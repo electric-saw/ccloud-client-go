@@ -76,8 +76,8 @@ type KafkaConsumerGroupLag struct {
 	MaxLagClientId    string   `json:"max_lag_client_id"`
 	MaxLagTopicName   string   `json:"max_lag_topic_name"`
 	MaxLagPartitionId int      `json:"max_lag_partition_id"`
-	MaxLag            int      `json:"max_lag"`
-	TotalLag          int      `json:"total_lag"`
+	MaxLag            int64    `json:"max_lag"`
+	TotalLag          int64    `json:"total_lag"`
 	MaxLagConsumer    Resource `json:"max_lag_consumer"`
 	MaxLagPartition   Resource `json:"max_lag_partition"`
 }

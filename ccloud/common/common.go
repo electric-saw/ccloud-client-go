@@ -1,5 +1,7 @@
 package common
 
+import "net/url"
+
 type PaginationOptions struct {
 	PageSize  int    `url:"page_size,omitempty"`
 	PageToken string `url:"page_token,omitempty"`
@@ -31,4 +33,13 @@ type BaseModel struct {
 		Prev         *string `json:"prev"`
 		TotalSize    *int    `json:"total_size"`
 	} `json:"metadata"`
+}
+
+func (b *BaseModel) GetPageNextToken() string {
+	if b.Metadata.Next == nil {
+		u, _ := url.Parse(*b.Metadata.Last)
+		return u.Query().Get("page_token")
+	} else {
+		return *b.Metadata.Next
+	}
 }

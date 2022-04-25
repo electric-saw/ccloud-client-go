@@ -10,6 +10,8 @@ import (
 
 type Topic struct {
 	common.BaseModel
+	ClusterId              string   `json:"cluster_id"`
+	TopicName              string   `json:"topic_name"`
 	IsInternal             bool     `json:"is_internal"`
 	ReplicationFactor      int      `json:"replication_factor"`
 	PartitionCount         int      `json:"partition_count"`
@@ -70,7 +72,7 @@ type TopicCreateReq struct {
 	PartitionCount    int    `json:"partition_count"`
 	ReplicationFactor int    `json:"replication_factor"`
 	// ReplicasAssignment map[string][]int `json:"replicas_assignment"` TODO: implement this
-	Configs []KafkaConfig `json:"configs"`
+	Configs []KafkaConfigUpdateItem `json:"configs"`
 }
 
 func (c *ConfluentClusterClient) CreateTopic(req *TopicCreateReq) (*Topic, error) {

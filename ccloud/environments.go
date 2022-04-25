@@ -15,7 +15,7 @@ type Environment struct {
 
 type EnvironmentList struct {
 	common.BaseModel
-	Data []ServiceAccount `json:"data"`
+	Data []Environment `json:"data"`
 }
 
 func (c *ConfluentClient) ListEnvironments(opt *common.PaginationOptions) (*EnvironmentList, error) {

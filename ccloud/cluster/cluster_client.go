@@ -1,6 +1,7 @@
 package cluster
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -51,9 +52,21 @@ func (c *ConfluentClusterClient) doRequest(base string, urlPath, method string, 
 
 	url.Path = path.Join(url.Path, urlPath)
 
-	req, err := retryablehttp.NewRequest(method, url.String(), body)
-	if err != nil {
-		return nil, err
+	var req *retryablehttp.Request
+	if body != nil {
+		bodyReader, err := json.Marshal(body)
+		if err != nil {
+			return nil, fmt.Errorf("failed to marshal body: %s", err)
+		}
+		req, err = retryablehttp.NewRequest(method, url.String(), bodyReader)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		req, err = retryablehttp.NewRequest(method, url.String(), nil)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	req.Request.SetBasicAuth(c.user, c.password)

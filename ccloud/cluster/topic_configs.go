@@ -34,7 +34,7 @@ func (c *ConfluentClusterClient) ListTopicConfigs(topicName string, opt *common.
 func (c *ConfluentClusterClient) GetTopicConfig(topicName, configName string) (*KafkaConfig, error) {
 	path := fmt.Sprintf("%s/configs/%s", topicName, configName)
 
-	req, err := c.doRequest(c.clusterInfo.BrokerConfigs.Related, path, http.MethodGet, nil, nil)
+	req, err := c.doRequest(c.clusterInfo.Topics.Related, path, http.MethodGet, nil, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ func (c *ConfluentClusterClient) GetTopicConfig(topicName, configName string) (*
 func (c *ConfluentClusterClient) UpdateTopicConfig(topicName, configName string, req *KafkaConfigUpdateReq) error {
 	path := fmt.Sprintf("%s/configs/%s", topicName, configName)
 
-	res, err := c.doRequest(c.clusterInfo.BrokerConfigs.Related, path, http.MethodPut, req, nil)
+	res, err := c.doRequest(c.clusterInfo.Topics.Related, path, http.MethodPut, req, nil)
 	if err != nil {
 		return err
 	}
@@ -69,10 +69,10 @@ func (c *ConfluentClusterClient) UpdateTopicConfig(topicName, configName string,
 	return nil
 }
 
-func (c *ConfluentClusterClient) UpdateTopicConfigBatch(topicName, string, req *KafkaConfigUpdateBatch) error {
+func (c *ConfluentClusterClient) UpdateTopicConfigBatch(topicName string, req *KafkaConfigUpdateBatch) error {
 	path := fmt.Sprintf("%s/configs:alter", topicName)
 
-	res, err := c.doRequest(c.clusterInfo.BrokerConfigs.Related, path, http.MethodPost, req, nil)
+	res, err := c.doRequest(c.clusterInfo.Topics.Related, path, http.MethodPost, req, nil)
 	if err != nil {
 		return err
 	}
@@ -86,7 +86,7 @@ func (c *ConfluentClusterClient) UpdateTopicConfigBatch(topicName, string, req *
 
 func (c *ConfluentClusterClient) ResetTopicConfig(topicName, configName string) error {
 	path := fmt.Sprintf("%s/configs/%s", topicName, configName)
-	res, err := c.doRequest(c.clusterInfo.BrokerConfigs.Related, path, http.MethodDelete, nil, nil)
+	res, err := c.doRequest(c.clusterInfo.Topics.Related, path, http.MethodDelete, nil, nil)
 	if err != nil {
 		return err
 	}

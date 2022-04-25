@@ -25,8 +25,8 @@ type KafkaConsumerGroupList struct {
 	Data []KafkaConsumerGroup `json:"data"`
 }
 
-func (c *ConfluentClusterClient) ListConsumerGroups() (*KafkaConsumerGroupList, error) {
-	res, err := c.doRequest(c.clusterInfo.ConsumerGroups.Related, "", http.MethodGet, nil, nil)
+func (c *ConfluentClusterClient) ListConsumerGroups(opt *common.PaginationOptions) (*KafkaConsumerGroupList, error) {
+	res, err := c.doRequest(c.clusterInfo.ConsumerGroups.Related, "", http.MethodGet, nil, opt)
 	if err != nil {
 		return nil, err
 	}

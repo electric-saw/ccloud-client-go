@@ -26,7 +26,7 @@ type KafkaCluster struct {
 
 func (c *ConfluentClusterClient) getCluster() (*KafkaCluster, error) {
 	urlPath := fmt.Sprintf("/kafka/v3/clusters/%s", c.ClusterId)
-	req, err := c.doRequest(urlPath, "", http.MethodGet, nil, nil)
+	req, err := c.doRequest(c.BaseUrl, urlPath, http.MethodGet, nil, nil)
 	if err != nil {
 		return nil, err
 	}

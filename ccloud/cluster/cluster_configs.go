@@ -64,8 +64,8 @@ func (c *ConfluentClusterClient) UpdateKafkaConfig(configName string, req *Kafka
 }
 
 func (c *ConfluentClusterClient) UpdateKafkaConfigBatch(req *KafkaConfigUpdateBatch) error {
-	baseUrl := fmt.Sprintf("%s:alter", c.clusterInfo.BrokerConfigs.Related)
-	res, err := c.doRequest(baseUrl, "", http.MethodPost, req, nil)
+	urlPath := fmt.Sprintf("%s:alter", c.clusterInfo.BrokerConfigs.Related)
+	res, err := c.doRequest(c.clusterInfo.BrokerConfigs.Related, urlPath, http.MethodPost, req, nil)
 	if err != nil {
 		return err
 	}

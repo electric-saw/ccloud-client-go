@@ -36,10 +36,10 @@ type BaseModel struct {
 }
 
 func (b *BaseModel) GetPageNextToken() string {
-	if b.Metadata.Next == nil {
-		u, _ := url.Parse(*b.Metadata.Last)
+	if b.Metadata.Next != nil {
+		u, _ := url.Parse(*b.Metadata.Next)
 		return u.Query().Get("page_token")
 	} else {
-		return *b.Metadata.Next
+		return ""
 	}
 }

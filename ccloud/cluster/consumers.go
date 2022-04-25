@@ -88,9 +88,9 @@ type KafkaConsumerLagList struct {
 	Data []KafkaConsumerLag `json:"data"`
 }
 
-func (c *ConfluentClusterClient) ListConsumerLag(consumerGroupId string) (*KafkaConsumerLagList, error) {
+func (c *ConfluentClusterClient) ListConsumerLag(consumerGroupId string, opt *common.PaginationOptions) (*KafkaConsumerLagList, error) {
 	urlPath := fmt.Sprintf("%s/lags", consumerGroupId)
-	res, err := c.doRequest(c.clusterInfo.ConsumerGroups.Related, urlPath, http.MethodGet, nil, nil)
+	res, err := c.doRequest(c.clusterInfo.ConsumerGroups.Related, urlPath, http.MethodGet, nil, opt)
 	if err != nil {
 		return nil, err
 	}

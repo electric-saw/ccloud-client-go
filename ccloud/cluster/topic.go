@@ -45,7 +45,7 @@ func (c *ConfluentClusterClient) ListTopics(opts *common.PaginationOptions) (*To
 }
 
 func (c *ConfluentClusterClient) GetTopic(topicId string) (*Topic, error) {
-	req, err := c.doRequest(fmt.Sprintf("%s/%s", c.clusterInfo.Topics.Related, topicId), "", http.MethodGet, nil, nil)
+	req, err := c.doRequest(c.clusterInfo.Topics.Related, topicId, http.MethodGet, nil, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,6 @@ type TopicCreateReq struct {
 }
 
 func (c *ConfluentClusterClient) CreateTopic(req *TopicCreateReq) (*Topic, error) {
-
 	res, err := c.doRequest(c.clusterInfo.Topics.Related, "", http.MethodPost, req, nil)
 	if err != nil {
 		return nil, err
@@ -96,7 +95,7 @@ func (c *ConfluentClusterClient) CreateTopic(req *TopicCreateReq) (*Topic, error
 }
 
 func (c *ConfluentClusterClient) DeleteTopic(topicId string) error {
-	req, err := c.doRequest(fmt.Sprintf("%s/%s", c.clusterInfo.Topics.Related, topicId), "", http.MethodDelete, nil, nil)
+	req, err := c.doRequest(c.clusterInfo.Topics.Related, topicId, http.MethodDelete, nil, nil)
 	if err != nil {
 		return err
 	}

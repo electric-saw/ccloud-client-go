@@ -40,6 +40,10 @@ func (c *ConfluentClusterClient) doRequest(base string, urlPath, method string, 
 	client := retryablehttp.NewClient()
 	client.RetryMax = 10
 
+	if base == "" {
+		base = c.BaseUrl
+	}
+
 	url, err := url.Parse(base)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse base url: %s", err)

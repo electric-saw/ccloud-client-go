@@ -68,11 +68,11 @@ func (c *ConfluentClusterClient) GetTopic(topicId string) (*Topic, error) {
 }
 
 type TopicCreateReq struct {
-	TopicName         string `json:"topic_name"`
-	PartitionCount    int    `json:"partition_count"`
-	ReplicationFactor int    `json:"replication_factor"`
+	TopicName         string `json:"topic_name,omitempty"`
+	PartitionCount    int    `json:"partitions_count,omitempty"`
+	ReplicationFactor int    `json:"replication_factor,omitempty"`
 	// ReplicasAssignment map[string][]int `json:"replicas_assignment"` TODO: implement this
-	Configs []KafkaConfigUpdateItem `json:"configs"`
+	Configs []KafkaConfigUpdateItem `json:"configs,omitempty"`
 }
 
 func (c *ConfluentClusterClient) CreateTopic(req *TopicCreateReq) (*Topic, error) {

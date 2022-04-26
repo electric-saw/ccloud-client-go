@@ -36,9 +36,9 @@ type KafkaConfigUpdateReq struct {
 }
 
 type KafkaConfigUpdateItem struct {
-	Name      string   `json:"name"`
-	Value     string   `json:"value"`
-	Operation ConfigOp `json:"operation"`
+	Name      string   `json:"name,omitempty"`
+	Value     string   `json:"value,omitempty"`
+	Operation ConfigOp `json:"operation,omitempty"`
 }
 
 type KafkaConfigUpdateBatch struct {

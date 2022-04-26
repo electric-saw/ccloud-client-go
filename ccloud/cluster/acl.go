@@ -42,12 +42,18 @@ const (
 	AclPermissionTypeAllow   AclPermissionType = "ALLOW"
 	AclPermissionTypeDeny    AclPermissionType = "DENY"
 	AclPermissionTypeAny     AclPermissionType = "ANY"
+
+	AclPatternTypeUnknown  AclPatternType = "UNKNOWN"
+	AclPatternTypeLiteral  AclPatternType = "LITERAL"
+	AclPatternTypePrefixed AclPatternType = "PREFIXED"
+	AclPatternTypeMatch    AclPatternType = "MATCH"
+	AclPatternTypeAny      AclPatternType = "ANY"
 )
 
 type KafkaAcl struct {
 	common.BaseModel
 	ClusterId    string            `json:"cluster_id"`
-	ResourceType string            `json:"resource_type"`
+	ResourceType AclResourceType   `json:"resource_type"`
 	ResourceName string            `json:"resource_name"`
 	PatternType  AclPatternType    `json:"pattern_type"`
 	Principal    string            `json:"principal"`
@@ -62,6 +68,7 @@ type KafkaAclList struct {
 }
 
 type KafkaAclSearchQry struct {
+	common.PaginationOptions
 	ResourceType AclResourceType   `url:"resource_type,omitempty"`
 	ResourceName string            `url:"resource_name,omitempty"`
 	Principal    string            `url:"principal,omitempty"`

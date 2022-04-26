@@ -46,3 +46,7 @@ func (c *ConfluentClient) V1ListServiceAccounts(opt *V1QueryOpts) (*V1ServiceAcc
 func (s *V1ServiceAccount) HasId() bool {
 	return s.Id != nil
 }
+
+func (s *V1ServiceAccount) HasResourceId() bool {
+	return s.ResourceId != nil
+}

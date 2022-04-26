@@ -16,23 +16,23 @@ const (
 )
 
 type BaseModel struct {
-	ApiVersion   string `json:"api_version"`
-	Kind         string `json:"kind"`
-	Id           string `json:"id"`
-	ResourceName string `json:"resource_name"`
-	Related      string `json:"related"`
+	ApiVersion   string `json:"api_version,omitempty"`
+	Kind         string `json:"kind,omitempty"`
+	Id           string `json:"id,omitempty"`
+	ResourceName string `json:"resource_name,omitempty"`
+	Related      string `json:"related,omitempty"`
 	Metadata     struct {
-		Self         *string `json:"self"`
-		ResourceName *string `json:"resource_name"`
-		CreatedAt    *string `json:"created_at"`
-		UpdatedAt    *string `json:"updated_at"`
-		DeleteAt     *string `json:"delete_at"`
-		First        *string `json:"first"`
-		Last         *string `json:"last"`
-		Next         *string `json:"next"`
-		Prev         *string `json:"prev"`
-		TotalSize    *int    `json:"total_size"`
-	} `json:"metadata"`
+		Self         *string `json:"self,omitempty"`
+		ResourceName *string `json:"resource_name,omitempty"`
+		CreatedAt    *string `json:"created_at,omitempty"`
+		UpdatedAt    *string `json:"updated_at,omitempty"`
+		DeleteAt     *string `json:"delete_at,omitempty"`
+		First        *string `json:"first,omitempty"`
+		Last         *string `json:"last,omitempty"`
+		Next         *string `json:"next,omitempty"`
+		Prev         *string `json:"prev,omitempty"`
+		TotalSize    *int    `json:"total_size,omitempty"`
+	} `json:"metadata,omitempty"`
 }
 
 func (b *BaseModel) GetPageNextToken() string {

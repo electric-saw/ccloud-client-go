@@ -52,14 +52,14 @@ const (
 
 type KafkaAcl struct {
 	common.BaseModel
-	ClusterId    string            `json:"cluster_id"`
-	ResourceType AclResourceType   `json:"resource_type"`
-	ResourceName string            `json:"resource_name"`
-	PatternType  AclPatternType    `json:"pattern_type"`
-	Principal    string            `json:"principal"`
-	Host         string            `json:"host"`
-	Operation    AclOperationType  `json:"operation"`
-	Permission   AclPermissionType `json:"permission"`
+	ClusterId    string            `json:"cluster_id,omitempty"`
+	ResourceType AclResourceType   `json:"resource_type,omitempty"`
+	ResourceName string            `json:"resource_name,omitempty"`
+	PatternType  AclPatternType    `json:"pattern_type,omitempty"`
+	Principal    string            `json:"principal,omitempty"`
+	Host         string            `json:"host,omitempty"`
+	Operation    AclOperationType  `json:"operation,omitempty"`
+	Permission   AclPermissionType `json:"permission,omitempty"`
 }
 
 type KafkaAclList struct {
@@ -99,25 +99,27 @@ func (c *ConfluentClusterClient) SearchAcls(qry *KafkaAclSearchQry) (*KafkaAclLi
 	return &list, nil
 }
 
-func (c *ConfluentClusterClient) CreateAcl(acl *KafkaAcl) (*KafkaAcl, error) {
-	res, err := c.doRequest(c.clusterInfo.Acls.Related, "", "POST", nil, acl)
+type KafkaAclCreateReq struct {
+	ResourceType AclResourceType   `json:"resource_type,omitempty"`
+	ResourceName string            `json:"resource_name,omitempty"`
+	PatternType  AclPatternType    `json:"pattern_type,omitempty"`
+	Principal    string            `json:"principal,omitempty"`
+	Host         string            `json:"host,omitempty"`
+	Operation    AclOperationType  `json:"operation,omitempty"`
+	Permission   AclPermissionType `json:"permission,omitempty"`
+}
+
+func (c *ConfluentClusterClient) CreateAcl(acl *KafkaAclCreateReq) error {
+	res, err := c.doRequest(c.clusterInfo.Acls.Related, "", "POST", acl, nil)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	if http.StatusCreated != res.StatusCode {
-		return nil, fmt.Errorf("failed to create acl: %s", res.Status)
+		return fmt.Errorf("failed to create acl (%s):  %s", res.Status, res.Body)
 	}
 
-	defer res.Body.Close()
-
-	var createdAcl KafkaAcl
-	err = json.NewDecoder(res.Body).Decode(&createdAcl)
-	if err != nil {
-		return nil, err
-	}
-
-	return &createdAcl, nil
+	return nil
 }
 
 func (c *ConfluentClusterClient) DeleteAcl(acl *KafkaAcl) error {

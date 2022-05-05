@@ -24,6 +24,10 @@ func NewClient(user, password string) *ConfluentClient {
 	}
 }
 
+type specWrap struct {
+	Spec interface{} `json:"spec"`
+}
+
 func (c *ConfluentClient) doRequest(urlPath, method string, body, params interface{}) (*http.Response, error) {
 	client := retryablehttp.NewClient()
 	client.RetryMax = 10
@@ -54,6 +58,7 @@ func (c *ConfluentClient) doRequest(urlPath, method string, body, params interfa
 	}
 
 	req.Request.SetBasicAuth(c.user, c.password)
+	req.Header["Content-Type"] = []string{"application/json"}
 
 	qry, err := query.Values(params)
 	if err != nil {

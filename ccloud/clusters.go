@@ -119,7 +119,7 @@ type KafkaClusterCreateReq struct {
 
 func (c *ConfluentClient) CreateKafkaCluster(create *KafkaClusterCreateReq) (*KafkaCluster, error) {
 	urlPath := "/cmk/v2/clusters"
-	req, err := c.doRequest(urlPath, http.MethodPost, create, nil)
+	req, err := c.doRequest(urlPath, http.MethodPost, specWrap{create}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -153,7 +153,7 @@ type KafkaClusterUpdateReq struct {
 
 func (c *ConfluentClient) UpdateKafkaCluster(KafkaClusterId string, update *KafkaClusterUpdateReq) (*KafkaCluster, error) {
 	urlPath := fmt.Sprintf("/cmk/v2/clusters/%s", KafkaClusterId)
-	req, err := c.doRequest(urlPath, http.MethodPatch, update, nil)
+	req, err := c.doRequest(urlPath, http.MethodPatch, specWrap{update}, nil)
 	if err != nil {
 		return nil, err
 	}

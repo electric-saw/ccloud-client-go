@@ -125,7 +125,7 @@ func (c *ConfluentClient) CreateKafkaCluster(create *KafkaClusterCreateReq) (*Ka
 	}
 
 	if http.StatusAccepted != req.StatusCode {
-		return nil, fmt.Errorf("failed to create service account: %s", req.Status)
+		return nil, fmt.Errorf("failed to create cluster: %s", req.Status)
 	}
 
 	defer req.Body.Close()
@@ -159,7 +159,7 @@ func (c *ConfluentClient) UpdateKafkaCluster(KafkaClusterId string, update *Kafk
 	}
 
 	if http.StatusOK != req.StatusCode {
-		return nil, fmt.Errorf("failed to get kafka cluster: %s", req.Status)
+		return nil, fmt.Errorf("failed to update kafka cluster: %s", req.Status)
 	}
 
 	defer req.Body.Close()

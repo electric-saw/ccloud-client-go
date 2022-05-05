@@ -75,7 +75,7 @@ func (c *ConfluentClient) UpdateUser(userId string, update *UserUpdateReq) (*Use
 	}
 
 	if http.StatusOK != req.StatusCode {
-		return nil, fmt.Errorf("failed to get user: %s", req.Status)
+		return nil, fmt.Errorf("failed to update user: %s", req.Status)
 	}
 
 	defer req.Body.Close()

@@ -50,8 +50,6 @@ func (c *ConfluentClient) doRequest(urlPath, method string, body, params interfa
 		if err != nil {
 			return nil, err
 		}
-		req.Request.Header.Add("Content-Type", "application/json")
-		
 	} else {
 		req, err = retryablehttp.NewRequest(method, url.String(), nil)
 		if err != nil {

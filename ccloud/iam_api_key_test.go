@@ -76,15 +76,13 @@ func TestCreateUpdateDeleteApiKey(t *testing.T) {
 	apiKey := apiKeys.Data[0]
 
 	apiCreated, err := c.CreateApiKey(&ccloud.ApiKeyCreateReq{
-		Spec: ccloud.ApiKeySpecReq{
-			DisplayName: "test-api-key",
-			Description: "test-api-key description",
-			Owner: ccloud.ApiKeyCommonReq{
-				Id: apiKey.Spec.Owner.Id,
-			},
-			Resource:  ccloud.ApiKeyCommonReq{
-				Id: apiKey.Spec.Resource.Id,
-			},
+		DisplayName: "test-api-key",
+		Description: "test-api-key description",
+		Owner: ccloud.ApiKeyCommonReq{
+			Id: apiKey.Spec.Owner.Id,
+		},
+		Resource:  ccloud.ApiKeyCommonReq{
+			Id: apiKey.Spec.Resource.Id,
 		},
 	})
 
@@ -94,8 +92,8 @@ func TestCreateUpdateDeleteApiKey(t *testing.T) {
 	if apiCreated != nil {
 		fmt.Println(apiCreated.Id)
 		var update ccloud.ApiKeyUpdateReq
-		update.Spec.DisplayName="test"
-		update.Spec.Description="test description"
+		update.DisplayName="test"
+		update.Description="test description"
 
 		apiKeyUpdated, errUpdate  := c.UpdateApiKey(
 			apiCreated.Id,

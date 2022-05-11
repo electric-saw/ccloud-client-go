@@ -39,20 +39,15 @@ type ApiKeyCommonReq struct {
 }
 
 type ApiKeyUpdateReq struct {
-	Spec struct {
-		DisplayName string `json:"display_name,omitempty"`
-		Description string `json:"description,omitempty"`
-	}`json:"spec,omitempty"`
+	DisplayName string `json:"display_name,omitempty"`
+	Description string `json:"description,omitempty"`
 }
 
-type ApiKeySpecReq struct {
+type ApiKeyCreateReq struct {
 	DisplayName string `json:"display_name,omitempty"`
 	Description string `json:"description,omitempty"`
 	Owner ApiKeyCommonReq `json:"owner"`
 	Resource ApiKeyCommonReq `json:"resource,omitempty"`
-} 
-type ApiKeyCreateReq struct {
-	Spec  ApiKeySpecReq `json:"spec"`
 } 
 
 func (c *ConfluentClient) ListApiKeys(opt *ApiKeyListOptions) (*ApiKeyList, error) {
@@ -101,7 +96,7 @@ func (c *ConfluentClient) GetApiKey(apyKeyId string) (*ApiKey, error) {
 
 func (c *ConfluentClient) CreateApiKey(create *ApiKeyCreateReq) (*ApiKey, error) {
 	urlPath := "/iam/v2/api-keys"
-	req, err := c.doRequest(urlPath, http.MethodPost, create, nil)
+	req, err := c.doRequest(urlPath, http.MethodPost, specWrap{create}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -144,7 +139,7 @@ func (c *ConfluentClient) DeleteApiKey(id string) (error) {
 
 func (c *ConfluentClient) UpdateApiKey(apyKeyId string, update *ApiKeyUpdateReq) (*ApiKey, error) {
 	urlPath := fmt.Sprintf("/iam/v2/api-keys/%s", apyKeyId)
-	req, err := c.doRequest(urlPath, http.MethodPatch, update, nil)
+	req, err := c.doRequest(urlPath, http.MethodPatch, specWrap{update}, nil)
 	if err != nil {
 		return nil, err
 	}

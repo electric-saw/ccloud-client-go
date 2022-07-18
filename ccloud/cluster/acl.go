@@ -116,7 +116,12 @@ func (c *ConfluentClusterClient) CreateAcl(acl *KafkaAclCreateReq) error {
 	}
 
 	if http.StatusCreated != res.StatusCode {
-		return fmt.Errorf("failed to create acl (%s):  %s", res.Status, res.Body)
+		errorRes, err := common.NewErrorResponse(res.Body)
+		if err != nil {
+			return err
+		}
+
+		return fmt.Errorf("failed to create acl (%s):  %s", res.Status, errorRes.Error())
 	}
 
 	return nil

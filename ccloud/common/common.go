@@ -1,6 +1,12 @@
 package common
 
-import "net/url"
+import (
+	"encoding/json"
+	"fmt"
+	"io"
+	"io/ioutil"
+	"net/url"
+)
 
 type PaginationOptions struct {
 	PageSize  int    `url:"page_size,omitempty"`
@@ -35,6 +41,11 @@ type BaseModel struct {
 	} `json:"metadata,omitempty"`
 }
 
+type ErrorResponse struct {
+	ErrorCode int    `json:"error_code,omitempty"`
+	Message   string `json:"message,omitempty"`
+}
+
 func (b *BaseModel) GetPageNextToken() string {
 	if b.Metadata.Next != nil {
 		u, _ := url.Parse(*b.Metadata.Next)
@@ -42,4 +53,24 @@ func (b *BaseModel) GetPageNextToken() string {
 	} else {
 		return ""
 	}
+}
+
+func (er *ErrorResponse) Error() string {
+	return er.Message
+}
+
+func NewErrorResponse(body io.ReadCloser) (*ErrorResponse, error) {
+	var errRes ErrorResponse
+
+	buff, err := ioutil.ReadAll(body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read error response: %s", err)
+	}
+
+	err = json.Unmarshal(buff, &errRes)
+	if err != nil {
+		errRes.Message = string(buff)
+	}
+
+	return &errRes, nil
 }

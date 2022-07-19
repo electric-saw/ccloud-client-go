@@ -52,14 +52,14 @@ const (
 
 type KafkaAcl struct {
 	common.BaseModel
-	ClusterId    string            `json:"cluster_id,omitempty"`
-	ResourceType AclResourceType   `json:"resource_type,omitempty"`
-	ResourceName string            `json:"resource_name,omitempty"`
-	PatternType  AclPatternType    `json:"pattern_type,omitempty"`
-	Principal    string            `json:"principal,omitempty"`
-	Host         string            `json:"host,omitempty"`
-	Operation    AclOperationType  `json:"operation,omitempty"`
-	Permission   AclPermissionType `json:"permission,omitempty"`
+	ClusterId    string            `json:"cluster_id,omitempty" url:"-"`
+	ResourceType AclResourceType   `json:"resource_type,omitempty" url:"resource_type,omitempty"`
+	ResourceName string            `json:"resource_name,omitempty" url:"resource_name,omitempty"`
+	PatternType  AclPatternType    `json:"pattern_type,omitempty" url:"pattern_type,omitempty"`
+	Principal    string            `json:"principal,omitempty" url:"principal,omitempty"`
+	Host         string            `json:"host,omitempty" url:"host,omitempty"`
+	Operation    AclOperationType  `json:"operation,omitempty" url:"operation,omitempty"`
+	Permission   AclPermissionType `json:"permission,omitempty" url:"permission,omitempty"`
 }
 
 type KafkaAclList struct {
@@ -128,12 +128,19 @@ func (c *ConfluentClusterClient) CreateAcl(acl *KafkaAclCreateReq) error {
 }
 
 func (c *ConfluentClusterClient) DeleteAcl(acl *KafkaAcl) error {
-	res, err := c.doRequest(c.clusterInfo.Acls.Related, acl.Id, "DELETE", nil, nil)
+	var url string
+	if acl.Metadata.Self != nil && *acl.Metadata.Self != "" {
+		url = *acl.Metadata.Self
+	} else {
+		url = c.clusterInfo.Acls.Related
+	}
+
+	res, err := c.doRequest(url, "", "DELETE", nil, acl)
 	if err != nil {
 		return err
 	}
 
-	if http.StatusNoContent != res.StatusCode {
+	if http.StatusOK != res.StatusCode && http.StatusNoContent != res.StatusCode {
 		return fmt.Errorf("failed to delete acl: %s", res.Status)
 	}
 

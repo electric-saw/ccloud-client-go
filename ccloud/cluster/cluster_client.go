@@ -1,6 +1,7 @@
 package cluster
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -41,6 +42,14 @@ func (c *ConfluentClusterClient) doRequest(base string, urlPath, method string, 
 	client := retryablehttp.NewClient()
 	client.RetryMax = 10
 
+	client.CheckRetry = func(ctx context.Context, resp *http.Response, err error) (bool, error) {
+		ok, e := retryablehttp.DefaultRetryPolicy(ctx, resp, err)
+		if !ok && (resp.StatusCode == http.StatusUnauthorized || resp.StatusCode >= 500 && resp.StatusCode != 501) {
+			return true, e
+		}
+		return ok, nil
+	}
+	
 	if base == "" {
 		base = c.BaseUrl
 	}

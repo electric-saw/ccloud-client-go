@@ -31,6 +31,14 @@ type specWrap struct {
 func (c *ConfluentClient) doRequest(urlPath, method string, body, params interface{}) (*http.Response, error) {
 	client := retryablehttp.NewClient()
 	client.RetryMax = 10
+	
+	client.CheckRetry = func(ctx context.Context, resp *http.Response, err error) (bool, error) {
+		ok, e := retryablehttp.DefaultRetryPolicy(ctx, resp, err)
+		if !ok && (resp.StatusCode == http.StatusUnauthorized || resp.StatusCode >= 500 && resp.StatusCode != 501) {
+			return true, e
+		}
+		return ok, nil
+	}
 
 	url, err := url.Parse(c.BaseUrl)
 	if err != nil {

@@ -5,6 +5,7 @@ go 1.22
 require (
 	github.com/google/go-querystring v1.1.0
 	github.com/hashicorp/go-retryablehttp v0.7.5
+	github.com/joho/godotenv v1.5.1
 	github.com/stretchr/testify v1.2.2
 )
 

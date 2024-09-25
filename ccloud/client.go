@@ -1,39 +1,51 @@
 package ccloud
 
 import (
+	"bytes"
 	"context"
-	
+	"io"
+
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
 
+	"github.com/electric-saw/ccloud-client-go/ccloud/client"
 	"github.com/google/go-querystring/query"
 	"github.com/hashicorp/go-retryablehttp"
 )
 
+const ContentTypeJSON = "application/json"
+
 type ConfluentClient struct {
-	user     string
-	password string
-	BaseUrl  string
+	auth    client.ClientAuth
+	BaseUrl string
 }
 
-func NewClient(user, password string) *ConfluentClient {
+func NewClient() *ConfluentClient {
 	return &ConfluentClient{
-		user:     user,
-		password: password,
-		BaseUrl:  "https://api.confluent.cloud",
+		BaseUrl: "https://api.confluent.cloud",
 	}
+}
+
+func (c *ConfluentClient) WithAuth(auth client.ClientAuth) *ConfluentClient {
+	c.auth = auth
+	return c
+}
+
+func (c *ConfluentClient) WithBaseUrl(baseUrl string) *ConfluentClient {
+	c.BaseUrl = baseUrl
+	return c
 }
 
 type specWrap struct {
 	Spec interface{} `json:"spec"`
 }
 
-func (c *ConfluentClient) doRequest(urlPath, method string, body, params interface{}) (*http.Response, error) {
+func (c *ConfluentClient) doRequest(urlPath, method string, body, params any) (*http.Response, error) {
 	client := retryablehttp.NewClient()
 	client.RetryMax = 10
-	
+
 	client.CheckRetry = func(ctx context.Context, resp *http.Response, err error) (bool, error) {
 		ok, e := retryablehttp.DefaultRetryPolicy(ctx, resp, err)
 		if !ok && (resp.StatusCode == http.StatusUnauthorized || resp.StatusCode >= 500 && resp.StatusCode != 501) {
@@ -51,24 +63,27 @@ func (c *ConfluentClient) doRequest(urlPath, method string, body, params interfa
 
 	var req *retryablehttp.Request
 
+	var bodyReader io.Reader
+
 	if body != nil {
-		bodyReader, err := json.Marshal(body)
+		bodyBuffer := new(bytes.Buffer)
+		err := json.NewEncoder(bodyBuffer).Encode(body)
 		if err != nil {
-			return nil, fmt.Errorf("failed to marshal body: %s", err)
+			return nil, fmt.Errorf("failed to encode body: %s", err)
 		}
-		req, err = retryablehttp.NewRequest(method, url.String(), bodyReader)
-		if err != nil {
-			return nil, err
-		}
-	} else {
-		req, err = retryablehttp.NewRequest(method, url.String(), nil)
-		if err != nil {
-			return nil, err
-		}
+		bodyReader = bodyBuffer
 	}
 
-	req.Request.SetBasicAuth(c.user, c.password)
-	req.Header["Content-Type"] = []string{"application/json"}
+	req, err = retryablehttp.NewRequest(method, url.String(), bodyReader)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := c.auth.SetAuth(req.Request); err != nil {
+		return nil, fmt.Errorf("failed to set auth: %s", err)
+	}
+
+	req.Header.Add("Content-Type", ContentTypeJSON)
 
 	qry, err := query.Values(params)
 	if err != nil {

@@ -19,7 +19,7 @@ func TestListApiKeys(t *testing.T) {
 		apiKeys, err := c.ListApiKeys(
 			&ccloud.ApiKeyListOptions{
 				PaginationOptions: common.PaginationOptions{
-					PageSize: 100,
+					PageSize:  100,
 					PageToken: pageToken,
 				},
 			})
@@ -81,7 +81,7 @@ func TestCreateUpdateDeleteApiKey(t *testing.T) {
 		Owner: ccloud.ApiKeyCommonReq{
 			Id: apiKey.Spec.Owner.Id,
 		},
-		Resource:  ccloud.ApiKeyCommonReq{
+		Resource: ccloud.ApiKeyCommonReq{
 			Id: apiKey.Spec.Resource.Id,
 		},
 	})
@@ -92,10 +92,10 @@ func TestCreateUpdateDeleteApiKey(t *testing.T) {
 	if apiCreated != nil {
 		fmt.Println(apiCreated.Id)
 		var update ccloud.ApiKeyUpdateReq
-		update.DisplayName="test"
-		update.Description="test description"
+		update.DisplayName = "test"
+		update.Description = "test description"
 
-		apiKeyUpdated, errUpdate  := c.UpdateApiKey(
+		apiKeyUpdated, errUpdate := c.UpdateApiKey(
 			apiCreated.Id,
 			&update,
 		)
@@ -105,7 +105,7 @@ func TestCreateUpdateDeleteApiKey(t *testing.T) {
 			assert.Equal(t, apiKeyUpdated.Spec.DisplayName, "test")
 			assert.Equal(t, apiKeyUpdated.Spec.Description, "test description")
 		}
-		
+
 		err = c.DeleteApiKey(apiKeyUpdated.Id)
 		assert.NoError(t, err)
 	}

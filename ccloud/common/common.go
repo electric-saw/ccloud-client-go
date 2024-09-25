@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/url"
 )
 
@@ -27,6 +26,7 @@ type BaseModel struct {
 	Id           string `json:"id,omitempty"`
 	ResourceName string `json:"resource_name,omitempty"`
 	Related      string `json:"related,omitempty"`
+	Status       map[string]interface{}
 	Metadata     struct {
 		Self         *string `json:"self,omitempty"`
 		ResourceName *string `json:"resource_name,omitempty"`
@@ -62,7 +62,7 @@ func (er *ErrorResponse) Error() string {
 func NewErrorResponse(body io.ReadCloser) (*ErrorResponse, error) {
 	var errRes ErrorResponse
 
-	buff, err := ioutil.ReadAll(body)
+	buff, err := io.ReadAll(body)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read error response: %s", err)
 	}

@@ -15,12 +15,12 @@ func makeClient() *ccloud.ConfluentClient {
 	key := os.Getenv("CONFLUENT_API_KEY")
 	secret := os.Getenv("CONFLUENT_API_SECRET")
 
-	return ccloud.NewClient(key, secret)
+	return ccloud.NewClient().WithAuth(ccloud.NewBasicAuth(key, secret))
 }
 
 func makeRbacCrn() string {
 	schemaRegistryCluster := os.Getenv("SCHEMA_REGISTRY_CLUSTER")
-	organization :=  os.Getenv("ORGANIZATION")
+	organization := os.Getenv("ORGANIZATION")
 	environment := os.Getenv("ENVIRONMENT")
 
 	return fmt.Sprintf("crn://confluent.cloud/organization=%s/environment=%s/schema-registry=%s/subject=*", organization, environment, schemaRegistryCluster)

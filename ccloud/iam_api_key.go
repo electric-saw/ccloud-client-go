@@ -3,7 +3,7 @@ package ccloud
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 
 	"github.com/electric-saw/ccloud-client-go/ccloud/common"
@@ -12,9 +12,9 @@ import (
 type ApiKeySpec struct {
 	Description string `json:"description,omitempty"`
 	DisplayName string `json:"display_name,omitempty"`
-	Owner common.BaseModel
-	Resource common.BaseModel
-	Secret string `json:"secret,omitempty"`
+	Owner       common.BaseModel
+	Resource    common.BaseModel
+	Secret      string `json:"secret,omitempty"`
 }
 
 type ApiKey struct {
@@ -34,7 +34,7 @@ type ApiKeyListOptions struct {
 }
 
 type ApiKeyCommonReq struct {
-	Id string `json:"id"`
+	Id          string `json:"id"`
 	Environment string `json:"environment,omitempty"`
 }
 
@@ -44,11 +44,11 @@ type ApiKeyUpdateReq struct {
 }
 
 type ApiKeyCreateReq struct {
-	DisplayName string `json:"display_name,omitempty"`
-	Description string `json:"description,omitempty"`
-	Owner ApiKeyCommonReq `json:"owner"`
-	Resource ApiKeyCommonReq `json:"resource,omitempty"`
-} 
+	DisplayName string          `json:"display_name,omitempty"`
+	Description string          `json:"description,omitempty"`
+	Owner       ApiKeyCommonReq `json:"owner"`
+	Resource    ApiKeyCommonReq `json:"resource,omitempty"`
+}
 
 func (c *ConfluentClient) ListApiKeys(opt *ApiKeyListOptions) (*ApiKeyList, error) {
 	urlPath := "/iam/v2/api-keys"
@@ -100,16 +100,14 @@ func (c *ConfluentClient) CreateApiKey(create *ApiKeyCreateReq) (*ApiKey, error)
 	if err != nil {
 		return nil, err
 	}
-	
+
 	defer req.Body.Close()
 
 	if http.StatusAccepted != req.StatusCode {
-		data, _ := ioutil.ReadAll(req.Body)
+		data, _ := io.ReadAll(req.Body)
 		fmt.Println(string(data))
 		return nil, fmt.Errorf("failed to create api-key: %s", req.Status)
 	}
-
-	
 
 	var ApiKey ApiKey
 	err = json.NewDecoder(req.Body).Decode(&ApiKey)
@@ -120,8 +118,7 @@ func (c *ConfluentClient) CreateApiKey(create *ApiKeyCreateReq) (*ApiKey, error)
 	return &ApiKey, nil
 }
 
-
-func (c *ConfluentClient) DeleteApiKey(id string) (error) {
+func (c *ConfluentClient) DeleteApiKey(id string) error {
 	urlPath := fmt.Sprintf("/iam/v2/api-keys/%s", id)
 	req, err := c.doRequest(urlPath, http.MethodDelete, nil, nil)
 	if err != nil {

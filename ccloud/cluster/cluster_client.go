@@ -49,7 +49,7 @@ func (c *ConfluentClusterClient) doRequest(base string, urlPath, method string, 
 		}
 		return ok, nil
 	}
-	
+
 	if base == "" {
 		base = c.BaseUrl
 	}

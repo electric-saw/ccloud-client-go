@@ -80,8 +80,8 @@ func (c *ConfluentClient) ListKafkaClusters(opt *KafkaClusterListOptions) (*Kafk
 	return &KafkaClusters, nil
 }
 
-func (c *ConfluentClient) GetKafkaCluster(KafkaClusterId string, opt *KafkaClusterListOptions) (*KafkaCluster, error) {
-	urlPath := fmt.Sprintf("/cmk/v2/clusters/%s", KafkaClusterId)
+func (c *ConfluentClient) GetKafkaCluster(kafkaClusterId string, opt *KafkaClusterListOptions) (*KafkaCluster, error) {
+	urlPath := fmt.Sprintf("/cmk/v2/clusters/%s", kafkaClusterId)
 	req, err := c.doRequest(urlPath, http.MethodGet, nil, opt)
 	if err != nil {
 		return nil, err
@@ -151,8 +151,8 @@ type KafkaClusterUpdateReq struct {
 	} `json:"environment"`
 }
 
-func (c *ConfluentClient) UpdateKafkaCluster(KafkaClusterId string, update *KafkaClusterUpdateReq) (*KafkaCluster, error) {
-	urlPath := fmt.Sprintf("/cmk/v2/clusters/%s", KafkaClusterId)
+func (c *ConfluentClient) UpdateKafkaCluster(kafkaClusterId string, update *KafkaClusterUpdateReq) (*KafkaCluster, error) {
+	urlPath := fmt.Sprintf("/cmk/v2/clusters/%s", kafkaClusterId)
 	req, err := c.doRequest(urlPath, http.MethodPatch, specWrap{update}, nil)
 	if err != nil {
 		return nil, err
@@ -173,8 +173,8 @@ func (c *ConfluentClient) UpdateKafkaCluster(KafkaClusterId string, update *Kafk
 	return &KafkaCluster, nil
 }
 
-func (c *ConfluentClient) DeleteKafkaCluster(KafkaClusterId string, opt KafkaClusterListOptions) error {
-	urlPath := fmt.Sprintf("/cmk/v2/clusters/%s", KafkaClusterId)
+func (c *ConfluentClient) DeleteKafkaCluster(kafkaClusterId string, opt KafkaClusterListOptions) error {
+	urlPath := fmt.Sprintf("/cmk/v2/clusters/%s", kafkaClusterId)
 	req, err := c.doRequest(urlPath, http.MethodDelete, nil, opt)
 	if err != nil {
 		return err

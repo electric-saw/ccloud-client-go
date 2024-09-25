@@ -5,14 +5,14 @@ import (
 	"testing"
 
 	"github.com/electric-saw/ccloud-client-go/ccloud/cluster"
-	"github.com/stretchr/testify/assert"
 	"github.com/joho/godotenv"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGetClusterLinking(t *testing.T) {
 	err := godotenv.Load()
 	assert.NoError(t, err)
-	
+
 	c, err := makeClusterClient()
 	assert.NoError(t, err)
 
@@ -25,7 +25,7 @@ func TestGetClusterLinking(t *testing.T) {
 func TestGetClusterLinkingConfig(t *testing.T) {
 	err := godotenv.Load()
 	assert.NoError(t, err)
-	
+
 	c, err := makeClusterClient()
 	assert.NoError(t, err)
 
@@ -38,7 +38,7 @@ func TestGetClusterLinkingConfig(t *testing.T) {
 func TestCreateMirrorTopic(t *testing.T) {
 	err := godotenv.Load()
 	assert.NoError(t, err)
-	
+
 	c, err := makeClusterClient()
 	assert.NoError(t, err)
 
@@ -48,7 +48,6 @@ func TestCreateMirrorTopic(t *testing.T) {
 }
 
 func makeClusterClient() (*cluster.ConfluentClusterClient, error) {
-	//user, password, clusterId, clusterUrl string
 	key := os.Getenv("CLUSTER_USER_DR")
 	secret := os.Getenv("CLUSTER_PASSWORD_DR")
 	clusterId := os.Getenv("CLUSTER_ID_DR")

@@ -19,18 +19,17 @@ func TestGetSchemaRegistryRbac(t *testing.T) {
 			},
 			CrnPattern: crn,
 		})
-		
+
 	assert.NoError(t, err)
 	assert.NotNil(t, rbacList)
 
 	rbacList, err = c.ListSchemaRegistryRBAC(
 		&ccloud.SchemaRegistryRbacListOptions{
 			CrnPattern: rbacList.Data[0].CrnPattern,
-			Principal: rbacList.Data[0].Principal,
-	})
-	
+			Principal:  rbacList.Data[0].Principal,
+		})
+
 	assert.NoError(t, err)
 	assert.NotNil(t, rbacList)
-		
 
 }

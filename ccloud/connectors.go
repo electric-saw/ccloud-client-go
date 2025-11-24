@@ -12,186 +12,230 @@ type Connector struct {
 	common.BaseModel
 	Name   string                 `json:"name,omitempty"`
 	Config map[string]interface{} `json:"config,omitempty"`
+	Type   string                 `json:"type,omitempty"`
+	Tasks  []Task                 `json:"tasks,omitempty"`
 }
 
-type ConnectorCreateReq struct {
-	Name   string                 `json:"name"`
-	Config map[string]interface{} `json:"config"`
+type Task struct {
+	Connector string `json:"connector"`
+	Task      int    `json:"task"`
 }
 
-func (c *ConfluentClient) CreateConnector(environmentId, clusterId, name string, config map[string]interface{}) (*Connector, error) {
-	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors", environmentId, clusterId)
-	create := &ConnectorCreateReq{
-		Name:   name,
-		Config: config,
-	}
-	resp, err := c.doRequest(urlPath, http.MethodPost, create, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	if resp.StatusCode != http.StatusCreated && resp.StatusCode != http.StatusOK {
-		defer resp.Body.Close()
-		errRes, _ := common.NewErrorResponse(resp.Body)
-		if errRes != nil && errRes.Message != "" {
-			return nil, fmt.Errorf("failed to create connector: %s", errRes.Message)
-		}
-		return nil, fmt.Errorf("failed to create connector: %s", resp.Status)
-	}
-
-	defer resp.Body.Close()
-
-	var connector Connector
-	if err := json.NewDecoder(resp.Body).Decode(&connector); err != nil {
-		return nil, err
-	}
-
-	return &connector, nil
-}
-
-// CreateS3SinkConnector essa func eu criei com base no curl mais para facilitar a criação da func CreateConnector
-func (c *ConfluentClient) CreateS3SinkConnector(
-	environmentId, clusterId, name, bucket, providerIntegrationId, topics string,
-	transformsName, transformsInsertType, transformsInsertPartitionField,
-	transformsInsertStaticField, transformsInsertStaticValue,
-	transformsInsertTimestampField, transformsInsertTopicField,
-	timeInterval string,
-	tasksMax int,
-) (*Connector, error) {
-	cfg := map[string]interface{}{
-		"connector.class":         "S3_SINK",
-		"s3.bucket.name":          bucket,
-		"authentication.method":   "IAM Roles",
-		"provider.integration.id": providerIntegrationId,
-		"topics":                  topics,
-		"input.data.format":       "AVRO",
-		"output.data.format":      "AVRO",
-		"flush.size":              "1000",
-		"partitioner.class":       "TimeBasedPartitioner",
-		"time.interval":           timeInterval,
-		"tasks.max":               fmt.Sprintf("%d", tasksMax),
-	}
-
-	// adiciona transforms se fornecidos
-	if transformsName != "" {
-		cfg["transforms"] = transformsName
-	}
-	if transformsInsertType != "" {
-		cfg[fmt.Sprintf("transforms.%s.type", transformsName)] = transformsInsertType
-	}
-	if transformsInsertPartitionField != "" {
-		cfg[fmt.Sprintf("transforms.%s.partition.field", transformsName)] = transformsInsertPartitionField
-	}
-	if transformsInsertStaticField != "" {
-		cfg[fmt.Sprintf("transforms.%s.static.field", transformsName)] = transformsInsertStaticField
-	}
-	if transformsInsertStaticValue != "" {
-		cfg[fmt.Sprintf("transforms.%s.static.value", transformsName)] = transformsInsertStaticValue
-	}
-	if transformsInsertTimestampField != "" {
-		cfg[fmt.Sprintf("transforms.%s.timestamp.field", transformsName)] = transformsInsertTimestampField
-	}
-	if transformsInsertTopicField != "" {
-		cfg[fmt.Sprintf("transforms.%s.topic.field", transformsName)] = transformsInsertTopicField
-	}
-
-	return c.CreateConnector(environmentId, clusterId, name, cfg)
-}
-
-// Get 1 de 9
-// ListConnectors lista todos os connectors de um cluster Connect
 type ConnectorList struct {
 	common.BaseModel
 	Data []Connector `json:"data"`
 }
 
-func (c *ConfluentClient) ListConnectors(environmentId, clusterId string) (*ConnectorList, error) {
+type S3SinkConnectorConfig struct {
+	Bucket                string
+	AuthenticationMethod  string
+	ProviderIntegrationId string
+	Topics                string
+	InputDataFormat       string
+	OutputDataFormat      string
+	FlushSize             int
+	PartitionerClass      string
+	TimeInterval          string
+	TasksMax              int
+	Transforms            *TransformsConfig
+}
+
+type TransformsConfig struct {
+	Name           string
+	Type           string
+	PartitionField string
+	StaticField    string
+	StaticValue    string
+	TimestampField string
+	TopicField     string
+}
+
+func (s *S3SinkConnectorConfig) ToMap() map[string]interface{} {
+	config := map[string]interface{}{
+		"connector.class":         "S3_SINK",
+		"s3.bucket.name":          s.Bucket,
+		"authentication.method":   s.AuthenticationMethod,
+		"provider.integration.id": s.ProviderIntegrationId,
+		"topics":                  s.Topics,
+		"tasks.max":               fmt.Sprintf("%d", s.TasksMax),
+	}
+
+	if s.InputDataFormat != "" {
+		config["input.data.format"] = s.InputDataFormat
+	} else {
+		config["input.data.format"] = "AVRO"
+	}
+
+	if s.OutputDataFormat != "" {
+		config["output.data.format"] = s.OutputDataFormat
+	} else {
+		config["output.data.format"] = "AVRO"
+	}
+
+	if s.Transforms != nil {
+		s.Transforms.addToConfig(config)
+	}
+
+	return config
+}
+
+func (t *TransformsConfig) addToConfig(config map[string]interface{}) {
+	if t.Name == "" {
+		return
+	}
+
+	config["transforms"] = t.Name
+
+	if t.Type != "" {
+		config[fmt.Sprintf("transforms.%s.type", t.Name)] = t.Type
+	}
+	if t.PartitionField != "" {
+		config[fmt.Sprintf("transforms.%s.partition.field", t.Name)] = t.PartitionField
+	}
+	if t.StaticField != "" {
+		config[fmt.Sprintf("transforms.%s.static.field", t.Name)] = t.StaticField
+	}
+	if t.StaticValue != "" {
+		config[fmt.Sprintf("transforms.%s.static.value", t.Name)] = t.StaticValue
+	}
+	if t.TimestampField != "" {
+		config[fmt.Sprintf("transforms.%s.timestamp.field", t.Name)] = t.TimestampField
+	}
+	if t.TopicField != "" {
+		config[fmt.Sprintf("transforms.%s.topic.field", t.Name)] = t.TopicField
+	}
+}
+
+func (c *ConfluentClient) CreateConnector(environmentId, clusterId, name string, config map[string]interface{}) (*Connector, error) {
 	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors", environmentId, clusterId)
-	resp, err := c.doRequest(urlPath, http.MethodGet, nil, nil)
+
+	connector := &Connector{
+		Name:   name,
+		Config: config,
+	}
+
+	req, err := c.doRequest(urlPath, http.MethodPost, connector, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	if resp.StatusCode != http.StatusOK {
-		defer resp.Body.Close()
-		errRes, _ := common.NewErrorResponse(resp.Body)
-		if errRes != nil && errRes.Message != "" {
-			return nil, fmt.Errorf("failed to list connectors: %s", errRes.Message)
-		}
-		return nil, fmt.Errorf("failed to list connectors: %s", resp.Status)
+	if http.StatusCreated != req.StatusCode && http.StatusOK != req.StatusCode {
+		return nil, fmt.Errorf("failed to create connector: %s", req.Status)
 	}
 
-	defer resp.Body.Close()
+	defer req.Body.Close()
+
+	var result Connector
+	err = json.NewDecoder(req.Body).Decode(&result)
+	if err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+func (c *ConfluentClient) CreateS3SinkConnector(environmentId, clusterId, name string, config *S3SinkConnectorConfig) (*Connector, error) {
+	return c.CreateConnector(environmentId, clusterId, name, config.ToMap())
+}
+
+func (c *ConfluentClient) ListConnectors(environmentId, clusterId string) (*ConnectorList, error) {
+	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors", environmentId, clusterId)
+	req, err := c.doRequest(urlPath, http.MethodGet, nil, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if http.StatusOK != req.StatusCode {
+		return nil, fmt.Errorf("failed to list connectors: %s", req.Status)
+	}
+
+	defer req.Body.Close()
 
 	var connectors ConnectorList
-	if err := json.NewDecoder(resp.Body).Decode(&connectors); err != nil {
+	err = json.NewDecoder(req.Body).Decode(&connectors)
+	if err != nil {
 		return nil, err
 	}
 
 	return &connectors, nil
 }
 
-// Get 2 de 9
-// GetConnectorConfig retorna a configuração atual de um connector
-type ConnectorConfig map[string]interface{}
-
-func (c *ConfluentClient) GetConnectorConfig(environmentId, clusterId, connectorName string) (ConnectorConfig, error) {
-	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/config", environmentId, clusterId, connectorName)
-	resp, err := c.doRequest(urlPath, http.MethodGet, nil, nil)
+func (c *ConfluentClient) GetConnector(environmentId, clusterId, connectorName string) (*Connector, error) {
+	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s", environmentId, clusterId, connectorName)
+	req, err := c.doRequest(urlPath, http.MethodGet, nil, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	if resp.StatusCode != http.StatusOK {
-		defer resp.Body.Close()
-		errRes, _ := common.NewErrorResponse(resp.Body)
-		if errRes != nil && errRes.Message != "" {
-			return nil, fmt.Errorf("failed to get connector config: %s", errRes.Message)
-		}
-		return nil, fmt.Errorf("failed to get connector config: %s", resp.Status)
+	if http.StatusOK != req.StatusCode {
+		return nil, fmt.Errorf("failed to get connector: %s", req.Status)
 	}
 
-	defer resp.Body.Close()
+	defer req.Body.Close()
 
-	var cfg ConnectorConfig
-	if err := json.NewDecoder(resp.Body).Decode(&cfg); err != nil {
+	var connector Connector
+	err = json.NewDecoder(req.Body).Decode(&connector)
+	if err != nil {
+		return nil, err
+	}
+
+	return &connector, nil
+}
+
+func (c *ConfluentClient) GetConnectorConfig(environmentId, clusterId, connectorName string) (map[string]interface{}, error) {
+	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/config", environmentId, clusterId, connectorName)
+	req, err := c.doRequest(urlPath, http.MethodGet, nil, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if http.StatusOK != req.StatusCode {
+		return nil, fmt.Errorf("failed to get connector config: %s", req.Status)
+	}
+
+	defer req.Body.Close()
+
+	var cfg map[string]interface{}
+	err = json.NewDecoder(req.Body).Decode(&cfg)
+	if err != nil {
 		return nil, err
 	}
 
 	return cfg, nil
 }
 
-// DeleteConnector remove um connector existente do cluster Connect
 func (c *ConfluentClient) DeleteConnector(environmentId, clusterId, connectorName string) error {
 	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s", environmentId, clusterId, connectorName)
-	resp, err := c.doRequest(urlPath, http.MethodDelete, nil, nil)
+	req, err := c.doRequest(urlPath, http.MethodDelete, nil, nil)
 	if err != nil {
 		return err
 	}
 
-	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusNoContent && resp.StatusCode != http.StatusAccepted {
-		return fmt.Errorf("failed to delete connector: %s", resp.Status)
+	if http.StatusOK != req.StatusCode && http.StatusNoContent != req.StatusCode && http.StatusAccepted != req.StatusCode {
+		return fmt.Errorf("failed to delete connector: %s", req.Status)
 	}
 
 	return nil
 }
 
-// put UpdateConnectorConfig atualiza a configuração de um connector existente
-func (c *ConfluentClient) UpdateConnectorConfig(environmentId, clusterId, connectorName string, newConfig ConnectorConfig) error {
+func (c *ConfluentClient) UpdateConnectorConfig(environmentId, clusterId, connectorName string, newConfig map[string]interface{}) (*Connector, error) {
 	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/config", environmentId, clusterId, connectorName)
-	resp, err := c.doRequest(urlPath, http.MethodPut, newConfig, nil)
+	req, err := c.doRequest(urlPath, http.MethodPut, newConfig, nil)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	if resp.StatusCode != http.StatusOK {
-		defer resp.Body.Close()
-		errRes, _ := common.NewErrorResponse(resp.Body)
-		if errRes != nil && errRes.Message != "" {
-			return fmt.Errorf("failed to update connector config: %s", errRes.Message)
-		}
-		return fmt.Errorf("failed to update connector config: %s", resp.Status)
+	if http.StatusOK != req.StatusCode && http.StatusCreated != req.StatusCode {
+		return nil, fmt.Errorf("failed to update connector config: %s", req.Status)
 	}
 
-	return nil
+	defer req.Body.Close()
+
+	var connector Connector
+	err = json.NewDecoder(req.Body).Decode(&connector)
+	if err != nil {
+		return nil, err
+	}
+
+	return &connector, nil
 }

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"reflect"
 
 	"github.com/electric-saw/ccloud-client-go/ccloud/common"
 )
@@ -26,25 +27,22 @@ type ConnectorList struct {
 	Data []Connector `json:"data"`
 }
 
-type ConnectorConfig interface {
-	ToMap() map[string]interface{}
-}
-
 type S3SinkConnectorConfig struct {
-	Bucket                string
-	AuthenticationMethod  string
-	ProviderIntegrationId string
-	Topics                string
-	InputDataFormat       string
-	OutputDataFormat      string
-	FlushSize             int
-	PartitionerClass      string
-	TimeInterval          string
-	TasksMax              int
-	KafkaApiKey           string
-	KafkaApiSecret        string
-	Transforms            *TransformsConfig
-	AdditionalProperties  map[string]interface{}
+	ConnectorClass        string                 `json:"connector.class,omitempty" default:"S3_SINK"`
+	Bucket                string                 `json:"s3.bucket.name,omitempty"`
+	AuthenticationMethod  string                 `json:"authentication.method,omitempty" default:"IAM Roles"`
+	ProviderIntegrationId string                 `json:"provider.integration.id,omitempty"`
+	Topics                string                 `json:"topics,omitempty"`
+	InputDataFormat       string                 `json:"input.data.format,omitempty" default:"AVRO"`
+	OutputDataFormat      string                 `json:"output.data.format,omitempty" default:"AVRO"`
+	FlushSize             string                 `json:"flush.size,omitempty"`
+	PartitionerClass      string                 `json:"partitioner.class,omitempty"`
+	TimeInterval          string                 `json:"time.interval,omitempty"`
+	TasksMax              string                 `json:"tasks.max,omitempty"`
+	KafkaApiKey           string                 `json:"kafka.api.key,omitempty"`
+	KafkaApiSecret        string                 `json:"kafka.api.secret,omitempty"`
+	Transforms            *TransformsConfig      `json:"-"`
+	AdditionalProperties  map[string]interface{} `json:"-"`
 }
 
 type TransformsConfig struct {
@@ -58,115 +56,79 @@ type TransformsConfig struct {
 	OffsetField    string
 }
 
-func (s *S3SinkConnectorConfig) ToMap() map[string]interface{} {
-	config := map[string]interface{}{
-		"connector.class":         "S3_SINK",
-		"s3.bucket.name":          s.Bucket,
-		"provider.integration.id": s.ProviderIntegrationId,
-		"topics":                  s.Topics,
-		"tasks.max":               fmt.Sprintf("%d", s.TasksMax),
+func applyDefaults(configMap map[string]interface{}, config interface{}) {
+	v := reflect.ValueOf(config)
+	if v.Kind() == reflect.Ptr {
+		v = v.Elem()
 	}
 
-	// Set authentication method with default
-	if s.AuthenticationMethod != "" {
-		config["authentication.method"] = s.AuthenticationMethod
-	} else {
-		config["authentication.method"] = "IAM Roles"
-	}
-
-	if s.InputDataFormat != "" {
-		config["input.data.format"] = s.InputDataFormat
-	} else {
-		config["input.data.format"] = "AVRO"
-	}
-
-	if s.OutputDataFormat != "" {
-		config["output.data.format"] = s.OutputDataFormat
-	} else {
-		config["output.data.format"] = "AVRO"
-	}
-
-	if s.FlushSize > 0 {
-		config["flush.size"] = fmt.Sprintf("%d", s.FlushSize)
-	}
-
-	if s.PartitionerClass != "" {
-		config["partitioner.class"] = s.PartitionerClass
-	}
-
-	if s.TimeInterval != "" {
-		config["time.interval"] = s.TimeInterval
-	}
-
-	if s.KafkaApiKey != "" {
-		config["kafka.api.key"] = s.KafkaApiKey
-	}
-
-	if s.KafkaApiSecret != "" {
-		config["kafka.api.secret"] = s.KafkaApiSecret
-	}
-
-	if s.Transforms != nil {
-		s.Transforms.addToConfig(config)
-	}
-
-	for key, value := range s.AdditionalProperties {
-		config[key] = value
-	}
-
-	return config
-}
-
-func (t *TransformsConfig) addToConfig(config map[string]interface{}) {
-	if t.Name == "" {
+	if v.Kind() != reflect.Struct {
 		return
 	}
 
-	config["transforms"] = t.Name
+	t := v.Type()
 
-	if t.Type != "" {
-		config[fmt.Sprintf("transforms.%s.type", t.Name)] = t.Type
-	}
-	if t.PartitionField != "" {
-		config[fmt.Sprintf("transforms.%s.partition.field", t.Name)] = t.PartitionField
-	}
-	if t.StaticField != "" {
-		config[fmt.Sprintf("transforms.%s.static.field", t.Name)] = t.StaticField
-	}
-	if t.StaticValue != "" {
-		config[fmt.Sprintf("transforms.%s.static.value", t.Name)] = t.StaticValue
-	}
-	if t.TimestampField != "" {
-		config[fmt.Sprintf("transforms.%s.timestamp.field", t.Name)] = t.TimestampField
-	}
-	if t.TopicField != "" {
-		config[fmt.Sprintf("transforms.%s.topic.field", t.Name)] = t.TopicField
-	}
-	if t.OffsetField != "" {
-		config[fmt.Sprintf("transforms.%s.offset.field", t.Name)] = t.OffsetField
+	for i := 0; i < v.NumField(); i++ {
+		field := t.Field(i)
+		fieldValue := v.Field(i)
+
+		if !fieldValue.CanInterface() {
+			continue
+		}
+
+		jsonTag := field.Tag.Get("json")
+		if jsonTag == "" || jsonTag == "-" {
+			continue
+		}
+
+		jsonName := jsonTag
+		if idx := len(jsonTag); idx > 0 {
+			for j, c := range jsonTag {
+				if c == ',' {
+					jsonName = jsonTag[:j]
+					break
+				}
+			}
+		}
+		defaultValue := field.Tag.Get("default")
+		if defaultValue == "" {
+			continue
+		}
+
+		if _, exists := configMap[jsonName]; !exists || configMap[jsonName] == "" || configMap[jsonName] == 0 {
+			switch fieldValue.Kind() {
+			case reflect.String:
+				if fieldValue.String() == "" {
+					configMap[jsonName] = defaultValue
+				}
+			case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+				if fieldValue.Int() == 0 {
+					configMap[jsonName] = defaultValue
+				}
+			}
+		}
 	}
 }
 
-func (c *ConfluentClient) CreateConnectorTyped(environmentId, clusterId, name string, config ConnectorConfig) (*Connector, error) {
-	return c.CreateConnector(environmentId, clusterId, name, config.ToMap())
-}
-
-func (c *ConfluentClient) UpdateConnectorTyped(environmentId, clusterId, name string, config ConnectorConfig) (*Connector, error) {
-	return c.UpdateConnectorConfig(environmentId, clusterId, name, config.ToMap())
-}
-
-func (c *ConfluentClient) CreateConnector(environmentId, clusterId, name string, config map[string]interface{}) (*Connector, error) {
+func (c *ConfluentClient) CreateConnector(environmentId, clusterId, name string, config interface{}) (*Connector, error) {
 	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors", environmentId, clusterId)
 
-	configCopy := make(map[string]interface{})
-	for k, v := range config {
-		configCopy[k] = v
+	configBytes, err := json.Marshal(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal config: %w", err)
 	}
-	configCopy["name"] = name
+
+	var configMap map[string]interface{}
+	if err := json.Unmarshal(configBytes, &configMap); err != nil {
+		return nil, fmt.Errorf("failed to unmarshal config: %w", err)
+	}
+
+	applyDefaults(configMap, config)
+	configMap["name"] = name
 
 	payload := map[string]interface{}{
 		"name":   name,
-		"config": configCopy,
+		"config": configMap,
 	}
 
 	req, err := c.doRequest(urlPath, http.MethodPost, payload, nil)
@@ -265,16 +227,23 @@ func (c *ConfluentClient) DeleteConnector(environmentId, clusterId, connectorNam
 	return nil
 }
 
-func (c *ConfluentClient) UpdateConnectorConfig(environmentId, clusterId, connectorName string, newConfig map[string]interface{}) (*Connector, error) {
+func (c *ConfluentClient) UpdateConnectorConfig(environmentId, clusterId, connectorName string, newConfig interface{}) (*Connector, error) {
 	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/config", environmentId, clusterId, connectorName)
 
-	configCopy := make(map[string]interface{})
-	for k, v := range newConfig {
-		configCopy[k] = v
+	configBytes, err := json.Marshal(newConfig)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal config: %w", err)
 	}
-	configCopy["name"] = connectorName
 
-	req, err := c.doRequest(urlPath, http.MethodPut, configCopy, nil)
+	var configMap map[string]interface{}
+	if err := json.Unmarshal(configBytes, &configMap); err != nil {
+		return nil, fmt.Errorf("failed to unmarshal config: %w", err)
+	}
+
+	applyDefaults(configMap, newConfig)
+	configMap["name"] = connectorName
+
+	req, err := c.doRequest(urlPath, http.MethodPut, configMap, nil)
 	if err != nil {
 		return nil, err
 	}

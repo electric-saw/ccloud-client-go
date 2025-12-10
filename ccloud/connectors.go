@@ -56,6 +56,25 @@ type TransformsConfig struct {
 	OffsetField    string
 }
 
+type ConnectorStatus struct {
+	Name      string              `json:"name"`
+	Connector ConnectorTaskStatus `json:"connector"`
+	Tasks     []TaskStatus        `json:"tasks"`
+}
+
+type ConnectorTaskStatus struct {
+	State    string `json:"state"`
+	WorkerId string `json:"worker_id"`
+	Trace    string `json:"trace,omitempty"`
+}
+
+type TaskStatus struct {
+	Id       int    `json:"id"`
+	State    string `json:"state"`
+	WorkerId string `json:"worker_id"`
+	Trace    string `json:"trace,omitempty"`
+}
+
 func applyDefaults(configMap map[string]interface{}, config interface{}) {
 	v := reflect.ValueOf(config)
 	if v.Kind() == reflect.Ptr {
@@ -213,6 +232,28 @@ func (c *ConfluentClient) GetConnector(environmentId, clusterId, connectorName s
 	return &connector, nil
 }
 
+func (c *ConfluentClient) GetConnectorStatus(environmentId, clusterId, connectorName string) (*ConnectorStatus, error) {
+	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/status", environmentId, clusterId, connectorName)
+	req, err := c.doRequest(urlPath, http.MethodGet, nil, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if http.StatusOK != req.StatusCode {
+		return nil, fmt.Errorf("failed to get connector status: %s", req.Status)
+	}
+
+	defer req.Body.Close()
+
+	var status ConnectorStatus
+	err = json.NewDecoder(req.Body).Decode(&status)
+	if err != nil {
+		return nil, err
+	}
+
+	return &status, nil
+}
+
 func (c *ConfluentClient) DeleteConnector(environmentId, clusterId, connectorName string) error {
 	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s", environmentId, clusterId, connectorName)
 	req, err := c.doRequest(urlPath, http.MethodDelete, nil, nil)
@@ -222,6 +263,48 @@ func (c *ConfluentClient) DeleteConnector(environmentId, clusterId, connectorNam
 
 	if http.StatusOK != req.StatusCode && http.StatusNoContent != req.StatusCode && http.StatusAccepted != req.StatusCode {
 		return fmt.Errorf("failed to delete connector: %s", req.Status)
+	}
+
+	return nil
+}
+
+func (c *ConfluentClient) PauseConnector(environmentId, clusterId, connectorName string) error {
+	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/pause", environmentId, clusterId, connectorName)
+	req, err := c.doRequest(urlPath, http.MethodPut, nil, nil)
+	if err != nil {
+		return err
+	}
+
+	if http.StatusOK != req.StatusCode && http.StatusAccepted != req.StatusCode {
+		return fmt.Errorf("failed to pause connector: %s", req.Status)
+	}
+
+	return nil
+}
+
+func (c *ConfluentClient) ResumeConnector(environmentId, clusterId, connectorName string) error {
+	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/resume", environmentId, clusterId, connectorName)
+	req, err := c.doRequest(urlPath, http.MethodPut, nil, nil)
+	if err != nil {
+		return err
+	}
+
+	if http.StatusOK != req.StatusCode && http.StatusAccepted != req.StatusCode {
+		return fmt.Errorf("failed to resume connector: %s", req.Status)
+	}
+
+	return nil
+}
+
+func (c *ConfluentClient) RestartConnector(environmentId, clusterId, connectorName string) error {
+	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/restart", environmentId, clusterId, connectorName)
+	req, err := c.doRequest(urlPath, http.MethodPost, nil, nil)
+	if err != nil {
+		return err
+	}
+
+	if http.StatusOK != req.StatusCode && http.StatusAccepted != req.StatusCode {
+		return fmt.Errorf("failed to restart connector: %s", req.Status)
 	}
 
 	return nil

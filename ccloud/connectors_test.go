@@ -301,3 +301,206 @@ func TestUpdateConnectorTyped(t *testing.T) {
 	assert.Equal(t, s3Config.Bucket, updated.Config["s3.bucket.name"])
 	assert.Equal(t, "S3_SINK", updated.Config["connector.class"])
 }
+
+func TestGetConnectorStatus(t *testing.T) {
+	env := "env-1"
+	cluster := "cluster-1"
+	name := "test-connector"
+
+	expectedStatus := ConnectorStatus{
+		Name: name,
+		Connector: ConnectorTaskStatus{
+			State:    "RUNNING",
+			WorkerId: "worker-1",
+		},
+		Tasks: []TaskStatus{
+			{
+				Id:       0,
+				State:    "RUNNING",
+				WorkerId: "worker-1",
+			},
+			{
+				Id:       1,
+				State:    "RUNNING",
+				WorkerId: "worker-1",
+			},
+		},
+	}
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			t.Fatalf("unexpected method: %s", r.Method)
+		}
+
+		expectedPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/status", env, cluster, name)
+		if r.URL.Path != expectedPath {
+			t.Fatalf("unexpected path: %s (expect %s)", r.URL.Path, expectedPath)
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		_ = json.NewEncoder(w).Encode(expectedStatus)
+	}))
+	defer ts.Close()
+
+	client := NewClient().WithAuth(noopAuth{}).WithBaseUrl(ts.URL)
+
+	status, err := client.GetConnectorStatus(env, cluster, name)
+	assert.NoError(t, err)
+	assert.Equal(t, name, status.Name)
+	assert.Equal(t, "RUNNING", status.Connector.State)
+	assert.Equal(t, "worker-1", status.Connector.WorkerId)
+	assert.Len(t, status.Tasks, 2)
+	assert.Equal(t, "RUNNING", status.Tasks[0].State)
+	assert.Equal(t, "RUNNING", status.Tasks[1].State)
+}
+
+func TestPauseConnector(t *testing.T) {
+	env := "env-1"
+	cluster := "cluster-1"
+	name := "test-connector"
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPut {
+			t.Fatalf("unexpected method: %s", r.Method)
+		}
+
+		expectedPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/pause", env, cluster, name)
+		if r.URL.Path != expectedPath {
+			t.Fatalf("unexpected path: %s (expect %s)", r.URL.Path, expectedPath)
+		}
+
+		w.WriteHeader(http.StatusOK)
+	}))
+	defer ts.Close()
+
+	client := NewClient().WithAuth(noopAuth{}).WithBaseUrl(ts.URL)
+
+	err := client.PauseConnector(env, cluster, name)
+	assert.NoError(t, err)
+}
+
+func TestPauseConnectorAccepted(t *testing.T) {
+	env := "env-1"
+	cluster := "cluster-1"
+	name := "test-connector"
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPut {
+			t.Fatalf("unexpected method: %s", r.Method)
+		}
+
+		expectedPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/pause", env, cluster, name)
+		if r.URL.Path != expectedPath {
+			t.Fatalf("unexpected path: %s (expect %s)", r.URL.Path, expectedPath)
+		}
+
+		w.WriteHeader(http.StatusAccepted)
+	}))
+	defer ts.Close()
+
+	client := NewClient().WithAuth(noopAuth{}).WithBaseUrl(ts.URL)
+
+	err := client.PauseConnector(env, cluster, name)
+	assert.NoError(t, err)
+}
+
+func TestResumeConnector(t *testing.T) {
+	env := "env-1"
+	cluster := "cluster-1"
+	name := "test-connector"
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPut {
+			t.Fatalf("unexpected method: %s", r.Method)
+		}
+
+		expectedPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/resume", env, cluster, name)
+		if r.URL.Path != expectedPath {
+			t.Fatalf("unexpected path: %s (expect %s)", r.URL.Path, expectedPath)
+		}
+
+		w.WriteHeader(http.StatusOK)
+	}))
+	defer ts.Close()
+
+	client := NewClient().WithAuth(noopAuth{}).WithBaseUrl(ts.URL)
+
+	err := client.ResumeConnector(env, cluster, name)
+	assert.NoError(t, err)
+}
+
+func TestResumeConnectorAccepted(t *testing.T) {
+	env := "env-1"
+	cluster := "cluster-1"
+	name := "test-connector"
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPut {
+			t.Fatalf("unexpected method: %s", r.Method)
+		}
+
+		expectedPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/resume", env, cluster, name)
+		if r.URL.Path != expectedPath {
+			t.Fatalf("unexpected path: %s (expect %s)", r.URL.Path, expectedPath)
+		}
+
+		w.WriteHeader(http.StatusAccepted)
+	}))
+	defer ts.Close()
+
+	client := NewClient().WithAuth(noopAuth{}).WithBaseUrl(ts.URL)
+
+	err := client.ResumeConnector(env, cluster, name)
+	assert.NoError(t, err)
+}
+
+func TestRestartConnector(t *testing.T) {
+	env := "env-1"
+	cluster := "cluster-1"
+	name := "test-connector"
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			t.Fatalf("unexpected method: %s", r.Method)
+		}
+
+		expectedPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/restart", env, cluster, name)
+		if r.URL.Path != expectedPath {
+			t.Fatalf("unexpected path: %s (expect %s)", r.URL.Path, expectedPath)
+		}
+
+		w.WriteHeader(http.StatusOK)
+	}))
+	defer ts.Close()
+
+	client := NewClient().WithAuth(noopAuth{}).WithBaseUrl(ts.URL)
+
+	err := client.RestartConnector(env, cluster, name)
+	assert.NoError(t, err)
+}
+
+func TestRestartConnectorAccepted(t *testing.T) {
+	env := "env-1"
+	cluster := "cluster-1"
+	name := "test-connector"
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			t.Fatalf("unexpected method: %s", r.Method)
+		}
+
+		expectedPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors/%s/restart", env, cluster, name)
+		if r.URL.Path != expectedPath {
+			t.Fatalf("unexpected path: %s (expect %s)", r.URL.Path, expectedPath)
+		}
+
+		w.WriteHeader(http.StatusAccepted)
+	}))
+	defer ts.Close()
+
+	client := NewClient().WithAuth(noopAuth{}).WithBaseUrl(ts.URL)
+
+	err := client.RestartConnector(env, cluster, name)
+	assert.NoError(t, err)
+}

@@ -57,9 +57,9 @@ type TransformsConfig struct {
 }
 
 type ConnectorStatus struct {
-	Name      string      `json:"name"`
+	Name      string              `json:"name"`
 	Connector ConnectorTaskStatus `json:"connector"`
-	Tasks     []TaskStatus `json:"tasks"`
+	Tasks     []TaskStatus        `json:"tasks"`
 }
 
 type ConnectorTaskStatus struct {

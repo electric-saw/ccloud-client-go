@@ -82,7 +82,9 @@ func TestCreateUpdateDeleteClientQuota(t *testing.T) {
 
 	clusterID := clusters.Data[0].Id
 
-	serviceAccounts, err := c.ListServiceAccounts(&common.PaginationOptions{PageSize: 1})
+	serviceAccounts, err := c.ListServiceAccounts(&ccloud.ListServiceAccountsQuery{
+		PaginationOptions: common.PaginationOptions{PageSize: 1},
+	})
 	if err != nil || len(serviceAccounts.Data) == 0 {
 		t.Skip("Skipping test: No service accounts available")
 		return

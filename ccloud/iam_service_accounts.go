@@ -19,23 +19,15 @@ type ServiceAccountList struct {
 	Data []ServiceAccount `json:"data"`
 }
 
-func (c *ConfluentClient) ListServiceAccounts(pagination *common.PaginationOptions, displayNames ...string) (*ServiceAccountList, error) {
+type ListServiceAccountsQuery struct {
+	common.PaginationOptions
+	DisplayNames []string `url:"display_name,omitempty"`
+}
+
+func (c *ConfluentClient) ListServiceAccounts(query *ListServiceAccountsQuery) (*ServiceAccountList, error) {
 	urlPath := "/iam/v2/service-accounts"
 
-	type listServiceAccountsParams struct {
-		PageSize     int      `url:"page_size,omitempty"`
-		PageToken    string   `url:"page_token,omitempty"`
-		DisplayNames []string `url:"display_name"`
-	}
-
-	params := &listServiceAccountsParams{}
-	if pagination != nil {
-		params.PageSize = pagination.PageSize
-		params.PageToken = pagination.PageToken
-	}
-	params.DisplayNames = displayNames
-
-	req, err := c.doRequest(urlPath, http.MethodGet, nil, params)
+	req, err := c.doRequest(urlPath, http.MethodGet, nil, query)
 	if err != nil {
 		return nil, err
 	}

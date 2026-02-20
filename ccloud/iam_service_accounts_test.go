@@ -17,8 +17,10 @@ func (n noopAuthSA) SetAuth(req *http.Request) error { return nil }
 
 func TestListServiceAccounts(t *testing.T) {
 	c := makeClient()
-	serviceAccounts, err := c.ListServiceAccounts(&common.PaginationOptions{
-		PageSize: 1,
+	serviceAccounts, err := c.ListServiceAccounts(&ccloud.ListServiceAccountsQuery{
+		PaginationOptions: common.PaginationOptions{
+			PageSize: 1,
+		},
 	})
 	assert.NoError(t, err)
 
@@ -74,7 +76,9 @@ func TestListServiceAccountsWithDisplayName(t *testing.T) {
 
 	client := ccloud.NewClient().WithAuth(noopAuthSA{}).WithBaseUrl(ts.URL)
 
-	serviceAccounts, err := client.ListServiceAccounts(nil, "tf_runner_sa", "mySA")
+	serviceAccounts, err := client.ListServiceAccounts(&ccloud.ListServiceAccountsQuery{
+		DisplayNames: []string{"tf_runner_sa", "mySA"},
+	})
 	assert.NoError(t, err)
 	assert.NotNil(t, serviceAccounts)
 	assert.Len(t, serviceAccounts.Data, 2)
@@ -123,8 +127,10 @@ func TestListServiceAccountsWithPagination(t *testing.T) {
 
 	client := ccloud.NewClient().WithAuth(noopAuthSA{}).WithBaseUrl(ts.URL)
 
-	serviceAccounts, err := client.ListServiceAccounts(&common.PaginationOptions{
-		PageSize: 10,
+	serviceAccounts, err := client.ListServiceAccounts(&ccloud.ListServiceAccountsQuery{
+		PaginationOptions: common.PaginationOptions{
+			PageSize: 10,
+		},
 	})
 	assert.NoError(t, err)
 	assert.NotNil(t, serviceAccounts)

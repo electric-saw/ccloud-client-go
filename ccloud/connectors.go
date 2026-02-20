@@ -75,6 +75,27 @@ type TaskStatus struct {
 	Trace    string `json:"trace,omitempty"`
 }
 
+type ConnectorId struct {
+	Id     string `json:"id"`
+	IdType string `json:"id_type"`
+}
+
+type ConnectorInfo struct {
+	Name   string                 `json:"name"`
+	Config map[string]interface{} `json:"config"`
+	Type   string                 `json:"type"`
+}
+
+type ConnectorWithExpansions struct {
+	Id     ConnectorId     `json:"id"`
+	Info   ConnectorInfo   `json:"info"`
+	Status ConnectorStatus `json:"status"`
+}
+
+type listConnectorsParams struct {
+	Expand string `url:"expand,omitempty"`
+}
+
 func applyDefaults(configMap map[string]interface{}, config interface{}) {
 	v := reflect.ValueOf(config)
 	if v.Kind() == reflect.Ptr {
@@ -351,4 +372,53 @@ func (c *ConfluentClient) UpdateConnectorConfig(environmentId, clusterId, connec
 	}
 
 	return &connector, nil
+}
+
+func (c *ConfluentClient) ListConnectorsWithExpansions(environmentId, clusterId string, expand ...string) (map[string]ConnectorWithExpansions, error) {
+	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors", environmentId, clusterId)
+
+	expandStr := ""
+	if len(expand) > 0 {
+		for i, e := range expand {
+			if i > 0 {
+				expandStr += ","
+			}
+			expandStr += e
+		}
+	}
+
+	params := listConnectorsParams{Expand: expandStr}
+
+	req, err := c.doRequest(urlPath, http.MethodGet, nil, params)
+	if err != nil {
+		return nil, err
+	}
+
+	if http.StatusOK != req.StatusCode {
+		defer req.Body.Close()
+		return nil, fmt.Errorf("failed to list connectors with expansions: %s", req.Status)
+	}
+
+	defer req.Body.Close()
+
+	var result map[string]ConnectorWithExpansions
+	err = json.NewDecoder(req.Body).Decode(&result)
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+
+func (c *ConfluentClient) GetConnectorWithExpansions(environmentId, clusterId, connectorName string, expand ...string) (*ConnectorWithExpansions, error) {
+	connectors, err := c.ListConnectorsWithExpansions(environmentId, clusterId, expand...)
+	if err != nil {
+		return nil, err
+	}
+
+	if connector, ok := connectors[connectorName]; ok {
+		return &connector, nil
+	}
+
+	return nil, fmt.Errorf("connector '%s' not found", connectorName)
 }

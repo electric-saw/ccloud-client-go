@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"reflect"
+	"strings"
 
 	"github.com/electric-saw/ccloud-client-go/ccloud/common"
 )
@@ -377,15 +378,7 @@ func (c *ConfluentClient) UpdateConnectorConfig(environmentId, clusterId, connec
 func (c *ConfluentClient) ListConnectorsWithExpansions(environmentId, clusterId string, expand ...string) (map[string]ConnectorWithExpansions, error) {
 	urlPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors", environmentId, clusterId)
 
-	expandStr := ""
-	if len(expand) > 0 {
-		for i, e := range expand {
-			if i > 0 {
-				expandStr += ","
-			}
-			expandStr += e
-		}
-	}
+	expandStr := strings.Join(expand, ",")
 
 	params := listConnectorsParams{Expand: expandStr}
 

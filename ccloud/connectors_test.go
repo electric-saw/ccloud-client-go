@@ -504,3 +504,257 @@ func TestRestartConnectorAccepted(t *testing.T) {
 	err := client.RestartConnector(env, cluster, name)
 	assert.NoError(t, err)
 }
+
+func TestListConnectorsWithExpansions(t *testing.T) {
+	env := "env-1"
+	cluster := "cluster-1"
+
+	connectorsList := map[string]ConnectorWithExpansions{
+		"MyGcsLogsBucketConnector": {
+			Id: ConnectorId{
+				Id:     "lcc-12345",
+				IdType: "ID",
+			},
+			Info: ConnectorInfo{
+				Name: "MyGcsLogsBucketConnector",
+				Config: map[string]interface{}{
+					"connector.class": "GcsSink",
+					"gcs.bucket.name": "APILogsBucket",
+					"kafka.region":    "us-west-2",
+					"topics":          "APILogsTopic",
+					"flush.size":      "1000",
+					"time.interval":   "DAILY",
+					"tasks.max":       "1",
+				},
+				Type: "sink",
+			},
+			Status: ConnectorStatus{
+				Name: "MyGcsLogsBucketConnector",
+				Connector: ConnectorTaskStatus{
+					State:    "PROVISIONING",
+					WorkerId: "MyGcsLogsBucketConnector",
+					Trace:    "",
+				},
+				Tasks: []TaskStatus{},
+			},
+		},
+		"MyDatagenConnector": {
+			Id: ConnectorId{
+				Id:     "lcc-54321",
+				IdType: "ID",
+			},
+			Info: ConnectorInfo{
+				Name: "MyDatagenConnector",
+				Config: map[string]interface{}{
+					"connector.class": "DatagenSource",
+					"quickstart":      "ORDERS",
+					"topics":          "APILogsTopic",
+				},
+				Type: "source",
+			},
+			Status: ConnectorStatus{
+				Name: "MyDatagenConnector",
+				Connector: ConnectorTaskStatus{
+					State:    "RUNNING",
+					WorkerId: "MyDatagenConnector",
+					Trace:    "",
+				},
+				Tasks: []TaskStatus{
+					{
+						Id:       0,
+						State:    "RUNNING",
+						WorkerId: "MyDatagenConnector",
+					},
+				},
+			},
+		},
+	}
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			t.Fatalf("unexpected method: %s", r.Method)
+		}
+
+		expectedPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors", env, cluster)
+		if r.URL.Path != expectedPath {
+			t.Fatalf("unexpected path: %s (expect %s)", r.URL.Path, expectedPath)
+		}
+
+		// Verify expand parameters
+		expand := r.URL.Query().Get("expand")
+		if expand != "id,info,status" {
+			t.Fatalf("unexpected expand parameter: %s", expand)
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		_ = json.NewEncoder(w).Encode(connectorsList)
+	}))
+	defer ts.Close()
+
+	client := NewClient().WithAuth(noopAuth{}).WithBaseUrl(ts.URL)
+
+	connectors, err := client.ListConnectorsWithExpansions(env, cluster, "id", "info", "status")
+	assert.NoError(t, err)
+	assert.Len(t, connectors, 2)
+
+	// Verify GCS connector
+	gcs, ok := connectors["MyGcsLogsBucketConnector"]
+	assert.True(t, ok)
+	assert.Equal(t, "lcc-12345", gcs.Id.Id)
+	assert.Equal(t, "ID", gcs.Id.IdType)
+	assert.Equal(t, "MyGcsLogsBucketConnector", gcs.Info.Name)
+	assert.Equal(t, "GcsSink", gcs.Info.Config["connector.class"])
+	assert.Equal(t, "sink", gcs.Info.Type)
+	assert.Equal(t, "PROVISIONING", gcs.Status.Connector.State)
+
+	// Verify Datagen connector
+	datagen, ok := connectors["MyDatagenConnector"]
+	assert.True(t, ok)
+	assert.Equal(t, "lcc-54321", datagen.Id.Id)
+	assert.Equal(t, "MyDatagenConnector", datagen.Info.Name)
+	assert.Equal(t, "DatagenSource", datagen.Info.Config["connector.class"])
+	assert.Equal(t, "source", datagen.Info.Type)
+	assert.Equal(t, "RUNNING", datagen.Status.Connector.State)
+	assert.Len(t, datagen.Status.Tasks, 1)
+}
+
+func TestGetConnectorWithExpansions(t *testing.T) {
+	env := "env-1"
+	cluster := "cluster-1"
+	connectorName := "MyDatagenConnector"
+
+	connectorsList := map[string]ConnectorWithExpansions{
+		"MyGcsLogsBucketConnector": {
+			Id: ConnectorId{
+				Id:     "lcc-12345",
+				IdType: "ID",
+			},
+			Info: ConnectorInfo{
+				Name: "MyGcsLogsBucketConnector",
+				Config: map[string]interface{}{
+					"connector.class": "GcsSink",
+				},
+				Type: "sink",
+			},
+			Status: ConnectorStatus{
+				Name: "MyGcsLogsBucketConnector",
+				Connector: ConnectorTaskStatus{
+					State:    "PROVISIONING",
+					WorkerId: "MyGcsLogsBucketConnector",
+				},
+				Tasks: []TaskStatus{},
+			},
+		},
+		connectorName: {
+			Id: ConnectorId{
+				Id:     "lcc-54321",
+				IdType: "ID",
+			},
+			Info: ConnectorInfo{
+				Name: connectorName,
+				Config: map[string]interface{}{
+					"connector.class": "DatagenSource",
+					"quickstart":      "ORDERS",
+					"topics":          "APILogsTopic",
+					"tasks.max":       "1",
+				},
+				Type: "source",
+			},
+			Status: ConnectorStatus{
+				Name: connectorName,
+				Connector: ConnectorTaskStatus{
+					State:    "RUNNING",
+					WorkerId: connectorName,
+					Trace:    "",
+				},
+				Tasks: []TaskStatus{
+					{
+						Id:       0,
+						State:    "RUNNING",
+						WorkerId: connectorName,
+					},
+				},
+			},
+		},
+	}
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			t.Fatalf("unexpected method: %s", r.Method)
+		}
+
+		// GetConnectorWithExpansions now calls ListConnectorsWithExpansions internally
+		expectedPath := fmt.Sprintf("/connect/v1/environments/%s/clusters/%s/connectors", env, cluster)
+		if r.URL.Path != expectedPath {
+			t.Fatalf("unexpected path: %s (expect %s)", r.URL.Path, expectedPath)
+		}
+
+		// Verify expand parameters
+		expand := r.URL.Query().Get("expand")
+		if expand != "id,info,status" {
+			t.Fatalf("unexpected expand parameter: %s", expand)
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		_ = json.NewEncoder(w).Encode(connectorsList)
+	}))
+	defer ts.Close()
+
+	client := NewClient().WithAuth(noopAuth{}).WithBaseUrl(ts.URL)
+
+	connector, err := client.GetConnectorWithExpansions(env, cluster, connectorName, "id", "info", "status")
+	assert.NoError(t, err)
+	assert.NotNil(t, connector)
+	assert.Equal(t, "lcc-54321", connector.Id.Id)
+	assert.Equal(t, connectorName, connector.Info.Name)
+	assert.Equal(t, "DatagenSource", connector.Info.Config["connector.class"])
+	assert.Equal(t, "source", connector.Info.Type)
+	assert.Equal(t, "RUNNING", connector.Status.Connector.State)
+	assert.Len(t, connector.Status.Tasks, 1)
+}
+
+func TestGetConnectorWithExpansionsNotFound(t *testing.T) {
+	env := "env-1"
+	cluster := "cluster-1"
+	connectorName := "NonExistentConnector"
+
+	connectorsList := map[string]ConnectorWithExpansions{
+		"MyGcsLogsBucketConnector": {
+			Id: ConnectorId{
+				Id:     "lcc-12345",
+				IdType: "ID",
+			},
+			Info: ConnectorInfo{
+				Name: "MyGcsLogsBucketConnector",
+				Config: map[string]interface{}{
+					"connector.class": "GcsSink",
+				},
+				Type: "sink",
+			},
+			Status: ConnectorStatus{
+				Name: "MyGcsLogsBucketConnector",
+				Connector: ConnectorTaskStatus{
+					State:    "PROVISIONING",
+					WorkerId: "MyGcsLogsBucketConnector",
+				},
+				Tasks: []TaskStatus{},
+			},
+		},
+	}
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		_ = json.NewEncoder(w).Encode(connectorsList)
+	}))
+	defer ts.Close()
+
+	client := NewClient().WithAuth(noopAuth{}).WithBaseUrl(ts.URL)
+
+	connector, err := client.GetConnectorWithExpansions(env, cluster, connectorName, "id", "info", "status")
+	assert.Error(t, err)
+	assert.Nil(t, connector)
+	assert.Contains(t, err.Error(), "not found")
+}

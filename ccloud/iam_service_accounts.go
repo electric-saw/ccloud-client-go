@@ -19,9 +19,15 @@ type ServiceAccountList struct {
 	Data []ServiceAccount `json:"data"`
 }
 
-func (c *ConfluentClient) ListServiceAccounts(opt *common.PaginationOptions) (*ServiceAccountList, error) {
+type ListServiceAccountsQuery struct {
+	common.PaginationOptions
+	DisplayNames []string `url:"display_name,omitempty"`
+}
+
+func (c *ConfluentClient) ListServiceAccounts(query *ListServiceAccountsQuery) (*ServiceAccountList, error) {
 	urlPath := "/iam/v2/service-accounts"
-	req, err := c.doRequest(urlPath, http.MethodGet, nil, opt)
+
+	req, err := c.doRequest(urlPath, http.MethodGet, nil, query)
 	if err != nil {
 		return nil, err
 	}

@@ -109,6 +109,10 @@ type KafkaAclCreateReq struct {
 	Permission   AclPermissionType `json:"permission,omitempty"`
 }
 
+type KafkaAclBatchCreateReq struct {
+	Data []KafkaAclCreateReq `json:"data"`
+}
+
 func (c *ConfluentClusterClient) CreateAcl(acl *KafkaAclCreateReq) error {
 	res, err := c.doRequest(c.clusterInfo.Acls.Related, "", "POST", acl, nil)
 	if err != nil {
@@ -122,6 +126,27 @@ func (c *ConfluentClusterClient) CreateAcl(acl *KafkaAclCreateReq) error {
 		}
 
 		return fmt.Errorf("failed to create acl (%s):  %s", res.Status, errorRes.Error())
+	}
+
+	return nil
+}
+
+func (c *ConfluentClusterClient) BatchCreateAcls(batch *KafkaAclBatchCreateReq) error {
+	// Build URL with :batch suffix
+	urlPath := c.clusterInfo.Acls.Related + ":batch"
+
+	res, err := c.doRequest(urlPath, "", "POST", batch, nil)
+	if err != nil {
+		return err
+	}
+
+	if res.StatusCode != http.StatusCreated && res.StatusCode != http.StatusNoContent {
+		errorRes, err := common.NewErrorResponse(res.Body)
+		if err != nil {
+			return err
+		}
+
+		return fmt.Errorf("failed to batch create acls (%s): %s", res.Status, errorRes.Error())
 	}
 
 	return nil

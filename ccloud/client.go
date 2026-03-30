@@ -79,8 +79,10 @@ func (c *ConfluentClient) doRequest(urlPath, method string, body, params any) (*
 		return nil, err
 	}
 
-	if err := c.auth.SetAuth(req.Request); err != nil {
-		return nil, fmt.Errorf("failed to set auth: %s", err)
+	if c.auth != nil {
+		if err := c.auth.SetAuth(req.Request); err != nil {
+			return nil, fmt.Errorf("failed to set auth: %s", err)
+		}
 	}
 
 	req.Header.Add("Content-Type", ContentTypeJSON)

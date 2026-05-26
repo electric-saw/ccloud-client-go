@@ -32,4 +32,4 @@ jobs:
           python-version: '3.x'
 
       - name: Run pre-commit
-        uses: github-action-pre-commit@v4.0.0
+        uses: cloudposse/github-action-pre-commit@v4.0.0

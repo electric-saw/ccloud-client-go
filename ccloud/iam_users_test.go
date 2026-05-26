@@ -1,9 +1,7 @@
 package ccloud_test
 
 import (
-	"fmt"
 	"os"
-
 	"testing"
 
 	"github.com/electric-saw/ccloud-client-go/ccloud"
@@ -16,14 +14,6 @@ func makeClient() *ccloud.ConfluentClient {
 	secret := os.Getenv("CONFLUENT_API_SECRET")
 
 	return ccloud.NewClient().WithAuth(ccloud.NewBasicAuth(key, secret))
-}
-
-func makeRbacCrn() string {
-	schemaRegistryCluster := os.Getenv("SCHEMA_REGISTRY_CLUSTER")
-	organization := os.Getenv("ORGANIZATION")
-	environment := os.Getenv("ENVIRONMENT")
-
-	return fmt.Sprintf("crn://confluent.cloud/organization=%s/environment=%s/schema-registry=%s/subject=*", organization, environment, schemaRegistryCluster)
 }
 
 func TestListRoles(t *testing.T) {

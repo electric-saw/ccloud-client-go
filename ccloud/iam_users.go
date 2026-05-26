@@ -30,7 +30,7 @@ func (c *ConfluentClient) ListUsers(opt *common.PaginationOptions) (*UserList, e
 		return nil, fmt.Errorf("failed to list users: %s", req.Status)
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	var userList UserList
 	err = json.NewDecoder(req.Body).Decode(&userList)
@@ -52,7 +52,7 @@ func (c *ConfluentClient) GetUser(userId string) (*User, error) {
 		return nil, fmt.Errorf("failed to get user: %s", req.Status)
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	var user User
 	err = json.NewDecoder(req.Body).Decode(&user)
@@ -78,7 +78,7 @@ func (c *ConfluentClient) UpdateUser(userId string, update *UserUpdateReq) (*Use
 		return nil, fmt.Errorf("failed to update user: %s", req.Status)
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	var user User
 	err = json.NewDecoder(req.Body).Decode(&user)

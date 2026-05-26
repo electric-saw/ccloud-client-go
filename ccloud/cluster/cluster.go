@@ -35,7 +35,7 @@ func (c *ConfluentClusterClient) getCluster() (*KafkaCluster, error) {
 		return nil, fmt.Errorf("failed to get cluster: %s", req.Status)
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	var cluster KafkaCluster
 	err = json.NewDecoder(req.Body).Decode(&cluster)

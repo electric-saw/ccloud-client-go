@@ -125,7 +125,7 @@ func (c *ConfluentClient) CreateFlinkComputePool(
 	if err != nil {
 		return nil, fmt.Errorf("failed to make request for compute pool %q: %w", displayName, err)
 	}
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	if req.StatusCode != http.StatusCreated && req.StatusCode != http.StatusOK {
 		return nil, extractAPIError(req, fmt.Sprintf("create compute pool %q", displayName))
@@ -155,7 +155,7 @@ func (c *ConfluentClient) GetFlinkComputePool(environmentID, computePoolID strin
 	if err != nil {
 		return nil, fmt.Errorf("failed to make request for compute pool %q: %w", computePoolID, err)
 	}
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	if req.StatusCode != http.StatusOK {
 		return nil, extractAPIError(req, fmt.Sprintf("get compute pool %q", computePoolID))
@@ -182,7 +182,7 @@ func (c *ConfluentClient) ListFlinkComputePools(environmentID string) ([]FlinkCo
 	if err != nil {
 		return nil, fmt.Errorf("failed to make request for listing compute pools: %w", err)
 	}
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	if req.StatusCode != http.StatusOK {
 		return nil, extractAPIError(req, "list compute pools")
@@ -212,7 +212,7 @@ func (c *ConfluentClient) DeleteFlinkComputePool(environmentID, computePoolID st
 	if err != nil {
 		return fmt.Errorf("failed to make request for deleting compute pool %q: %w", computePoolID, err)
 	}
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	if req.StatusCode != http.StatusOK && req.StatusCode != http.StatusNoContent && req.StatusCode != http.StatusAccepted {
 		return extractAPIError(req, fmt.Sprintf("delete compute pool %q", computePoolID))
@@ -256,7 +256,7 @@ func (c *ConfluentClient) CreateFlinkStatement(
 	if err != nil {
 		return nil, fmt.Errorf("failed to make request for statement %q: %w", displayName, err)
 	}
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	if req.StatusCode != http.StatusCreated && req.StatusCode != http.StatusOK {
 		return nil, extractAPIError(req, fmt.Sprintf("create statement %q", displayName))
@@ -286,7 +286,7 @@ func (c *ConfluentClient) GetFlinkStatement(environmentID, statementName string)
 	if err != nil {
 		return nil, fmt.Errorf("failed to make request for statement %q: %w", statementName, err)
 	}
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	if req.StatusCode != http.StatusOK {
 		return nil, extractAPIError(req, fmt.Sprintf("get statement %q", statementName))
@@ -313,7 +313,7 @@ func (c *ConfluentClient) ListFlinkStatements(environmentID string) ([]FlinkStat
 	if err != nil {
 		return nil, fmt.Errorf("failed to make request for listing statements: %w", err)
 	}
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	if req.StatusCode != http.StatusOK {
 		return nil, extractAPIError(req, "list statements")
@@ -343,7 +343,7 @@ func (c *ConfluentClient) DeleteFlinkStatement(environmentID, statementName stri
 	if err != nil {
 		return fmt.Errorf("failed to make request for deleting statement %q: %w", statementName, err)
 	}
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	if req.StatusCode != http.StatusOK && req.StatusCode != http.StatusNoContent && req.StatusCode != http.StatusAccepted {
 		return extractAPIError(req, fmt.Sprintf("delete statement %q", statementName))
@@ -368,7 +368,7 @@ func (c *ConfluentClient) CancelFlinkStatement(environmentID, statementName stri
 	if err != nil {
 		return fmt.Errorf("failed to make request for cancelling statement %q: %w", statementName, err)
 	}
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	if req.StatusCode != http.StatusOK && req.StatusCode != http.StatusAccepted {
 		return extractAPIError(req, fmt.Sprintf("cancel statement %q", statementName))

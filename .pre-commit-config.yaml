@@ -32,7 +32,6 @@ repos:
       - id: golangci-lint
         args:
           - "--timeout=8m"
-          - --go=1.22
       - id: go-critic
         exclude: ^docs/docs.go$
       # - id: go-unit-tests

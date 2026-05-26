@@ -114,7 +114,7 @@ func TestCreateFlinkComputePool(t *testing.T) {
 					// Return mock response
 					w.WriteHeader(tt.mockStatusCode)
 					if tt.mockResponse != nil {
-						json.NewEncoder(w).Encode(tt.mockResponse)
+						_ = json.NewEncoder(w).Encode(tt.mockResponse)
 					}
 				}))
 				defer server.Close()
@@ -229,7 +229,7 @@ func TestGetFlinkComputePool(t *testing.T) {
 				server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 					w.WriteHeader(tt.mockStatusCode)
 					if tt.mockResponse != nil {
-						json.NewEncoder(w).Encode(tt.mockResponse)
+						_ = json.NewEncoder(w).Encode(tt.mockResponse)
 					}
 				}))
 				defer server.Close()
@@ -297,7 +297,7 @@ func TestListFlinkComputePools(t *testing.T) {
 			if tt.environmentID != "" {
 				server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 					response := FlinkComputePoolList{Data: tt.mockPools}
-					json.NewEncoder(w).Encode(response)
+					_ = json.NewEncoder(w).Encode(response)
 				}))
 				defer server.Close()
 
@@ -391,7 +391,7 @@ func TestCreateFlinkStatement(t *testing.T) {
 				server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 					w.WriteHeader(tt.mockStatusCode)
 					if tt.mockResponse != nil {
-						json.NewEncoder(w).Encode(tt.mockResponse)
+						_ = json.NewEncoder(w).Encode(tt.mockResponse)
 					}
 				}))
 				defer server.Close()

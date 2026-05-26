@@ -1,0 +1,35 @@
+name: PR Validator
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Lint with pre-commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Install Go tools
+        run: |
+          go install github.com/fzipp/gocyclo/cmd/gocyclo@latest
+          go install golang.org/x/tools/cmd/goimports@latest
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+          go install github.com/go-critic/go-critic/cmd/gocritic@latest
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run pre-commit
+        uses: github-action-pre-commit@v4.0.0

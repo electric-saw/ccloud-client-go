@@ -55,41 +55,41 @@ type ClientQuota struct {
 
 func (c *ClientQuota) String() string {
 	var result strings.Builder
-	result.WriteString(fmt.Sprintf("Client Quota ID: %s\n", c.ID))
-	result.WriteString(fmt.Sprintf("Display Name: %s\n", c.Spec.DisplayName))
-	result.WriteString(fmt.Sprintf("Description: %s\n", c.Spec.Description))
+	fmt.Fprintf(&result, "Client Quota ID: %s\n", c.ID)
+	fmt.Fprintf(&result, "Display Name: %s\n", c.Spec.DisplayName)
+	fmt.Fprintf(&result, "Description: %s\n", c.Spec.Description)
 
 	if c.Spec.Throughput != nil {
 		result.WriteString("Throughput:\n")
-		result.WriteString(fmt.Sprintf("  Ingress Byte Rate: %s\n", c.Spec.Throughput.IngressByteRate))
-		result.WriteString(fmt.Sprintf("  Egress Byte Rate: %s\n", c.Spec.Throughput.EgressByteRate))
+		fmt.Fprintf(&result, "  Ingress Byte Rate: %s\n", c.Spec.Throughput.IngressByteRate)
+		fmt.Fprintf(&result, "  Egress Byte Rate: %s\n", c.Spec.Throughput.EgressByteRate)
 	}
 
 	if c.Spec.Cluster != nil {
 		result.WriteString("Cluster:\n")
-		result.WriteString(fmt.Sprintf("  ID: %s\n", c.Spec.Cluster.ID))
-		result.WriteString(fmt.Sprintf("  Environment: %s\n", c.Spec.Cluster.Environment))
-		result.WriteString(fmt.Sprintf("  Resource Name: %s\n", c.Spec.Cluster.ResourceName))
+		fmt.Fprintf(&result, "  ID: %s\n", c.Spec.Cluster.ID)
+		fmt.Fprintf(&result, "  Environment: %s\n", c.Spec.Cluster.Environment)
+		fmt.Fprintf(&result, "  Resource Name: %s\n", c.Spec.Cluster.ResourceName)
 	}
 
 	if len(c.Spec.Principals) > 0 {
-		result.WriteString(fmt.Sprintf("Principals (%d):\n", len(c.Spec.Principals)))
+		fmt.Fprintf(&result, "Principals (%d):\n", len(c.Spec.Principals))
 		for i, p := range c.Spec.Principals {
-			result.WriteString(fmt.Sprintf("  %d. ID: %s\n", i+1, p.ID))
+			fmt.Fprintf(&result, "  %d. ID: %s\n", i+1, p.ID)
 			if p.Related != "" {
-				result.WriteString(fmt.Sprintf("     Related: %s\n", p.Related))
+				fmt.Fprintf(&result, "     Related: %s\n", p.Related)
 			}
 		}
 	}
 
 	if c.Spec.Environment != nil {
 		result.WriteString("Environment:\n")
-		result.WriteString(fmt.Sprintf("  ID: %s\n", c.Spec.Environment.ID))
+		fmt.Fprintf(&result, "  ID: %s\n", c.Spec.Environment.ID)
 		if c.Spec.Environment.Related != "" {
-			result.WriteString(fmt.Sprintf("  Related: %s\n", c.Spec.Environment.Related))
+			fmt.Fprintf(&result, "  Related: %s\n", c.Spec.Environment.Related)
 		}
 		if c.Spec.Environment.ResourceName != "" {
-			result.WriteString(fmt.Sprintf("  Resource Name: %s\n", c.Spec.Environment.ResourceName))
+			fmt.Fprintf(&result, "  Resource Name: %s\n", c.Spec.Environment.ResourceName)
 		}
 	}
 
@@ -106,41 +106,41 @@ type ClientQuotaDetail struct {
 
 func (c *ClientQuotaDetail) String() string {
 	var result strings.Builder
-	result.WriteString(fmt.Sprintf("Client Quota ID: %s\n", c.ID))
-	result.WriteString(fmt.Sprintf("Display Name: %s\n", c.Spec.DisplayName))
-	result.WriteString(fmt.Sprintf("Description: %s\n", c.Spec.Description))
+	fmt.Fprintf(&result, "Client Quota ID: %s\n", c.ID)
+	fmt.Fprintf(&result, "Display Name: %s\n", c.Spec.DisplayName)
+	fmt.Fprintf(&result, "Description: %s\n", c.Spec.Description)
 
 	if c.Spec.Throughput != nil {
 		result.WriteString("Throughput:\n")
-		result.WriteString(fmt.Sprintf("  Ingress Byte Rate: %s\n", c.Spec.Throughput.IngressByteRate))
-		result.WriteString(fmt.Sprintf("  Egress Byte Rate: %s\n", c.Spec.Throughput.EgressByteRate))
+		fmt.Fprintf(&result, "  Ingress Byte Rate: %s\n", c.Spec.Throughput.IngressByteRate)
+		fmt.Fprintf(&result, "  Egress Byte Rate: %s\n", c.Spec.Throughput.EgressByteRate)
 	}
 
 	if c.Spec.Cluster != nil {
 		result.WriteString("Cluster:\n")
-		result.WriteString(fmt.Sprintf("  ID: %s\n", c.Spec.Cluster.ID))
-		result.WriteString(fmt.Sprintf("  Environment: %s\n", c.Spec.Cluster.Environment))
-		result.WriteString(fmt.Sprintf("  Resource Name: %s\n", c.Spec.Cluster.ResourceName))
+		fmt.Fprintf(&result, "  ID: %s\n", c.Spec.Cluster.ID)
+		fmt.Fprintf(&result, "  Environment: %s\n", c.Spec.Cluster.Environment)
+		fmt.Fprintf(&result, "  Resource Name: %s\n", c.Spec.Cluster.ResourceName)
 	}
 
 	if len(c.Spec.Principals) > 0 {
-		result.WriteString(fmt.Sprintf("Principals (%d):\n", len(c.Spec.Principals)))
+		fmt.Fprintf(&result, "Principals (%d):\n", len(c.Spec.Principals))
 		for i, p := range c.Spec.Principals {
-			result.WriteString(fmt.Sprintf("  %d. ID: %s\n", i+1, p.ID))
+			fmt.Fprintf(&result, "  %d. ID: %s\n", i+1, p.ID)
 			if p.Related != "" {
-				result.WriteString(fmt.Sprintf("     Related: %s\n", p.Related))
+				fmt.Fprintf(&result, "     Related: %s\n", p.Related)
 			}
 		}
 	}
 
 	if c.Spec.Environment != nil {
 		result.WriteString("Environment:\n")
-		result.WriteString(fmt.Sprintf("  ID: %s\n", c.Spec.Environment.ID))
+		fmt.Fprintf(&result, "  ID: %s\n", c.Spec.Environment.ID)
 		if c.Spec.Environment.Related != "" {
-			result.WriteString(fmt.Sprintf("  Related: %s\n", c.Spec.Environment.Related))
+			fmt.Fprintf(&result, "  Related: %s\n", c.Spec.Environment.Related)
 		}
 		if c.Spec.Environment.ResourceName != "" {
-			result.WriteString(fmt.Sprintf("  Resource Name: %s\n", c.Spec.Environment.ResourceName))
+			fmt.Fprintf(&result, "  Resource Name: %s\n", c.Spec.Environment.ResourceName)
 		}
 	}
 
@@ -208,11 +208,11 @@ func (c *ConfluentClient) ListClientQuotas(opt *ClientQuotaListOptions) (*Client
 
 	if http.StatusOK != req.StatusCode {
 		bodyBytes, _ := io.ReadAll(req.Body)
-		defer req.Body.Close()
+		defer req.Body.Close() //nolint:errcheck
 		return nil, fmt.Errorf("failed to list client quotas: status=%s, body=%s", req.Status, string(bodyBytes))
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	bodyBytes, _ := io.ReadAll(req.Body)
 
@@ -234,11 +234,11 @@ func (c *ConfluentClient) GetClientQuota(id string) (*ClientQuotaDetail, error) 
 
 	if http.StatusOK != req.StatusCode {
 		bodyBytes, _ := io.ReadAll(req.Body)
-		defer req.Body.Close()
+		defer req.Body.Close() //nolint:errcheck
 		return nil, fmt.Errorf("failed to get client quota: status=%s, body=%s", req.Status, string(bodyBytes))
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	bodyBytes, _ := io.ReadAll(req.Body)
 
@@ -258,7 +258,7 @@ func (c *ConfluentClient) CreateClientQuota(create *ClientQuotaCreateReq) (*Clie
 		return nil, err
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	if http.StatusAccepted != req.StatusCode {
 		bodyBytes, _ := io.ReadAll(req.Body)
@@ -285,11 +285,11 @@ func (c *ConfluentClient) UpdateClientQuota(id string, update *ClientQuotaUpdate
 
 	if http.StatusOK != req.StatusCode {
 		bodyBytes, _ := io.ReadAll(req.Body)
-		defer req.Body.Close()
+		defer req.Body.Close() //nolint:errcheck
 		return nil, fmt.Errorf("failed to update client quota: status=%s, body=%s", req.Status, string(bodyBytes))
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	bodyBytes, _ := io.ReadAll(req.Body)
 
@@ -311,11 +311,11 @@ func (c *ConfluentClient) DeleteClientQuota(id string) error {
 
 	if http.StatusNoContent != req.StatusCode {
 		bodyBytes, _ := io.ReadAll(req.Body)
-		defer req.Body.Close()
+		defer req.Body.Close() //nolint:errcheck
 		return fmt.Errorf("failed to delete client quota: status=%s, body=%s", req.Status, string(bodyBytes))
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	return nil
 }

@@ -32,7 +32,7 @@ func (c *ConfluentClient) V1ListServiceAccounts(opt *V1QueryOpts) (*V1ServiceAcc
 		return nil, fmt.Errorf("failed to list service-accounts: %s", req.Status)
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	var serviceAccounts V1ServiceAccountList
 	err = json.NewDecoder(req.Body).Decode(&serviceAccounts)

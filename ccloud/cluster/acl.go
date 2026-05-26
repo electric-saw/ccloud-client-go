@@ -88,7 +88,7 @@ func (c *ConfluentClusterClient) SearchAcls(qry *KafkaAclSearchQry) (*KafkaAclLi
 		return nil, fmt.Errorf("failed to search acls: %s", res.Status)
 	}
 
-	defer res.Body.Close()
+	defer res.Body.Close() //nolint:errcheck
 
 	var list KafkaAclList
 	err = json.NewDecoder(res.Body).Decode(&list)

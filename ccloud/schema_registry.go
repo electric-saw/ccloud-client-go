@@ -42,7 +42,7 @@ func (c *ConfluentClient) ListSchemaRegistry(opt *SchemaRegistryClusterListOptio
 		return nil, fmt.Errorf("failed to list kafka clusters: %s", req.Status)
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	var schemaRegistryClusters SchemaRegistryClusterList
 	err = json.NewDecoder(req.Body).Decode(&schemaRegistryClusters)
@@ -64,7 +64,7 @@ func (c *ConfluentClient) GetSchemaRegistry(schemaRegistryId string, opt *Schema
 		return nil, fmt.Errorf("failed to get kafka cluster: %s", req.Status)
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	var schemaRegistryCluster SchemaRegistryCluster
 	err = json.NewDecoder(req.Body).Decode(&schemaRegistryCluster)

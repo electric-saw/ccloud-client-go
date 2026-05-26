@@ -97,6 +97,31 @@ type listConnectorsParams struct {
 	Expand string `url:"expand,omitempty"`
 }
 
+func getJSONFieldName(jsonTag string) string {
+	for i, c := range jsonTag {
+		if c == ',' {
+			return jsonTag[:i]
+		}
+	}
+	return jsonTag
+}
+
+func shouldApplyDefault(configMap map[string]interface{}, jsonName string, fieldValue reflect.Value, defaultValue string) bool {
+	if defaultValue == "" {
+		return false
+	}
+	if _, exists := configMap[jsonName]; exists && configMap[jsonName] != "" && configMap[jsonName] != 0 {
+		return false
+	}
+	switch fieldValue.Kind() {
+	case reflect.String:
+		return fieldValue.String() == ""
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+		return fieldValue.Int() == 0
+	}
+	return false
+}
+
 func applyDefaults(configMap map[string]interface{}, config interface{}) {
 	v := reflect.ValueOf(config)
 	if v.Kind() == reflect.Ptr {
@@ -122,31 +147,11 @@ func applyDefaults(configMap map[string]interface{}, config interface{}) {
 			continue
 		}
 
-		jsonName := jsonTag
-		if idx := len(jsonTag); idx > 0 {
-			for j, c := range jsonTag {
-				if c == ',' {
-					jsonName = jsonTag[:j]
-					break
-				}
-			}
-		}
+		jsonName := getJSONFieldName(jsonTag)
 		defaultValue := field.Tag.Get("default")
-		if defaultValue == "" {
-			continue
-		}
 
-		if _, exists := configMap[jsonName]; !exists || configMap[jsonName] == "" || configMap[jsonName] == 0 {
-			switch fieldValue.Kind() {
-			case reflect.String:
-				if fieldValue.String() == "" {
-					configMap[jsonName] = defaultValue
-				}
-			case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-				if fieldValue.Int() == 0 {
-					configMap[jsonName] = defaultValue
-				}
-			}
+		if shouldApplyDefault(configMap, jsonName, fieldValue, defaultValue) {
+			configMap[jsonName] = defaultValue
 		}
 	}
 }
@@ -178,7 +183,7 @@ func (c *ConfluentClient) CreateConnector(environmentId, clusterId, name string,
 	}
 
 	if http.StatusCreated != req.StatusCode && http.StatusOK != req.StatusCode {
-		defer req.Body.Close()
+		defer req.Body.Close() //nolint:errcheck
 
 		var errorBody map[string]interface{}
 		if err := json.NewDecoder(req.Body).Decode(&errorBody); err == nil {
@@ -188,7 +193,7 @@ func (c *ConfluentClient) CreateConnector(environmentId, clusterId, name string,
 		return nil, fmt.Errorf("failed to create connector: %s", req.Status)
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	var result Connector
 	err = json.NewDecoder(req.Body).Decode(&result)
@@ -210,7 +215,7 @@ func (c *ConfluentClient) ListConnectors(environmentId, clusterId string) ([]Con
 		return nil, fmt.Errorf("failed to list connectors: %s", req.Status)
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	var names []string
 	err = json.NewDecoder(req.Body).Decode(&names)
@@ -243,7 +248,7 @@ func (c *ConfluentClient) GetConnector(environmentId, clusterId, connectorName s
 		return nil, fmt.Errorf("failed to get connector: %s", req.Status)
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	var connector Connector
 	err = json.NewDecoder(req.Body).Decode(&connector)
@@ -265,7 +270,7 @@ func (c *ConfluentClient) GetConnectorStatus(environmentId, clusterId, connector
 		return nil, fmt.Errorf("failed to get connector status: %s", req.Status)
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	var status ConnectorStatus
 	err = json.NewDecoder(req.Body).Decode(&status)
@@ -354,7 +359,7 @@ func (c *ConfluentClient) UpdateConnectorConfig(environmentId, clusterId, connec
 	}
 
 	if http.StatusOK != req.StatusCode && http.StatusCreated != req.StatusCode {
-		defer req.Body.Close()
+		defer req.Body.Close() //nolint:errcheck
 
 		var errorBody map[string]interface{}
 		if err := json.NewDecoder(req.Body).Decode(&errorBody); err == nil {
@@ -364,7 +369,7 @@ func (c *ConfluentClient) UpdateConnectorConfig(environmentId, clusterId, connec
 		return nil, fmt.Errorf("failed to update connector config: %s", req.Status)
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	var connector Connector
 	err = json.NewDecoder(req.Body).Decode(&connector)
@@ -388,11 +393,11 @@ func (c *ConfluentClient) ListConnectorsWithExpansions(environmentId, clusterId 
 	}
 
 	if http.StatusOK != req.StatusCode {
-		defer req.Body.Close()
+		defer req.Body.Close() //nolint:errcheck
 		return nil, fmt.Errorf("failed to list connectors with expansions: %s", req.Status)
 	}
 
-	defer req.Body.Close()
+	defer req.Body.Close() //nolint:errcheck
 
 	var result map[string]ConnectorWithExpansions
 	err = json.NewDecoder(req.Body).Decode(&result)

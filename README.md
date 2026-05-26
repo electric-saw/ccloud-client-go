@@ -14,9 +14,10 @@ A comprehensive Go client library for Confluent Cloud API. This library enables 
 - **Client Quota Management**: Define and control resource quotas for clients
 - **Connector Management**: Create, configure, monitor, and manage Kafka connectors with lifecycle control
 - **Schema Registry Integration**: Manage schemas and subjects
-- **RBAC Support**: Role-based access control operations
+- **RBAC Support**: Role-based access control operations (create, list, get, delete role bindings)
 - **Cluster Linking**: Configure and manage cluster linking
 - **ACL Management**: Control access to Kafka resources
+- **Topic Management**: Create, update, and delete topics including partition count updates
 
 ## Installation
 
@@ -191,6 +192,55 @@ if status.Connector.State == "RUNNING" {
 for _, task := range status.Tasks {
     fmt.Printf("Task %d: %s\n", task.Id, task.State)
 }
+```
+
+## Working with Role Bindings
+
+```go
+// List role bindings
+roleBindings, err := client.ListRoleBindings(&ccloud.ListRoleBindingsQuery{
+    Principal:  "User:u-111aaa",
+    RoleName:   "CloudClusterAdmin",
+    CrnPattern: "crn://confluent.cloud/organization=org-id",
+})
+
+// Get a specific role binding
+roleBinding, err := client.GetRoleBinding("rb-12345")
+
+// Create a role binding
+newRoleBinding := &ccloud.RoleBindingCreateReq{
+    Principal:  "User:u-111aaa",
+    RoleName:   "CloudClusterAdmin",
+    CrnPattern: "crn://confluent.cloud/organization=org-id/environment=env-id/cloud-cluster=lkc-id",
+}
+createdRoleBinding, err := client.CreateRoleBinding(newRoleBinding)
+
+// Delete a role binding
+err = client.DeleteRoleBinding("rb-12345")
+```
+
+## Working with Topics (Cluster Client)
+
+```go
+// Get a cluster client
+clusterClient, err := client.GetClusterClient("lkc-abc123", "env-xyz789")
+
+// List topics
+topics, err := clusterClient.ListTopics(nil)
+
+// Create a topic
+newTopic := &cluster.TopicCreateReq{
+    TopicName:         "my-topic",
+    PartitionCount:    6,
+    ReplicationFactor: 3,
+}
+topic, err := clusterClient.CreateTopic(newTopic)
+
+// Update topic partition count (increase only)
+updatedTopic, err := clusterClient.UpdateTopicPartitions("my-topic", 12)
+
+// Delete a topic
+err = clusterClient.DeleteTopic("my-topic")
 ```
 
 ## Additional Examples

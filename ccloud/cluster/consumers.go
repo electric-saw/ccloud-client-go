@@ -35,7 +35,7 @@ func (c *ConfluentClusterClient) ListConsumer(consumerGroupId string) (*KafkaCon
 		return nil, fmt.Errorf("failed to list consumer: %s", res.Status)
 	}
 
-	defer res.Body.Close() //nolint:errcheck
+	defer res.Body.Close()
 
 	var list KafkaConsumerList
 	err = json.NewDecoder(res.Body).Decode(&list)
@@ -58,7 +58,7 @@ func (c *ConfluentClusterClient) GetConsumer(consumerGroupId, consumerId string)
 		return nil, fmt.Errorf("failed to get consumer: %s", res.Status)
 	}
 
-	defer res.Body.Close() //nolint:errcheck
+	defer res.Body.Close()
 
 	var consumer KafkaConsumer
 	err = json.NewDecoder(res.Body).Decode(&consumer)
@@ -99,7 +99,7 @@ func (c *ConfluentClusterClient) ListConsumerLag(consumerGroupId string, opt *co
 		return nil, fmt.Errorf("failed to get consumer group lag: %s", res.Status)
 	}
 
-	defer res.Body.Close() //nolint:errcheck
+	defer res.Body.Close()
 
 	var lags KafkaConsumerLagList
 	err = json.NewDecoder(res.Body).Decode(&lags)

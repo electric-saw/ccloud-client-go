@@ -45,7 +45,7 @@ func (c *ConfluentClient) ListRoleBindings(query *ListRoleBindingsQuery) (*RoleB
 		return nil, fmt.Errorf("failed to list role bindings: %s", res.Status)
 	}
 
-	defer res.Body.Close() //nolint:errcheck
+	defer res.Body.Close()
 
 	var roleBindingList RoleBindingList
 	err = json.NewDecoder(res.Body).Decode(&roleBindingList)
@@ -68,7 +68,7 @@ func (c *ConfluentClient) GetRoleBinding(roleBindingId string) (*RoleBinding, er
 		return nil, fmt.Errorf("failed to get role binding: %s", res.Status)
 	}
 
-	defer res.Body.Close() //nolint:errcheck
+	defer res.Body.Close()
 
 	var roleBinding RoleBinding
 	err = json.NewDecoder(res.Body).Decode(&roleBinding)
@@ -91,7 +91,7 @@ func (c *ConfluentClient) CreateRoleBinding(req *RoleBindingCreateReq) (*RoleBin
 		return nil, fmt.Errorf("failed to create role binding: %s", res.Status)
 	}
 
-	defer res.Body.Close() //nolint:errcheck
+	defer res.Body.Close()
 
 	var roleBinding RoleBinding
 	err = json.NewDecoder(res.Body).Decode(&roleBinding)
@@ -110,7 +110,7 @@ func (c *ConfluentClient) DeleteRoleBinding(roleBindingId string) error {
 		return err
 	}
 
-	defer res.Body.Close() //nolint:errcheck
+	defer res.Body.Close()
 
 	if http.StatusOK != res.StatusCode && http.StatusNoContent != res.StatusCode {
 		return fmt.Errorf("failed to delete role binding: %s", res.Status)

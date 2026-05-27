@@ -69,7 +69,7 @@ func (c *ConfluentClient) ListKafkaClusters(opt *KafkaClusterListOptions) (*Kafk
 		return nil, fmt.Errorf("failed to list kafka clusters: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var KafkaClusters KafkaClusterList
 	err = json.NewDecoder(req.Body).Decode(&KafkaClusters)
@@ -91,7 +91,7 @@ func (c *ConfluentClient) GetKafkaCluster(kafkaClusterId string, opt *KafkaClust
 		return nil, fmt.Errorf("failed to get kafka cluster: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var KafkaCluster KafkaCluster
 	err = json.NewDecoder(req.Body).Decode(&KafkaCluster)
@@ -128,7 +128,7 @@ func (c *ConfluentClient) CreateKafkaCluster(create *KafkaClusterCreateReq) (*Ka
 		return nil, fmt.Errorf("failed to create cluster: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var KafkaCluster KafkaCluster
 	err = json.NewDecoder(req.Body).Decode(&KafkaCluster)
@@ -162,7 +162,7 @@ func (c *ConfluentClient) UpdateKafkaCluster(kafkaClusterId string, update *Kafk
 		return nil, fmt.Errorf("failed to update kafka cluster: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var KafkaCluster KafkaCluster
 	err = json.NewDecoder(req.Body).Decode(&KafkaCluster)

@@ -36,7 +36,7 @@ func (c *ConfluentClient) ListServiceAccounts(query *ListServiceAccountsQuery) (
 		return nil, fmt.Errorf("failed to list service-accounts: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var serviceAccounts ServiceAccountList
 	err = json.NewDecoder(req.Body).Decode(&serviceAccounts)
@@ -58,7 +58,7 @@ func (c *ConfluentClient) GetServiceAccount(serviceAccountId string) (*ServiceAc
 		return nil, fmt.Errorf("failed to get service-account: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var serviceAccount ServiceAccount
 	err = json.NewDecoder(req.Body).Decode(&serviceAccount)
@@ -85,7 +85,7 @@ func (c *ConfluentClient) CreateServiceAccount(create *ServiceAccountCreateReq) 
 		return nil, fmt.Errorf("failed to create service account: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var serviceAccount ServiceAccount
 	err = json.NewDecoder(req.Body).Decode(&serviceAccount)
@@ -111,7 +111,7 @@ func (c *ConfluentClient) UpdateServiceAccount(serviceAccountId string, update *
 		return nil, fmt.Errorf("failed to get service-account: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var serviceAccount ServiceAccount
 	err = json.NewDecoder(req.Body).Decode(&serviceAccount)

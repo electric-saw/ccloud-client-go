@@ -208,11 +208,11 @@ func (c *ConfluentClient) ListClientQuotas(opt *ClientQuotaListOptions) (*Client
 
 	if http.StatusOK != req.StatusCode {
 		bodyBytes, _ := io.ReadAll(req.Body)
-		defer req.Body.Close() //nolint:errcheck
+		defer req.Body.Close()
 		return nil, fmt.Errorf("failed to list client quotas: status=%s, body=%s", req.Status, string(bodyBytes))
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	bodyBytes, _ := io.ReadAll(req.Body)
 
@@ -234,11 +234,11 @@ func (c *ConfluentClient) GetClientQuota(id string) (*ClientQuotaDetail, error) 
 
 	if http.StatusOK != req.StatusCode {
 		bodyBytes, _ := io.ReadAll(req.Body)
-		defer req.Body.Close() //nolint:errcheck
+		defer req.Body.Close()
 		return nil, fmt.Errorf("failed to get client quota: status=%s, body=%s", req.Status, string(bodyBytes))
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	bodyBytes, _ := io.ReadAll(req.Body)
 
@@ -258,7 +258,7 @@ func (c *ConfluentClient) CreateClientQuota(create *ClientQuotaCreateReq) (*Clie
 		return nil, err
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	if http.StatusAccepted != req.StatusCode {
 		bodyBytes, _ := io.ReadAll(req.Body)
@@ -285,11 +285,11 @@ func (c *ConfluentClient) UpdateClientQuota(id string, update *ClientQuotaUpdate
 
 	if http.StatusOK != req.StatusCode {
 		bodyBytes, _ := io.ReadAll(req.Body)
-		defer req.Body.Close() //nolint:errcheck
+		defer req.Body.Close()
 		return nil, fmt.Errorf("failed to update client quota: status=%s, body=%s", req.Status, string(bodyBytes))
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	bodyBytes, _ := io.ReadAll(req.Body)
 
@@ -311,11 +311,11 @@ func (c *ConfluentClient) DeleteClientQuota(id string) error {
 
 	if http.StatusNoContent != req.StatusCode {
 		bodyBytes, _ := io.ReadAll(req.Body)
-		defer req.Body.Close() //nolint:errcheck
+		defer req.Body.Close()
 		return fmt.Errorf("failed to delete client quota: status=%s, body=%s", req.Status, string(bodyBytes))
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	return nil
 }

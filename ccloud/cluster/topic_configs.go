@@ -20,7 +20,7 @@ func (c *ConfluentClusterClient) ListTopicConfigs(topicName string, opt *common.
 		return nil, fmt.Errorf("failed to list kafka configs: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var configList KafkaConfigList
 	err = json.NewDecoder(req.Body).Decode(&configList)
@@ -43,7 +43,7 @@ func (c *ConfluentClusterClient) GetTopicConfig(topicName, configName string) (*
 		return nil, fmt.Errorf("failed to get kafka config: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var config KafkaConfig
 	err = json.NewDecoder(req.Body).Decode(&config)

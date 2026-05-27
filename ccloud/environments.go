@@ -29,7 +29,7 @@ func (c *ConfluentClient) ListEnvironments(opt *common.PaginationOptions) (*Envi
 		return nil, fmt.Errorf("failed to list environments: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var environments EnvironmentList
 	err = json.NewDecoder(req.Body).Decode(&environments)
@@ -51,7 +51,7 @@ func (c *ConfluentClient) GetEnvironment(environmentId string) (*Environment, er
 		return nil, fmt.Errorf("failed to get environment: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var environment Environment
 	err = json.NewDecoder(req.Body).Decode(&environment)
@@ -77,7 +77,7 @@ func (c *ConfluentClient) CreateEnvironment(create *EnvironmentCreateReq) (*Serv
 		return nil, fmt.Errorf("failed to create environment: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var serviceAccount ServiceAccount
 	err = json.NewDecoder(req.Body).Decode(&serviceAccount)
@@ -103,7 +103,7 @@ func (c *ConfluentClient) UpdateEnvironment(environmentId string, update *Enviro
 		return nil, fmt.Errorf("failed to get environment: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var environment Environment
 	err = json.NewDecoder(req.Body).Decode(&environment)

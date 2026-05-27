@@ -61,7 +61,7 @@ func (c *ConfluentClient) ListApiKeys(opt *ApiKeyListOptions) (*ApiKeyList, erro
 		return nil, fmt.Errorf("failed to list api keys: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var apiKeys ApiKeyList
 	err = json.NewDecoder(req.Body).Decode(&apiKeys)
@@ -83,7 +83,7 @@ func (c *ConfluentClient) GetApiKey(apyKeyId string) (*ApiKey, error) {
 		return nil, fmt.Errorf("failed to get api-key: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var apiKey ApiKey
 	err = json.NewDecoder(req.Body).Decode(&apiKey)
@@ -101,7 +101,7 @@ func (c *ConfluentClient) CreateApiKey(create *ApiKeyCreateReq) (*ApiKey, error)
 		return nil, err
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	if http.StatusAccepted != req.StatusCode {
 		data, _ := io.ReadAll(req.Body)
@@ -129,7 +129,7 @@ func (c *ConfluentClient) DeleteApiKey(id string) error {
 		return fmt.Errorf("failed to delete api-key: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	return nil
 }
@@ -145,7 +145,7 @@ func (c *ConfluentClient) UpdateApiKey(apyKeyId string, update *ApiKeyUpdateReq)
 		return nil, fmt.Errorf("failed to update api-key: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var apiKey ApiKey
 	err = json.NewDecoder(req.Body).Decode(&apiKey)

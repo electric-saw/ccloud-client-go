@@ -58,7 +58,7 @@ func (c *ConfluentClusterClient) GetClusterLinking() (*ClusterLinking, error) {
 		return nil, fmt.Errorf("failed to get cluster linkings: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var clusterLinking ClusterLinking
 	err = json.NewDecoder(req.Body).Decode(&clusterLinking)
@@ -80,7 +80,7 @@ func (c *ConfluentClusterClient) GetClusterLinkingConfig(linkName string) (*Clus
 		return nil, fmt.Errorf("failed to get cluster linking config: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var clusterLinkingConfig ClusterLinkingConfig
 	err = json.NewDecoder(req.Body).Decode(&clusterLinkingConfig)

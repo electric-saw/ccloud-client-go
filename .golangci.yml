@@ -1,0 +1,14 @@
+version: "2"
+
+linters:
+  enable:
+    - errcheck
+    - staticcheck
+    - gocyclo
+  settings:
+    errcheck:
+      exclude-functions:
+        - (io.Closer).Close
+        - (*net/http.Response.Body).Close
+        - (net/http.ResponseWriter).Write
+        - (*github.com/hashicorp/go-retryablehttp.Response.Body).Close

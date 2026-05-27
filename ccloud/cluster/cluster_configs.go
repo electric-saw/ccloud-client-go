@@ -18,7 +18,7 @@ func (c *ConfluentClusterClient) ListKafkaConfigs(opt *common.PaginationOptions)
 		return nil, fmt.Errorf("failed to list kafka configs: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var configList KafkaConfigList
 	err = json.NewDecoder(req.Body).Decode(&configList)
@@ -39,7 +39,7 @@ func (c *ConfluentClusterClient) GetKafkaConfig(configName string) (*KafkaConfig
 		return nil, fmt.Errorf("failed to get kafka config: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var config KafkaConfig
 	err = json.NewDecoder(req.Body).Decode(&config)

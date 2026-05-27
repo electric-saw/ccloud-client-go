@@ -35,7 +35,7 @@ func (c *ConfluentClusterClient) ListTopics(opts *common.PaginationOptions) (*To
 		return nil, fmt.Errorf("failed to list topics: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var topicList TopicList
 	err = json.NewDecoder(req.Body).Decode(&topicList)
@@ -56,7 +56,7 @@ func (c *ConfluentClusterClient) GetTopic(topicId string) (*Topic, error) {
 		return nil, fmt.Errorf("failed to get topic: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var topic Topic
 	err = json.NewDecoder(req.Body).Decode(&topic)
@@ -85,7 +85,7 @@ func (c *ConfluentClusterClient) CreateTopic(req *TopicCreateReq) (*Topic, error
 		return nil, fmt.Errorf("failed to create topic: %s", res.Status)
 	}
 
-	defer res.Body.Close() //nolint:errcheck
+	defer res.Body.Close()
 
 	var topic Topic
 	err = json.NewDecoder(res.Body).Decode(&topic)
@@ -127,7 +127,7 @@ func (c *ConfluentClusterClient) UpdateTopicPartitions(topicName string, partiti
 		return nil, fmt.Errorf("failed to update topic partitions: %s", res.Status)
 	}
 
-	defer res.Body.Close() //nolint:errcheck
+	defer res.Body.Close()
 
 	var topic Topic
 	err = json.NewDecoder(res.Body).Decode(&topic)

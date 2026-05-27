@@ -33,7 +33,7 @@ func (c *ConfluentClusterClient) GetConsumerLag(consumerGroupId, topicName strin
 		return nil, fmt.Errorf("failed to get consumer lag: %s", res.Status)
 	}
 
-	defer res.Body.Close() //nolint:errcheck
+	defer res.Body.Close()
 
 	var lag KafkaPartitionConsumerLag
 	err = json.NewDecoder(res.Body).Decode(&lag)
@@ -70,7 +70,7 @@ func (c *ConfluentClusterClient) ListPartitions(topicName string) (*KafkaPartiti
 		return nil, fmt.Errorf("failed to list partitions: %s", res.Status)
 	}
 
-	defer res.Body.Close() //nolint:errcheck
+	defer res.Body.Close()
 
 	var partitions KafkaPartitionList
 	err = json.NewDecoder(res.Body).Decode(&partitions)
@@ -92,7 +92,7 @@ func (c *ConfluentClusterClient) GetPartition(topicName string, partitionId int)
 		return nil, fmt.Errorf("failed to get partition: %s", res.Status)
 	}
 
-	defer res.Body.Close() //nolint:errcheck
+	defer res.Body.Close()
 
 	var partition KafkaPartition
 	err = json.NewDecoder(res.Body).Decode(&partition)

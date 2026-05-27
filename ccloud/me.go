@@ -149,7 +149,7 @@ func (c *ConfluentClient) GetMe() (*Profile, error) {
 		return nil, fmt.Errorf("failed to list users: %s", req.Status)
 	}
 
-	defer req.Body.Close() //nolint:errcheck
+	defer req.Body.Close()
 
 	var profile Profile
 	err = json.NewDecoder(req.Body).Decode(&profile)

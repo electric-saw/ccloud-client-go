@@ -97,9 +97,34 @@ type listConnectorsParams struct {
 	Expand string `url:"expand,omitempty"`
 }
 
+func getJSONFieldName(jsonTag string) string {
+	for i, c := range jsonTag {
+		if c == ',' {
+			return jsonTag[:i]
+		}
+	}
+	return jsonTag
+}
+
+func shouldApplyDefault(configMap map[string]interface{}, jsonName string, fieldValue reflect.Value, defaultValue string) bool {
+	if defaultValue == "" {
+		return false
+	}
+	if _, exists := configMap[jsonName]; exists && configMap[jsonName] != "" && configMap[jsonName] != 0 {
+		return false
+	}
+	switch fieldValue.Kind() {
+	case reflect.String:
+		return fieldValue.String() == ""
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+		return fieldValue.Int() == 0
+	}
+	return false
+}
+
 func applyDefaults(configMap map[string]interface{}, config interface{}) {
 	v := reflect.ValueOf(config)
-	if v.Kind() == reflect.Ptr {
+	if v.Kind() == reflect.Pointer {
 		v = v.Elem()
 	}
 
@@ -122,31 +147,11 @@ func applyDefaults(configMap map[string]interface{}, config interface{}) {
 			continue
 		}
 
-		jsonName := jsonTag
-		if idx := len(jsonTag); idx > 0 {
-			for j, c := range jsonTag {
-				if c == ',' {
-					jsonName = jsonTag[:j]
-					break
-				}
-			}
-		}
+		jsonName := getJSONFieldName(jsonTag)
 		defaultValue := field.Tag.Get("default")
-		if defaultValue == "" {
-			continue
-		}
 
-		if _, exists := configMap[jsonName]; !exists || configMap[jsonName] == "" || configMap[jsonName] == 0 {
-			switch fieldValue.Kind() {
-			case reflect.String:
-				if fieldValue.String() == "" {
-					configMap[jsonName] = defaultValue
-				}
-			case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-				if fieldValue.Int() == 0 {
-					configMap[jsonName] = defaultValue
-				}
-			}
+		if shouldApplyDefault(configMap, jsonName, fieldValue, defaultValue) {
+			configMap[jsonName] = defaultValue
 		}
 	}
 }

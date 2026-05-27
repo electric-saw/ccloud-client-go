@@ -101,3 +101,20 @@ func (c *ConfluentClient) CreateRoleBinding(req *RoleBindingCreateReq) (*RoleBin
 
 	return &roleBinding, nil
 }
+
+func (c *ConfluentClient) DeleteRoleBinding(roleBindingId string) error {
+	urlPath := fmt.Sprintf("/iam/v2/role-bindings/%s", roleBindingId)
+
+	res, err := c.doRequest(urlPath, http.MethodDelete, nil, nil)
+	if err != nil {
+		return err
+	}
+
+	defer res.Body.Close()
+
+	if http.StatusOK != res.StatusCode && http.StatusNoContent != res.StatusCode {
+		return fmt.Errorf("failed to delete role binding: %s", res.Status)
+	}
+
+	return nil
+}

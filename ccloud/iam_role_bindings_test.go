@@ -58,7 +58,7 @@ func TestCreateRoleBinding(t *testing.T) {
 func TestCreateRoleBindingError(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(`{"error": "invalid request"}`))
+		_, _ = w.Write([]byte(`{"error": "invalid request"}`))
 	}))
 	defer ts.Close()
 
@@ -137,7 +137,7 @@ func TestListRoleBindings(t *testing.T) {
 func TestListRoleBindingsError(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(`{"error": "server error"}`))
+		_, _ = w.Write([]byte(`{"error": "server error"}`))
 	}))
 	defer ts.Close()
 
@@ -186,7 +186,7 @@ func TestGetRoleBinding(t *testing.T) {
 func TestGetRoleBindingNotFound(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte(`{"error": "not found"}`))
+		_, _ = w.Write([]byte(`{"error": "not found"}`))
 	}))
 	defer ts.Close()
 
@@ -197,4 +197,51 @@ func TestGetRoleBindingNotFound(t *testing.T) {
 	assert.Error(t, err)
 	assert.Nil(t, result)
 	assert.Contains(t, err.Error(), "failed to get role binding")
+}
+
+func TestDeleteRoleBinding(t *testing.T) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(t, http.MethodDelete, r.Method)
+		assert.Equal(t, "/iam/v2/role-bindings/rb-12345", r.URL.Path)
+
+		w.WriteHeader(http.StatusOK)
+	}))
+	defer ts.Close()
+
+	client := ccloud.NewClient().WithAuth(noopAuth{}).WithBaseUrl(ts.URL)
+
+	err := client.DeleteRoleBinding("rb-12345")
+
+	assert.NoError(t, err)
+}
+
+func TestDeleteRoleBindingNoContent(t *testing.T) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(t, http.MethodDelete, r.Method)
+		assert.Equal(t, "/iam/v2/role-bindings/rb-12345", r.URL.Path)
+
+		w.WriteHeader(http.StatusNoContent)
+	}))
+	defer ts.Close()
+
+	client := ccloud.NewClient().WithAuth(noopAuth{}).WithBaseUrl(ts.URL)
+
+	err := client.DeleteRoleBinding("rb-12345")
+
+	assert.NoError(t, err)
+}
+
+func TestDeleteRoleBindingNotFound(t *testing.T) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNotFound)
+		_, _ = w.Write([]byte(`{"error": "not found"}`))
+	}))
+	defer ts.Close()
+
+	client := ccloud.NewClient().WithAuth(noopAuth{}).WithBaseUrl(ts.URL)
+
+	err := client.DeleteRoleBinding("rb-nonexistent")
+
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "failed to delete role binding")
 }

@@ -108,3 +108,32 @@ func (c *ConfluentClusterClient) DeleteTopic(topicId string) error {
 
 	return nil
 }
+
+type TopicUpdatePartitionsReq struct {
+	PartitionsCount int `json:"partitions_count"`
+}
+
+func (c *ConfluentClusterClient) UpdateTopicPartitions(topicName string, partitionsCount int) (*Topic, error) {
+	req := &TopicUpdatePartitionsReq{
+		PartitionsCount: partitionsCount,
+	}
+
+	res, err := c.doRequest(c.clusterInfo.Topics.Related, topicName, http.MethodPatch, req, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if http.StatusOK != res.StatusCode {
+		return nil, fmt.Errorf("failed to update topic partitions: %s", res.Status)
+	}
+
+	defer res.Body.Close()
+
+	var topic Topic
+	err = json.NewDecoder(res.Body).Decode(&topic)
+	if err != nil {
+		return nil, err
+	}
+
+	return &topic, nil
+}

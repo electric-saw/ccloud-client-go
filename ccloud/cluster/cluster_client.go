@@ -78,7 +78,7 @@ func (c *ConfluentClusterClient) doRequest(base string, urlPath, method string, 
 		}
 	}
 
-	req.Request.SetBasicAuth(c.user, c.password)
+	req.SetBasicAuth(c.user, c.password)
 
 	qry, err := query.Values(params)
 	if err != nil {

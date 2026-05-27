@@ -124,7 +124,7 @@ func shouldApplyDefault(configMap map[string]interface{}, jsonName string, field
 
 func applyDefaults(configMap map[string]interface{}, config interface{}) {
 	v := reflect.ValueOf(config)
-	if v.Kind() == reflect.Ptr {
+	if v.Kind() == reflect.Pointer {
 		v = v.Elem()
 	}
 

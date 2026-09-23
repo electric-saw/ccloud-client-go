@@ -63,19 +63,19 @@ type InvitationCreateReq struct {
 
 func (c *ConfluentClient) ListInvitations(query *ListInvitationsQuery) (*InvitationList, error) {
 	urlPath := "/iam/v2/invitations"
-	request, err := c.doRequest(urlPath, http.MethodGet, nil, query)
+	response, err := c.doRequest(urlPath, http.MethodGet, nil, query)
 	if err != nil {
 		return nil, err
 	}
 
-	if http.StatusOK != request.StatusCode {
-		return nil, fmt.Errorf("failed to list invitations: %s", request.Status)
+	defer response.Body.Close()
+
+	if http.StatusOK != response.StatusCode {
+		return nil, fmt.Errorf("failed to list invitations: %s", response.Status)
 	}
 
-	defer request.Body.Close()
-
 	var invitationList InvitationList
-	err = json.NewDecoder(request.Body).Decode(&invitationList)
+	err = json.NewDecoder(response.Body).Decode(&invitationList)
 	if err != nil {
 		return nil, err
 	}
@@ -83,21 +83,21 @@ func (c *ConfluentClient) ListInvitations(query *ListInvitationsQuery) (*Invitat
 	return &invitationList, nil
 }
 
-func (c *ConfluentClient) CreateInvitation(body *InvitationCreateReq) (*Invitation, error) {
+func (c *ConfluentClient) CreateInvitation(request *InvitationCreateReq) (*Invitation, error) {
 	urlPath := "/iam/v2/invitations"
-	request, err := c.doRequest(urlPath, http.MethodPost, body, nil)
+	response, err := c.doRequest(urlPath, http.MethodPost, request, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	if http.StatusCreated != request.StatusCode {
-		return nil, fmt.Errorf("failed to create invitation: %s", request.Status)
+	defer response.Body.Close()
+
+	if http.StatusCreated != response.StatusCode {
+		return nil, fmt.Errorf("failed to create invitation: %s", response.Status)
 	}
 
-	defer request.Body.Close()
-
 	var invitation Invitation
-	err = json.NewDecoder(request.Body).Decode(&invitation)
+	err = json.NewDecoder(response.Body).Decode(&invitation)
 	if err != nil {
 		return nil, err
 	}
@@ -107,19 +107,19 @@ func (c *ConfluentClient) CreateInvitation(body *InvitationCreateReq) (*Invitati
 
 func (c *ConfluentClient) GetInvitation(id string) (*Invitation, error) {
 	urlPath := fmt.Sprintf("/iam/v2/invitations/%s", id)
-	request, err := c.doRequest(urlPath, http.MethodGet, nil, nil)
+	response, err := c.doRequest(urlPath, http.MethodGet, nil, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	if http.StatusOK != request.StatusCode {
-		return nil, fmt.Errorf("failed to get invitation: %s", request.Status)
+	defer response.Body.Close()
+
+	if http.StatusOK != response.StatusCode {
+		return nil, fmt.Errorf("failed to get invitation: %s", response.Status)
 	}
 
-	defer request.Body.Close()
-
 	var invitation Invitation
-	err = json.NewDecoder(request.Body).Decode(&invitation)
+	err = json.NewDecoder(response.Body).Decode(&invitation)
 	if err != nil {
 		return nil, err
 	}
@@ -129,13 +129,15 @@ func (c *ConfluentClient) GetInvitation(id string) (*Invitation, error) {
 
 func (c *ConfluentClient) DeleteInvitation(id string) error {
 	urlPath := fmt.Sprintf("/iam/v2/invitations/%s", id)
-	request, err := c.doRequest(urlPath, http.MethodDelete, nil, nil)
+	response, err := c.doRequest(urlPath, http.MethodDelete, nil, nil)
 	if err != nil {
 		return err
 	}
 
-	if http.StatusOK != request.StatusCode && http.StatusNoContent != request.StatusCode {
-		return fmt.Errorf("failed to delete invitation: %s", request.Status)
+	defer response.Body.Close()
+
+	if http.StatusOK != response.StatusCode && http.StatusNoContent != response.StatusCode {
+		return fmt.Errorf("failed to delete invitation: %s", response.Status)
 	}
 
 	return nil

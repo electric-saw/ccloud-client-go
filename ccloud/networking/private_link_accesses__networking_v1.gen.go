@@ -116,7 +116,7 @@ type UpdateNetworkingV1PrivateLinkAccess200JSONResponseBodyKind string
 type CreateNetworkingV1PrivateLinkAccessJSONRequestBody CreateNetworkingV1PrivateLinkAccessJSONBody
 type UpdateNetworkingV1PrivateLinkAccessJSONRequestBody UpdateNetworkingV1PrivateLinkAccessJSONBody
 
-func (c *Client) ListNetworkingV1PrivateLinkAccesses(ctx context.Context, params *ListNetworkingV1PrivateLinkAccessesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListNetworkingV1PrivateLinkAccesses(ctx context.Context, params *ListNetworkingV1PrivateLinkAccessesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNetworkingV1PrivateLinkAccessesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -127,7 +127,7 @@ func (c *Client) ListNetworkingV1PrivateLinkAccesses(ctx context.Context, params
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNetworkingV1PrivateLinkAccessWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNetworkingV1PrivateLinkAccessWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1PrivateLinkAccessRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -138,7 +138,7 @@ func (c *Client) CreateNetworkingV1PrivateLinkAccessWithBody(ctx context.Context
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNetworkingV1PrivateLinkAccess(ctx context.Context, body CreateNetworkingV1PrivateLinkAccessJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNetworkingV1PrivateLinkAccess(ctx context.Context, body CreateNetworkingV1PrivateLinkAccessJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1PrivateLinkAccessRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -149,7 +149,7 @@ func (c *Client) CreateNetworkingV1PrivateLinkAccess(ctx context.Context, body C
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteNetworkingV1PrivateLinkAccess(ctx context.Context, id string, params *DeleteNetworkingV1PrivateLinkAccessParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteNetworkingV1PrivateLinkAccess(ctx context.Context, id string, params *DeleteNetworkingV1PrivateLinkAccessParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteNetworkingV1PrivateLinkAccessRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -160,7 +160,7 @@ func (c *Client) DeleteNetworkingV1PrivateLinkAccess(ctx context.Context, id str
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetNetworkingV1PrivateLinkAccess(ctx context.Context, id string, params *GetNetworkingV1PrivateLinkAccessParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetNetworkingV1PrivateLinkAccess(ctx context.Context, id string, params *GetNetworkingV1PrivateLinkAccessParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNetworkingV1PrivateLinkAccessRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -171,7 +171,7 @@ func (c *Client) GetNetworkingV1PrivateLinkAccess(ctx context.Context, id string
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNetworkingV1PrivateLinkAccessWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNetworkingV1PrivateLinkAccessWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1PrivateLinkAccessRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -182,7 +182,7 @@ func (c *Client) UpdateNetworkingV1PrivateLinkAccessWithBody(ctx context.Context
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNetworkingV1PrivateLinkAccess(ctx context.Context, id string, body UpdateNetworkingV1PrivateLinkAccessJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNetworkingV1PrivateLinkAccess(ctx context.Context, id string, body UpdateNetworkingV1PrivateLinkAccessJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1PrivateLinkAccessRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

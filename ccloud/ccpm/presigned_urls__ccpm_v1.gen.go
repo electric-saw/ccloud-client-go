@@ -45,7 +45,7 @@ type CreateCcpmV1PresignedUrl201JSONResponseBodyApiVersion string
 type CreateCcpmV1PresignedUrl201JSONResponseBodyKind string
 type CreateCcpmV1PresignedUrlJSONRequestBody CreateCcpmV1PresignedUrlJSONBody
 
-func (c *Client) CreateCcpmV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateCcpmV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateCcpmV1PresignedUrlRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func (c *Client) CreateCcpmV1PresignedUrlWithBody(ctx context.Context, contentTy
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateCcpmV1PresignedUrl(ctx context.Context, body CreateCcpmV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateCcpmV1PresignedUrl(ctx context.Context, body CreateCcpmV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateCcpmV1PresignedUrlRequest(c.Server, body)
 	if err != nil {
 		return nil, err

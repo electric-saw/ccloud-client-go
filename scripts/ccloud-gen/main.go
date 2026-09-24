@@ -30,6 +30,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"sort"
+	"strconv"
 	"strings"
 	"text/template"
 
@@ -124,6 +125,9 @@ func cmdGen(args []string) error {
 
 // cmdOapiCodegen runs the oapi-codegen binary once per group, emitting
 // ccloud/<pkg>/client.gen.go from the normalized spec.
+//
+// The plain client is generated as unexported `oasClient` (client-type-name)
+// so the only exported client surface per package is ClientWithResponses.
 func cmdOapiCodegen() error {
 	lines, err := runOutput("go", "run", "./scripts/ccloud-gen", "genlines", "build/groups.json")
 	if err != nil {
@@ -143,17 +147,40 @@ func cmdOapiCodegen() error {
 		}
 		out := filepath.Join(dir, "client.gen.go")
 		fmt.Printf("  gen: %s -> %s\n", tags, out)
-		if err := run("oapi-codegen",
-			"-include-tags", tags,
-			"-generate", "types,client",
-			"-package", pkg,
-			"-o", out,
-			"spec/openapi.norm.yaml",
-		); err != nil {
+
+		// oapi-codegen v2.8: client-type-name is only settable via config file.
+		cfg := filepath.Join(dir, ".oapi-gen.yaml")
+		cfgContent := fmt.Sprintf(`package: %s
+output: %s
+generate:
+  client: true
+  models: true
+output-options:
+  client-type-name: oasClient
+  include-tags:
+%s
+`, pkg, out, tagListYAML(tags))
+		if err := os.WriteFile(cfg, []byte(cfgContent), 0o644); err != nil {
+			return err
+		}
+		if err := run("oapi-codegen", "--config", cfg, "spec/openapi.norm.yaml"); err != nil {
+			return err
+		}
+		if err := os.Remove(cfg); err != nil {
 			return err
 		}
 	}
 	return nil
+}
+
+// tagListYAML renders a []string YAML block for the config's include-tags.
+func tagListYAML(tags string) string {
+	parts := strings.Split(tags, ",")
+	lines := make([]string, 0, len(parts))
+	for _, t := range parts {
+		lines = append(lines, "    - "+strconv.Quote(t))
+	}
+	return strings.Join(lines, "\n")
 }
 
 // cmdGoimports runs goimports -w over every generated .gen.go file.

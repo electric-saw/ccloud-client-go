@@ -32,7 +32,7 @@ type CreateOrgV2ScimTokenJSONBody struct {
 }
 type CreateOrgV2ScimTokenJSONRequestBody CreateOrgV2ScimTokenJSONBody
 
-func (c *Client) ListOrgV2ScimTokens(ctx context.Context, params *ListOrgV2ScimTokensParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListOrgV2ScimTokens(ctx context.Context, params *ListOrgV2ScimTokensParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListOrgV2ScimTokensRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -43,7 +43,7 @@ func (c *Client) ListOrgV2ScimTokens(ctx context.Context, params *ListOrgV2ScimT
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateOrgV2ScimTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateOrgV2ScimTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateOrgV2ScimTokenRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -54,7 +54,7 @@ func (c *Client) CreateOrgV2ScimTokenWithBody(ctx context.Context, contentType s
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateOrgV2ScimToken(ctx context.Context, body CreateOrgV2ScimTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateOrgV2ScimToken(ctx context.Context, body CreateOrgV2ScimTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateOrgV2ScimTokenRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -65,7 +65,7 @@ func (c *Client) CreateOrgV2ScimToken(ctx context.Context, body CreateOrgV2ScimT
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteOrgV2ScimToken(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteOrgV2ScimToken(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteOrgV2ScimTokenRequest(c.Server, id)
 	if err != nil {
 		return nil, err

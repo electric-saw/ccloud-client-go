@@ -77,7 +77,7 @@ type GetNotificationsV1ResourcePreferenceByFilter200JSONResponseBodyKind string
 type CreateNotificationsV1ResourcePreferenceJSONRequestBody CreateNotificationsV1ResourcePreferenceJSONBody
 type UpdateNotificationsV1ResourcePreferenceJSONRequestBody = NotificationsV1ResourcePreference
 
-func (c *Client) CreateNotificationsV1ResourcePreferenceWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNotificationsV1ResourcePreferenceWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNotificationsV1ResourcePreferenceRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -88,7 +88,7 @@ func (c *Client) CreateNotificationsV1ResourcePreferenceWithBody(ctx context.Con
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNotificationsV1ResourcePreference(ctx context.Context, body CreateNotificationsV1ResourcePreferenceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNotificationsV1ResourcePreference(ctx context.Context, body CreateNotificationsV1ResourcePreferenceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNotificationsV1ResourcePreferenceRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -99,7 +99,7 @@ func (c *Client) CreateNotificationsV1ResourcePreference(ctx context.Context, bo
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteNotificationsV1ResourcePreference(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteNotificationsV1ResourcePreference(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteNotificationsV1ResourcePreferenceRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -110,7 +110,7 @@ func (c *Client) DeleteNotificationsV1ResourcePreference(ctx context.Context, id
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetNotificationsV1ResourcePreference(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetNotificationsV1ResourcePreference(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNotificationsV1ResourcePreferenceRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -121,7 +121,7 @@ func (c *Client) GetNotificationsV1ResourcePreference(ctx context.Context, id st
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNotificationsV1ResourcePreferenceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNotificationsV1ResourcePreferenceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNotificationsV1ResourcePreferenceRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -132,7 +132,7 @@ func (c *Client) UpdateNotificationsV1ResourcePreferenceWithBody(ctx context.Con
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNotificationsV1ResourcePreference(ctx context.Context, id string, body UpdateNotificationsV1ResourcePreferenceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNotificationsV1ResourcePreference(ctx context.Context, id string, body UpdateNotificationsV1ResourcePreferenceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNotificationsV1ResourcePreferenceRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -143,7 +143,7 @@ func (c *Client) UpdateNotificationsV1ResourcePreference(ctx context.Context, id
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetNotificationsV1ResourcePreferenceByFilter(ctx context.Context, params *GetNotificationsV1ResourcePreferenceByFilterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetNotificationsV1ResourcePreferenceByFilter(ctx context.Context, params *GetNotificationsV1ResourcePreferenceByFilterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNotificationsV1ResourcePreferenceByFilterRequest(c.Server, params)
 	if err != nil {
 		return nil, err

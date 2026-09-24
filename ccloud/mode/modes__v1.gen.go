@@ -35,7 +35,7 @@ type UpdateModeJSONRequestBody = ModeUpdateRequest
 type UpdateModeApplicationVndSchemaregistryPlusJSONRequestBody = ModeUpdateRequest
 type UpdateModeApplicationVndSchemaregistryV1PlusJSONRequestBody = ModeUpdateRequest
 
-func (c *Client) GetTopLevelMode(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetTopLevelMode(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetTopLevelModeRequest(c.Server)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (c *Client) GetTopLevelMode(ctx context.Context, reqEditors ...RequestEdito
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateTopLevelModeWithBody(ctx context.Context, params *UpdateTopLevelModeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateTopLevelModeWithBody(ctx context.Context, params *UpdateTopLevelModeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTopLevelModeRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -57,7 +57,7 @@ func (c *Client) UpdateTopLevelModeWithBody(ctx context.Context, params *UpdateT
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateTopLevelMode(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateTopLevelMode(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTopLevelModeRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err
@@ -68,7 +68,7 @@ func (c *Client) UpdateTopLevelMode(ctx context.Context, params *UpdateTopLevelM
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateTopLevelModeWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateTopLevelModeWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTopLevelModeRequestWithApplicationVndSchemaregistryPlusJSONBody(c.Server, params, body)
 	if err != nil {
 		return nil, err
@@ -79,7 +79,7 @@ func (c *Client) UpdateTopLevelModeWithApplicationVndSchemaregistryPlusJSONBody(
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateTopLevelModeWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateTopLevelModeWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTopLevelModeRequestWithApplicationVndSchemaregistryV1PlusJSONBody(c.Server, params, body)
 	if err != nil {
 		return nil, err
@@ -90,7 +90,7 @@ func (c *Client) UpdateTopLevelModeWithApplicationVndSchemaregistryV1PlusJSONBod
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteSubjectMode(ctx context.Context, subject string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteSubjectMode(ctx context.Context, subject string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteSubjectModeRequest(c.Server, subject)
 	if err != nil {
 		return nil, err
@@ -101,7 +101,7 @@ func (c *Client) DeleteSubjectMode(ctx context.Context, subject string, reqEdito
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetMode(ctx context.Context, subject string, params *GetModeParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetMode(ctx context.Context, subject string, params *GetModeParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetModeRequest(c.Server, subject, params)
 	if err != nil {
 		return nil, err
@@ -112,7 +112,7 @@ func (c *Client) GetMode(ctx context.Context, subject string, params *GetModePar
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateModeWithBody(ctx context.Context, subject string, params *UpdateModeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateModeWithBody(ctx context.Context, subject string, params *UpdateModeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateModeRequestWithBody(c.Server, subject, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -123,7 +123,7 @@ func (c *Client) UpdateModeWithBody(ctx context.Context, subject string, params 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateMode(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateMode(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateModeRequest(c.Server, subject, params, body)
 	if err != nil {
 		return nil, err
@@ -134,7 +134,7 @@ func (c *Client) UpdateMode(ctx context.Context, subject string, params *UpdateM
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateModeWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateModeWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateModeRequestWithApplicationVndSchemaregistryPlusJSONBody(c.Server, subject, params, body)
 	if err != nil {
 		return nil, err
@@ -145,7 +145,7 @@ func (c *Client) UpdateModeWithApplicationVndSchemaregistryPlusJSONBody(ctx cont
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateModeWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateModeWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateModeRequestWithApplicationVndSchemaregistryV1PlusJSONBody(c.Server, subject, params, body)
 	if err != nil {
 		return nil, err

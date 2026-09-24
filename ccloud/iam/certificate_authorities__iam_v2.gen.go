@@ -35,7 +35,7 @@ type UpdateIamV2CertificateAuthority200JSONResponseBodyKind string
 type CreateIamV2CertificateAuthorityJSONRequestBody = IamV2CreateCertRequest
 type UpdateIamV2CertificateAuthorityJSONRequestBody = IamV2UpdateCertRequest
 
-func (c *Client) ListIamV2CertificateAuthorities(ctx context.Context, params *ListIamV2CertificateAuthoritiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListIamV2CertificateAuthorities(ctx context.Context, params *ListIamV2CertificateAuthoritiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIamV2CertificateAuthoritiesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (c *Client) ListIamV2CertificateAuthorities(ctx context.Context, params *Li
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateIamV2CertificateAuthorityWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateIamV2CertificateAuthorityWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2CertificateAuthorityRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -57,7 +57,7 @@ func (c *Client) CreateIamV2CertificateAuthorityWithBody(ctx context.Context, co
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateIamV2CertificateAuthority(ctx context.Context, body CreateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateIamV2CertificateAuthority(ctx context.Context, body CreateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2CertificateAuthorityRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -68,7 +68,7 @@ func (c *Client) CreateIamV2CertificateAuthority(ctx context.Context, body Creat
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteIamV2CertificateAuthority(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteIamV2CertificateAuthority(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIamV2CertificateAuthorityRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -79,7 +79,7 @@ func (c *Client) DeleteIamV2CertificateAuthority(ctx context.Context, id string,
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetIamV2CertificateAuthority(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetIamV2CertificateAuthority(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2CertificateAuthorityRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -90,7 +90,7 @@ func (c *Client) GetIamV2CertificateAuthority(ctx context.Context, id string, re
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateIamV2CertificateAuthorityWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateIamV2CertificateAuthorityWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2CertificateAuthorityRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -101,7 +101,7 @@ func (c *Client) UpdateIamV2CertificateAuthorityWithBody(ctx context.Context, id
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateIamV2CertificateAuthority(ctx context.Context, id string, body UpdateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateIamV2CertificateAuthority(ctx context.Context, id string, body UpdateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2CertificateAuthorityRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

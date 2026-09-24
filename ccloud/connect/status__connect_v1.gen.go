@@ -18,7 +18,7 @@ import (
 type ReadConnectv1ConnectorStatus200JSONResponseBodyConnectorState string
 type ReadConnectv1ConnectorStatus200JSONResponseBodyType string
 
-func (c *Client) ReadConnectv1ConnectorStatus(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ReadConnectv1ConnectorStatus(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReadConnectv1ConnectorStatusRequest(c.Server, environmentId, kafkaClusterId, connectorName)
 	if err != nil {
 		return nil, err
@@ -29,7 +29,7 @@ func (c *Client) ReadConnectv1ConnectorStatus(ctx context.Context, environmentId
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ListConnectv1ConnectorTasks(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListConnectv1ConnectorTasks(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListConnectv1ConnectorTasksRequest(c.Server, environmentId, kafkaClusterId, connectorName)
 	if err != nil {
 		return nil, err

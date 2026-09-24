@@ -116,7 +116,7 @@ type UpdateNetworkingV1NetworkLinkService200JSONResponseBodyKind string
 type CreateNetworkingV1NetworkLinkServiceJSONRequestBody CreateNetworkingV1NetworkLinkServiceJSONBody
 type UpdateNetworkingV1NetworkLinkServiceJSONRequestBody UpdateNetworkingV1NetworkLinkServiceJSONBody
 
-func (c *Client) ListNetworkingV1NetworkLinkServices(ctx context.Context, params *ListNetworkingV1NetworkLinkServicesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListNetworkingV1NetworkLinkServices(ctx context.Context, params *ListNetworkingV1NetworkLinkServicesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNetworkingV1NetworkLinkServicesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -127,7 +127,7 @@ func (c *Client) ListNetworkingV1NetworkLinkServices(ctx context.Context, params
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNetworkingV1NetworkLinkServiceWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNetworkingV1NetworkLinkServiceWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1NetworkLinkServiceRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -138,7 +138,7 @@ func (c *Client) CreateNetworkingV1NetworkLinkServiceWithBody(ctx context.Contex
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNetworkingV1NetworkLinkService(ctx context.Context, body CreateNetworkingV1NetworkLinkServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNetworkingV1NetworkLinkService(ctx context.Context, body CreateNetworkingV1NetworkLinkServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1NetworkLinkServiceRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -149,7 +149,7 @@ func (c *Client) CreateNetworkingV1NetworkLinkService(ctx context.Context, body 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteNetworkingV1NetworkLinkService(ctx context.Context, id string, params *DeleteNetworkingV1NetworkLinkServiceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteNetworkingV1NetworkLinkService(ctx context.Context, id string, params *DeleteNetworkingV1NetworkLinkServiceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteNetworkingV1NetworkLinkServiceRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -160,7 +160,7 @@ func (c *Client) DeleteNetworkingV1NetworkLinkService(ctx context.Context, id st
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetNetworkingV1NetworkLinkService(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkServiceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetNetworkingV1NetworkLinkService(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkServiceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNetworkingV1NetworkLinkServiceRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -171,7 +171,7 @@ func (c *Client) GetNetworkingV1NetworkLinkService(ctx context.Context, id strin
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNetworkingV1NetworkLinkServiceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNetworkingV1NetworkLinkServiceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1NetworkLinkServiceRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -182,7 +182,7 @@ func (c *Client) UpdateNetworkingV1NetworkLinkServiceWithBody(ctx context.Contex
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNetworkingV1NetworkLinkService(ctx context.Context, id string, body UpdateNetworkingV1NetworkLinkServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNetworkingV1NetworkLinkService(ctx context.Context, id string, body UpdateNetworkingV1NetworkLinkServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1NetworkLinkServiceRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

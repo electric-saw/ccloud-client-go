@@ -116,7 +116,7 @@ type UpdateNetworkingV1TransitGatewayAttachment200JSONResponseBodyKind string
 type CreateNetworkingV1TransitGatewayAttachmentJSONRequestBody CreateNetworkingV1TransitGatewayAttachmentJSONBody
 type UpdateNetworkingV1TransitGatewayAttachmentJSONRequestBody UpdateNetworkingV1TransitGatewayAttachmentJSONBody
 
-func (c *Client) ListNetworkingV1TransitGatewayAttachments(ctx context.Context, params *ListNetworkingV1TransitGatewayAttachmentsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListNetworkingV1TransitGatewayAttachments(ctx context.Context, params *ListNetworkingV1TransitGatewayAttachmentsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNetworkingV1TransitGatewayAttachmentsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -127,7 +127,7 @@ func (c *Client) ListNetworkingV1TransitGatewayAttachments(ctx context.Context, 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNetworkingV1TransitGatewayAttachmentWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNetworkingV1TransitGatewayAttachmentWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1TransitGatewayAttachmentRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -138,7 +138,7 @@ func (c *Client) CreateNetworkingV1TransitGatewayAttachmentWithBody(ctx context.
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNetworkingV1TransitGatewayAttachment(ctx context.Context, body CreateNetworkingV1TransitGatewayAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNetworkingV1TransitGatewayAttachment(ctx context.Context, body CreateNetworkingV1TransitGatewayAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1TransitGatewayAttachmentRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -149,7 +149,7 @@ func (c *Client) CreateNetworkingV1TransitGatewayAttachment(ctx context.Context,
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteNetworkingV1TransitGatewayAttachment(ctx context.Context, id string, params *DeleteNetworkingV1TransitGatewayAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteNetworkingV1TransitGatewayAttachment(ctx context.Context, id string, params *DeleteNetworkingV1TransitGatewayAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteNetworkingV1TransitGatewayAttachmentRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -160,7 +160,7 @@ func (c *Client) DeleteNetworkingV1TransitGatewayAttachment(ctx context.Context,
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetNetworkingV1TransitGatewayAttachment(ctx context.Context, id string, params *GetNetworkingV1TransitGatewayAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetNetworkingV1TransitGatewayAttachment(ctx context.Context, id string, params *GetNetworkingV1TransitGatewayAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNetworkingV1TransitGatewayAttachmentRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -171,7 +171,7 @@ func (c *Client) GetNetworkingV1TransitGatewayAttachment(ctx context.Context, id
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNetworkingV1TransitGatewayAttachmentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNetworkingV1TransitGatewayAttachmentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1TransitGatewayAttachmentRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -182,7 +182,7 @@ func (c *Client) UpdateNetworkingV1TransitGatewayAttachmentWithBody(ctx context.
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNetworkingV1TransitGatewayAttachment(ctx context.Context, id string, body UpdateNetworkingV1TransitGatewayAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNetworkingV1TransitGatewayAttachment(ctx context.Context, id string, body UpdateNetworkingV1TransitGatewayAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1TransitGatewayAttachmentRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

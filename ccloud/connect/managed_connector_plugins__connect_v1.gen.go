@@ -29,7 +29,7 @@ type ValidateConnectv1ConnectorPlugin200JSONResponseBodyConfigsDefinitionWidth s
 type TranslateConnectv1ConnectorPluginJSONRequestBody TranslateConnectv1ConnectorPluginJSONBody
 type ValidateConnectv1ConnectorPluginJSONRequestBody ValidateConnectv1ConnectorPluginJSONBody
 
-func (c *Client) ListConnectv1ConnectorPlugins(ctx context.Context, environmentId string, kafkaClusterId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListConnectv1ConnectorPlugins(ctx context.Context, environmentId string, kafkaClusterId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListConnectv1ConnectorPluginsRequest(c.Server, environmentId, kafkaClusterId)
 	if err != nil {
 		return nil, err
@@ -40,7 +40,7 @@ func (c *Client) ListConnectv1ConnectorPlugins(ctx context.Context, environmentI
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) TranslateConnectv1ConnectorPluginWithBody(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) TranslateConnectv1ConnectorPluginWithBody(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTranslateConnectv1ConnectorPluginRequestWithBody(c.Server, environmentId, kafkaClusterId, pluginName, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -51,7 +51,7 @@ func (c *Client) TranslateConnectv1ConnectorPluginWithBody(ctx context.Context, 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) TranslateConnectv1ConnectorPlugin(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, body TranslateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) TranslateConnectv1ConnectorPlugin(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, body TranslateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTranslateConnectv1ConnectorPluginRequest(c.Server, environmentId, kafkaClusterId, pluginName, params, body)
 	if err != nil {
 		return nil, err
@@ -62,7 +62,7 @@ func (c *Client) TranslateConnectv1ConnectorPlugin(ctx context.Context, environm
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ValidateConnectv1ConnectorPluginWithBody(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ValidateConnectv1ConnectorPluginWithBody(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewValidateConnectv1ConnectorPluginRequestWithBody(c.Server, environmentId, kafkaClusterId, pluginName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -73,7 +73,7 @@ func (c *Client) ValidateConnectv1ConnectorPluginWithBody(ctx context.Context, e
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ValidateConnectv1ConnectorPlugin(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, body ValidateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ValidateConnectv1ConnectorPlugin(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, body ValidateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewValidateConnectv1ConnectorPluginRequest(c.Server, environmentId, kafkaClusterId, pluginName, body)
 	if err != nil {
 		return nil, err

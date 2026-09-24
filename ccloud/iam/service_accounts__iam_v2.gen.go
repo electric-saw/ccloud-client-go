@@ -70,7 +70,7 @@ type UpdateIamV2ServiceAccount200JSONResponseBodyKind string
 type CreateIamV2ServiceAccountJSONRequestBody CreateIamV2ServiceAccountJSONBody
 type UpdateIamV2ServiceAccountJSONRequestBody = IamV2ServiceAccount
 
-func (c *Client) ListIamV2ServiceAccounts(ctx context.Context, params *ListIamV2ServiceAccountsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListIamV2ServiceAccounts(ctx context.Context, params *ListIamV2ServiceAccountsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIamV2ServiceAccountsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -81,7 +81,7 @@ func (c *Client) ListIamV2ServiceAccounts(ctx context.Context, params *ListIamV2
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateIamV2ServiceAccountWithBody(ctx context.Context, params *CreateIamV2ServiceAccountParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateIamV2ServiceAccountWithBody(ctx context.Context, params *CreateIamV2ServiceAccountParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2ServiceAccountRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -92,7 +92,7 @@ func (c *Client) CreateIamV2ServiceAccountWithBody(ctx context.Context, params *
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateIamV2ServiceAccount(ctx context.Context, params *CreateIamV2ServiceAccountParams, body CreateIamV2ServiceAccountJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateIamV2ServiceAccount(ctx context.Context, params *CreateIamV2ServiceAccountParams, body CreateIamV2ServiceAccountJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2ServiceAccountRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err
@@ -103,7 +103,7 @@ func (c *Client) CreateIamV2ServiceAccount(ctx context.Context, params *CreateIa
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteIamV2ServiceAccount(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteIamV2ServiceAccount(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIamV2ServiceAccountRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -114,7 +114,7 @@ func (c *Client) DeleteIamV2ServiceAccount(ctx context.Context, id string, reqEd
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetIamV2ServiceAccount(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetIamV2ServiceAccount(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2ServiceAccountRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -125,7 +125,7 @@ func (c *Client) GetIamV2ServiceAccount(ctx context.Context, id string, reqEdito
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateIamV2ServiceAccountWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateIamV2ServiceAccountWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2ServiceAccountRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -136,7 +136,7 @@ func (c *Client) UpdateIamV2ServiceAccountWithBody(ctx context.Context, id strin
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateIamV2ServiceAccount(ctx context.Context, id string, body UpdateIamV2ServiceAccountJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateIamV2ServiceAccount(ctx context.Context, id string, body UpdateIamV2ServiceAccountJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2ServiceAccountRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

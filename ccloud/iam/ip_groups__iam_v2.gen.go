@@ -64,7 +64,7 @@ type UpdateIamV2IpGroup200JSONResponseBodyKind string
 type CreateIamV2IpGroupJSONRequestBody CreateIamV2IpGroupJSONBody
 type UpdateIamV2IpGroupJSONRequestBody = IamV2IpGroup
 
-func (c *Client) ListIamV2IpGroups(ctx context.Context, params *ListIamV2IpGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListIamV2IpGroups(ctx context.Context, params *ListIamV2IpGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIamV2IpGroupsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -75,7 +75,7 @@ func (c *Client) ListIamV2IpGroups(ctx context.Context, params *ListIamV2IpGroup
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateIamV2IpGroupWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateIamV2IpGroupWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2IpGroupRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -86,7 +86,7 @@ func (c *Client) CreateIamV2IpGroupWithBody(ctx context.Context, contentType str
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateIamV2IpGroup(ctx context.Context, body CreateIamV2IpGroupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateIamV2IpGroup(ctx context.Context, body CreateIamV2IpGroupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2IpGroupRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -97,7 +97,7 @@ func (c *Client) CreateIamV2IpGroup(ctx context.Context, body CreateIamV2IpGroup
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteIamV2IpGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteIamV2IpGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIamV2IpGroupRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -108,7 +108,7 @@ func (c *Client) DeleteIamV2IpGroup(ctx context.Context, id string, reqEditors .
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetIamV2IpGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetIamV2IpGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2IpGroupRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -119,7 +119,7 @@ func (c *Client) GetIamV2IpGroup(ctx context.Context, id string, reqEditors ...R
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateIamV2IpGroupWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateIamV2IpGroupWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2IpGroupRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -130,7 +130,7 @@ func (c *Client) UpdateIamV2IpGroupWithBody(ctx context.Context, id string, cont
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateIamV2IpGroup(ctx context.Context, id string, body UpdateIamV2IpGroupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateIamV2IpGroup(ctx context.Context, id string, body UpdateIamV2IpGroupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2IpGroupRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

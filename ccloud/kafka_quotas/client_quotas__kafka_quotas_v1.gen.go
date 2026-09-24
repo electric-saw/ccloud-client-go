@@ -69,7 +69,7 @@ type UpdateKafkaQuotasV1ClientQuota200JSONResponseBodyKind string
 type CreateKafkaQuotasV1ClientQuotaJSONRequestBody = CreateKafkaQuotasV1ClientQuotaJSONBody
 type UpdateKafkaQuotasV1ClientQuotaJSONRequestBody UpdateKafkaQuotasV1ClientQuotaJSONBody
 
-func (c *Client) ListKafkaQuotasV1ClientQuotas(ctx context.Context, params *ListKafkaQuotasV1ClientQuotasParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListKafkaQuotasV1ClientQuotas(ctx context.Context, params *ListKafkaQuotasV1ClientQuotasParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaQuotasV1ClientQuotasRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -80,7 +80,7 @@ func (c *Client) ListKafkaQuotasV1ClientQuotas(ctx context.Context, params *List
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateKafkaQuotasV1ClientQuotaWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateKafkaQuotasV1ClientQuotaWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKafkaQuotasV1ClientQuotaRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -91,7 +91,7 @@ func (c *Client) CreateKafkaQuotasV1ClientQuotaWithBody(ctx context.Context, con
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateKafkaQuotasV1ClientQuota(ctx context.Context, body CreateKafkaQuotasV1ClientQuotaJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateKafkaQuotasV1ClientQuota(ctx context.Context, body CreateKafkaQuotasV1ClientQuotaJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKafkaQuotasV1ClientQuotaRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -102,7 +102,7 @@ func (c *Client) CreateKafkaQuotasV1ClientQuota(ctx context.Context, body Create
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteKafkaQuotasV1ClientQuota(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteKafkaQuotasV1ClientQuota(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteKafkaQuotasV1ClientQuotaRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -113,7 +113,7 @@ func (c *Client) DeleteKafkaQuotasV1ClientQuota(ctx context.Context, id string, 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetKafkaQuotasV1ClientQuota(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetKafkaQuotasV1ClientQuota(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaQuotasV1ClientQuotaRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (c *Client) GetKafkaQuotasV1ClientQuota(ctx context.Context, id string, req
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateKafkaQuotasV1ClientQuotaWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateKafkaQuotasV1ClientQuotaWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaQuotasV1ClientQuotaRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -135,7 +135,7 @@ func (c *Client) UpdateKafkaQuotasV1ClientQuotaWithBody(ctx context.Context, id 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateKafkaQuotasV1ClientQuota(ctx context.Context, id string, body UpdateKafkaQuotasV1ClientQuotaJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateKafkaQuotasV1ClientQuota(ctx context.Context, id string, body UpdateKafkaQuotasV1ClientQuotaJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaQuotasV1ClientQuotaRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

@@ -20,7 +20,7 @@ type RefreshIamV2JsonWebKeySet200JSONResponseBodyApiVersion string
 type RefreshIamV2JsonWebKeySet200JSONResponseBodyKind string
 type RefreshIamV2JsonWebKeySetJSONRequestBody = IamV2Jwks
 
-func (c *Client) RefreshIamV2JsonWebKeySetWithBody(ctx context.Context, providerId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) RefreshIamV2JsonWebKeySetWithBody(ctx context.Context, providerId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRefreshIamV2JsonWebKeySetRequestWithBody(c.Server, providerId, contentType, body)
 	if err != nil {
 		return nil, err
@@ -31,7 +31,7 @@ func (c *Client) RefreshIamV2JsonWebKeySetWithBody(ctx context.Context, provider
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) RefreshIamV2JsonWebKeySet(ctx context.Context, providerId string, body RefreshIamV2JsonWebKeySetJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) RefreshIamV2JsonWebKeySet(ctx context.Context, providerId string, body RefreshIamV2JsonWebKeySetJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRefreshIamV2JsonWebKeySetRequest(c.Server, providerId, body)
 	if err != nil {
 		return nil, err

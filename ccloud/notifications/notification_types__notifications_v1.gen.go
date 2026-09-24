@@ -29,7 +29,7 @@ type ListNotificationsV1NotificationTypesParams struct {
 type GetNotificationsV1NotificationType200JSONResponseBodyApiVersion string
 type GetNotificationsV1NotificationType200JSONResponseBodyKind string
 
-func (c *Client) ListNotificationsV1NotificationTypes(ctx context.Context, params *ListNotificationsV1NotificationTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListNotificationsV1NotificationTypes(ctx context.Context, params *ListNotificationsV1NotificationTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNotificationsV1NotificationTypesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -40,7 +40,7 @@ func (c *Client) ListNotificationsV1NotificationTypes(ctx context.Context, param
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetNotificationsV1NotificationType(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetNotificationsV1NotificationType(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNotificationsV1NotificationTypeRequest(c.Server, id)
 	if err != nil {
 		return nil, err

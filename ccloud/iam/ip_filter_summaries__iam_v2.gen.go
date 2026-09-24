@@ -22,7 +22,7 @@ type GetIamV2IpFilterSummaryParams struct {
 type GetIamV2IpFilterSummary200JSONResponseBodyApiVersion string
 type GetIamV2IpFilterSummary200JSONResponseBodyKind string
 
-func (c *Client) GetIamV2IpFilterSummary(ctx context.Context, params *GetIamV2IpFilterSummaryParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetIamV2IpFilterSummary(ctx context.Context, params *GetIamV2IpFilterSummaryParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2IpFilterSummaryRequest(c.Server, params)
 	if err != nil {
 		return nil, err

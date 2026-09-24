@@ -6,7 +6,755 @@ info:
     x-audience: external-public
     x-logo:
         url: https://assets.confluent.io/m/1661ef5e4ff82d3d/
-    description: "# Introduction\n\n<div class=\"status-info\">\n<p class=\"status-info-title\">Note</p>\nThis documents the collection of Confluent Cloud APIs. Each API documents its\n<a href=\"#api-lifecycle-policy\">lifecycle phase</a>. APIs\nmarked as Early Access or Preview are not ready for production usage. We're currently\nworking with a select group of customers to get feedback and iterate on these APIs.\n</div>\n\nConfluent Cloud APIs are a core building block of Confluent Cloud. You can use the APIs to\nmanage your own account or to integrate Confluent into your product.\n\nMost of the APIs are organized around\n<a href=\"http://en.wikipedia.org/wiki/Representational_State_Transfer\" target=\"_blank\">REST</a>\nand the resources which make up Confluent Cloud. The APIs have predictable\nresource-oriented URLs, transport data using JSON, and use standard HTTP verbs,\nresponse codes, authentication, and design principles.\n\n## Object Model\n\n<div class=\"status-info\">\n<p class=\"status-info-title\">Note</p>\nThis section describes the object model for many Confluent Cloud APIs, but not all.\nThe Connect v1 API group has a different object model. You can review the example\nrequest and response bodies in <a href=\"../ccloud/connectors-connect-v-1/\">Connect v1 API</a>\nto see its object model.\n</div>\n\nConfluent Cloud APIs are primarily designed to be declarative and intent-oriented. In other words,\ntell the API what you want (for example, throughput or SLOs) and it will figure out how to make it happen\n(for example, cluster sizing). A Confluent object acts as a \"record of intent\" — after you create the\nobject, Confluent Cloud will work tirelessly in the background to ensure that the object exists\nas specified.\n\nConfluent APIs represent objects in JSON with media-type `application/json`.\n\nMany objects follow a model consisting of `spec` and `status`. An object's `spec` tells\nConfluent the _desired state_ (specification) of the resource. The object may not be\nimmediately available or changes may not be immediately applied. For this reason,\nmany objects also have a `status` property that provides info about the\n_current state_ of the resource. Confluent Cloud is continuously and actively managing\neach resource's current state to match it's desired state.\n\nAll Confluent objects share a set of common properties:\n\n- **api_version** – API objects have an `api_version` field indicating their API version.\n- **kind** – API objects have a `kind` field indicating the kind of object it is.\n- **id** – Each object in the API will have an identifier, indicated via its `id` field,\n  and should be treated as an opaque string unless otherwise specified.\n\nThere are a number of other [standard properties](#standard-properties) and that you'll encounter\nused by many API objects. And of course, objects have plenty of non-standard fields that are\nspecific to each object _kind_... this is what makes them interesting!\n\n# Authentication\n\nConfluent uses API keys and JSON Web Tokens (JWTs) to integrate your applications\nand workflows to your Confluent Cloud resources using the Confluent Cloud REST APIs.\nYour applications and workflows must be authenticated and authorized in order to\naccess and manage Confluent Cloud resources.\n\n## API keys\n\nYou can create and manage your API keys using the Confluent Cloud Console or\nConfluent CLI. For more information, see [Use API Keys to Control Access in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/api-keys/api-keys.html).\n\nConfluent Cloud uses the following categories of API keys:\n\n- A **Cloud API key** grants access to the Confluent Cloud Management APIs,\n  such as for Provisioning and Metrics integrations.\n- A **resource-specific API key** grants access to a single Confluent Cloud\n  resource, such as a Kafka cluster or a Schema Registry. For the full list of\n  resource scopes, see [Resource scopes](https://docs.confluent.io/cloud/current/access-management/authenticate/api-keys/api-keys.html#resource-scopes).\n- A **global API key** grants access across Confluent Cloud services and\n  resources, based on the permissions assigned to the owning principal. Some\n  limitations apply. For more information, see\n  [Global API keys](https://docs.confluent.io/cloud/current/access-management/authenticate/api-keys/api-keys.html#cloud-global-api-keys).\n\nEach Confluent Cloud API key is associated with a principal (specific user or\nservice account) and inherits the permissions granted to the owner.\n\n- For example, if service account `Armageddon` is granted ACLs on Kafka cluster\n  `neptune`, then a Kafka API Key for `neptune` owned by `Armageddon` will have\n  these ACLs enforced.\n- **Note:** API keys are automatically deleted when the associated user or service\n  account is deleted (for example, when an employee leaves the company or moves to\n  a new department and an SSO integration removes the Confluent Cloud user as they\n  no longer require access).\n- Confluent **strongly recommends** that you use service accounts for all\n  production-critical access.\n\nConfluent Cloud API keys grant access to Confluent Cloud resources, so **keep them secure**!\nDo not share your API keys and secrets in publicly-accessible locations, such as\nGitHub or client-side code.\n\nAll API requests must be made over HTTPS. Calls made over plain HTTP will fail.\nAPI requests without authentication will also fail.\n\nTo use an API key, you must send it in an `Authorization: Basic {credentials}` header.\nRemember that HTTP Basic authentication requires you to provide your credentials as\nthe API key ID and associated API secret separated by a colon and encoded using Base64\nformat. For example, if your API key ID is `ABCDEFGH123456789` and the API key Secret\nis `XNCIW93I2L1SQPJSJ823K1LS902KLDFMCZPWEO`, then the authorization header is:\n\n```text​\nAuthorization: Basic QUJDREVGR0gxMjM0NTY3ODk6WE5DSVc5M0kyTDFTUVBKU0o4MjNLMUxTOTAyS0xERk1DWlBXRU8=\n```\n\nYou can generate this header example from the API key:\n\nmacOS:\n\n```shell\n$ echo -n \"ABCDEFGH123456789:XNCIW93I2L1SQPJSJ823K1LS902KLDFMCZPWEO\" | base64\n\n```\n\nLinux:\n\n```shell\n$ echo -n \"ABCDEFGH123456789:XNCIW93I2L1SQPJSJ823K1LS902KLDFMCZPWEO\" | base64 -w 0\n```\n\nWindows (PowerShell only):\n\nThis command is only supported for PowerShell and will not work in the Command shell. \n\n```shell\n$ [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(\"ABCDEFGH123456789:XNCIW93I2L1SQPJSJ823K1LS902KLDFMCZPWEO\"))\n```\n\nTo find out if an API operation supports Cloud API Keys, look in the **AUTHORIZATIONS**\nlisting for `cloud-api-key`.\n\nTo find out if an API operation supports resource-specific API Keys, look in the **AUTHORIZATIONS**\nlisting for `resource-api-key`.\n\nTo find out if an API operation supports Global API Keys, look in the **AUTHORIZATIONS**\nlisting for `global-api-key`.\n\n## External OAuth\n\nYou can use [OAuth/OIDC support for Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/overview.html)\nto authenticate and authorize access to applications and workloads for the\nfollowing Confluent Cloud REST APIs:\n\n- **Kafka REST API**: [Kafka REST API for Clusters(V3)](../ccloud/cluster-v-3/).\n  For an API overview and examples, see [Cluster Management with Kafka REST API](https://docs.confluent.io/cloud/current/kafka-rest/kafka-rest-cc.html).\n- **Schema Registry REST API**: [Schema Registry REST API for Schemas(V1)](../ccloud/schemas-v-1/)\n  and [Subjects](../ccloud/subjects-v-1/).\n  For an API overview and examples, see [Schema Registry REST API for Confluent Cloud](https://docs.confluent.io/cloud/current/sr/sr-rest-apis.html).\n\nAlternatively, to find out if an API operation supports external tokens, look in the **AUTHORIZATIONS**\nlisting for `external-access-token`.\n\n## Confluent STS tokens\n\nConfluent Security Token Service (STS) issues access tokens (`confluent-sts-access-token`)\nby exchanging an external token (`external-access-token`) for a `confluent-sts-access-token`. You can use\nConfluent STS tokens to authenticate to Confluent Cloud APIs that support the\n`confluent-sts-access-token` notation.\n\nTo find out if an API operation supports Confluent STS tokens, look in the **AUTHORIZATIONS**\nlisting for `confluent-sts-access-token`.\n\n## Partner OAuth\n\nApproved partners can fetch Partner tokens (`confluent-partner-access-token`) that validate their identity\nand grant access to the Partner API (`partner/v2`), which lets them sign up\nan organization on behalf of a customer, manage entitlements (create, read, and list),\nand read or list organizations they have signed up.\n\nTo find out an API operation supports Partner tokens, look in the **AUTHORIZATIONS**\nlisting for `confluent-partner-access-token`.\n\n<!-- TODO: port this back to the Confluent API Design Guide -->\n\n<SecurityDefinitions />\n\n# Errors\n\nConfluent API error messages are a critical part of the developer experience. For Confluent Cloud, they must be\nclear, consistent, actionable, and designed for both developers and automated systems. Strong error\nhandling supports fast troubleshooting, reliable integration, and efficient support–the foundation of\na positive developer experience.\n\nOur APIs are built on RESTful principles. They use resource-oriented URLs, standard HTTP verbs, and JSON\nfor requests and responses. This section defines clear standards for structuring, formatting, and documenting\nerror messages for all Confluent REST APIs.\n\n<div class=\"status-info\">\n<p class=\"status-info-title\">Note</p>\nThis error format applies to most Confluent Cloud APIs. However, the Connect v1 API group uses a different structure. For Connect v1-specific error behavior and examples, refer to the Connect v1 API documentation <a href=\"../ccloud/connectors-connect-v-1/\">below</a> to see its error behavior.\n</div>\n\n## Key principles\n\nUse the following best practices when designing and documenting API error messages:\n\n- **Ensure clarity and consistency**: Messages must be easy to understand–use active voice and plain language–and consistently formatted across endpoints.\n\n- **Write actionable messages**: Always include a resolution or next step, enabling users to correct the problem.\n\n- **Avoid exposing sensitive data**: Never expose internal system details, stack traces, logs, or user-specific content.\n\n- **Follow industry best practices**: Don't use a period at the end of the message field, even if it is a full sentence. This follows industry standards. Use periods in the details and suggestion fields if the content is a complete sentence. View the [API best practices blog](#status-codes) by Postman, a trusted API leader.\n\n## HTTP status codes\n\nConfluent Cloud APIs return standard [HTTP status codes](#status-codes) to\nindicate the outcome of API request. Each error response includes a `status` field that reflects the appropriate HTTP code as a string (for example, `\"403\"` or `\"404\"`).\nFor a list of supported codes and their meaning, see the [HTTP status codes](#status-codes) section.\n\n## Error response structure\n\nEach API error response **should** include the following fields:\n\n**Top-level fields**\n\n| Field        | Type   | Required | Description                                                                                                                                             |\n| ------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| status       | String | Yes      | HTTP status code (for example, 400, 404, 500).                                                                                                          |\n| error        | Object | Yes      | Main object containing error details.                                                                                                                   |\n| requestId    | String | Optional | Unique identifier for the API request. Use for tracing, debugging, and support inquiries.                                                               |\n| doc_url      | String | Optional | Link to relevant documentation or troubleshooting steps.                                                                                                |\n\n**Fields inside `error` object**\n\n| Field       | Type   | Required | Description                                                                                                                                             |\n| ------------| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |\n|  code       | String | Yes      | Unique, application-specific error code. Write error codes in uppercase letters, using underscores to separate words (for example, RESOURCE_NOT_FOUND). |\n|  message    | String | Yes      | Clear, actionable, user-friendly description of what went wrong using active voice.                                                                     |\n|  details    | String | Optional | Additional explanation or context about the error using active voice.                                                                                   |\n|  timestamp  | String | Yes      | ISO 8601 UTC timestamp indicating the date and time when the error occurred.                                                                            |\n|  path       | String | Yes      | The exact API endpoint or resource path related to the error.                                                                                           |\n|  suggestion | String | Optional | Recommend actions the user can take to fix or avoid the error using active voice.                                                                       |\n\nEach Confluent API error includes a status and a structured error object with a code, message, and optional context to help you understand and resolve the issue. The following example\nshows a standard Confluent API error response in JSON format:\n\n    {\n      \"status\": 400,\n      \"error\": {\n        \"code\": \"INVALID_SCHEMA_FIELD\",\n        \"message\": \"The 'name' field in the schema is required and cannot be empty.\",\n        \"details\": \"Schemas must include a top-level 'name' field with a non-empty string value.\",\n        \"timestamp\": \"2025-08-01T20:36:45Z\",\n        \"path\": \"/api/v1/schemas\",\n        \"suggestion\": \"Ensure the 'name' field is included in the payload and is not an empty string.\"\n      },\n      \"requestId\": \"a1b2c3d4-e5f6-7890-g1h2-i3j4k516m7n8\",\n      \"doc_url\": \"https://docs.confluent.io/cloud/current/api/errors/INVALID_SCHEMA_FIELD.html\"\n    }\n\nNote that if a request fails validation, it will return an HTTP `422 Unprocessable Entity`\nwith a list of fields that failed validation.\n\n## Pagination\n\n<div class=\"status-info\">\n<p class=\"status-info-title\">Note</p>\nThis section describes the pagination behavior of “list” operations for many Confluent Cloud APIs, but not all.\nThe Connect V1 and Kafka V3 API list operations do not support pagination.\n</div>\n\nAll API resources have support for bulk reads via \"list\" API operations. For example,\nyou can \"list Kafka clusters\", \"list api keys\", and \"list environments\". These \"list\"\noperations require pagination; by requesting smaller subsets of data, API clients\nreceive a response much faster than requesting the entire, potentially large, data set.\n\nAll \"list\" operations follow the same pattern with the following parameters:\n\n- `page_size` – client-provided max number of items per page, only valid on the first request.\n- `page_token` – server-generated token used for traversing through the result set.\n\nA paginated response may include any of the following pagination links. API clients may\nfollow the respective link to page forward or backward through the result set as desired.\n\n| [Link Relation](https://www.iana.org/assignments/link-relations/link-relations.xml) | Description                                                                                                                                                                             |\n| ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `next`                                                                              | A link to the next page of results. A response that does not contain a next link does not have further data to fetch.                                                                   |\n| `prev`                                                                              | A link to the previous page of results. A response that does not contain a prev link has no previous data. This link is **optional** for collections that cannot be traversed backward. |\n| `first`                                                                             | A link to the first page of results. This link is **optional** for collections that cannot be indexed directly to a given page.                                                         |\n| `last`                                                                              | A link to the last page of results. This link is **optional** for collections that cannot be indexed directly to a given page.                                                          |\n\nAPI clients must treat pagination links and the `page_token` parameter in particular as an opaque string.\n\nAn example paginated list response may look like\n\n```\n{\n    \"api_version\": \"v2\",\n    \"kind\": \"KafkaClusterList\",\n    \"metadata\": {\n        \"next\": \"https://api.confluent.cloud/kafka-clusters?page_token=ABCDEFGHIJKLMNOP1234567890\"\n    }\n    \"data\": [\n        {\n            \"metadata\": {\n                \"id\": \"lkc-abc123\",\n                \"self\": \"https://api.confluent.cloud/kafka-clusters/lkc-abc123\",\n                \"resource_name\": \"crn://confluent.cloud/kafka=lkc-abc123\",\n            }\n            \"spec\": {\n                \"display_name\": \"My Kafka Cluster\",\n                <snip>\n            },\n            \"status\": {\n                \"phase\": \"RUNNING\",\n                <snip>\n            }\n        },\n        <snip>\n    ]\n}\n```\n\n# Rate Limiting\n\nTo protect the stability of the API and keep it available to all users, Confluent employs\nmultiple safeguards. If you send too many requests in quick succession or perform too many\nconcurrent operations, you may be throttled or have your request rejected with an error.\n\nWhen a rate limit is breached, an HTTP `429 Too Many Requests` error is\nreturned. The following headers are sent back to provide assistance in dealing\nwith rate limits. Note that headers are not returned for a `429` error response with\n[Kafka REST API (v3)](../ccloud/cluster-v-3/).\n\n| Header                  | Description                                                                                                                                                                                                                                        |\n| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `X-RateLimit-Limit`     | The maximum number of requests you're permitted to make per time period.                                                                                                                                                                           |\n| `X-RateLimit-Reset`     | The relative time in seconds until the current rate limit window resets.                                                                                                                                                                           |\n| `Retry-After`           | The number of seconds to wait until the rate limit window resets. Only sent when the rate limit is reached.                                                                                                                                        |\n| `X-RateLimit-Remaining` | The number of requests remaining in the current rate-limit window. **Important:** This differs from Github and Twitter\\'s same-named header which uses UTC epoch seconds. We use relative time to avoid client/server time synchronization issues. |\n\nConfluent enforces multiple kinds of limits, including request-rate and concurrency limits, both per user and organization-wide. Unauthenticated requests are associated with the originating IP address, not the user making requests.\n\nIntegrations should gracefully handle these limits by watching for `429` error responses and\nbuilding in a retry mechanism. This mechanism should follow a capped exponential backoff policy to\nprevent [retry amplification](https://landing.google.com/sre/sre-book/chapters/addressing-cascading-failures/)\n(\"retry storms\") and also introduce some randomness (\"jitter\") to avoid the\n[thundering herd effect](https://en.wikipedia.org/wiki/Thundering_herd_problem).\n\nRate limits are generally fixed and cannot be increased. If you require higher\nthroughput, you can use a Dedicated cluster, where certain limits scale\nautomatically with the number of CKUs. For example, each additional CKU\nincreases the Kafka REST Produce v3 connection limit by 300 requests per\nsecond. For reference, see the\n[eCKU/CKU comparison table](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#ecku-cku-comparison).\n\nIf you’re running into this error and think you need a higher rate limit, contact Confluent at\n[support@confluent.io](mailto:support@confluent.io).\n\n# Identifiers and URLs\n\nMost resources have multiple identifiers:\n\n- `id` is the \"natural identifier\" for an object. It is only unique within its parent resource.\n  The `id` is unique across time: the ID will not be reclaimed and reused after an object is deleted.\n- `resource_name` is a Uniform Resource Identifier (URI) that is globally unique across all resources.\n  This encompasses all parent resource `kind`s and `id`s necessary to uniquely identify a particular\n  instance of this object `kind`. Because it uses object `id`s, the CRN will not be reclaimed and\n  reused after an object is deleted. It is represented as a Confluent Resource Name (see below).\n- `self` is a Uniform Resource Locator (URL) at which an object can be addressed.\n  This URL encodes the service location, API version, and other particulars necessary to\n  locate the resource at a point in time.\n\nTo see how these relate to each other, consider `KafkaBroker` with `broker.id=2` in a `KafkaCluster`\nin Confluent Cloud identified as `lkc-xsi8201`. In such an example, the `KafkaBroker` has `id=2`,\nthe `resource_name` is `crn://confluent.cloud/kafka=lkc-xsi8201/broker=2` and the `self` URL may be\nsomething like `https://pkc-8wlk2n.us-west-2.aws.confluent.cloud`. Note that different identifiers\ncarry different information for different purposes, but the `resource_name` is the most complete\nand canonical identifier.\n\n## Confluent Resource Names (CRNs)\n\n_Confluent Resource Names_ (CRNs) are used to uniquely identify all Confluent resources.\n\nA CRN is a valid URI having an \"authority\" of `confluent.cloud` or a self-managed\n<a href=\"https://docs.confluent.io/current/security/rbac/configure-mds/index.html\" target=\"_blank\">\nmetadata service URL</a>, followed by the minimal hierarchical set of key-value\npairs necessary to uniquely identify a resource.\n\nHere are some examples for basic resources in Confluent Cloud:\n\n| Resource                   | Example CRN                                                                                                                                                              |\n| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| Organization               | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a                                                                                                  |\n| Environment                | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy                                                                            |\n| User                       | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-rst9876                                                                                   |\n| API Key                    | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-zyx98/api-key=ABCDEFG9876543210                                                           |\n| Service Account            | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/service-account=sa-abc1234                                                                       |\n| Kafka Cluster              | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/cloud-cluster=lkc-123abc/kafka=lkc-123abc                                  |\n| Kafka Topic                | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/cloud-cluster=lkc-123abc/kafka=lkc-123abc/topic=my_kafka_topic             |\n| Consumer Group             | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/cloud-cluster=lkc-123abc/kafka=lkc-123abc/group=confluent_cli_consumer_123 |\n| Network                    | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/network=n-123abc                                                           |\n| Peering                    | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/network=n-123abc/peering=p-123abc                                          |\n| Private Link Access        | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/network=n-123abc/private-link-access=pla-123abc                            |\n| Transit Gateway Attachment | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/network=n-123abc/transit-gateway-attachment=tgwa-123abc                    |\n| Schema Registry Cluster    | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/schema-registry=lsrc-789qw                                                 |\n| Schema Subject             | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/schema-registry=lsrc-789qw/subject=test                                    |\n| KEK                        | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/schema-registry=lsrc-789qw//kek=test_kek                                   |\n| Connector                  | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/cloud-cluster=lkc-123abc/connector=my_datagen_connector                    |\n| Provider Integration       | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/provider-integration=cspi-123j1                                            |\n\n# Data Types\n\n## Primitive Types\n\n| Data Type | Representation                                                                                                                                                                                                                                                                                                                                                                                                                          |\n| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| Integers  | Each API may specify the type as `int32` or `int64`. Note that many languages, including JavaScript, are limited to a max size of approx `2**53` and don't correctly handle large `int64` values with their default JSON parser.                                                                                                                                                                                                        |\n| Dates     | <a href=\"https://www.ietf.org/rfc/rfc3339.txt\" target=\"_blank\">RFC 3339</a> formatted string. UTC timezones are assumed, unless otherwise given.                                                                                                                                                                                                                                                                                        |\n| Times     | <a href=\"https://www.ietf.org/rfc/rfc3339.txt\" target=\"_blank\">RFC 3339</a> formatted string. UTC timezones are assumed, unless otherwise given.                                                                                                                                                                                                                                                                                        |\n| Durations | <a href=\"https://www.ietf.org/rfc/rfc3339.txt\" target=\"_blank\">RFC 3339</a> formatted string.                                                                                                                                                                                                                                                                                                                                           |\n| Periods   | <a href=\"https://www.ietf.org/rfc/rfc3339.txt\" target=\"_blank\">RFC 3339</a> formatted string. UTC timezones are assumed, unless otherwise given.                                                                                                                                                                                                                                                                                        |\n| Ranges    | All ranges are represented using half-open intervals with naming conventions like `[start_XXX, end_XXX)` such as `[start_time, end_time)`.                                                                                                                                                                                                                                                                                              |\n| Enums     | Most APIs use <a href=\"https://opensource.zalando.com/restful-api-guidelines/#112\" target=\"_blank\">`x-extensible-enum`</a> as an open-ended list of values. This improves compatibility compared with a standard `enum` which by definition represents a closed set. All enums have a `0`-valued entry which either serves as the default for common cases, or represents `UNSPECIFIED` when no default exists and results in an error. |\n\n<!-- TODO\n### Standard Objects\n\n| Money Object | https://schema.org/MonetaryAmount or https://opensource.zalando.com/restful-api-guidelines/#173\n| Price Specification | https://schema.org/PriceSpecification -> https://schema.org/UnitPriceSpecification and https://schema.org/PaymentChargeSpecification\n-->\n\n### Standard Properties\n\nConfluent uses this set of standard properties to ensure common concepts use\nthe same name and semantics across different APIs.\n\n| Name             | Description                                                                                                                                                                                         |\n| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| **api_version**  | Many API objects have an `api_version` field indicating their API version. See the [Object Model](#object-model).                                                                           |\n| **kind**         | Many API objects have a `kind` field indicating the kind of object it is. See the [Object Model](#object-model).                                                                            |\n| **id**           | Many objects in the API will have an identifier, indicated via its `id` field, and should be treated as an opaque string unless otherwise specified. See the [Object Model](#object-model). |\n| **name**         | Objects which support a client-provided unique identifier instead of a generated `id` will indicate this identifier via its `name` field.                                                           |\n| **display_name** | The human-readable display name of an API object.                                                                                                                                                   |\n| **title**        | The official name of an API object, such as a company name. It should be treated as the formal version of `display_name`.                                                                           |\n| **description**  | One or more paragraphs of text description of an entity.                                                                                                                                            |\n| **created_at**   | The date and time the object was created, represented as a string in <a href=\"https://www.ietf.org/rfc/rfc3339.txt\" target=\"_blank\">RFC 3339</a> format.                                            |\n| **updated_at**   | The date and time the object was last modified, represented as a string in <a href=\"https://www.ietf.org/rfc/rfc3339.txt\" target=\"_blank\">RFC 3339</a> format.                                      |\n| **deleted_at**   | If present, the date and time after which the object was/will be deleted, represented as a string in <a href=\"https://www.ietf.org/rfc/rfc3339.txt\" target=\"_blank\">RFC 3339</a> format.            |\n| **page_token**   | The pagination token in the List request. See [Pagination](#pagination).                                                                                                                    |\n| **page_size**    | The pagination size in the List request. See [Pagination](#pagination).                                                                                                                     |\n| **total_size**   | The total count of items in the list irrespective of pagination. See [Pagination](#pagination).                                                                                             |\n| **spec**         | The _desired state_ specification of the resource, as observed by Confluent Cloud.                                                                                                                  |\n| **status**       | The _current state_ of the resource, as observed by Confluent Cloud.                                                                                                                                |\n\n# Versioning\n\nConfluent APIs ensure stability for your integrations by avoiding the introduction\nof breaking changes to customers unexpectedly. Confluent will make non-breaking\nAPI changes without advance notice. Thus, API clients **must** follow the\n[Compatibility Policy](#compatibility-policy) below to ensure your\nintegration remains stable. All APIs follow the API Lifecycle Policy described below,\nwhich describes the guarantees API clients can rely on.\n\nBreaking changes will be [widely communicated](#communication) in advance in accordance\nwith the Confluent [Deprecation Policy](#deprecation-policy). Confluent will provide\ntimelines and a migration path for all API changes, where available. Be sure to subscribe\nto one or more [communication channels](#communication) so you don't miss any updates!\n\nOne exception to these guidelines is for critical security issues. Confluent will take any necessary\nactions to mitigate any critical security issue as soon as possible, which may include disabling\nthe vulnerable functionality until a proper solution is available.\n\nDo not consume any Confluent API unless it is documented in the API Reference. All undocumented\nendpoints should be considered private, subject to change without notice, and not covered by any\nagreements.\n\n> Note: The version in the URL (e.g. \"v1\" or \"v2\") is not a \"major version\" in the\n> [Semantic Versioning](https://semver.org/) sense. It is a \"generational version\" or \"meta version\", as seen in\n> APIs like <a href=\"https://developer.github.com/v3/versions/\" target=\"_blank\">Github API</a> or the\n> <a href=\"https://stripe.com/docs/api/versioning\" target=\"_blank\">Stripe API</a>.\n\n## API Groups\n\nConfluent APIs are divided into API Groups, such as the Cluster Management for Apache Kafka (CMK) API group,\nthe Connect API group, and the Data Catalog API group. Each group has its own set of endpoints and resources,\nas well as its own API group version.\n\nBecause different API groups have different versions, there is no single version for the \"Confluent Cloud API\".\nThe latest version of the Connect API group may be `connect/v1`, while the latest version of the CMK API group\nmay be `cmk/v2`.\n\nWhen a breaking change is introduced into one API group, Confluent will increase the API version for that API group\nonly, leaving the other API groups' versions unchanged. This makes it easier for you to understand whether a given\nbreaking change impacts your usage of the APIs.\n\n## Known Issues\n\nDuring the Early Access and Preview periods, we have a few known issues.\n\n| Issue          | Description                                                                   | Proposed Resolution                                 |\n| -------------- | ----------------------------------------------------------------------------- | --------------------------------------------------- |\n| Quota Exceeded | Some \"Quota Exceeded\" errors will be returned as HTTP 400 instead of HTTP 402 | Return 402 consistently for \"Quota Exceeded\" errors |\n\n## API Lifecycle Policy\n\nThe following status labels are applicable to APIs, features, and SDK versions, based on\nthe current support status of each:\n\n- **Early Access** – May change at any time. Not recommended for production usage. Not officially supported by\n  Confluent. Intended for user feedback only. Users must be granted explicit access to the API by Confluent.\n- **Preview** – Unlikely to change between Preview and General Availability. Not recommended for production usage.\n  Officially supported by Confluent for non-production usage. Accessible to all users.\n- **Limited Availability (LA)** - Available to key select customers in a subset of regions/providers/networks and recommended for production usage.\n- **Generally Available (GA)** – Will not change at short notice. Recommended for production usage.\n  Officially supported by Confluent for non-production and production usage.\n- **Deprecated** – Still supported, but no longer under active development. Existing usage will continue to function\n  but migration following the upgrade guide is strongly recommended. New use cases should be built against the new\n  version. Deprecated feature or version will be removed in the future at the announced date.\n- **Sunset** – Removed, and no longer supported or available.\n\nAn API is \"Generally Available\" unless explicitly marked otherwise.\n\n## Compatibility Policy\n\nConfluent Cloud APIs are governed by\n<a href=\"https://docs.confluent.io/cloud/current/clusters/upgrade-policy.html\" target=\"_blank\">\nConfluent Cloud Upgrade Policy</a>, which means that backward incompatible changes and\ndeprecations will be made approximately once per year, and 180 days notice will be provided via email to all\nregistered Confluent Cloud users.\n\n### Backward Compatibility\n\n> _An API version is backward compatible if a program written against the previous version of the API will continue to work the same way, without modification, against this version of the API._\n\nConfluent considers the following changes to be backward compatible:\n\n- Adding new API resources.\n- Adding new optional parameters to existing API requests (e.g., query string).\n- Adding new properties to existing API resources (e.g., request body).\n- Changing the order of properties in existing API responses.\n- Changing the length or format of object IDs or other opaque strings.\n  - Unless otherwise documented, you can safely assume object IDs generated by Confluent will never exceed 255\n    characters, but you should be able to handle IDs of up to that length. If you're using MySQL,\n    for example, you should store IDs in a `VARCHAR(255) COLLATE utf8_bin` column.\n  - This includes adding or removing fixed prefixes (such as `lkc-` on Kafka cluster IDs).\n  - This includes API keys, API tokens, and similar authentication mechanisms.\n  - This includes all strings described as \"opaque\" in the docs, such as pagination cursors.\n- Adding new API event types.\n- Adding new properties to existing API event types.\n- Omitting properties with null values from existing API responses.\n\n### Forward Compatibility\n\n> _An API version is forward compatible if a program written against the next version of the API\n> will continue to work the same way, without modification, against this version of the API._\n\nIn other words, a forward compatible API will accept input intended for a later version of itself.\n\nConfluent does not guarantee the forward compatibility of the APIs, but Confluent does generally follow the guidelines\ngiven by the [Robustness principle](https://en.wikipedia.org/wiki/Robustness_principle).\nThis means that the API determines what to do with a request based only on the parts that it recognizes.\n\nThis is often referred to as the MUST IGNORE rule.\n\n- Request parameters that are not recognized will be ignored (e.g., query string).\n- Request properties that are not recognized will be ignored (e.g., request body).\n- Request metadata that are not recognized will be ignored (e.g., request headers).\n\nAPI clients must also follow the MUST IGNORE rule.\n\n- Response properties that are not recognized must be ignored (e.g., response body).\n- Response metadata that are not recognized must be ignored (e.g., response headers).\n\nAdditionally, there is a more subtle related rule called the MUST FORWARD rule. Any parts of\na request that an API doesn't recognize must be forwarded unchanged.\n\n- Response properties that are not recognized must be included in any input subsequent updates (e.g., request body)\n  - This includes future `PUT` requests in a read/modify/write operation.\n    (This isn't required for `PATCH` partial updates, which is why Confluent APIs use `PATCH`.)\n- Event processors must not strip unknown properties before forwarding messages.\n\n#### Compatibility Implementation Hints\n\nConfluent considers adding new properties to existing API resources (e.g., response bodies) to be a backward-compatible change. To ensure your integrations remain stable when new fields are introduced, your JSON parsers should be configured to ignore unknown properties rather than throwing an error.\n\nFor the **Jackson** library (Java), use one of these approaches:\n\n**1. Global Configuration (Recommended)**\n\nConfigure `ObjectMapper` to ignore unknown properties globally.\n\n```java\nObjectMapper objectMapper = new ObjectMapper();\nobjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);\n```\n\n**2. Class-Level Control**\n\nUse `@JsonIgnoreProperties` to ignore unknown fields on specific classes.\n\n```java\n@JsonIgnoreProperties(ignoreUnknown = true)\npublic class MyResource { ... }\n```\n\n**3. Capturing Unknown Fields**\n\nUse `@JsonAnySetter` to preserve unknown fields in a `Map`, in order to use them on future requests to fulfill the MUST FORWARD requirement.\n\n```java\npublic class MyResource {\n    // ... existing fields ...\n    private Map<String, Object> unknownProperties = new HashMap<>();\n\n    @JsonAnySetter\n    public void addUnknownProperty(String key, Object value) {\n        this.unknownProperties.put(key, value);\n    }\n    \n    public Map<String, Object> getUnknownProperties() {\n        return unknownProperties;\n    }\n}\n```\n\n### Client Responsibilities\n\n- Resource and rate limits, and the default and maximum sizes of paginated data **are not**\n  considered part of the API contract and may change (possibly dynamically). It is the client's\n  responsibility to read the road signs and obey the speed limit.\n- If a property has a primitive type and the API documentation does not explicitly limit its\n  possible values, clients **must not** assume the values are constrained to a particular set\n  of possible responses.\n- If a property of an object is not explicitly declared as mandatory in the API, clients\n  **must not** assume it will be present.\n- A resource **may** be modified to return a \"redirection\" response (e.g. `301`, `307`) instead of\n  directly returning the resource. Clients **must** handle HTTP-level redirects, and respect HTTP\n  headers (e.g. `Location`).\n\n## Deprecation Policy\n\nConfluent will announce deprecations at least 180 days in advance of a breaking change\nand will continue to maintain the deprecated APIs in their original form during this time.\n\nExceptions to this policy apply in case of critical security vulnerabilities or functional defects.\n\n### Communication\n\nWhen a deprecation is announced, the details and any relevant migration\ninformation will be available on one or more of the following channels:\n\n- Announcements on the <a href=\"https://www.confluent.io/blog/\" target=\"_blank\">Developer Blog</a>,\n  <a href=\"https://confluentcommunity.slack.com\" target=\"_blank\">Community Slack</a>\n  (<a href=\"https://slackpass.io/confluentcommunity\" target=\"_blank\">join!</a>),\n  <a href=\"https://groups.google.com/forum/#!forum/confluent-platform\" target=\"_blank\">Google Group</a>,\n  the <a href=\"https://twitter.com/ConfluentInc\" target=\"_blank\">@ConfluentInc twitter</a>\n  account, and similar channels\n- Enterprise customers may receive information by email to their specified Confluent contact, if applicable.\n\n<!-- TODO:\n### Discoverability\n-->\n\n# HTTP Guidelines\n\n## Status Codes\n\nConfluent respects the meanings and behavior of HTTP status codes as defined\nin <a href=\"https://tools.ietf.org/html/rfc2616\">RFC2616</a> and elsewhere.\n\n- Codes in the `2xx` range indicate success\n- Codes in the `3xx` range indicate redirection\n- Codes in the `4xx` range indicate an error caused by the client request\n  (e.g., a required parameter was omitted, an invalid cluster configuration was provided, etc.)\n- Codes in the `5xx` range indicate an error with Confluent's servers (these are rare)\n\nThe various HTTP status codes that might be returned are listed below.\n\n| Code               | Title             | Description                                                                                                     |\n| ------------------ | ----------------- | --------------------------------------------------------------------------------------------------------------- |\n| 200                | OK                | Everything worked as expected.                                                                                  |\n| 201                | Created           | The resource was created. Follow the `Location` header.                                                         |\n| 204                | No Content        | Everything worked and there is no content to return.                                                            |\n| 400                | Bad Request       | The request was unacceptable, often due to malformed syntax, or a missing or malformed parameter.               |\n| 401                | Unauthorized      | No valid credentials provided. or the credentials are unsuitable, invalid, or unauthorized.                     |\n| 402                | Over Quota        | The request was valid, but you've exceeded your plan quota or limits.                                           |\n| 404                | Not Found         | The requested resource doesn't exist or you're unauthorized to know it exists.                                  |\n| 409                | Conflict          | The request conflicts with another request (perhaps it already exists or was based on a stale version of data). |\n| 422                | Validation Failed | The request was parsed correctly but failed some sort of validation.                                            |\n| 429                | Too Many Requests | Too many requests hit the API too quickly. Confluent recommends an exponential backoff of your requests.        |\n| 500, 502, 503, 504 | Server Errors     | Something went wrong on Confluent's end. (These are rare.)                                                      |\n\nThis list is not exhaustive; other standard HTTP error codes may be used,\nincluding `304`, `307`, `308`, `405`, `406`, `408`, `410`, and `415`.\n\nFor more details, see https://httpstatuses.com.\n\n<!--\n\n## Method Overriding\n\nSome firewalls and HTTP clients restrict the use of verbs other than `GET` and `POST`. In those\nenvironments, Confluent API operations that require `PUT`, `PATCH`, and `DELETE` verbs will be inaccessible.\n\nTo avoid this issue, Confluent APIs support the `X-HTTP-Method-Override` header, allowing clients to\n\"tunnel\" `PUT`, `PATCH`, and `DELETE` requests via a `POST` request.\n\nFor example, to call a Confluent `PATCH` resource via a `POST` request, you can\ninclude `X-HTTP-Method-Override: PATCH` as a header.\n\n## User Agent Required\n\nConfluent API requests **should** include a valid `User-Agent` header. Requests with no `User-Agent`\nheader may be rejected. You should use the name of your integration for the `User-Agent`\nheader value and include contact information so that Confluent can contact you if there are problems.\n\n> If your integration is acting as a proxy or gateway, you **should** forward the User-Agent\n> of the originating client with your API requests.\n\nHere's a complete example:\n\n    User-Agent: CoolToolName/1.2.3 (https://example.org/CoolTool/; CoolTool@example.org) UsedBaseLibrary/2.1.0\n\nThe minimum user agent string is the integration name and version: `name/version`.\nYou can string together multiple values in a space-separated list. The full syntax is:\n\n    name/version [(comments)] [name/version [(comments)]] [...]​\n\nFor the integration name, use a string (without whitespace) that clearly and meaningfully\nidentifies your integration.\n\n* Avoid ambiguous names: `Confluent-Integration`, `Kafka-Sink`\n* Use clear and meaningful names: `ABCTools-ToolName`, `StackStorm-Confluent-Plugin`\n\nFor the version, use a semantic version, build ID, commit hash, or other identifier\nthat is updated automatically when you release a new version.\n\nWrap comments in parentheses `()` as a semi-colon separated list. Helpful comments to include:\n\n* A public URL for your integration, such as a GitHub link or a page in your\n  docs site that describes the integration.\n* Contact information so that Confluent can easily reach the integration publisher. This\n  information from the user agent string will never be shared nor used by Confluent for\n  any purpose other than discussing the integration with its publisher.\n\nIf you provide an invalid `User-Agent` header, you may receive a `403 Forbidden` response.\n\n-->\n\n# Metrics APIs\n\nFor Metrics APIs, see <a href=\"https://api.telemetry.confluent.cloud/docs\">Confluent Cloud Metrics API</a>.\n"
+    description: |
+        # Introduction
+
+        <div class="status-info">
+        <p class="status-info-title">Note</p>
+        This documents the collection of Confluent Cloud APIs. Each API documents its
+        <a href="#api-lifecycle-policy">lifecycle phase</a>. APIs
+        marked as Early Access or Preview are not ready for production usage. We're currently
+        working with a select group of customers to get feedback and iterate on these APIs.
+        </div>
+
+        Confluent Cloud APIs are a core building block of Confluent Cloud. You can use the APIs to
+        manage your own account or to integrate Confluent into your product.
+
+        Most of the APIs are organized around
+        <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank">REST</a>
+        and the resources which make up Confluent Cloud. The APIs have predictable
+        resource-oriented URLs, transport data using JSON, and use standard HTTP verbs,
+        response codes, authentication, and design principles.
+
+        ## Object Model
+
+        <div class="status-info">
+        <p class="status-info-title">Note</p>
+        This section describes the object model for many Confluent Cloud APIs, but not all.
+        The Connect v1 API group has a different object model. You can review the example
+        request and response bodies in <a href="../ccloud/connectors-connect-v-1/">Connect v1 API</a>
+        to see its object model.
+        </div>
+
+        Confluent Cloud APIs are primarily designed to be declarative and intent-oriented. In other words,
+        tell the API what you want (for example, throughput or SLOs) and it will figure out how to make it happen
+        (for example, cluster sizing). A Confluent object acts as a "record of intent" — after you create the
+        object, Confluent Cloud will work tirelessly in the background to ensure that the object exists
+        as specified.
+
+        Confluent APIs represent objects in JSON with media-type `application/json`.
+
+        Many objects follow a model consisting of `spec` and `status`. An object's `spec` tells
+        Confluent the _desired state_ (specification) of the resource. The object may not be
+        immediately available or changes may not be immediately applied. For this reason,
+        many objects also have a `status` property that provides info about the
+        _current state_ of the resource. Confluent Cloud is continuously and actively managing
+        each resource's current state to match it's desired state.
+
+        All Confluent objects share a set of common properties:
+
+        - **api_version** – API objects have an `api_version` field indicating their API version.
+        - **kind** – API objects have a `kind` field indicating the kind of object it is.
+        - **id** – Each object in the API will have an identifier, indicated via its `id` field,
+          and should be treated as an opaque string unless otherwise specified.
+
+        There are a number of other [standard properties](#standard-properties) and that you'll encounter
+        used by many API objects. And of course, objects have plenty of non-standard fields that are
+        specific to each object _kind_... this is what makes them interesting!
+
+        # Authentication
+
+        Confluent uses API keys and JSON Web Tokens (JWTs) to integrate your applications
+        and workflows to your Confluent Cloud resources using the Confluent Cloud REST APIs.
+        Your applications and workflows must be authenticated and authorized in order to
+        access and manage Confluent Cloud resources.
+
+        ## API keys
+
+        You can create and manage your API keys using the Confluent Cloud Console or
+        Confluent CLI. For more information, see [Use API Keys to Control Access in Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/api-keys/api-keys.html).
+
+        Confluent Cloud uses the following categories of API keys:
+
+        - A **Cloud API key** grants access to the Confluent Cloud Management APIs,
+          such as for Provisioning and Metrics integrations.
+        - A **resource-specific API key** grants access to a single Confluent Cloud
+          resource, such as a Kafka cluster or a Schema Registry. For the full list of
+          resource scopes, see [Resource scopes](https://docs.confluent.io/cloud/current/access-management/authenticate/api-keys/api-keys.html#resource-scopes).
+        - A **global API key** grants access across Confluent Cloud services and
+          resources, based on the permissions assigned to the owning principal. Some
+          limitations apply. For more information, see
+          [Global API keys](https://docs.confluent.io/cloud/current/access-management/authenticate/api-keys/api-keys.html#cloud-global-api-keys).
+
+        Each Confluent Cloud API key is associated with a principal (specific user or
+        service account) and inherits the permissions granted to the owner.
+
+        - For example, if service account `Armageddon` is granted ACLs on Kafka cluster
+          `neptune`, then a Kafka API Key for `neptune` owned by `Armageddon` will have
+          these ACLs enforced.
+        - **Note:** API keys are automatically deleted when the associated user or service
+          account is deleted (for example, when an employee leaves the company or moves to
+          a new department and an SSO integration removes the Confluent Cloud user as they
+          no longer require access).
+        - Confluent **strongly recommends** that you use service accounts for all
+          production-critical access.
+
+        Confluent Cloud API keys grant access to Confluent Cloud resources, so **keep them secure**!
+        Do not share your API keys and secrets in publicly-accessible locations, such as
+        GitHub or client-side code.
+
+        All API requests must be made over HTTPS. Calls made over plain HTTP will fail.
+        API requests without authentication will also fail.
+
+        To use an API key, you must send it in an `Authorization: Basic {credentials}` header.
+        Remember that HTTP Basic authentication requires you to provide your credentials as
+        the API key ID and associated API secret separated by a colon and encoded using Base64
+        format. For example, if your API key ID is `ABCDEFGH123456789` and the API key Secret
+        is `XNCIW93I2L1SQPJSJ823K1LS902KLDFMCZPWEO`, then the authorization header is:
+
+        ```text​
+        Authorization: Basic QUJDREVGR0gxMjM0NTY3ODk6WE5DSVc5M0kyTDFTUVBKU0o4MjNLMUxTOTAyS0xERk1DWlBXRU8=
+        ```
+
+        You can generate this header example from the API key:
+
+        macOS:
+
+        ```shell
+        $ echo -n "ABCDEFGH123456789:XNCIW93I2L1SQPJSJ823K1LS902KLDFMCZPWEO" | base64
+
+        ```
+
+        Linux:
+
+        ```shell
+        $ echo -n "ABCDEFGH123456789:XNCIW93I2L1SQPJSJ823K1LS902KLDFMCZPWEO" | base64 -w 0
+        ```
+
+        Windows (PowerShell only):
+
+        This command is only supported for PowerShell and will not work in the Command shell.
+
+        ```shell
+        $ [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("ABCDEFGH123456789:XNCIW93I2L1SQPJSJ823K1LS902KLDFMCZPWEO"))
+        ```
+
+        To find out if an API operation supports Cloud API Keys, look in the **AUTHORIZATIONS**
+        listing for `cloud-api-key`.
+
+        To find out if an API operation supports resource-specific API Keys, look in the **AUTHORIZATIONS**
+        listing for `resource-api-key`.
+
+        To find out if an API operation supports Global API Keys, look in the **AUTHORIZATIONS**
+        listing for `global-api-key`.
+
+        ## External OAuth
+
+        You can use [OAuth/OIDC support for Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/overview.html)
+        to authenticate and authorize access to applications and workloads for the
+        following Confluent Cloud REST APIs:
+
+        - **Kafka REST API**: [Kafka REST API for Clusters(V3)](../ccloud/cluster-v-3/).
+          For an API overview and examples, see [Cluster Management with Kafka REST API](https://docs.confluent.io/cloud/current/kafka-rest/kafka-rest-cc.html).
+        - **Schema Registry REST API**: [Schema Registry REST API for Schemas(V1)](../ccloud/schemas-v-1/)
+          and [Subjects](../ccloud/subjects-v-1/).
+          For an API overview and examples, see [Schema Registry REST API for Confluent Cloud](https://docs.confluent.io/cloud/current/sr/sr-rest-apis.html).
+
+        Alternatively, to find out if an API operation supports external tokens, look in the **AUTHORIZATIONS**
+        listing for `external-access-token`.
+
+        ## Confluent STS tokens
+
+        Confluent Security Token Service (STS) issues access tokens (`confluent-sts-access-token`)
+        by exchanging an external token (`external-access-token`) for a `confluent-sts-access-token`. You can use
+        Confluent STS tokens to authenticate to Confluent Cloud APIs that support the
+        `confluent-sts-access-token` notation.
+
+        To find out if an API operation supports Confluent STS tokens, look in the **AUTHORIZATIONS**
+        listing for `confluent-sts-access-token`.
+
+        ## Partner OAuth
+
+        Approved partners can fetch Partner tokens (`confluent-partner-access-token`) that validate their identity
+        and grant access to the Partner API (`partner/v2`), which lets them sign up
+        an organization on behalf of a customer, manage entitlements (create, read, and list),
+        and read or list organizations they have signed up.
+
+        To find out an API operation supports Partner tokens, look in the **AUTHORIZATIONS**
+        listing for `confluent-partner-access-token`.
+
+        <!-- TODO: port this back to the Confluent API Design Guide -->
+
+        <SecurityDefinitions />
+
+        # Errors
+
+        Confluent API error messages are a critical part of the developer experience. For Confluent Cloud, they must be
+        clear, consistent, actionable, and designed for both developers and automated systems. Strong error
+        handling supports fast troubleshooting, reliable integration, and efficient support–the foundation of
+        a positive developer experience.
+
+        Our APIs are built on RESTful principles. They use resource-oriented URLs, standard HTTP verbs, and JSON
+        for requests and responses. This section defines clear standards for structuring, formatting, and documenting
+        error messages for all Confluent REST APIs.
+
+        <div class="status-info">
+        <p class="status-info-title">Note</p>
+        This error format applies to most Confluent Cloud APIs. However, the Connect v1 API group uses a different structure. For Connect v1-specific error behavior and examples, refer to the Connect v1 API documentation <a href="../ccloud/connectors-connect-v-1/">below</a> to see its error behavior.
+        </div>
+
+        ## Key principles
+
+        Use the following best practices when designing and documenting API error messages:
+
+        - **Ensure clarity and consistency**: Messages must be easy to understand–use active voice and plain language–and consistently formatted across endpoints.
+
+        - **Write actionable messages**: Always include a resolution or next step, enabling users to correct the problem.
+
+        - **Avoid exposing sensitive data**: Never expose internal system details, stack traces, logs, or user-specific content.
+
+        - **Follow industry best practices**: Don't use a period at the end of the message field, even if it is a full sentence. This follows industry standards. Use periods in the details and suggestion fields if the content is a complete sentence. View the [API best practices blog](#status-codes) by Postman, a trusted API leader.
+
+        ## HTTP status codes
+
+        Confluent Cloud APIs return standard [HTTP status codes](#status-codes) to
+        indicate the outcome of API request. Each error response includes a `status` field that reflects the appropriate HTTP code as a string (for example, `"403"` or `"404"`).
+        For a list of supported codes and their meaning, see the [HTTP status codes](#status-codes) section.
+
+        ## Error response structure
+
+        Each API error response **should** include the following fields:
+
+        **Top-level fields**
+
+        | Field        | Type   | Required | Description                                                                                                                                             |
+        | ------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+        | status       | String | Yes      | HTTP status code (for example, 400, 404, 500).                                                                                                          |
+        | error        | Object | Yes      | Main object containing error details.                                                                                                                   |
+        | requestId    | String | Optional | Unique identifier for the API request. Use for tracing, debugging, and support inquiries.                                                               |
+        | doc_url      | String | Optional | Link to relevant documentation or troubleshooting steps.                                                                                                |
+
+        **Fields inside `error` object**
+
+        | Field       | Type   | Required | Description                                                                                                                                             |
+        | ------------| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+        |  code       | String | Yes      | Unique, application-specific error code. Write error codes in uppercase letters, using underscores to separate words (for example, RESOURCE_NOT_FOUND). |
+        |  message    | String | Yes      | Clear, actionable, user-friendly description of what went wrong using active voice.                                                                     |
+        |  details    | String | Optional | Additional explanation or context about the error using active voice.                                                                                   |
+        |  timestamp  | String | Yes      | ISO 8601 UTC timestamp indicating the date and time when the error occurred.                                                                            |
+        |  path       | String | Yes      | The exact API endpoint or resource path related to the error.                                                                                           |
+        |  suggestion | String | Optional | Recommend actions the user can take to fix or avoid the error using active voice.                                                                       |
+
+        Each Confluent API error includes a status and a structured error object with a code, message, and optional context to help you understand and resolve the issue. The following example
+        shows a standard Confluent API error response in JSON format:
+
+            {
+              "status": 400,
+              "error": {
+                "code": "INVALID_SCHEMA_FIELD",
+                "message": "The 'name' field in the schema is required and cannot be empty.",
+                "details": "Schemas must include a top-level 'name' field with a non-empty string value.",
+                "timestamp": "2025-08-01T20:36:45Z",
+                "path": "/api/v1/schemas",
+                "suggestion": "Ensure the 'name' field is included in the payload and is not an empty string."
+              },
+              "requestId": "a1b2c3d4-e5f6-7890-g1h2-i3j4k516m7n8",
+              "doc_url": "https://docs.confluent.io/cloud/current/api/errors/INVALID_SCHEMA_FIELD.html"
+            }
+
+        Note that if a request fails validation, it will return an HTTP `422 Unprocessable Entity`
+        with a list of fields that failed validation.
+
+        ## Pagination
+
+        <div class="status-info">
+        <p class="status-info-title">Note</p>
+        This section describes the pagination behavior of “list” operations for many Confluent Cloud APIs, but not all.
+        The Connect V1 and Kafka V3 API list operations do not support pagination.
+        </div>
+
+        All API resources have support for bulk reads via "list" API operations. For example,
+        you can "list Kafka clusters", "list api keys", and "list environments". These "list"
+        operations require pagination; by requesting smaller subsets of data, API clients
+        receive a response much faster than requesting the entire, potentially large, data set.
+
+        All "list" operations follow the same pattern with the following parameters:
+
+        - `page_size` – client-provided max number of items per page, only valid on the first request.
+        - `page_token` – server-generated token used for traversing through the result set.
+
+        A paginated response may include any of the following pagination links. API clients may
+        follow the respective link to page forward or backward through the result set as desired.
+
+        | [Link Relation](https://www.iana.org/assignments/link-relations/link-relations.xml) | Description                                                                                                                                                                             |
+        | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+        | `next`                                                                              | A link to the next page of results. A response that does not contain a next link does not have further data to fetch.                                                                   |
+        | `prev`                                                                              | A link to the previous page of results. A response that does not contain a prev link has no previous data. This link is **optional** for collections that cannot be traversed backward. |
+        | `first`                                                                             | A link to the first page of results. This link is **optional** for collections that cannot be indexed directly to a given page.                                                         |
+        | `last`                                                                              | A link to the last page of results. This link is **optional** for collections that cannot be indexed directly to a given page.                                                          |
+
+        API clients must treat pagination links and the `page_token` parameter in particular as an opaque string.
+
+        An example paginated list response may look like
+
+        ```
+        {
+            "api_version": "v2",
+            "kind": "KafkaClusterList",
+            "metadata": {
+                "next": "https://api.confluent.cloud/kafka-clusters?page_token=ABCDEFGHIJKLMNOP1234567890"
+            }
+            "data": [
+                {
+                    "metadata": {
+                        "id": "lkc-abc123",
+                        "self": "https://api.confluent.cloud/kafka-clusters/lkc-abc123",
+                        "resource_name": "crn://confluent.cloud/kafka=lkc-abc123",
+                    }
+                    "spec": {
+                        "display_name": "My Kafka Cluster",
+                        <snip>
+                    },
+                    "status": {
+                        "phase": "RUNNING",
+                        <snip>
+                    }
+                },
+                <snip>
+            ]
+        }
+        ```
+
+        # Rate Limiting
+
+        To protect the stability of the API and keep it available to all users, Confluent employs
+        multiple safeguards. If you send too many requests in quick succession or perform too many
+        concurrent operations, you may be throttled or have your request rejected with an error.
+
+        When a rate limit is breached, an HTTP `429 Too Many Requests` error is
+        returned. The following headers are sent back to provide assistance in dealing
+        with rate limits. Note that headers are not returned for a `429` error response with
+        [Kafka REST API (v3)](../ccloud/cluster-v-3/).
+
+        | Header                  | Description                                                                                                                                                                                                                                        |
+        | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+        | `X-RateLimit-Limit`     | The maximum number of requests you're permitted to make per time period.                                                                                                                                                                           |
+        | `X-RateLimit-Reset`     | The relative time in seconds until the current rate limit window resets.                                                                                                                                                                           |
+        | `Retry-After`           | The number of seconds to wait until the rate limit window resets. Only sent when the rate limit is reached.                                                                                                                                        |
+        | `X-RateLimit-Remaining` | The number of requests remaining in the current rate-limit window. **Important:** This differs from Github and Twitter\'s same-named header which uses UTC epoch seconds. We use relative time to avoid client/server time synchronization issues. |
+
+        Confluent enforces multiple kinds of limits, including request-rate and concurrency limits, both per user and organization-wide. Unauthenticated requests are associated with the originating IP address, not the user making requests.
+
+        Integrations should gracefully handle these limits by watching for `429` error responses and
+        building in a retry mechanism. This mechanism should follow a capped exponential backoff policy to
+        prevent [retry amplification](https://landing.google.com/sre/sre-book/chapters/addressing-cascading-failures/)
+        ("retry storms") and also introduce some randomness ("jitter") to avoid the
+        [thundering herd effect](https://en.wikipedia.org/wiki/Thundering_herd_problem).
+
+        Rate limits are generally fixed and cannot be increased. If you require higher
+        throughput, you can use a Dedicated cluster, where certain limits scale
+        automatically with the number of CKUs. For example, each additional CKU
+        increases the Kafka REST Produce v3 connection limit by 300 requests per
+        second. For reference, see the
+        [eCKU/CKU comparison table](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#ecku-cku-comparison).
+
+        If you’re running into this error and think you need a higher rate limit, contact Confluent at
+        [support@confluent.io](mailto:support@confluent.io).
+
+        # Identifiers and URLs
+
+        Most resources have multiple identifiers:
+
+        - `id` is the "natural identifier" for an object. It is only unique within its parent resource.
+          The `id` is unique across time: the ID will not be reclaimed and reused after an object is deleted.
+        - `resource_name` is a Uniform Resource Identifier (URI) that is globally unique across all resources.
+          This encompasses all parent resource `kind`s and `id`s necessary to uniquely identify a particular
+          instance of this object `kind`. Because it uses object `id`s, the CRN will not be reclaimed and
+          reused after an object is deleted. It is represented as a Confluent Resource Name (see below).
+        - `self` is a Uniform Resource Locator (URL) at which an object can be addressed.
+          This URL encodes the service location, API version, and other particulars necessary to
+          locate the resource at a point in time.
+
+        To see how these relate to each other, consider `KafkaBroker` with `broker.id=2` in a `KafkaCluster`
+        in Confluent Cloud identified as `lkc-xsi8201`. In such an example, the `KafkaBroker` has `id=2`,
+        the `resource_name` is `crn://confluent.cloud/kafka=lkc-xsi8201/broker=2` and the `self` URL may be
+        something like `https://pkc-8wlk2n.us-west-2.aws.confluent.cloud`. Note that different identifiers
+        carry different information for different purposes, but the `resource_name` is the most complete
+        and canonical identifier.
+
+        ## Confluent Resource Names (CRNs)
+
+        _Confluent Resource Names_ (CRNs) are used to uniquely identify all Confluent resources.
+
+        A CRN is a valid URI having an "authority" of `confluent.cloud` or a self-managed
+        <a href="https://docs.confluent.io/current/security/rbac/configure-mds/index.html" target="_blank">
+        metadata service URL</a>, followed by the minimal hierarchical set of key-value
+        pairs necessary to uniquely identify a resource.
+
+        Here are some examples for basic resources in Confluent Cloud:
+
+        | Resource                   | Example CRN                                                                                                                                                              |
+        | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+        | Organization               | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a                                                                                                  |
+        | Environment                | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy                                                                            |
+        | User                       | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-rst9876                                                                                   |
+        | API Key                    | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/user=u-zyx98/api-key=ABCDEFG9876543210                                                           |
+        | Service Account            | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/service-account=sa-abc1234                                                                       |
+        | Kafka Cluster              | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/cloud-cluster=lkc-123abc/kafka=lkc-123abc                                  |
+        | Kafka Topic                | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/cloud-cluster=lkc-123abc/kafka=lkc-123abc/topic=my_kafka_topic             |
+        | Consumer Group             | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/cloud-cluster=lkc-123abc/kafka=lkc-123abc/group=confluent_cli_consumer_123 |
+        | Network                    | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/network=n-123abc                                                           |
+        | Peering                    | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/network=n-123abc/peering=p-123abc                                          |
+        | Private Link Access        | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/network=n-123abc/private-link-access=pla-123abc                            |
+        | Transit Gateway Attachment | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/network=n-123abc/transit-gateway-attachment=tgwa-123abc                    |
+        | Schema Registry Cluster    | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/schema-registry=lsrc-789qw                                                 |
+        | Schema Subject             | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/schema-registry=lsrc-789qw/subject=test                                    |
+        | KEK                        | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/schema-registry=lsrc-789qw//kek=test_kek                                   |
+        | Connector                  | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/cloud-cluster=lkc-123abc/connector=my_datagen_connector                    |
+        | Provider Integration       | crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-456xy/provider-integration=cspi-123j1                                            |
+
+        # Data Types
+
+        ## Primitive Types
+
+        | Data Type | Representation                                                                                                                                                                                                                                                                                                                                                                                                                          |
+        | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+        | Integers  | Each API may specify the type as `int32` or `int64`. Note that many languages, including JavaScript, are limited to a max size of approx `2**53` and don't correctly handle large `int64` values with their default JSON parser.                                                                                                                                                                                                        |
+        | Dates     | <a href="https://www.ietf.org/rfc/rfc3339.txt" target="_blank">RFC 3339</a> formatted string. UTC timezones are assumed, unless otherwise given.                                                                                                                                                                                                                                                                                        |
+        | Times     | <a href="https://www.ietf.org/rfc/rfc3339.txt" target="_blank">RFC 3339</a> formatted string. UTC timezones are assumed, unless otherwise given.                                                                                                                                                                                                                                                                                        |
+        | Durations | <a href="https://www.ietf.org/rfc/rfc3339.txt" target="_blank">RFC 3339</a> formatted string.                                                                                                                                                                                                                                                                                                                                           |
+        | Periods   | <a href="https://www.ietf.org/rfc/rfc3339.txt" target="_blank">RFC 3339</a> formatted string. UTC timezones are assumed, unless otherwise given.                                                                                                                                                                                                                                                                                        |
+        | Ranges    | All ranges are represented using half-open intervals with naming conventions like `[start_XXX, end_XXX)` such as `[start_time, end_time)`.                                                                                                                                                                                                                                                                                              |
+        | Enums     | Most APIs use <a href="https://opensource.zalando.com/restful-api-guidelines/#112" target="_blank">`x-extensible-enum`</a> as an open-ended list of values. This improves compatibility compared with a standard `enum` which by definition represents a closed set. All enums have a `0`-valued entry which either serves as the default for common cases, or represents `UNSPECIFIED` when no default exists and results in an error. |
+
+        <!-- TODO
+        ### Standard Objects
+
+        | Money Object | https://schema.org/MonetaryAmount or https://opensource.zalando.com/restful-api-guidelines/#173
+        | Price Specification | https://schema.org/PriceSpecification -> https://schema.org/UnitPriceSpecification and https://schema.org/PaymentChargeSpecification
+        -->
+
+        ### Standard Properties
+
+        Confluent uses this set of standard properties to ensure common concepts use
+        the same name and semantics across different APIs.
+
+        | Name             | Description                                                                                                                                                                                         |
+        | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+        | **api_version**  | Many API objects have an `api_version` field indicating their API version. See the [Object Model](#object-model).                                                                           |
+        | **kind**         | Many API objects have a `kind` field indicating the kind of object it is. See the [Object Model](#object-model).                                                                            |
+        | **id**           | Many objects in the API will have an identifier, indicated via its `id` field, and should be treated as an opaque string unless otherwise specified. See the [Object Model](#object-model). |
+        | **name**         | Objects which support a client-provided unique identifier instead of a generated `id` will indicate this identifier via its `name` field.                                                           |
+        | **display_name** | The human-readable display name of an API object.                                                                                                                                                   |
+        | **title**        | The official name of an API object, such as a company name. It should be treated as the formal version of `display_name`.                                                                           |
+        | **description**  | One or more paragraphs of text description of an entity.                                                                                                                                            |
+        | **created_at**   | The date and time the object was created, represented as a string in <a href="https://www.ietf.org/rfc/rfc3339.txt" target="_blank">RFC 3339</a> format.                                            |
+        | **updated_at**   | The date and time the object was last modified, represented as a string in <a href="https://www.ietf.org/rfc/rfc3339.txt" target="_blank">RFC 3339</a> format.                                      |
+        | **deleted_at**   | If present, the date and time after which the object was/will be deleted, represented as a string in <a href="https://www.ietf.org/rfc/rfc3339.txt" target="_blank">RFC 3339</a> format.            |
+        | **page_token**   | The pagination token in the List request. See [Pagination](#pagination).                                                                                                                    |
+        | **page_size**    | The pagination size in the List request. See [Pagination](#pagination).                                                                                                                     |
+        | **total_size**   | The total count of items in the list irrespective of pagination. See [Pagination](#pagination).                                                                                             |
+        | **spec**         | The _desired state_ specification of the resource, as observed by Confluent Cloud.                                                                                                                  |
+        | **status**       | The _current state_ of the resource, as observed by Confluent Cloud.                                                                                                                                |
+
+        # Versioning
+
+        Confluent APIs ensure stability for your integrations by avoiding the introduction
+        of breaking changes to customers unexpectedly. Confluent will make non-breaking
+        API changes without advance notice. Thus, API clients **must** follow the
+        [Compatibility Policy](#compatibility-policy) below to ensure your
+        integration remains stable. All APIs follow the API Lifecycle Policy described below,
+        which describes the guarantees API clients can rely on.
+
+        Breaking changes will be [widely communicated](#communication) in advance in accordance
+        with the Confluent [Deprecation Policy](#deprecation-policy). Confluent will provide
+        timelines and a migration path for all API changes, where available. Be sure to subscribe
+        to one or more [communication channels](#communication) so you don't miss any updates!
+
+        One exception to these guidelines is for critical security issues. Confluent will take any necessary
+        actions to mitigate any critical security issue as soon as possible, which may include disabling
+        the vulnerable functionality until a proper solution is available.
+
+        Do not consume any Confluent API unless it is documented in the API Reference. All undocumented
+        endpoints should be considered private, subject to change without notice, and not covered by any
+        agreements.
+
+        > Note: The version in the URL (e.g. "v1" or "v2") is not a "major version" in the
+        > [Semantic Versioning](https://semver.org/) sense. It is a "generational version" or "meta version", as seen in
+        > APIs like <a href="https://developer.github.com/v3/versions/" target="_blank">Github API</a> or the
+        > <a href="https://stripe.com/docs/api/versioning" target="_blank">Stripe API</a>.
+
+        ## API Groups
+
+        Confluent APIs are divided into API Groups, such as the Cluster Management for Apache Kafka (CMK) API group,
+        the Connect API group, and the Data Catalog API group. Each group has its own set of endpoints and resources,
+        as well as its own API group version.
+
+        Because different API groups have different versions, there is no single version for the "Confluent Cloud API".
+        The latest version of the Connect API group may be `connect/v1`, while the latest version of the CMK API group
+        may be `cmk/v2`.
+
+        When a breaking change is introduced into one API group, Confluent will increase the API version for that API group
+        only, leaving the other API groups' versions unchanged. This makes it easier for you to understand whether a given
+        breaking change impacts your usage of the APIs.
+
+        ## Known Issues
+
+        During the Early Access and Preview periods, we have a few known issues.
+
+        | Issue          | Description                                                                   | Proposed Resolution                                 |
+        | -------------- | ----------------------------------------------------------------------------- | --------------------------------------------------- |
+        | Quota Exceeded | Some "Quota Exceeded" errors will be returned as HTTP 400 instead of HTTP 402 | Return 402 consistently for "Quota Exceeded" errors |
+
+        ## API Lifecycle Policy
+
+        The following status labels are applicable to APIs, features, and SDK versions, based on
+        the current support status of each:
+
+        - **Early Access** – May change at any time. Not recommended for production usage. Not officially supported by
+          Confluent. Intended for user feedback only. Users must be granted explicit access to the API by Confluent.
+        - **Preview** – Unlikely to change between Preview and General Availability. Not recommended for production usage.
+          Officially supported by Confluent for non-production usage. Accessible to all users.
+        - **Limited Availability (LA)** - Available to key select customers in a subset of regions/providers/networks and recommended for production usage.
+        - **Generally Available (GA)** – Will not change at short notice. Recommended for production usage.
+          Officially supported by Confluent for non-production and production usage.
+        - **Deprecated** – Still supported, but no longer under active development. Existing usage will continue to function
+          but migration following the upgrade guide is strongly recommended. New use cases should be built against the new
+          version. Deprecated feature or version will be removed in the future at the announced date.
+        - **Sunset** – Removed, and no longer supported or available.
+
+        An API is "Generally Available" unless explicitly marked otherwise.
+
+        ## Compatibility Policy
+
+        Confluent Cloud APIs are governed by
+        <a href="https://docs.confluent.io/cloud/current/clusters/upgrade-policy.html" target="_blank">
+        Confluent Cloud Upgrade Policy</a>, which means that backward incompatible changes and
+        deprecations will be made approximately once per year, and 180 days notice will be provided via email to all
+        registered Confluent Cloud users.
+
+        ### Backward Compatibility
+
+        > _An API version is backward compatible if a program written against the previous version of the API will continue to work the same way, without modification, against this version of the API._
+
+        Confluent considers the following changes to be backward compatible:
+
+        - Adding new API resources.
+        - Adding new optional parameters to existing API requests (e.g., query string).
+        - Adding new properties to existing API resources (e.g., request body).
+        - Changing the order of properties in existing API responses.
+        - Changing the length or format of object IDs or other opaque strings.
+          - Unless otherwise documented, you can safely assume object IDs generated by Confluent will never exceed 255
+            characters, but you should be able to handle IDs of up to that length. If you're using MySQL,
+            for example, you should store IDs in a `VARCHAR(255) COLLATE utf8_bin` column.
+          - This includes adding or removing fixed prefixes (such as `lkc-` on Kafka cluster IDs).
+          - This includes API keys, API tokens, and similar authentication mechanisms.
+          - This includes all strings described as "opaque" in the docs, such as pagination cursors.
+        - Adding new API event types.
+        - Adding new properties to existing API event types.
+        - Omitting properties with null values from existing API responses.
+
+        ### Forward Compatibility
+
+        > _An API version is forward compatible if a program written against the next version of the API
+        > will continue to work the same way, without modification, against this version of the API._
+
+        In other words, a forward compatible API will accept input intended for a later version of itself.
+
+        Confluent does not guarantee the forward compatibility of the APIs, but Confluent does generally follow the guidelines
+        given by the [Robustness principle](https://en.wikipedia.org/wiki/Robustness_principle).
+        This means that the API determines what to do with a request based only on the parts that it recognizes.
+
+        This is often referred to as the MUST IGNORE rule.
+
+        - Request parameters that are not recognized will be ignored (e.g., query string).
+        - Request properties that are not recognized will be ignored (e.g., request body).
+        - Request metadata that are not recognized will be ignored (e.g., request headers).
+
+        API clients must also follow the MUST IGNORE rule.
+
+        - Response properties that are not recognized must be ignored (e.g., response body).
+        - Response metadata that are not recognized must be ignored (e.g., response headers).
+
+        Additionally, there is a more subtle related rule called the MUST FORWARD rule. Any parts of
+        a request that an API doesn't recognize must be forwarded unchanged.
+
+        - Response properties that are not recognized must be included in any input subsequent updates (e.g., request body)
+          - This includes future `PUT` requests in a read/modify/write operation.
+            (This isn't required for `PATCH` partial updates, which is why Confluent APIs use `PATCH`.)
+        - Event processors must not strip unknown properties before forwarding messages.
+
+        #### Compatibility Implementation Hints
+
+        Confluent considers adding new properties to existing API resources (e.g., response bodies) to be a backward-compatible change. To ensure your integrations remain stable when new fields are introduced, your JSON parsers should be configured to ignore unknown properties rather than throwing an error.
+
+        For the **Jackson** library (Java), use one of these approaches:
+
+        **1. Global Configuration (Recommended)**
+
+        Configure `ObjectMapper` to ignore unknown properties globally.
+
+        ```java
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        ```
+
+        **2. Class-Level Control**
+
+        Use `@JsonIgnoreProperties` to ignore unknown fields on specific classes.
+
+        ```java
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public class MyResource { ... }
+        ```
+
+        **3. Capturing Unknown Fields**
+
+        Use `@JsonAnySetter` to preserve unknown fields in a `Map`, in order to use them on future requests to fulfill the MUST FORWARD requirement.
+
+        ```java
+        public class MyResource {
+            // ... existing fields ...
+            private Map<String, Object> unknownProperties = new HashMap<>();
+
+            @JsonAnySetter
+            public void addUnknownProperty(String key, Object value) {
+                this.unknownProperties.put(key, value);
+            }
+
+            public Map<String, Object> getUnknownProperties() {
+                return unknownProperties;
+            }
+        }
+        ```
+
+        ### Client Responsibilities
+
+        - Resource and rate limits, and the default and maximum sizes of paginated data **are not**
+          considered part of the API contract and may change (possibly dynamically). It is the client's
+          responsibility to read the road signs and obey the speed limit.
+        - If a property has a primitive type and the API documentation does not explicitly limit its
+          possible values, clients **must not** assume the values are constrained to a particular set
+          of possible responses.
+        - If a property of an object is not explicitly declared as mandatory in the API, clients
+          **must not** assume it will be present.
+        - A resource **may** be modified to return a "redirection" response (e.g. `301`, `307`) instead of
+          directly returning the resource. Clients **must** handle HTTP-level redirects, and respect HTTP
+          headers (e.g. `Location`).
+
+        ## Deprecation Policy
+
+        Confluent will announce deprecations at least 180 days in advance of a breaking change
+        and will continue to maintain the deprecated APIs in their original form during this time.
+
+        Exceptions to this policy apply in case of critical security vulnerabilities or functional defects.
+
+        ### Communication
+
+        When a deprecation is announced, the details and any relevant migration
+        information will be available on one or more of the following channels:
+
+        - Announcements on the <a href="https://www.confluent.io/blog/" target="_blank">Developer Blog</a>,
+          <a href="https://confluentcommunity.slack.com" target="_blank">Community Slack</a>
+          (<a href="https://slackpass.io/confluentcommunity" target="_blank">join!</a>),
+          <a href="https://groups.google.com/forum/#!forum/confluent-platform" target="_blank">Google Group</a>,
+          the <a href="https://twitter.com/ConfluentInc" target="_blank">@ConfluentInc twitter</a>
+          account, and similar channels
+        - Enterprise customers may receive information by email to their specified Confluent contact, if applicable.
+
+        <!-- TODO:
+        ### Discoverability
+        -->
+
+        # HTTP Guidelines
+
+        ## Status Codes
+
+        Confluent respects the meanings and behavior of HTTP status codes as defined
+        in <a href="https://tools.ietf.org/html/rfc2616">RFC2616</a> and elsewhere.
+
+        - Codes in the `2xx` range indicate success
+        - Codes in the `3xx` range indicate redirection
+        - Codes in the `4xx` range indicate an error caused by the client request
+          (e.g., a required parameter was omitted, an invalid cluster configuration was provided, etc.)
+        - Codes in the `5xx` range indicate an error with Confluent's servers (these are rare)
+
+        The various HTTP status codes that might be returned are listed below.
+
+        | Code               | Title             | Description                                                                                                     |
+        | ------------------ | ----------------- | --------------------------------------------------------------------------------------------------------------- |
+        | 200                | OK                | Everything worked as expected.                                                                                  |
+        | 201                | Created           | The resource was created. Follow the `Location` header.                                                         |
+        | 204                | No Content        | Everything worked and there is no content to return.                                                            |
+        | 400                | Bad Request       | The request was unacceptable, often due to malformed syntax, or a missing or malformed parameter.               |
+        | 401                | Unauthorized      | No valid credentials provided. or the credentials are unsuitable, invalid, or unauthorized.                     |
+        | 402                | Over Quota        | The request was valid, but you've exceeded your plan quota or limits.                                           |
+        | 404                | Not Found         | The requested resource doesn't exist or you're unauthorized to know it exists.                                  |
+        | 409                | Conflict          | The request conflicts with another request (perhaps it already exists or was based on a stale version of data). |
+        | 422                | Validation Failed | The request was parsed correctly but failed some sort of validation.                                            |
+        | 429                | Too Many Requests | Too many requests hit the API too quickly. Confluent recommends an exponential backoff of your requests.        |
+        | 500, 502, 503, 504 | Server Errors     | Something went wrong on Confluent's end. (These are rare.)                                                      |
+
+        This list is not exhaustive; other standard HTTP error codes may be used,
+        including `304`, `307`, `308`, `405`, `406`, `408`, `410`, and `415`.
+
+        For more details, see https://httpstatuses.com.
+
+        <!--
+
+        ## Method Overriding
+
+        Some firewalls and HTTP clients restrict the use of verbs other than `GET` and `POST`. In those
+        environments, Confluent API operations that require `PUT`, `PATCH`, and `DELETE` verbs will be inaccessible.
+
+        To avoid this issue, Confluent APIs support the `X-HTTP-Method-Override` header, allowing clients to
+        "tunnel" `PUT`, `PATCH`, and `DELETE` requests via a `POST` request.
+
+        For example, to call a Confluent `PATCH` resource via a `POST` request, you can
+        include `X-HTTP-Method-Override: PATCH` as a header.
+
+        ## User Agent Required
+
+        Confluent API requests **should** include a valid `User-Agent` header. Requests with no `User-Agent`
+        header may be rejected. You should use the name of your integration for the `User-Agent`
+        header value and include contact information so that Confluent can contact you if there are problems.
+
+        > If your integration is acting as a proxy or gateway, you **should** forward the User-Agent
+        > of the originating client with your API requests.
+
+        Here's a complete example:
+
+            User-Agent: CoolToolName/1.2.3 (https://example.org/CoolTool/; CoolTool@example.org) UsedBaseLibrary/2.1.0
+
+        The minimum user agent string is the integration name and version: `name/version`.
+        You can string together multiple values in a space-separated list. The full syntax is:
+
+            name/version [(comments)] [name/version [(comments)]] [...]​
+
+        For the integration name, use a string (without whitespace) that clearly and meaningfully
+        identifies your integration.
+
+        * Avoid ambiguous names: `Confluent-Integration`, `Kafka-Sink`
+        * Use clear and meaningful names: `ABCTools-ToolName`, `StackStorm-Confluent-Plugin`
+
+        For the version, use a semantic version, build ID, commit hash, or other identifier
+        that is updated automatically when you release a new version.
+
+        Wrap comments in parentheses `()` as a semi-colon separated list. Helpful comments to include:
+
+        * A public URL for your integration, such as a GitHub link or a page in your
+          docs site that describes the integration.
+        * Contact information so that Confluent can easily reach the integration publisher. This
+          information from the user agent string will never be shared nor used by Confluent for
+          any purpose other than discussing the integration with its publisher.
+
+        If you provide an invalid `User-Agent` header, you may receive a `403 Forbidden` response.
+
+        -->
+
+        # Metrics APIs
+
+        For Metrics APIs, see <a href="https://api.telemetry.confluent.cloud/docs">Confluent Cloud Metrics API</a>.
 servers:
     - url: https://api.confluent.cloud
       description: Confluent Cloud API
@@ -7304,7 +8052,12 @@ paths:
         put:
             x-lifecycle-stage: General Availability
             operationId: translateConnectv1ConnectorPlugin
-            description: "[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)\n\nTranslate the provided Self Managed configuration values. This API performs configuration translation\nand returns the translated fully managed configuration along with any errors or warnings. \nQuery Parameter `mask_sensitive=true` redacts sensitive config values in response."
+            description: |-
+                [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+                Translate the provided Self Managed configuration values. This API performs configuration translation
+                and returns the translated fully managed configuration along with any errors or warnings.
+                Query Parameter `mask_sensitive=true` redacts sensitive config values in response.
             summary: Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configurations
             tags:
                 - Managed Connector Plugins (connect/v1)
@@ -7400,7 +8153,11 @@ paths:
         get:
             x-lifecycle-stage: General Availability
             operationId: getConnectv1ConnectorOffsets
-            description: "[![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)\n\nGet the current offsets for the connector. The offsets provide information on the point in the source system, \nfrom which the connector is pulling in data. The offsets of a connector are continuously observed periodically and are queryable via this API."
+            description: |-
+                [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
+
+                Get the current offsets for the connector. The offsets provide information on the point in the source system,
+                from which the connector is pulling in data. The offsets of a connector are continuously observed periodically and are queryable via this API.
             summary: Get a Connector Offsets
             tags:
                 - Offsets (connect/v1)
@@ -18941,7 +19698,15 @@ paths:
     /partner/v2/signup:
         post:
             summary: Signup an Organization on behalf of a Customer
-            description: "[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)\n\nCreate an organization for a customer. You must pass in either an entitlement object reference (a url to \na previously created entitlement) or entitlement details. If you pass in an entitlement object reference, we will link with the \ncreated entitlement. If you pass in the entitlement details, we will create the entitlement with the organization \nin a single transaction. If you pass in user details (email, given name, and family name), we will\ncreate a user as well. If you do not pass in user details, you MUST call `/partner/v2/signup/activate`\nwith user details to complete signup."
+            description: |-
+                [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+                Create an organization for a customer. You must pass in either an entitlement object reference (a url to
+                a previously created entitlement) or entitlement details. If you pass in an entitlement object reference, we will link with the
+                created entitlement. If you pass in the entitlement details, we will create the entitlement with the organization
+                in a single transaction. If you pass in user details (email, given name, and family name), we will
+                create a user as well. If you do not pass in user details, you MUST call `/partner/v2/signup/activate`
+                with user details to complete signup.
             parameters:
                 - name: dry_run
                   in: query
@@ -18985,7 +19750,12 @@ paths:
         x-lifecycle-stage: Early Access
         post:
             summary: Activate an Incomplete Signup
-            description: "[![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)\n\nCreates a user in the organization previously created in `/partner/v2/signup`. This completes the signup\nprocess if you did not pass in user details to `/partner/v2/signup`. Calling this endpoint if the signup \nprocess has been completed will result in a `409 Conflict` error."
+            description: |-
+                [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
+
+                Creates a user in the organization previously created in `/partner/v2/signup`. This completes the signup
+                process if you did not pass in user details to `/partner/v2/signup`. Calling this endpoint if the signup
+                process has been completed will result in a `409 Conflict` error.
             requestBody:
                 description: A JSON object containing signup information
                 content:
@@ -39862,11 +40632,23 @@ components:
                     partition:
                         type: object
                         additionalProperties: true
-                        description: "The partition information. For sink connectors this is the kafka topic and \npartition. For source connectors this is depends on the partitions defined by the \nsource connector. For example, the table which this task is pulling data from in a\nJDBC based MySQL source connector.\nPlease refer to the [documentation](https://docs.confluent.io/cloud/current/connectors/offsets.html#manage-offsets-for-fully-managed-connectors-in-ccloud) for \nmore information."
+                        description: |-
+                            The partition information. For sink connectors this is the kafka topic and
+                            partition. For source connectors this is depends on the partitions defined by the
+                            source connector. For example, the table which this task is pulling data from in a
+                            JDBC based MySQL source connector.
+                            Please refer to the [documentation](https://docs.confluent.io/cloud/current/connectors/offsets.html#manage-offsets-for-fully-managed-connectors-in-ccloud) for
+                            more information.
                     offset:
                         type: object
                         additionalProperties: true
-                        description: "The offset of the partition. For sink connectors this is the kafka offset. For \nsource connectors this is depends on the offset defined by the source connector. \nFor example, the timestamp and incrementing column info in a table, for a JDBC based \nMySQL source connector.\nPlease refer to the [documentation](https://docs.confluent.io/cloud/current/connectors/offsets.html#manage-offsets-for-fully-managed-connectors-in-ccloud) for \nmore information."
+                        description: |-
+                            The offset of the partition. For sink connectors this is the kafka offset. For
+                            source connectors this is depends on the offset defined by the source connector.
+                            For example, the timestamp and incrementing column info in a table, for a JDBC based
+                            MySQL source connector.
+                            Please refer to the [documentation](https://docs.confluent.io/cloud/current/connectors/offsets.html#manage-offsets-for-fully-managed-connectors-in-ccloud) for
+                            more information.
         connect.v1.ConnectorOffsets:
             type: object
             description: Offsets for a connector
@@ -39892,7 +40674,18 @@ components:
             enum:
                 - PATCH
                 - DELETE
-            description: "The type of alter operation. PATCH will update the offset to the provided values.\nThe update will only happen for the partitions provided in the request. \nDELETE will delete the offset for the provided partitions and reset them back to the\nbase state. It is as if, a fresh new connector was created.\n\nFor sink connectors PATCH/DELETE will move the offsets to the provided point in the \ntopic partition. If the offset provided is not present in the topic partition it will\nby default reset to the earliest offset in the topic partition.\n\nFor source connectors, post PATCH/DELETE the connector will attempt to read from the \nposition defined in the altered offsets."
+            description: |-
+                The type of alter operation. PATCH will update the offset to the provided values.
+                The update will only happen for the partitions provided in the request.
+                DELETE will delete the offset for the provided partitions and reset them back to the
+                base state. It is as if, a fresh new connector was created.
+
+                For sink connectors PATCH/DELETE will move the offsets to the provided point in the
+                topic partition. If the offset provided is not present in the topic partition it will
+                by default reset to the earliest offset in the topic partition.
+
+                For source connectors, post PATCH/DELETE the connector will attempt to read from the
+                position defined in the altered offsets.
         connect.v1.AlterOffsetRequest:
             type: object
             description: |-
@@ -39930,7 +40723,10 @@ components:
                 - requested_at
         connect.v1.AlterOffsetStatus:
             type: object
-            description: "Status of the alter offset operation. The previous offsets in the response \nis the offsets that the connector last processed, before the offsets were altered,\nvia a patch or delete operation."
+            description: |-
+                Status of the alter offset operation. The previous offsets in the response
+                is the offsets that the connector last processed, before the offsets were altered,
+                via a patch or delete operation.
             properties:
                 request:
                     $ref: '#/components/schemas/connect.v1.AlterOffsetRequestInfo'
@@ -39945,7 +40741,14 @@ components:
                                 - PENDING_VALIDATION
                                 - APPLIED
                                 - FAILED
-                            description: "The phase of the alter offset operation. \n\nPENDING: The offset alter operation is in progress.\n\nAPPLIED: The offset alter operation has been applied to the connector.\n\nFAILED:  The offset alter operation has failed to be applied to the connector."
+                            description: |-
+                                The phase of the alter offset operation.
+
+                                PENDING: The offset alter operation is in progress.
+
+                                APPLIED: The offset alter operation has been applied to the connector.
+
+                                FAILED:  The offset alter operation has failed to be applied to the connector.
                         message:
                             type: string
                             description: An info message from the alter offset operation.
@@ -50810,11 +51613,20 @@ components:
                 end_time:
                     type: string
                     format: date-time
-                    description: "The date and time in UTC (represented as RFC3339 format) at which the statement reached its final terminal state. \nThis field is set when the Phase is COMPLETED, FAILED, or STOPPED.\n\nNote - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)\n"
+                    description: |
+                        The date and time in UTC (represented as RFC3339 format) at which the statement reached its final terminal state.
+                        This field is set when the Phase is COMPLETED, FAILED, or STOPPED.
+
+                        Note - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
                 duration:
                     type: string
                     format: duration
-                    description: "The total elapsed time (represented as ISO 8601 format) from when the statement transitioned from \nPENDING to RUNNING until it reached a final terminal state. This field is calculated and set when \nthe Phase is COMPLETED, FAILED, or STOPPED.\n\nNote - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)\n"
+                    description: |
+                        The total elapsed time (represented as ISO 8601 format) from when the statement transitioned from
+                        PENDING to RUNNING until it reached a final terminal state. This field is calculated and set when
+                        the Phase is COMPLETED, FAILED, or STOPPED.
+
+                        Note - The attribute is in a [Early Access lifecycle](https://docs.confluent.io/cloud/current/api.html#section/Versioning/API-Lifecycle-Policy)
                 affected_resource:
                     type: object
                     description: |
@@ -51031,7 +51843,9 @@ components:
                     maxProperties: 8192
                 compute_pool_id:
                     type: string
-                    description: "The id associated with the compute pool in context. \nIf not specified, the statement will use the default compute pool. The default pool is automatically determined by the system."
+                    description: |-
+                        The id associated with the compute pool in context.
+                        If not specified, the statement will use the default compute pool. The default pool is automatically determined by the system.
                     maxLength: 255
                 principal:
                     type: string

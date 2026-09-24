@@ -15,7 +15,7 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
-func (c *Client) PauseConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) PauseConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPauseConnectv1ConnectorRequest(c.Server, environmentId, kafkaClusterId, connectorName)
 	if err != nil {
 		return nil, err
@@ -26,7 +26,7 @@ func (c *Client) PauseConnectv1Connector(ctx context.Context, environmentId stri
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) RestartConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) RestartConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRestartConnectv1ConnectorRequest(c.Server, environmentId, kafkaClusterId, connectorName)
 	if err != nil {
 		return nil, err
@@ -37,7 +37,7 @@ func (c *Client) RestartConnectv1Connector(ctx context.Context, environmentId st
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ResumeConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ResumeConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewResumeConnectv1ConnectorRequest(c.Server, environmentId, kafkaClusterId, connectorName)
 	if err != nil {
 		return nil, err

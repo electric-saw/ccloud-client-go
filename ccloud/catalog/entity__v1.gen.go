@@ -33,7 +33,7 @@ type UpdateBusinessMetadataJSONRequestBody = UpdateBusinessMetadataJSONBody
 type CreateTagsJSONRequestBody = CreateTagsJSONBody
 type UpdateTagsJSONRequestBody = UpdateTagsJSONBody
 
-func (c *Client) PartialEntityUpdateWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) PartialEntityUpdateWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPartialEntityUpdateRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -44,7 +44,7 @@ func (c *Client) PartialEntityUpdateWithBody(ctx context.Context, contentType st
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) PartialEntityUpdate(ctx context.Context, body PartialEntityUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) PartialEntityUpdate(ctx context.Context, body PartialEntityUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPartialEntityUpdateRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -55,7 +55,7 @@ func (c *Client) PartialEntityUpdate(ctx context.Context, body PartialEntityUpda
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateBusinessMetadataWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateBusinessMetadataWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateBusinessMetadataRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ func (c *Client) CreateBusinessMetadataWithBody(ctx context.Context, contentType
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateBusinessMetadata(ctx context.Context, body CreateBusinessMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateBusinessMetadata(ctx context.Context, body CreateBusinessMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateBusinessMetadataRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -77,7 +77,7 @@ func (c *Client) CreateBusinessMetadata(ctx context.Context, body CreateBusiness
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateBusinessMetadataWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateBusinessMetadataWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateBusinessMetadataRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -88,7 +88,7 @@ func (c *Client) UpdateBusinessMetadataWithBody(ctx context.Context, contentType
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateBusinessMetadata(ctx context.Context, body UpdateBusinessMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateBusinessMetadata(ctx context.Context, body UpdateBusinessMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateBusinessMetadataRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -99,7 +99,7 @@ func (c *Client) UpdateBusinessMetadata(ctx context.Context, body UpdateBusiness
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateTagsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateTagsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateTagsRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -110,7 +110,7 @@ func (c *Client) CreateTagsWithBody(ctx context.Context, contentType string, bod
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateTags(ctx context.Context, body CreateTagsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateTags(ctx context.Context, body CreateTagsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateTagsRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -121,7 +121,7 @@ func (c *Client) CreateTags(ctx context.Context, body CreateTagsJSONRequestBody,
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateTagsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateTagsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTagsRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -132,7 +132,7 @@ func (c *Client) UpdateTagsWithBody(ctx context.Context, contentType string, bod
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateTags(ctx context.Context, body UpdateTagsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateTags(ctx context.Context, body UpdateTagsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTagsRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -143,7 +143,7 @@ func (c *Client) UpdateTags(ctx context.Context, body UpdateTagsJSONRequestBody,
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetByUniqueAttributes(ctx context.Context, typeName string, qualifiedName string, params *GetByUniqueAttributesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetByUniqueAttributes(ctx context.Context, typeName string, qualifiedName string, params *GetByUniqueAttributesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetByUniqueAttributesRequest(c.Server, typeName, qualifiedName, params)
 	if err != nil {
 		return nil, err
@@ -154,7 +154,7 @@ func (c *Client) GetByUniqueAttributes(ctx context.Context, typeName string, qua
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetBusinessMetadata(ctx context.Context, typeName string, qualifiedName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetBusinessMetadata(ctx context.Context, typeName string, qualifiedName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetBusinessMetadataRequest(c.Server, typeName, qualifiedName)
 	if err != nil {
 		return nil, err
@@ -165,7 +165,7 @@ func (c *Client) GetBusinessMetadata(ctx context.Context, typeName string, quali
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteBusinessMetadata(ctx context.Context, typeName string, qualifiedName string, bmName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteBusinessMetadata(ctx context.Context, typeName string, qualifiedName string, bmName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteBusinessMetadataRequest(c.Server, typeName, qualifiedName, bmName)
 	if err != nil {
 		return nil, err
@@ -176,7 +176,7 @@ func (c *Client) DeleteBusinessMetadata(ctx context.Context, typeName string, qu
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetTags(ctx context.Context, typeName string, qualifiedName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetTags(ctx context.Context, typeName string, qualifiedName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetTagsRequest(c.Server, typeName, qualifiedName)
 	if err != nil {
 		return nil, err
@@ -187,7 +187,7 @@ func (c *Client) GetTags(ctx context.Context, typeName string, qualifiedName str
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteTag(ctx context.Context, typeName string, qualifiedName string, tagName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteTag(ctx context.Context, typeName string, qualifiedName string, tagName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteTagRequest(c.Server, typeName, qualifiedName, tagName)
 	if err != nil {
 		return nil, err

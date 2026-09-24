@@ -113,7 +113,7 @@ type UpdateTableflowV1TableflowTopic200JSONResponseBodyKind string
 type CreateTableflowV1TableflowTopicJSONRequestBody CreateTableflowV1TableflowTopicJSONBody
 type UpdateTableflowV1TableflowTopicJSONRequestBody UpdateTableflowV1TableflowTopicJSONBody
 
-func (c *Client) ListTableflowV1TableflowTopics(ctx context.Context, params *ListTableflowV1TableflowTopicsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListTableflowV1TableflowTopics(ctx context.Context, params *ListTableflowV1TableflowTopicsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListTableflowV1TableflowTopicsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (c *Client) ListTableflowV1TableflowTopics(ctx context.Context, params *Lis
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateTableflowV1TableflowTopicWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateTableflowV1TableflowTopicWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateTableflowV1TableflowTopicRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -135,7 +135,7 @@ func (c *Client) CreateTableflowV1TableflowTopicWithBody(ctx context.Context, co
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateTableflowV1TableflowTopic(ctx context.Context, body CreateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateTableflowV1TableflowTopic(ctx context.Context, body CreateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateTableflowV1TableflowTopicRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -146,7 +146,7 @@ func (c *Client) CreateTableflowV1TableflowTopic(ctx context.Context, body Creat
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteTableflowV1TableflowTopic(ctx context.Context, displayName string, params *DeleteTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteTableflowV1TableflowTopic(ctx context.Context, displayName string, params *DeleteTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteTableflowV1TableflowTopicRequest(c.Server, displayName, params)
 	if err != nil {
 		return nil, err
@@ -157,7 +157,7 @@ func (c *Client) DeleteTableflowV1TableflowTopic(ctx context.Context, displayNam
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetTableflowV1TableflowTopic(ctx context.Context, displayName string, params *GetTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetTableflowV1TableflowTopic(ctx context.Context, displayName string, params *GetTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetTableflowV1TableflowTopicRequest(c.Server, displayName, params)
 	if err != nil {
 		return nil, err
@@ -168,7 +168,7 @@ func (c *Client) GetTableflowV1TableflowTopic(ctx context.Context, displayName s
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateTableflowV1TableflowTopicWithBody(ctx context.Context, displayName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateTableflowV1TableflowTopicWithBody(ctx context.Context, displayName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTableflowV1TableflowTopicRequestWithBody(c.Server, displayName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -179,7 +179,7 @@ func (c *Client) UpdateTableflowV1TableflowTopicWithBody(ctx context.Context, di
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateTableflowV1TableflowTopic(ctx context.Context, displayName string, body UpdateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateTableflowV1TableflowTopic(ctx context.Context, displayName string, body UpdateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTableflowV1TableflowTopicRequest(c.Server, displayName, body)
 	if err != nil {
 		return nil, err

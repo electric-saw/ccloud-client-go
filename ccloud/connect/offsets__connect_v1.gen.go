@@ -18,7 +18,7 @@ import (
 
 type AlterConnectv1ConnectorOffsetsRequestJSONRequestBody = ConnectV1AlterOffsetRequest
 
-func (c *Client) GetConnectv1ConnectorOffsets(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetConnectv1ConnectorOffsets(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetConnectv1ConnectorOffsetsRequest(c.Server, environmentId, kafkaClusterId, connectorName)
 	if err != nil {
 		return nil, err
@@ -29,7 +29,7 @@ func (c *Client) GetConnectv1ConnectorOffsets(ctx context.Context, environmentId
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) AlterConnectv1ConnectorOffsetsRequestWithBody(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) AlterConnectv1ConnectorOffsetsRequestWithBody(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewAlterConnectv1ConnectorOffsetsRequestRequestWithBody(c.Server, environmentId, kafkaClusterId, connectorName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -40,7 +40,7 @@ func (c *Client) AlterConnectv1ConnectorOffsetsRequestWithBody(ctx context.Conte
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) AlterConnectv1ConnectorOffsetsRequest(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, body AlterConnectv1ConnectorOffsetsRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) AlterConnectv1ConnectorOffsetsRequest(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, body AlterConnectv1ConnectorOffsetsRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewAlterConnectv1ConnectorOffsetsRequestRequest(c.Server, environmentId, kafkaClusterId, connectorName, body)
 	if err != nil {
 		return nil, err
@@ -51,7 +51,7 @@ func (c *Client) AlterConnectv1ConnectorOffsetsRequest(ctx context.Context, envi
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetConnectv1ConnectorOffsetsRequestStatus(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetConnectv1ConnectorOffsetsRequestStatus(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetConnectv1ConnectorOffsetsRequestStatusRequest(c.Server, environmentId, kafkaClusterId, connectorName)
 	if err != nil {
 		return nil, err

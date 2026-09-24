@@ -28,7 +28,7 @@ type SignupJSONRequestBody = PartnerSignupRequest
 type ActivateSignupJSONRequestBody = ActivatePartnerSignupRequest
 type SignupPartnerV2LinkJSONRequestBody = PartnerLinkRequest
 
-func (c *Client) SignupWithBody(ctx context.Context, params *SignupParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) SignupWithBody(ctx context.Context, params *SignupParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSignupRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -39,7 +39,7 @@ func (c *Client) SignupWithBody(ctx context.Context, params *SignupParams, conte
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) Signup(ctx context.Context, params *SignupParams, body SignupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) Signup(ctx context.Context, params *SignupParams, body SignupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSignupRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err
@@ -50,7 +50,7 @@ func (c *Client) Signup(ctx context.Context, params *SignupParams, body SignupJS
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ActivateSignupWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ActivateSignupWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewActivateSignupRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -61,7 +61,7 @@ func (c *Client) ActivateSignupWithBody(ctx context.Context, contentType string,
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ActivateSignup(ctx context.Context, body ActivateSignupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ActivateSignup(ctx context.Context, body ActivateSignupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewActivateSignupRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -72,7 +72,7 @@ func (c *Client) ActivateSignup(ctx context.Context, body ActivateSignupJSONRequ
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) SignupPartnerV2LinkWithBody(ctx context.Context, params *SignupPartnerV2LinkParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) SignupPartnerV2LinkWithBody(ctx context.Context, params *SignupPartnerV2LinkParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSignupPartnerV2LinkRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -83,7 +83,7 @@ func (c *Client) SignupPartnerV2LinkWithBody(ctx context.Context, params *Signup
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) SignupPartnerV2Link(ctx context.Context, params *SignupPartnerV2LinkParams, body SignupPartnerV2LinkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) SignupPartnerV2Link(ctx context.Context, params *SignupPartnerV2LinkParams, body SignupPartnerV2LinkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSignupPartnerV2LinkRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err

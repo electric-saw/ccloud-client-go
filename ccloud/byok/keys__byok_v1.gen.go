@@ -112,7 +112,7 @@ type UpdateByokV1Key200JSONResponseBodyKind string
 type CreateByokV1KeyJSONRequestBody CreateByokV1KeyJSONBody
 type UpdateByokV1KeyJSONRequestBody = ByokV1Key
 
-func (c *Client) ListByokV1Keys(ctx context.Context, params *ListByokV1KeysParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListByokV1Keys(ctx context.Context, params *ListByokV1KeysParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListByokV1KeysRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -123,7 +123,7 @@ func (c *Client) ListByokV1Keys(ctx context.Context, params *ListByokV1KeysParam
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateByokV1KeyWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateByokV1KeyWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateByokV1KeyRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -134,7 +134,7 @@ func (c *Client) CreateByokV1KeyWithBody(ctx context.Context, contentType string
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateByokV1Key(ctx context.Context, body CreateByokV1KeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateByokV1Key(ctx context.Context, body CreateByokV1KeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateByokV1KeyRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -145,7 +145,7 @@ func (c *Client) CreateByokV1Key(ctx context.Context, body CreateByokV1KeyJSONRe
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteByokV1Key(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteByokV1Key(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteByokV1KeyRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -156,7 +156,7 @@ func (c *Client) DeleteByokV1Key(ctx context.Context, id string, reqEditors ...R
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetByokV1Key(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetByokV1Key(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetByokV1KeyRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -167,7 +167,7 @@ func (c *Client) GetByokV1Key(ctx context.Context, id string, reqEditors ...Requ
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateByokV1KeyWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateByokV1KeyWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateByokV1KeyRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -178,7 +178,7 @@ func (c *Client) UpdateByokV1KeyWithBody(ctx context.Context, id string, content
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateByokV1Key(ctx context.Context, id string, body UpdateByokV1KeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateByokV1Key(ctx context.Context, id string, body UpdateByokV1KeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateByokV1KeyRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

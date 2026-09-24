@@ -91,7 +91,7 @@ type GetIamV2Invitation200JSONResponseBodyApiVersion string
 type GetIamV2Invitation200JSONResponseBodyKind string
 type CreateIamV2InvitationJSONRequestBody CreateIamV2InvitationJSONBody
 
-func (c *Client) ListIamV2Invitations(ctx context.Context, params *ListIamV2InvitationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListIamV2Invitations(ctx context.Context, params *ListIamV2InvitationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIamV2InvitationsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -102,7 +102,7 @@ func (c *Client) ListIamV2Invitations(ctx context.Context, params *ListIamV2Invi
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateIamV2InvitationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateIamV2InvitationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2InvitationRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -113,7 +113,7 @@ func (c *Client) CreateIamV2InvitationWithBody(ctx context.Context, contentType 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateIamV2Invitation(ctx context.Context, body CreateIamV2InvitationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateIamV2Invitation(ctx context.Context, body CreateIamV2InvitationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2InvitationRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (c *Client) CreateIamV2Invitation(ctx context.Context, body CreateIamV2Invi
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteIamV2Invitation(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteIamV2Invitation(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIamV2InvitationRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -135,7 +135,7 @@ func (c *Client) DeleteIamV2Invitation(ctx context.Context, id string, reqEditor
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetIamV2Invitation(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetIamV2Invitation(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2InvitationRequest(c.Server, id)
 	if err != nil {
 		return nil, err

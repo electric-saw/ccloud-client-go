@@ -169,7 +169,7 @@ type CreatePimV2IntegrationJSONRequestBody CreatePimV2IntegrationJSONBody
 type UpdatePimV2IntegrationJSONRequestBody UpdatePimV2IntegrationJSONBody
 type ValidatePimV2IntegrationJSONRequestBody ValidatePimV2IntegrationJSONBody
 
-func (c *Client) ListPimV2Integrations(ctx context.Context, params *ListPimV2IntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListPimV2Integrations(ctx context.Context, params *ListPimV2IntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListPimV2IntegrationsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -180,7 +180,7 @@ func (c *Client) ListPimV2Integrations(ctx context.Context, params *ListPimV2Int
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreatePimV2IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreatePimV2IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreatePimV2IntegrationRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -191,7 +191,7 @@ func (c *Client) CreatePimV2IntegrationWithBody(ctx context.Context, contentType
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreatePimV2Integration(ctx context.Context, body CreatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreatePimV2Integration(ctx context.Context, body CreatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreatePimV2IntegrationRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -202,7 +202,7 @@ func (c *Client) CreatePimV2Integration(ctx context.Context, body CreatePimV2Int
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeletePimV2Integration(ctx context.Context, id string, params *DeletePimV2IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeletePimV2Integration(ctx context.Context, id string, params *DeletePimV2IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeletePimV2IntegrationRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -213,7 +213,7 @@ func (c *Client) DeletePimV2Integration(ctx context.Context, id string, params *
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetPimV2Integration(ctx context.Context, id string, params *GetPimV2IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetPimV2Integration(ctx context.Context, id string, params *GetPimV2IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetPimV2IntegrationRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -224,7 +224,7 @@ func (c *Client) GetPimV2Integration(ctx context.Context, id string, params *Get
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdatePimV2IntegrationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdatePimV2IntegrationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdatePimV2IntegrationRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -235,7 +235,7 @@ func (c *Client) UpdatePimV2IntegrationWithBody(ctx context.Context, id string, 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdatePimV2Integration(ctx context.Context, id string, body UpdatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdatePimV2Integration(ctx context.Context, id string, body UpdatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdatePimV2IntegrationRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -246,7 +246,7 @@ func (c *Client) UpdatePimV2Integration(ctx context.Context, id string, body Upd
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ValidatePimV2IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ValidatePimV2IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewValidatePimV2IntegrationRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -257,7 +257,7 @@ func (c *Client) ValidatePimV2IntegrationWithBody(ctx context.Context, contentTy
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ValidatePimV2Integration(ctx context.Context, body ValidatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ValidatePimV2Integration(ctx context.Context, body ValidatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewValidatePimV2IntegrationRequest(c.Server, body)
 	if err != nil {
 		return nil, err

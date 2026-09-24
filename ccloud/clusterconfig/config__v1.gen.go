@@ -27,7 +27,7 @@ type UpdateSubjectLevelConfigJSONRequestBody = ConfigUpdateRequest
 type UpdateSubjectLevelConfigApplicationVndSchemaregistryPlusJSONRequestBody = ConfigUpdateRequest
 type UpdateSubjectLevelConfigApplicationVndSchemaregistryV1PlusJSONRequestBody = ConfigUpdateRequest
 
-func (c *Client) GetClusterConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetClusterConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetClusterConfigRequest(c.Server)
 	if err != nil {
 		return nil, err
@@ -38,7 +38,7 @@ func (c *Client) GetClusterConfig(ctx context.Context, reqEditors ...RequestEdit
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteTopLevelConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteTopLevelConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteTopLevelConfigRequest(c.Server)
 	if err != nil {
 		return nil, err
@@ -49,7 +49,7 @@ func (c *Client) DeleteTopLevelConfig(ctx context.Context, reqEditors ...Request
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetTopLevelConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetTopLevelConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetTopLevelConfigRequest(c.Server)
 	if err != nil {
 		return nil, err
@@ -60,7 +60,7 @@ func (c *Client) GetTopLevelConfig(ctx context.Context, reqEditors ...RequestEdi
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateTopLevelConfigWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateTopLevelConfigWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTopLevelConfigRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -71,7 +71,7 @@ func (c *Client) UpdateTopLevelConfigWithBody(ctx context.Context, contentType s
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateTopLevelConfig(ctx context.Context, body UpdateTopLevelConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateTopLevelConfig(ctx context.Context, body UpdateTopLevelConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTopLevelConfigRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -82,7 +82,7 @@ func (c *Client) UpdateTopLevelConfig(ctx context.Context, body UpdateTopLevelCo
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateTopLevelConfigWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, body UpdateTopLevelConfigApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateTopLevelConfigWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, body UpdateTopLevelConfigApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTopLevelConfigRequestWithApplicationVndSchemaregistryPlusJSONBody(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -93,7 +93,7 @@ func (c *Client) UpdateTopLevelConfigWithApplicationVndSchemaregistryPlusJSONBod
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateTopLevelConfigWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, body UpdateTopLevelConfigApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateTopLevelConfigWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, body UpdateTopLevelConfigApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTopLevelConfigRequestWithApplicationVndSchemaregistryV1PlusJSONBody(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -104,7 +104,7 @@ func (c *Client) UpdateTopLevelConfigWithApplicationVndSchemaregistryV1PlusJSONB
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteSubjectConfig(ctx context.Context, subject string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteSubjectConfig(ctx context.Context, subject string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteSubjectConfigRequest(c.Server, subject)
 	if err != nil {
 		return nil, err
@@ -115,7 +115,7 @@ func (c *Client) DeleteSubjectConfig(ctx context.Context, subject string, reqEdi
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetSubjectLevelConfig(ctx context.Context, subject string, params *GetSubjectLevelConfigParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetSubjectLevelConfig(ctx context.Context, subject string, params *GetSubjectLevelConfigParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSubjectLevelConfigRequest(c.Server, subject, params)
 	if err != nil {
 		return nil, err
@@ -126,7 +126,7 @@ func (c *Client) GetSubjectLevelConfig(ctx context.Context, subject string, para
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateSubjectLevelConfigWithBody(ctx context.Context, subject string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateSubjectLevelConfigWithBody(ctx context.Context, subject string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSubjectLevelConfigRequestWithBody(c.Server, subject, contentType, body)
 	if err != nil {
 		return nil, err
@@ -137,7 +137,7 @@ func (c *Client) UpdateSubjectLevelConfigWithBody(ctx context.Context, subject s
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateSubjectLevelConfig(ctx context.Context, subject string, body UpdateSubjectLevelConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateSubjectLevelConfig(ctx context.Context, subject string, body UpdateSubjectLevelConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSubjectLevelConfigRequest(c.Server, subject, body)
 	if err != nil {
 		return nil, err
@@ -148,7 +148,7 @@ func (c *Client) UpdateSubjectLevelConfig(ctx context.Context, subject string, b
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateSubjectLevelConfigWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, body UpdateSubjectLevelConfigApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateSubjectLevelConfigWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, body UpdateSubjectLevelConfigApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSubjectLevelConfigRequestWithApplicationVndSchemaregistryPlusJSONBody(c.Server, subject, body)
 	if err != nil {
 		return nil, err
@@ -159,7 +159,7 @@ func (c *Client) UpdateSubjectLevelConfigWithApplicationVndSchemaregistryPlusJSO
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateSubjectLevelConfigWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, body UpdateSubjectLevelConfigApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateSubjectLevelConfigWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, body UpdateSubjectLevelConfigApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSubjectLevelConfigRequestWithApplicationVndSchemaregistryV1PlusJSONBody(c.Server, subject, body)
 	if err != nil {
 		return nil, err

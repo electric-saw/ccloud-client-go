@@ -15,7 +15,7 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
-func (c *Client) ListKafkaConsumerGroups(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListKafkaConsumerGroups(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaConsumerGroupsRequest(c.Server, clusterId)
 	if err != nil {
 		return nil, err
@@ -26,7 +26,7 @@ func (c *Client) ListKafkaConsumerGroups(ctx context.Context, clusterId ClusterI
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetKafkaConsumerGroup(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetKafkaConsumerGroup(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaConsumerGroupRequest(c.Server, clusterId, consumerGroupId)
 	if err != nil {
 		return nil, err
@@ -37,7 +37,7 @@ func (c *Client) GetKafkaConsumerGroup(ctx context.Context, clusterId ClusterId,
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ListKafkaConsumers(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListKafkaConsumers(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaConsumersRequest(c.Server, clusterId, consumerGroupId)
 	if err != nil {
 		return nil, err
@@ -48,7 +48,7 @@ func (c *Client) ListKafkaConsumers(ctx context.Context, clusterId ClusterId, co
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetKafkaConsumer(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetKafkaConsumer(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaConsumerRequest(c.Server, clusterId, consumerGroupId, consumerId)
 	if err != nil {
 		return nil, err
@@ -59,7 +59,7 @@ func (c *Client) GetKafkaConsumer(ctx context.Context, clusterId ClusterId, cons
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetKafkaConsumerGroupLagSummary(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetKafkaConsumerGroupLagSummary(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaConsumerGroupLagSummaryRequest(c.Server, clusterId, consumerGroupId)
 	if err != nil {
 		return nil, err
@@ -70,7 +70,7 @@ func (c *Client) GetKafkaConsumerGroupLagSummary(ctx context.Context, clusterId 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ListKafkaConsumerLags(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListKafkaConsumerLags(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaConsumerLagsRequest(c.Server, clusterId, consumerGroupId)
 	if err != nil {
 		return nil, err
@@ -81,7 +81,7 @@ func (c *Client) ListKafkaConsumerLags(ctx context.Context, clusterId ClusterId,
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetKafkaConsumerLag(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, topicName TopicName, partitionId PartitionId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetKafkaConsumerLag(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, topicName TopicName, partitionId PartitionId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaConsumerLagRequest(c.Server, clusterId, consumerGroupId, topicName, partitionId)
 	if err != nil {
 		return nil, err

@@ -23,7 +23,7 @@ type GetKafkaTopicParams struct {
 type CreateKafkaTopicJSONRequestBody = CreateTopicRequestData
 type UpdatePartitionCountKafkaTopicJSONRequestBody = UpdatePartitionCountRequestData
 
-func (c *Client) ListKafkaTopics(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListKafkaTopics(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaTopicsRequest(c.Server, clusterId)
 	if err != nil {
 		return nil, err
@@ -34,7 +34,7 @@ func (c *Client) ListKafkaTopics(ctx context.Context, clusterId ClusterId, reqEd
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateKafkaTopicWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateKafkaTopicWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKafkaTopicRequestWithBody(c.Server, clusterId, contentType, body)
 	if err != nil {
 		return nil, err
@@ -45,7 +45,7 @@ func (c *Client) CreateKafkaTopicWithBody(ctx context.Context, clusterId Cluster
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateKafkaTopic(ctx context.Context, clusterId ClusterId, body CreateKafkaTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateKafkaTopic(ctx context.Context, clusterId ClusterId, body CreateKafkaTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKafkaTopicRequest(c.Server, clusterId, body)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func (c *Client) CreateKafkaTopic(ctx context.Context, clusterId ClusterId, body
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteKafkaTopic(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteKafkaTopic(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteKafkaTopicRequest(c.Server, clusterId, topicName)
 	if err != nil {
 		return nil, err
@@ -67,7 +67,7 @@ func (c *Client) DeleteKafkaTopic(ctx context.Context, clusterId ClusterId, topi
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetKafkaTopic(ctx context.Context, clusterId ClusterId, topicName TopicName, params *GetKafkaTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetKafkaTopic(ctx context.Context, clusterId ClusterId, topicName TopicName, params *GetKafkaTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaTopicRequest(c.Server, clusterId, topicName, params)
 	if err != nil {
 		return nil, err
@@ -78,7 +78,7 @@ func (c *Client) GetKafkaTopic(ctx context.Context, clusterId ClusterId, topicNa
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdatePartitionCountKafkaTopicWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdatePartitionCountKafkaTopicWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdatePartitionCountKafkaTopicRequestWithBody(c.Server, clusterId, topicName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -89,7 +89,7 @@ func (c *Client) UpdatePartitionCountKafkaTopicWithBody(ctx context.Context, clu
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdatePartitionCountKafkaTopic(ctx context.Context, clusterId ClusterId, topicName TopicName, body UpdatePartitionCountKafkaTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdatePartitionCountKafkaTopic(ctx context.Context, clusterId ClusterId, topicName TopicName, body UpdatePartitionCountKafkaTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdatePartitionCountKafkaTopicRequest(c.Server, clusterId, topicName, body)
 	if err != nil {
 		return nil, err

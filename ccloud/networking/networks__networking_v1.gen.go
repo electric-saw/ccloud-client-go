@@ -124,7 +124,7 @@ type UpdateNetworkingV1Network200JSONResponseBodyKind string
 type CreateNetworkingV1NetworkJSONRequestBody CreateNetworkingV1NetworkJSONBody
 type UpdateNetworkingV1NetworkJSONRequestBody UpdateNetworkingV1NetworkJSONBody
 
-func (c *Client) ListNetworkingV1Networks(ctx context.Context, params *ListNetworkingV1NetworksParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListNetworkingV1Networks(ctx context.Context, params *ListNetworkingV1NetworksParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNetworkingV1NetworksRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -135,7 +135,7 @@ func (c *Client) ListNetworkingV1Networks(ctx context.Context, params *ListNetwo
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNetworkingV1NetworkWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNetworkingV1NetworkWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1NetworkRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -146,7 +146,7 @@ func (c *Client) CreateNetworkingV1NetworkWithBody(ctx context.Context, contentT
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNetworkingV1Network(ctx context.Context, body CreateNetworkingV1NetworkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNetworkingV1Network(ctx context.Context, body CreateNetworkingV1NetworkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1NetworkRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -157,7 +157,7 @@ func (c *Client) CreateNetworkingV1Network(ctx context.Context, body CreateNetwo
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteNetworkingV1Network(ctx context.Context, id string, params *DeleteNetworkingV1NetworkParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteNetworkingV1Network(ctx context.Context, id string, params *DeleteNetworkingV1NetworkParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteNetworkingV1NetworkRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -168,7 +168,7 @@ func (c *Client) DeleteNetworkingV1Network(ctx context.Context, id string, param
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetNetworkingV1Network(ctx context.Context, id string, params *GetNetworkingV1NetworkParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetNetworkingV1Network(ctx context.Context, id string, params *GetNetworkingV1NetworkParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNetworkingV1NetworkRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -179,7 +179,7 @@ func (c *Client) GetNetworkingV1Network(ctx context.Context, id string, params *
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNetworkingV1NetworkWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNetworkingV1NetworkWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1NetworkRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -190,7 +190,7 @@ func (c *Client) UpdateNetworkingV1NetworkWithBody(ctx context.Context, id strin
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNetworkingV1Network(ctx context.Context, id string, body UpdateNetworkingV1NetworkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNetworkingV1Network(ctx context.Context, id string, body UpdateNetworkingV1NetworkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1NetworkRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

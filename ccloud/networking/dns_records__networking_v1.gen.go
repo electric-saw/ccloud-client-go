@@ -119,7 +119,7 @@ type UpdateNetworkingV1DnsRecord200JSONResponseBodyKind string
 type CreateNetworkingV1DnsRecordJSONRequestBody CreateNetworkingV1DnsRecordJSONBody
 type UpdateNetworkingV1DnsRecordJSONRequestBody UpdateNetworkingV1DnsRecordJSONBody
 
-func (c *Client) ListNetworkingV1DnsRecords(ctx context.Context, params *ListNetworkingV1DnsRecordsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListNetworkingV1DnsRecords(ctx context.Context, params *ListNetworkingV1DnsRecordsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNetworkingV1DnsRecordsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -130,7 +130,7 @@ func (c *Client) ListNetworkingV1DnsRecords(ctx context.Context, params *ListNet
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNetworkingV1DnsRecordWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNetworkingV1DnsRecordWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1DnsRecordRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -141,7 +141,7 @@ func (c *Client) CreateNetworkingV1DnsRecordWithBody(ctx context.Context, conten
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNetworkingV1DnsRecord(ctx context.Context, body CreateNetworkingV1DnsRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNetworkingV1DnsRecord(ctx context.Context, body CreateNetworkingV1DnsRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1DnsRecordRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -152,7 +152,7 @@ func (c *Client) CreateNetworkingV1DnsRecord(ctx context.Context, body CreateNet
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteNetworkingV1DnsRecord(ctx context.Context, id string, params *DeleteNetworkingV1DnsRecordParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteNetworkingV1DnsRecord(ctx context.Context, id string, params *DeleteNetworkingV1DnsRecordParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteNetworkingV1DnsRecordRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -163,7 +163,7 @@ func (c *Client) DeleteNetworkingV1DnsRecord(ctx context.Context, id string, par
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetNetworkingV1DnsRecord(ctx context.Context, id string, params *GetNetworkingV1DnsRecordParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetNetworkingV1DnsRecord(ctx context.Context, id string, params *GetNetworkingV1DnsRecordParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNetworkingV1DnsRecordRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -174,7 +174,7 @@ func (c *Client) GetNetworkingV1DnsRecord(ctx context.Context, id string, params
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNetworkingV1DnsRecordWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNetworkingV1DnsRecordWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1DnsRecordRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -185,7 +185,7 @@ func (c *Client) UpdateNetworkingV1DnsRecordWithBody(ctx context.Context, id str
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNetworkingV1DnsRecord(ctx context.Context, id string, body UpdateNetworkingV1DnsRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNetworkingV1DnsRecord(ctx context.Context, id string, body UpdateNetworkingV1DnsRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1DnsRecordRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

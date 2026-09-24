@@ -26,7 +26,7 @@ type UpdateExporterConfigByNameJSONRequestBody = ExporterConfigResponse
 type UpdateExporterConfigByNameApplicationVndSchemaregistryPlusJSONRequestBody = ExporterConfigResponse
 type UpdateExporterConfigByNameApplicationVndSchemaregistryV1PlusJSONRequestBody = ExporterConfigResponse
 
-func (c *Client) ListExporters(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListExporters(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListExportersRequest(c.Server)
 	if err != nil {
 		return nil, err
@@ -37,7 +37,7 @@ func (c *Client) ListExporters(ctx context.Context, reqEditors ...RequestEditorF
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) RegisterExporterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) RegisterExporterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRegisterExporterRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -48,7 +48,7 @@ func (c *Client) RegisterExporterWithBody(ctx context.Context, contentType strin
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) RegisterExporter(ctx context.Context, body RegisterExporterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) RegisterExporter(ctx context.Context, body RegisterExporterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRegisterExporterRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -59,7 +59,7 @@ func (c *Client) RegisterExporter(ctx context.Context, body RegisterExporterJSON
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) RegisterExporterWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, body RegisterExporterApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) RegisterExporterWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, body RegisterExporterApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRegisterExporterRequestWithApplicationVndSchemaregistryPlusJSONBody(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -70,7 +70,7 @@ func (c *Client) RegisterExporterWithApplicationVndSchemaregistryPlusJSONBody(ct
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) RegisterExporterWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, body RegisterExporterApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) RegisterExporterWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, body RegisterExporterApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRegisterExporterRequestWithApplicationVndSchemaregistryV1PlusJSONBody(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -81,7 +81,7 @@ func (c *Client) RegisterExporterWithApplicationVndSchemaregistryV1PlusJSONBody(
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteExporter(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteExporter(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteExporterRequest(c.Server, name)
 	if err != nil {
 		return nil, err
@@ -92,7 +92,7 @@ func (c *Client) DeleteExporter(ctx context.Context, name string, reqEditors ...
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetExporterInfoByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetExporterInfoByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetExporterInfoByNameRequest(c.Server, name)
 	if err != nil {
 		return nil, err
@@ -103,7 +103,7 @@ func (c *Client) GetExporterInfoByName(ctx context.Context, name string, reqEdit
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateExporterInfoWithBody(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateExporterInfoWithBody(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateExporterInfoRequestWithBody(c.Server, name, contentType, body)
 	if err != nil {
 		return nil, err
@@ -114,7 +114,7 @@ func (c *Client) UpdateExporterInfoWithBody(ctx context.Context, name string, co
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateExporterInfo(ctx context.Context, name string, body UpdateExporterInfoJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateExporterInfo(ctx context.Context, name string, body UpdateExporterInfoJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateExporterInfoRequest(c.Server, name, body)
 	if err != nil {
 		return nil, err
@@ -125,7 +125,7 @@ func (c *Client) UpdateExporterInfo(ctx context.Context, name string, body Updat
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateExporterInfoWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, body UpdateExporterInfoApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateExporterInfoWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, body UpdateExporterInfoApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateExporterInfoRequestWithApplicationVndSchemaregistryPlusJSONBody(c.Server, name, body)
 	if err != nil {
 		return nil, err
@@ -136,7 +136,7 @@ func (c *Client) UpdateExporterInfoWithApplicationVndSchemaregistryPlusJSONBody(
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateExporterInfoWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, body UpdateExporterInfoApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateExporterInfoWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, body UpdateExporterInfoApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateExporterInfoRequestWithApplicationVndSchemaregistryV1PlusJSONBody(c.Server, name, body)
 	if err != nil {
 		return nil, err
@@ -147,7 +147,7 @@ func (c *Client) UpdateExporterInfoWithApplicationVndSchemaregistryV1PlusJSONBod
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetExporterConfigByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetExporterConfigByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetExporterConfigByNameRequest(c.Server, name)
 	if err != nil {
 		return nil, err
@@ -158,7 +158,7 @@ func (c *Client) GetExporterConfigByName(ctx context.Context, name string, reqEd
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateExporterConfigByNameWithBody(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateExporterConfigByNameWithBody(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateExporterConfigByNameRequestWithBody(c.Server, name, contentType, body)
 	if err != nil {
 		return nil, err
@@ -169,7 +169,7 @@ func (c *Client) UpdateExporterConfigByNameWithBody(ctx context.Context, name st
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateExporterConfigByName(ctx context.Context, name string, body UpdateExporterConfigByNameJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateExporterConfigByName(ctx context.Context, name string, body UpdateExporterConfigByNameJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateExporterConfigByNameRequest(c.Server, name, body)
 	if err != nil {
 		return nil, err
@@ -180,7 +180,7 @@ func (c *Client) UpdateExporterConfigByName(ctx context.Context, name string, bo
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateExporterConfigByNameWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, body UpdateExporterConfigByNameApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateExporterConfigByNameWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, body UpdateExporterConfigByNameApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateExporterConfigByNameRequestWithApplicationVndSchemaregistryPlusJSONBody(c.Server, name, body)
 	if err != nil {
 		return nil, err
@@ -191,7 +191,7 @@ func (c *Client) UpdateExporterConfigByNameWithApplicationVndSchemaregistryPlusJ
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateExporterConfigByNameWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, body UpdateExporterConfigByNameApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateExporterConfigByNameWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, body UpdateExporterConfigByNameApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateExporterConfigByNameRequestWithApplicationVndSchemaregistryV1PlusJSONBody(c.Server, name, body)
 	if err != nil {
 		return nil, err
@@ -202,7 +202,7 @@ func (c *Client) UpdateExporterConfigByNameWithApplicationVndSchemaregistryV1Plu
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) PauseExporterByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) PauseExporterByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPauseExporterByNameRequest(c.Server, name)
 	if err != nil {
 		return nil, err
@@ -213,7 +213,7 @@ func (c *Client) PauseExporterByName(ctx context.Context, name string, reqEditor
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ResetExporterByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ResetExporterByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewResetExporterByNameRequest(c.Server, name)
 	if err != nil {
 		return nil, err
@@ -224,7 +224,7 @@ func (c *Client) ResetExporterByName(ctx context.Context, name string, reqEditor
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ResumeExporterByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ResumeExporterByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewResumeExporterByNameRequest(c.Server, name)
 	if err != nil {
 		return nil, err
@@ -235,7 +235,7 @@ func (c *Client) ResumeExporterByName(ctx context.Context, name string, reqEdito
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetExporterStatusByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetExporterStatusByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetExporterStatusByNameRequest(c.Server, name)
 	if err != nil {
 		return nil, err

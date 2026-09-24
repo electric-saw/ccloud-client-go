@@ -33,7 +33,7 @@ type ListCdxV1ConsumerSharedResourcesParams struct {
 type GetCdxV1ConsumerSharedResource200JSONResponseBodyApiVersion string
 type GetCdxV1ConsumerSharedResource200JSONResponseBodyKind string
 
-func (c *Client) ListCdxV1ConsumerSharedResources(ctx context.Context, params *ListCdxV1ConsumerSharedResourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListCdxV1ConsumerSharedResources(ctx context.Context, params *ListCdxV1ConsumerSharedResourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListCdxV1ConsumerSharedResourcesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -44,7 +44,7 @@ func (c *Client) ListCdxV1ConsumerSharedResources(ctx context.Context, params *L
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetCdxV1ConsumerSharedResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetCdxV1ConsumerSharedResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCdxV1ConsumerSharedResourceRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -55,7 +55,7 @@ func (c *Client) GetCdxV1ConsumerSharedResource(ctx context.Context, id string, 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ImageCdxV1ConsumerSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ImageCdxV1ConsumerSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewImageCdxV1ConsumerSharedResourceRequest(c.Server, id, fileName)
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ func (c *Client) ImageCdxV1ConsumerSharedResource(ctx context.Context, id string
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) NetworkCdxV1ConsumerSharedResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) NetworkCdxV1ConsumerSharedResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewNetworkCdxV1ConsumerSharedResourceRequest(c.Server, id)
 	if err != nil {
 		return nil, err

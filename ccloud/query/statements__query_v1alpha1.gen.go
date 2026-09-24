@@ -18,7 +18,7 @@ import (
 
 type ExecuteQueryV1alpha1StatementJSONRequestBody = QueryV1alpha1QueryRequest
 
-func (c *Client) ExecuteQueryV1alpha1StatementWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ExecuteQueryV1alpha1StatementWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewExecuteQueryV1alpha1StatementRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -29,7 +29,7 @@ func (c *Client) ExecuteQueryV1alpha1StatementWithBody(ctx context.Context, cont
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ExecuteQueryV1alpha1Statement(ctx context.Context, body ExecuteQueryV1alpha1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ExecuteQueryV1alpha1Statement(ctx context.Context, body ExecuteQueryV1alpha1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewExecuteQueryV1alpha1StatementRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -40,7 +40,7 @@ func (c *Client) ExecuteQueryV1alpha1Statement(ctx context.Context, body Execute
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetQueryV1alpha1JobStatus(ctx context.Context, statementId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetQueryV1alpha1JobStatus(ctx context.Context, statementId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetQueryV1alpha1JobStatusRequest(c.Server, statementId)
 	if err != nil {
 		return nil, err

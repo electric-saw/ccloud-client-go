@@ -77,7 +77,7 @@ type SearchUsingBasicParams struct {
 }
 type SearchUsingBasicParamsSortOrder string
 
-func (c *Client) SearchUsingAttribute(ctx context.Context, params *SearchUsingAttributeParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) SearchUsingAttribute(ctx context.Context, params *SearchUsingAttributeParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSearchUsingAttributeRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -88,7 +88,7 @@ func (c *Client) SearchUsingAttribute(ctx context.Context, params *SearchUsingAt
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) SearchUsingBasic(ctx context.Context, params *SearchUsingBasicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) SearchUsingBasic(ctx context.Context, params *SearchUsingBasicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSearchUsingBasicRequest(c.Server, params)
 	if err != nil {
 		return nil, err

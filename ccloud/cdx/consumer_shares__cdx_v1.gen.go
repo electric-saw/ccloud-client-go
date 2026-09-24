@@ -32,7 +32,7 @@ type ListCdxV1ConsumerSharesParams struct {
 type GetCdxV1ConsumerShare200JSONResponseBodyApiVersion string
 type GetCdxV1ConsumerShare200JSONResponseBodyKind string
 
-func (c *Client) ListCdxV1ConsumerShares(ctx context.Context, params *ListCdxV1ConsumerSharesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListCdxV1ConsumerShares(ctx context.Context, params *ListCdxV1ConsumerSharesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListCdxV1ConsumerSharesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -43,7 +43,7 @@ func (c *Client) ListCdxV1ConsumerShares(ctx context.Context, params *ListCdxV1C
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteCdxV1ConsumerShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteCdxV1ConsumerShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteCdxV1ConsumerShareRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -54,7 +54,7 @@ func (c *Client) DeleteCdxV1ConsumerShare(ctx context.Context, id string, reqEdi
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetCdxV1ConsumerShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetCdxV1ConsumerShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCdxV1ConsumerShareRequest(c.Server, id)
 	if err != nil {
 		return nil, err

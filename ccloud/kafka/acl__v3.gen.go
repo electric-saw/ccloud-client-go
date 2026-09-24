@@ -69,7 +69,7 @@ type GetKafkaAclsParams struct {
 type CreateKafkaAclsJSONRequestBody = CreateAclRequestData
 type BatchCreateKafkaAclsJSONRequestBody = CreateAclRequestDataList
 
-func (c *Client) DeleteKafkaAcls(ctx context.Context, clusterId ClusterId, params *DeleteKafkaAclsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteKafkaAcls(ctx context.Context, clusterId ClusterId, params *DeleteKafkaAclsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteKafkaAclsRequest(c.Server, clusterId, params)
 	if err != nil {
 		return nil, err
@@ -80,7 +80,7 @@ func (c *Client) DeleteKafkaAcls(ctx context.Context, clusterId ClusterId, param
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetKafkaAcls(ctx context.Context, clusterId ClusterId, params *GetKafkaAclsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetKafkaAcls(ctx context.Context, clusterId ClusterId, params *GetKafkaAclsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaAclsRequest(c.Server, clusterId, params)
 	if err != nil {
 		return nil, err
@@ -91,7 +91,7 @@ func (c *Client) GetKafkaAcls(ctx context.Context, clusterId ClusterId, params *
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateKafkaAclsWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateKafkaAclsWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKafkaAclsRequestWithBody(c.Server, clusterId, contentType, body)
 	if err != nil {
 		return nil, err
@@ -102,7 +102,7 @@ func (c *Client) CreateKafkaAclsWithBody(ctx context.Context, clusterId ClusterI
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateKafkaAcls(ctx context.Context, clusterId ClusterId, body CreateKafkaAclsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateKafkaAcls(ctx context.Context, clusterId ClusterId, body CreateKafkaAclsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKafkaAclsRequest(c.Server, clusterId, body)
 	if err != nil {
 		return nil, err
@@ -113,7 +113,7 @@ func (c *Client) CreateKafkaAcls(ctx context.Context, clusterId ClusterId, body 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) BatchCreateKafkaAclsWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) BatchCreateKafkaAclsWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewBatchCreateKafkaAclsRequestWithBody(c.Server, clusterId, contentType, body)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (c *Client) BatchCreateKafkaAclsWithBody(ctx context.Context, clusterId Clu
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) BatchCreateKafkaAcls(ctx context.Context, clusterId ClusterId, body BatchCreateKafkaAclsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) BatchCreateKafkaAcls(ctx context.Context, clusterId ClusterId, body BatchCreateKafkaAclsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewBatchCreateKafkaAclsRequest(c.Server, clusterId, body)
 	if err != nil {
 		return nil, err

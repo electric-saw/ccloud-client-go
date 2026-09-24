@@ -35,7 +35,7 @@ type GetSrcmV3ClusterParams struct {
 type GetSrcmV3Cluster200JSONResponseBodyApiVersion string
 type GetSrcmV3Cluster200JSONResponseBodyKind string
 
-func (c *Client) ListSrcmV3Clusters(ctx context.Context, params *ListSrcmV3ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListSrcmV3Clusters(ctx context.Context, params *ListSrcmV3ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSrcmV3ClustersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (c *Client) ListSrcmV3Clusters(ctx context.Context, params *ListSrcmV3Clust
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetSrcmV3Cluster(ctx context.Context, id string, params *GetSrcmV3ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetSrcmV3Cluster(ctx context.Context, id string, params *GetSrcmV3ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSrcmV3ClusterRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err

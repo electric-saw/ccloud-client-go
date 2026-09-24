@@ -113,7 +113,7 @@ type UpdateFcpmV2ComputePool200JSONResponseBodyKind string
 type CreateFcpmV2ComputePoolJSONRequestBody CreateFcpmV2ComputePoolJSONBody
 type UpdateFcpmV2ComputePoolJSONRequestBody UpdateFcpmV2ComputePoolJSONBody
 
-func (c *Client) ListFcpmV2ComputePools(ctx context.Context, params *ListFcpmV2ComputePoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListFcpmV2ComputePools(ctx context.Context, params *ListFcpmV2ComputePoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListFcpmV2ComputePoolsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (c *Client) ListFcpmV2ComputePools(ctx context.Context, params *ListFcpmV2C
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateFcpmV2ComputePoolWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateFcpmV2ComputePoolWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateFcpmV2ComputePoolRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -135,7 +135,7 @@ func (c *Client) CreateFcpmV2ComputePoolWithBody(ctx context.Context, contentTyp
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateFcpmV2ComputePool(ctx context.Context, body CreateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateFcpmV2ComputePool(ctx context.Context, body CreateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateFcpmV2ComputePoolRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -146,7 +146,7 @@ func (c *Client) CreateFcpmV2ComputePool(ctx context.Context, body CreateFcpmV2C
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteFcpmV2ComputePool(ctx context.Context, id string, params *DeleteFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteFcpmV2ComputePool(ctx context.Context, id string, params *DeleteFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteFcpmV2ComputePoolRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -157,7 +157,7 @@ func (c *Client) DeleteFcpmV2ComputePool(ctx context.Context, id string, params 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetFcpmV2ComputePool(ctx context.Context, id string, params *GetFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetFcpmV2ComputePool(ctx context.Context, id string, params *GetFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetFcpmV2ComputePoolRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -168,7 +168,7 @@ func (c *Client) GetFcpmV2ComputePool(ctx context.Context, id string, params *Ge
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateFcpmV2ComputePoolWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateFcpmV2ComputePoolWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateFcpmV2ComputePoolRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -179,7 +179,7 @@ func (c *Client) UpdateFcpmV2ComputePoolWithBody(ctx context.Context, id string,
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateFcpmV2ComputePool(ctx context.Context, id string, body UpdateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateFcpmV2ComputePool(ctx context.Context, id string, body UpdateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateFcpmV2ComputePoolRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

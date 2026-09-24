@@ -82,7 +82,7 @@ type UpdateSqlv1ConnectionJSONBodyKind string
 type CreateSqlv1ConnectionJSONRequestBody CreateSqlv1ConnectionJSONBody
 type UpdateSqlv1ConnectionJSONRequestBody UpdateSqlv1ConnectionJSONBody
 
-func (c *Client) ListSqlv1Connections(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1ConnectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListSqlv1Connections(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1ConnectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSqlv1ConnectionsRequest(c.Server, organizationId, environmentId, params)
 	if err != nil {
 		return nil, err
@@ -93,7 +93,7 @@ func (c *Client) ListSqlv1Connections(ctx context.Context, organizationId openap
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateSqlv1ConnectionWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateSqlv1ConnectionWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateSqlv1ConnectionRequestWithBody(c.Server, organizationId, environmentId, contentType, body)
 	if err != nil {
 		return nil, err
@@ -104,7 +104,7 @@ func (c *Client) CreateSqlv1ConnectionWithBody(ctx context.Context, organization
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, body CreateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, body CreateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateSqlv1ConnectionRequest(c.Server, organizationId, environmentId, body)
 	if err != nil {
 		return nil, err
@@ -115,7 +115,7 @@ func (c *Client) CreateSqlv1Connection(ctx context.Context, organizationId opena
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteSqlv1ConnectionRequest(c.Server, organizationId, environmentId, connectionName)
 	if err != nil {
 		return nil, err
@@ -126,7 +126,7 @@ func (c *Client) DeleteSqlv1Connection(ctx context.Context, organizationId opena
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSqlv1ConnectionRequest(c.Server, organizationId, environmentId, connectionName)
 	if err != nil {
 		return nil, err
@@ -137,7 +137,7 @@ func (c *Client) GetSqlv1Connection(ctx context.Context, organizationId openapi_
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateSqlv1ConnectionWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateSqlv1ConnectionWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSqlv1ConnectionRequestWithBody(c.Server, organizationId, environmentId, connectionName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -148,7 +148,7 @@ func (c *Client) UpdateSqlv1ConnectionWithBody(ctx context.Context, organization
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, body UpdateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, body UpdateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSqlv1ConnectionRequest(c.Server, organizationId, environmentId, connectionName, body)
 	if err != nil {
 		return nil, err

@@ -103,7 +103,7 @@ type PatchScimV2UserJSONRequestBody = ScimV2PatchOp
 type PatchScimV2UserApplicationScimPlusJSONRequestBody PatchScimV2UserApplicationScimPlusJSONBody
 type UpdateScimV2UserApplicationScimPlusJSONRequestBody UpdateScimV2UserApplicationScimPlusJSONBody
 
-func (c *Client) FindScimV2User(ctx context.Context, connectionName string, params *FindScimV2UserParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) FindScimV2User(ctx context.Context, connectionName string, params *FindScimV2UserParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewFindScimV2UserRequest(c.Server, connectionName, params)
 	if err != nil {
 		return nil, err
@@ -114,7 +114,7 @@ func (c *Client) FindScimV2User(ctx context.Context, connectionName string, para
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateScimV2UserWithBody(ctx context.Context, connectionName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateScimV2UserWithBody(ctx context.Context, connectionName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateScimV2UserRequestWithBody(c.Server, connectionName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -125,7 +125,7 @@ func (c *Client) CreateScimV2UserWithBody(ctx context.Context, connectionName st
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateScimV2UserWithApplicationScimPlusJSONBody(ctx context.Context, connectionName string, body CreateScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateScimV2UserWithApplicationScimPlusJSONBody(ctx context.Context, connectionName string, body CreateScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateScimV2UserRequestWithApplicationScimPlusJSONBody(c.Server, connectionName, body)
 	if err != nil {
 		return nil, err
@@ -136,7 +136,7 @@ func (c *Client) CreateScimV2UserWithApplicationScimPlusJSONBody(ctx context.Con
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteScimV2User(ctx context.Context, connectionName string, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteScimV2User(ctx context.Context, connectionName string, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteScimV2UserRequest(c.Server, connectionName, id)
 	if err != nil {
 		return nil, err
@@ -147,7 +147,7 @@ func (c *Client) DeleteScimV2User(ctx context.Context, connectionName string, id
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetScimV2User(ctx context.Context, connectionName string, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetScimV2User(ctx context.Context, connectionName string, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetScimV2UserRequest(c.Server, connectionName, id)
 	if err != nil {
 		return nil, err
@@ -158,7 +158,7 @@ func (c *Client) GetScimV2User(ctx context.Context, connectionName string, id st
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) PatchScimV2UserWithBody(ctx context.Context, connectionName string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) PatchScimV2UserWithBody(ctx context.Context, connectionName string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPatchScimV2UserRequestWithBody(c.Server, connectionName, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -169,7 +169,7 @@ func (c *Client) PatchScimV2UserWithBody(ctx context.Context, connectionName str
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) PatchScimV2User(ctx context.Context, connectionName string, id string, body PatchScimV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) PatchScimV2User(ctx context.Context, connectionName string, id string, body PatchScimV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPatchScimV2UserRequest(c.Server, connectionName, id, body)
 	if err != nil {
 		return nil, err
@@ -180,7 +180,7 @@ func (c *Client) PatchScimV2User(ctx context.Context, connectionName string, id 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) PatchScimV2UserWithApplicationScimPlusJSONBody(ctx context.Context, connectionName string, id string, body PatchScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) PatchScimV2UserWithApplicationScimPlusJSONBody(ctx context.Context, connectionName string, id string, body PatchScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPatchScimV2UserRequestWithApplicationScimPlusJSONBody(c.Server, connectionName, id, body)
 	if err != nil {
 		return nil, err
@@ -191,7 +191,7 @@ func (c *Client) PatchScimV2UserWithApplicationScimPlusJSONBody(ctx context.Cont
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateScimV2UserWithBody(ctx context.Context, connectionName string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateScimV2UserWithBody(ctx context.Context, connectionName string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateScimV2UserRequestWithBody(c.Server, connectionName, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -202,7 +202,7 @@ func (c *Client) UpdateScimV2UserWithBody(ctx context.Context, connectionName st
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateScimV2UserWithApplicationScimPlusJSONBody(ctx context.Context, connectionName string, id string, body UpdateScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateScimV2UserWithApplicationScimPlusJSONBody(ctx context.Context, connectionName string, id string, body UpdateScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateScimV2UserRequestWithApplicationScimPlusJSONBody(c.Server, connectionName, id, body)
 	if err != nil {
 		return nil, err

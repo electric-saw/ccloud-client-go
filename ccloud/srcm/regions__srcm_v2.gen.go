@@ -35,7 +35,7 @@ type ListSrcmV2RegionsParams struct {
 type GetSrcmV2Region200JSONResponseBodyApiVersion string
 type GetSrcmV2Region200JSONResponseBodyKind string
 
-func (c *Client) ListSrcmV2Regions(ctx context.Context, params *ListSrcmV2RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListSrcmV2Regions(ctx context.Context, params *ListSrcmV2RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSrcmV2RegionsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (c *Client) ListSrcmV2Regions(ctx context.Context, params *ListSrcmV2Region
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetSrcmV2Region(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetSrcmV2Region(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSrcmV2RegionRequest(c.Server, id)
 	if err != nil {
 		return nil, err

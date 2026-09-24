@@ -16,7 +16,7 @@ import (
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
-func (c *Client) GetSqlv1StatementExceptions(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetSqlv1StatementExceptions(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSqlv1StatementExceptionsRequest(c.Server, organizationId, environmentId, statementName)
 	if err != nil {
 		return nil, err

@@ -44,7 +44,7 @@ type GetNetworkingV1NetworkLinkServiceAssociationParams struct {
 type GetNetworkingV1NetworkLinkServiceAssociation200JSONResponseBodyApiVersion string
 type GetNetworkingV1NetworkLinkServiceAssociation200JSONResponseBodyKind string
 
-func (c *Client) ListNetworkingV1NetworkLinkServiceAssociations(ctx context.Context, params *ListNetworkingV1NetworkLinkServiceAssociationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListNetworkingV1NetworkLinkServiceAssociations(ctx context.Context, params *ListNetworkingV1NetworkLinkServiceAssociationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNetworkingV1NetworkLinkServiceAssociationsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -55,7 +55,7 @@ func (c *Client) ListNetworkingV1NetworkLinkServiceAssociations(ctx context.Cont
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetNetworkingV1NetworkLinkServiceAssociation(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkServiceAssociationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetNetworkingV1NetworkLinkServiceAssociation(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkServiceAssociationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNetworkingV1NetworkLinkServiceAssociationRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err

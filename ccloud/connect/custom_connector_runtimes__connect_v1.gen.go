@@ -23,7 +23,7 @@ type ListConnectV1CustomConnectorRuntimesParams struct {
 	PageToken *string `form:"page_token,omitempty" json:"page_token,omitempty"`
 }
 
-func (c *Client) ListConnectV1CustomConnectorRuntimes(ctx context.Context, params *ListConnectV1CustomConnectorRuntimesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListConnectV1CustomConnectorRuntimes(ctx context.Context, params *ListConnectV1CustomConnectorRuntimesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListConnectV1CustomConnectorRuntimesRequest(c.Server, params)
 	if err != nil {
 		return nil, err

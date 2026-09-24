@@ -88,7 +88,7 @@ type UpdateIamV2IdentityProvider200JSONResponseBodyKind string
 type CreateIamV2IdentityProviderJSONRequestBody CreateIamV2IdentityProviderJSONBody
 type UpdateIamV2IdentityProviderJSONRequestBody = IamV2IdentityProvider
 
-func (c *Client) ListIamV2IdentityProviders(ctx context.Context, params *ListIamV2IdentityProvidersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListIamV2IdentityProviders(ctx context.Context, params *ListIamV2IdentityProvidersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIamV2IdentityProvidersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -99,7 +99,7 @@ func (c *Client) ListIamV2IdentityProviders(ctx context.Context, params *ListIam
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateIamV2IdentityProviderWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateIamV2IdentityProviderWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2IdentityProviderRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -110,7 +110,7 @@ func (c *Client) CreateIamV2IdentityProviderWithBody(ctx context.Context, conten
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateIamV2IdentityProvider(ctx context.Context, body CreateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateIamV2IdentityProvider(ctx context.Context, body CreateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2IdentityProviderRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -121,7 +121,7 @@ func (c *Client) CreateIamV2IdentityProvider(ctx context.Context, body CreateIam
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteIamV2IdentityProvider(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteIamV2IdentityProvider(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIamV2IdentityProviderRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -132,7 +132,7 @@ func (c *Client) DeleteIamV2IdentityProvider(ctx context.Context, id string, req
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetIamV2IdentityProvider(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetIamV2IdentityProvider(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2IdentityProviderRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -143,7 +143,7 @@ func (c *Client) GetIamV2IdentityProvider(ctx context.Context, id string, reqEdi
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateIamV2IdentityProviderWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateIamV2IdentityProviderWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2IdentityProviderRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -154,7 +154,7 @@ func (c *Client) UpdateIamV2IdentityProviderWithBody(ctx context.Context, id str
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateIamV2IdentityProvider(ctx context.Context, id string, body UpdateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateIamV2IdentityProvider(ctx context.Context, id string, body UpdateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2IdentityProviderRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

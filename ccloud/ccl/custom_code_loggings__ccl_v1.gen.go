@@ -133,7 +133,7 @@ type UpdateCclV1CustomCodeLogging200JSONResponseBodyKind string
 type CreateCclV1CustomCodeLoggingJSONRequestBody CreateCclV1CustomCodeLoggingJSONBody
 type UpdateCclV1CustomCodeLoggingJSONRequestBody UpdateCclV1CustomCodeLoggingJSONBody
 
-func (c *Client) ListCclV1CustomCodeLoggings(ctx context.Context, params *ListCclV1CustomCodeLoggingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListCclV1CustomCodeLoggings(ctx context.Context, params *ListCclV1CustomCodeLoggingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListCclV1CustomCodeLoggingsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -144,7 +144,7 @@ func (c *Client) ListCclV1CustomCodeLoggings(ctx context.Context, params *ListCc
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateCclV1CustomCodeLoggingWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateCclV1CustomCodeLoggingWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateCclV1CustomCodeLoggingRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -155,7 +155,7 @@ func (c *Client) CreateCclV1CustomCodeLoggingWithBody(ctx context.Context, conte
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateCclV1CustomCodeLogging(ctx context.Context, body CreateCclV1CustomCodeLoggingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateCclV1CustomCodeLogging(ctx context.Context, body CreateCclV1CustomCodeLoggingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateCclV1CustomCodeLoggingRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -166,7 +166,7 @@ func (c *Client) CreateCclV1CustomCodeLogging(ctx context.Context, body CreateCc
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteCclV1CustomCodeLogging(ctx context.Context, id string, params *DeleteCclV1CustomCodeLoggingParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteCclV1CustomCodeLogging(ctx context.Context, id string, params *DeleteCclV1CustomCodeLoggingParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteCclV1CustomCodeLoggingRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -177,7 +177,7 @@ func (c *Client) DeleteCclV1CustomCodeLogging(ctx context.Context, id string, pa
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetCclV1CustomCodeLogging(ctx context.Context, id string, params *GetCclV1CustomCodeLoggingParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetCclV1CustomCodeLogging(ctx context.Context, id string, params *GetCclV1CustomCodeLoggingParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCclV1CustomCodeLoggingRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -188,7 +188,7 @@ func (c *Client) GetCclV1CustomCodeLogging(ctx context.Context, id string, param
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateCclV1CustomCodeLoggingWithBody(ctx context.Context, id string, params *UpdateCclV1CustomCodeLoggingParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateCclV1CustomCodeLoggingWithBody(ctx context.Context, id string, params *UpdateCclV1CustomCodeLoggingParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateCclV1CustomCodeLoggingRequestWithBody(c.Server, id, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -199,7 +199,7 @@ func (c *Client) UpdateCclV1CustomCodeLoggingWithBody(ctx context.Context, id st
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateCclV1CustomCodeLogging(ctx context.Context, id string, params *UpdateCclV1CustomCodeLoggingParams, body UpdateCclV1CustomCodeLoggingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateCclV1CustomCodeLogging(ctx context.Context, id string, params *UpdateCclV1CustomCodeLoggingParams, body UpdateCclV1CustomCodeLoggingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateCclV1CustomCodeLoggingRequest(c.Server, id, params, body)
 	if err != nil {
 		return nil, err

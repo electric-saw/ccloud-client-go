@@ -86,7 +86,7 @@ type ListSqlv1MaterializedTablesParams struct {
 type CreateSqlv1MaterializedTableJSONRequestBody CreateSqlv1MaterializedTableJSONBody
 type UpdateSqlv1MaterializedTableJSONRequestBody UpdateSqlv1MaterializedTableJSONBody
 
-func (c *Client) CreateSqlv1MaterializedTableWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateSqlv1MaterializedTableWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateSqlv1MaterializedTableRequestWithBody(c.Server, organizationId, environmentId, kafkaClusterId, contentType, body)
 	if err != nil {
 		return nil, err
@@ -97,7 +97,7 @@ func (c *Client) CreateSqlv1MaterializedTableWithBody(ctx context.Context, organ
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, body CreateSqlv1MaterializedTableJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, body CreateSqlv1MaterializedTableJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateSqlv1MaterializedTableRequest(c.Server, organizationId, environmentId, kafkaClusterId, body)
 	if err != nil {
 		return nil, err
@@ -108,7 +108,7 @@ func (c *Client) CreateSqlv1MaterializedTable(ctx context.Context, organizationI
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteSqlv1MaterializedTableRequest(c.Server, organizationId, environmentId, kafkaClusterId, tableName)
 	if err != nil {
 		return nil, err
@@ -119,7 +119,7 @@ func (c *Client) DeleteSqlv1MaterializedTable(ctx context.Context, organizationI
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSqlv1MaterializedTableRequest(c.Server, organizationId, environmentId, kafkaClusterId, tableName)
 	if err != nil {
 		return nil, err
@@ -130,7 +130,7 @@ func (c *Client) GetSqlv1MaterializedTable(ctx context.Context, organizationId o
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateSqlv1MaterializedTableWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateSqlv1MaterializedTableWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSqlv1MaterializedTableRequestWithBody(c.Server, organizationId, environmentId, kafkaClusterId, tableName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -141,7 +141,7 @@ func (c *Client) UpdateSqlv1MaterializedTableWithBody(ctx context.Context, organ
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, body UpdateSqlv1MaterializedTableJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, body UpdateSqlv1MaterializedTableJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSqlv1MaterializedTableRequest(c.Server, organizationId, environmentId, kafkaClusterId, tableName, body)
 	if err != nil {
 		return nil, err
@@ -152,7 +152,7 @@ func (c *Client) UpdateSqlv1MaterializedTable(ctx context.Context, organizationI
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ListSqlv1MaterializedTables(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1MaterializedTablesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListSqlv1MaterializedTables(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1MaterializedTablesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSqlv1MaterializedTablesRequest(c.Server, organizationId, environmentId, params)
 	if err != nil {
 		return nil, err

@@ -1117,7 +1117,7 @@ type RequestEditorFn func(ctx context.Context, req *http.Request) error
 type HttpRequestDoer interface {
 	Do(req *http.Request) (*http.Response, error)
 }
-type Client struct {
+type oasClient struct {
 	// The endpoint of the server conforming to this interface, with scheme,
 	// https://api.deepmap.com for example. This can contain a path relative
 	// to the server, such as https://api.deepmap.com/dev-test, and all the
@@ -1132,11 +1132,11 @@ type Client struct {
 	// the network.
 	RequestEditors []RequestEditorFn
 }
-type ClientOption func(*Client) error
+type ClientOption func(*oasClient) error
 
-func NewClient(server string, opts ...ClientOption) (*Client, error) {
+func NewClient(server string, opts ...ClientOption) (*oasClient, error) {
 	// create a client with sane default values
-	client := Client{
+	client := oasClient{
 		Server: server,
 	}
 	// mutate client and add all optional params
@@ -1156,13 +1156,13 @@ func NewClient(server string, opts ...ClientOption) (*Client, error) {
 	return &client, nil
 }
 func WithHTTPClient(doer HttpRequestDoer) ClientOption {
-	return func(c *Client) error {
+	return func(c *oasClient) error {
 		c.Client = doer
 		return nil
 	}
 }
 func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
-	return func(c *Client) error {
+	return func(c *oasClient) error {
 		c.RequestEditors = append(c.RequestEditors, fn)
 		return nil
 	}
@@ -1325,7 +1325,7 @@ type ClientInterface interface {
 	DeleteOrgV2ScimToken(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *Client) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
+func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
 	for _, r := range c.RequestEditors {
 		if err := r(ctx, req); err != nil {
 			return err
@@ -1351,7 +1351,7 @@ func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithRes
 	return &ClientWithResponses{client}, nil
 }
 func WithBaseURL(baseURL string) ClientOption {
-	return func(c *Client) error {
+	return func(c *oasClient) error {
 		newBaseURL, err := url.Parse(baseURL)
 		if err != nil {
 			return err

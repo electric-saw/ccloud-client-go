@@ -58,7 +58,7 @@ type GetServiceQuotaV1AppliedQuotaParams struct {
 type GetServiceQuotaV1AppliedQuota200JSONResponseBodyApiVersion string
 type GetServiceQuotaV1AppliedQuota200JSONResponseBodyKind string
 
-func (c *Client) ListServiceQuotaV1AppliedQuotas(ctx context.Context, params *ListServiceQuotaV1AppliedQuotasParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListServiceQuotaV1AppliedQuotas(ctx context.Context, params *ListServiceQuotaV1AppliedQuotasParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListServiceQuotaV1AppliedQuotasRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -69,7 +69,7 @@ func (c *Client) ListServiceQuotaV1AppliedQuotas(ctx context.Context, params *Li
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetServiceQuotaV1AppliedQuota(ctx context.Context, id string, params *GetServiceQuotaV1AppliedQuotaParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetServiceQuotaV1AppliedQuota(ctx context.Context, id string, params *GetServiceQuotaV1AppliedQuotaParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetServiceQuotaV1AppliedQuotaRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err

@@ -18,7 +18,7 @@ import (
 
 type ProduceRecordJSONRequestBody = ProduceRequest
 
-func (c *Client) ProduceRecordWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ProduceRecordWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewProduceRecordRequestWithBody(c.Server, clusterId, topicName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -29,7 +29,7 @@ func (c *Client) ProduceRecordWithBody(ctx context.Context, clusterId ClusterId,
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ProduceRecord(ctx context.Context, clusterId ClusterId, topicName TopicName, body ProduceRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ProduceRecord(ctx context.Context, clusterId ClusterId, topicName TopicName, body ProduceRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewProduceRecordRequest(c.Server, clusterId, topicName, body)
 	if err != nil {
 		return nil, err

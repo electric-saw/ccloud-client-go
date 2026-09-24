@@ -2755,7 +2755,7 @@ type RequestEditorFn func(ctx context.Context, req *http.Request) error
 type HttpRequestDoer interface {
 	Do(req *http.Request) (*http.Response, error)
 }
-type Client struct {
+type oasClient struct {
 	// The endpoint of the server conforming to this interface, with scheme,
 	// https://api.deepmap.com for example. This can contain a path relative
 	// to the server, such as https://api.deepmap.com/dev-test, and all the
@@ -2770,11 +2770,11 @@ type Client struct {
 	// the network.
 	RequestEditors []RequestEditorFn
 }
-type ClientOption func(*Client) error
+type ClientOption func(*oasClient) error
 
-func NewClient(server string, opts ...ClientOption) (*Client, error) {
+func NewClient(server string, opts ...ClientOption) (*oasClient, error) {
 	// create a client with sane default values
-	client := Client{
+	client := oasClient{
 		Server: server,
 	}
 	// mutate client and add all optional params
@@ -2794,13 +2794,13 @@ func NewClient(server string, opts ...ClientOption) (*Client, error) {
 	return &client, nil
 }
 func WithHTTPClient(doer HttpRequestDoer) ClientOption {
-	return func(c *Client) error {
+	return func(c *oasClient) error {
 		c.Client = doer
 		return nil
 	}
 }
 func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
-	return func(c *Client) error {
+	return func(c *oasClient) error {
 		c.RequestEditors = append(c.RequestEditors, fn)
 		return nil
 	}
@@ -3074,7 +3074,7 @@ type ClientInterface interface {
 	ResourcesCdxV1SharedToken(ctx context.Context, body ResourcesCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *Client) DeleteImageCdxV1ProviderSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteImageCdxV1ProviderSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteImageCdxV1ProviderSharedResourceRequest(c.Server, id, fileName)
 	if err != nil {
 		return nil, err
@@ -3085,7 +3085,7 @@ func (c *Client) DeleteImageCdxV1ProviderSharedResource(ctx context.Context, id 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ViewImageCdxV1ProviderSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ViewImageCdxV1ProviderSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewViewImageCdxV1ProviderSharedResourceRequest(c.Server, id, fileName)
 	if err != nil {
 		return nil, err
@@ -3096,7 +3096,7 @@ func (c *Client) ViewImageCdxV1ProviderSharedResource(ctx context.Context, id st
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UploadImageCdxV1ProviderSharedResourceWithBody(ctx context.Context, id string, fileName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UploadImageCdxV1ProviderSharedResourceWithBody(ctx context.Context, id string, fileName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUploadImageCdxV1ProviderSharedResourceRequestWithBody(c.Server, id, fileName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -3226,7 +3226,7 @@ func NewUploadImageCdxV1ProviderSharedResourceRequestWithBody(server string, id 
 
 	return req, nil
 }
-func (c *Client) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
+func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
 	for _, r := range c.RequestEditors {
 		if err := r(ctx, req); err != nil {
 			return err
@@ -3252,7 +3252,7 @@ func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithRes
 	return &ClientWithResponses{client}, nil
 }
 func WithBaseURL(baseURL string) ClientOption {
-	return func(c *Client) error {
+	return func(c *oasClient) error {
 		newBaseURL, err := url.Parse(baseURL)
 		if err != nil {
 			return err

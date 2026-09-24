@@ -81,7 +81,7 @@ type GetVersionsParams struct {
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 }
 
-func (c *Client) GetSchemas(ctx context.Context, params *GetSchemasParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetSchemas(ctx context.Context, params *GetSchemasParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSchemasRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -92,7 +92,7 @@ func (c *Client) GetSchemas(ctx context.Context, params *GetSchemasParams, reqEd
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetSchema(ctx context.Context, id int32, params *GetSchemaParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetSchema(ctx context.Context, id int32, params *GetSchemaParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSchemaRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -103,7 +103,7 @@ func (c *Client) GetSchema(ctx context.Context, id int32, params *GetSchemaParam
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetSchemaOnly(ctx context.Context, id int32, params *GetSchemaOnlyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetSchemaOnly(ctx context.Context, id int32, params *GetSchemaOnlyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSchemaOnlyRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -114,7 +114,7 @@ func (c *Client) GetSchemaOnly(ctx context.Context, id int32, params *GetSchemaO
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetSubjects(ctx context.Context, id int32, params *GetSubjectsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetSubjects(ctx context.Context, id int32, params *GetSubjectsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSubjectsRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -125,7 +125,7 @@ func (c *Client) GetSubjects(ctx context.Context, id int32, params *GetSubjectsP
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetVersions(ctx context.Context, id int32, params *GetVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetVersions(ctx context.Context, id int32, params *GetVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetVersionsRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -136,7 +136,7 @@ func (c *Client) GetVersions(ctx context.Context, id int32, params *GetVersionsP
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetSchemaTypes(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetSchemaTypes(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSchemaTypesRequest(c.Server)
 	if err != nil {
 		return nil, err

@@ -116,7 +116,7 @@ type UpdateNetworkingV1Peering200JSONResponseBodyKind string
 type CreateNetworkingV1PeeringJSONRequestBody CreateNetworkingV1PeeringJSONBody
 type UpdateNetworkingV1PeeringJSONRequestBody UpdateNetworkingV1PeeringJSONBody
 
-func (c *Client) ListNetworkingV1Peerings(ctx context.Context, params *ListNetworkingV1PeeringsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListNetworkingV1Peerings(ctx context.Context, params *ListNetworkingV1PeeringsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNetworkingV1PeeringsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -127,7 +127,7 @@ func (c *Client) ListNetworkingV1Peerings(ctx context.Context, params *ListNetwo
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNetworkingV1PeeringWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNetworkingV1PeeringWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1PeeringRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -138,7 +138,7 @@ func (c *Client) CreateNetworkingV1PeeringWithBody(ctx context.Context, contentT
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNetworkingV1Peering(ctx context.Context, body CreateNetworkingV1PeeringJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNetworkingV1Peering(ctx context.Context, body CreateNetworkingV1PeeringJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1PeeringRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -149,7 +149,7 @@ func (c *Client) CreateNetworkingV1Peering(ctx context.Context, body CreateNetwo
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteNetworkingV1Peering(ctx context.Context, id string, params *DeleteNetworkingV1PeeringParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteNetworkingV1Peering(ctx context.Context, id string, params *DeleteNetworkingV1PeeringParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteNetworkingV1PeeringRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -160,7 +160,7 @@ func (c *Client) DeleteNetworkingV1Peering(ctx context.Context, id string, param
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetNetworkingV1Peering(ctx context.Context, id string, params *GetNetworkingV1PeeringParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetNetworkingV1Peering(ctx context.Context, id string, params *GetNetworkingV1PeeringParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNetworkingV1PeeringRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -171,7 +171,7 @@ func (c *Client) GetNetworkingV1Peering(ctx context.Context, id string, params *
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNetworkingV1PeeringWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNetworkingV1PeeringWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1PeeringRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -182,7 +182,7 @@ func (c *Client) UpdateNetworkingV1PeeringWithBody(ctx context.Context, id strin
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNetworkingV1Peering(ctx context.Context, id string, body UpdateNetworkingV1PeeringJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNetworkingV1Peering(ctx context.Context, id string, body UpdateNetworkingV1PeeringJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1PeeringRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

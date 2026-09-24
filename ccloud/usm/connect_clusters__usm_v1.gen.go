@@ -76,7 +76,7 @@ type GetUsmV1ConnectCluster200JSONResponseBodyApiVersion string
 type GetUsmV1ConnectCluster200JSONResponseBodyKind string
 type CreateUsmV1ConnectClusterJSONRequestBody CreateUsmV1ConnectClusterJSONBody
 
-func (c *Client) ListUsmV1ConnectClusters(ctx context.Context, params *ListUsmV1ConnectClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListUsmV1ConnectClusters(ctx context.Context, params *ListUsmV1ConnectClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListUsmV1ConnectClustersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -87,7 +87,7 @@ func (c *Client) ListUsmV1ConnectClusters(ctx context.Context, params *ListUsmV1
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateUsmV1ConnectClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateUsmV1ConnectClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateUsmV1ConnectClusterRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -98,7 +98,7 @@ func (c *Client) CreateUsmV1ConnectClusterWithBody(ctx context.Context, contentT
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateUsmV1ConnectCluster(ctx context.Context, body CreateUsmV1ConnectClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateUsmV1ConnectCluster(ctx context.Context, body CreateUsmV1ConnectClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateUsmV1ConnectClusterRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -109,7 +109,7 @@ func (c *Client) CreateUsmV1ConnectCluster(ctx context.Context, body CreateUsmV1
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteUsmV1ConnectCluster(ctx context.Context, id string, params *DeleteUsmV1ConnectClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteUsmV1ConnectCluster(ctx context.Context, id string, params *DeleteUsmV1ConnectClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteUsmV1ConnectClusterRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -120,7 +120,7 @@ func (c *Client) DeleteUsmV1ConnectCluster(ctx context.Context, id string, param
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetUsmV1ConnectCluster(ctx context.Context, id string, params *GetUsmV1ConnectClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetUsmV1ConnectCluster(ctx context.Context, id string, params *GetUsmV1ConnectClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetUsmV1ConnectClusterRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err

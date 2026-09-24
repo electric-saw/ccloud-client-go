@@ -127,7 +127,7 @@ type ListConnectv1ConnectorsWithExpansionsParamsExpand string
 type CreateConnectv1ConnectorJSONRequestBody CreateConnectv1ConnectorJSONBody
 type CreateOrUpdateConnectv1ConnectorConfigJSONRequestBody CreateOrUpdateConnectv1ConnectorConfigJSONBody
 
-func (c *Client) ListConnectv1Connectors(ctx context.Context, environmentId string, kafkaClusterId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListConnectv1Connectors(ctx context.Context, environmentId string, kafkaClusterId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListConnectv1ConnectorsRequest(c.Server, environmentId, kafkaClusterId)
 	if err != nil {
 		return nil, err
@@ -138,7 +138,7 @@ func (c *Client) ListConnectv1Connectors(ctx context.Context, environmentId stri
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateConnectv1ConnectorWithBody(ctx context.Context, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateConnectv1ConnectorWithBody(ctx context.Context, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateConnectv1ConnectorRequestWithBody(c.Server, environmentId, kafkaClusterId, contentType, body)
 	if err != nil {
 		return nil, err
@@ -149,7 +149,7 @@ func (c *Client) CreateConnectv1ConnectorWithBody(ctx context.Context, environme
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, body CreateConnectv1ConnectorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, body CreateConnectv1ConnectorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateConnectv1ConnectorRequest(c.Server, environmentId, kafkaClusterId, body)
 	if err != nil {
 		return nil, err
@@ -160,7 +160,7 @@ func (c *Client) CreateConnectv1Connector(ctx context.Context, environmentId str
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteConnectv1ConnectorRequest(c.Server, environmentId, kafkaClusterId, connectorName)
 	if err != nil {
 		return nil, err
@@ -171,7 +171,7 @@ func (c *Client) DeleteConnectv1Connector(ctx context.Context, environmentId str
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ReadConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ReadConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReadConnectv1ConnectorRequest(c.Server, environmentId, kafkaClusterId, connectorName)
 	if err != nil {
 		return nil, err
@@ -182,7 +182,7 @@ func (c *Client) ReadConnectv1Connector(ctx context.Context, environmentId strin
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetConnectv1ConnectorConfig(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetConnectv1ConnectorConfig(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetConnectv1ConnectorConfigRequest(c.Server, environmentId, kafkaClusterId, connectorName)
 	if err != nil {
 		return nil, err
@@ -193,7 +193,7 @@ func (c *Client) GetConnectv1ConnectorConfig(ctx context.Context, environmentId 
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateOrUpdateConnectv1ConnectorConfigWithBody(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateOrUpdateConnectv1ConnectorConfigWithBody(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateOrUpdateConnectv1ConnectorConfigRequestWithBody(c.Server, environmentId, kafkaClusterId, connectorName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -204,7 +204,7 @@ func (c *Client) CreateOrUpdateConnectv1ConnectorConfigWithBody(ctx context.Cont
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateOrUpdateConnectv1ConnectorConfig(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, body CreateOrUpdateConnectv1ConnectorConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateOrUpdateConnectv1ConnectorConfig(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, body CreateOrUpdateConnectv1ConnectorConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateOrUpdateConnectv1ConnectorConfigRequest(c.Server, environmentId, kafkaClusterId, connectorName, body)
 	if err != nil {
 		return nil, err
@@ -215,7 +215,7 @@ func (c *Client) CreateOrUpdateConnectv1ConnectorConfig(ctx context.Context, env
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ListConnectv1ConnectorsWithExpansions(ctx context.Context, environmentId string, kafkaClusterId string, params *ListConnectv1ConnectorsWithExpansionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListConnectv1ConnectorsWithExpansions(ctx context.Context, environmentId string, kafkaClusterId string, params *ListConnectv1ConnectorsWithExpansionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListConnectv1ConnectorsWithExpansionsRequest(c.Server, environmentId, kafkaClusterId, params)
 	if err != nil {
 		return nil, err

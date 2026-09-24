@@ -22,7 +22,7 @@ type UpdateCdxV1OptIn200JSONResponseBodyApiVersion string
 type UpdateCdxV1OptIn200JSONResponseBodyKind string
 type UpdateCdxV1OptInJSONRequestBody = CdxV1OptIn
 
-func (c *Client) GetCdxV1OptIn(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetCdxV1OptIn(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCdxV1OptInRequest(c.Server)
 	if err != nil {
 		return nil, err
@@ -33,7 +33,7 @@ func (c *Client) GetCdxV1OptIn(ctx context.Context, reqEditors ...RequestEditorF
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateCdxV1OptInWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateCdxV1OptInWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateCdxV1OptInRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -44,7 +44,7 @@ func (c *Client) UpdateCdxV1OptInWithBody(ctx context.Context, contentType strin
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateCdxV1OptIn(ctx context.Context, body UpdateCdxV1OptInJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateCdxV1OptIn(ctx context.Context, body UpdateCdxV1OptInJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateCdxV1OptInRequest(c.Server, body)
 	if err != nil {
 		return nil, err

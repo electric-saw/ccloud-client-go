@@ -15,7 +15,7 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
-func (c *Client) ListKafkaPartitions(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListKafkaPartitions(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaPartitionsRequest(c.Server, clusterId, topicName)
 	if err != nil {
 		return nil, err
@@ -26,7 +26,7 @@ func (c *Client) ListKafkaPartitions(ctx context.Context, clusterId ClusterId, t
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetKafkaPartition(ctx context.Context, clusterId ClusterId, topicName TopicName, partitionId PartitionId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetKafkaPartition(ctx context.Context, clusterId ClusterId, topicName TopicName, partitionId PartitionId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaPartitionRequest(c.Server, clusterId, topicName, partitionId)
 	if err != nil {
 		return nil, err

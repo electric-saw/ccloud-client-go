@@ -107,7 +107,7 @@ type UpdateSrcmV2Cluster200JSONResponseBodyKind string
 type CreateSrcmV2ClusterJSONRequestBody CreateSrcmV2ClusterJSONBody
 type UpdateSrcmV2ClusterJSONRequestBody UpdateSrcmV2ClusterJSONBody
 
-func (c *Client) ListSrcmV2Clusters(ctx context.Context, params *ListSrcmV2ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListSrcmV2Clusters(ctx context.Context, params *ListSrcmV2ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSrcmV2ClustersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -118,7 +118,7 @@ func (c *Client) ListSrcmV2Clusters(ctx context.Context, params *ListSrcmV2Clust
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateSrcmV2ClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateSrcmV2ClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateSrcmV2ClusterRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -129,7 +129,7 @@ func (c *Client) CreateSrcmV2ClusterWithBody(ctx context.Context, contentType st
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateSrcmV2Cluster(ctx context.Context, body CreateSrcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateSrcmV2Cluster(ctx context.Context, body CreateSrcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateSrcmV2ClusterRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -140,7 +140,7 @@ func (c *Client) CreateSrcmV2Cluster(ctx context.Context, body CreateSrcmV2Clust
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteSrcmV2Cluster(ctx context.Context, id string, params *DeleteSrcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteSrcmV2Cluster(ctx context.Context, id string, params *DeleteSrcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteSrcmV2ClusterRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -151,7 +151,7 @@ func (c *Client) DeleteSrcmV2Cluster(ctx context.Context, id string, params *Del
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetSrcmV2Cluster(ctx context.Context, id string, params *GetSrcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetSrcmV2Cluster(ctx context.Context, id string, params *GetSrcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSrcmV2ClusterRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -162,7 +162,7 @@ func (c *Client) GetSrcmV2Cluster(ctx context.Context, id string, params *GetSrc
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateSrcmV2ClusterWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateSrcmV2ClusterWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSrcmV2ClusterRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -173,7 +173,7 @@ func (c *Client) UpdateSrcmV2ClusterWithBody(ctx context.Context, id string, con
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateSrcmV2Cluster(ctx context.Context, id string, body UpdateSrcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateSrcmV2Cluster(ctx context.Context, id string, body UpdateSrcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSrcmV2ClusterRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

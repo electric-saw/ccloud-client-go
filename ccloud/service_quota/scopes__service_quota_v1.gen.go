@@ -26,7 +26,7 @@ type ListServiceQuotaV1ScopesParams struct {
 type GetServiceQuotaV1Scope200JSONResponseBodyApiVersion string
 type GetServiceQuotaV1Scope200JSONResponseBodyKind string
 
-func (c *Client) ListServiceQuotaV1Scopes(ctx context.Context, params *ListServiceQuotaV1ScopesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListServiceQuotaV1Scopes(ctx context.Context, params *ListServiceQuotaV1ScopesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListServiceQuotaV1ScopesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -37,7 +37,7 @@ func (c *Client) ListServiceQuotaV1Scopes(ctx context.Context, params *ListServi
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetServiceQuotaV1Scope(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetServiceQuotaV1Scope(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetServiceQuotaV1ScopeRequest(c.Server, id)
 	if err != nil {
 		return nil, err

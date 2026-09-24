@@ -22,7 +22,7 @@ type UpdateFcpmV2OrgComputePoolConfig200JSONResponseBodyApiVersion string
 type UpdateFcpmV2OrgComputePoolConfig200JSONResponseBodyKind string
 type UpdateFcpmV2OrgComputePoolConfigJSONRequestBody = FcpmV2OrgComputePoolConfig
 
-func (c *Client) GetFcpmV2OrgComputePoolConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetFcpmV2OrgComputePoolConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetFcpmV2OrgComputePoolConfigRequest(c.Server)
 	if err != nil {
 		return nil, err
@@ -33,7 +33,7 @@ func (c *Client) GetFcpmV2OrgComputePoolConfig(ctx context.Context, reqEditors .
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateFcpmV2OrgComputePoolConfigWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateFcpmV2OrgComputePoolConfigWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateFcpmV2OrgComputePoolConfigRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -44,7 +44,7 @@ func (c *Client) UpdateFcpmV2OrgComputePoolConfigWithBody(ctx context.Context, c
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateFcpmV2OrgComputePoolConfig(ctx context.Context, body UpdateFcpmV2OrgComputePoolConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateFcpmV2OrgComputePoolConfig(ctx context.Context, body UpdateFcpmV2OrgComputePoolConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateFcpmV2OrgComputePoolConfigRequest(c.Server, body)
 	if err != nil {
 		return nil, err

@@ -35,7 +35,7 @@ type ListNetworkingV1IpAddressesParams struct {
 	PageToken *string `form:"page_token,omitempty" json:"page_token,omitempty"`
 }
 
-func (c *Client) ListNetworkingV1IpAddresses(ctx context.Context, params *ListNetworkingV1IpAddressesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListNetworkingV1IpAddresses(ctx context.Context, params *ListNetworkingV1IpAddressesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNetworkingV1IpAddressesRequest(c.Server, params)
 	if err != nil {
 		return nil, err

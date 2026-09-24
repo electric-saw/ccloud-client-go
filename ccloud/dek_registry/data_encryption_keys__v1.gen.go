@@ -86,7 +86,7 @@ type CreateDekJSONRequestBody = CreateDekRequest
 type CreateDekApplicationVndSchemaregistryPlusJSONRequestBody = CreateDekRequest
 type CreateDekApplicationVndSchemaregistryV1PlusJSONRequestBody = CreateDekRequest
 
-func (c *Client) GetDekSubjects(ctx context.Context, name string, params *GetDekSubjectsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetDekSubjects(ctx context.Context, name string, params *GetDekSubjectsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetDekSubjectsRequest(c.Server, name, params)
 	if err != nil {
 		return nil, err
@@ -97,7 +97,7 @@ func (c *Client) GetDekSubjects(ctx context.Context, name string, params *GetDek
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateDekWithBody(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateDekWithBody(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateDekRequestWithBody(c.Server, name, contentType, body)
 	if err != nil {
 		return nil, err
@@ -108,7 +108,7 @@ func (c *Client) CreateDekWithBody(ctx context.Context, name string, contentType
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateDek(ctx context.Context, name string, body CreateDekJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateDek(ctx context.Context, name string, body CreateDekJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateDekRequest(c.Server, name, body)
 	if err != nil {
 		return nil, err
@@ -119,7 +119,7 @@ func (c *Client) CreateDek(ctx context.Context, name string, body CreateDekJSONR
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateDekWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, body CreateDekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateDekWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, body CreateDekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateDekRequestWithApplicationVndSchemaregistryPlusJSONBody(c.Server, name, body)
 	if err != nil {
 		return nil, err
@@ -130,7 +130,7 @@ func (c *Client) CreateDekWithApplicationVndSchemaregistryPlusJSONBody(ctx conte
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateDekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, body CreateDekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateDekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, body CreateDekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateDekRequestWithApplicationVndSchemaregistryV1PlusJSONBody(c.Server, name, body)
 	if err != nil {
 		return nil, err
@@ -141,7 +141,7 @@ func (c *Client) CreateDekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx con
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteDekVersions(ctx context.Context, name string, subject string, params *DeleteDekVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteDekVersions(ctx context.Context, name string, subject string, params *DeleteDekVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteDekVersionsRequest(c.Server, name, subject, params)
 	if err != nil {
 		return nil, err
@@ -152,7 +152,7 @@ func (c *Client) DeleteDekVersions(ctx context.Context, name string, subject str
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetDek(ctx context.Context, name string, subject string, params *GetDekParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetDek(ctx context.Context, name string, subject string, params *GetDekParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetDekRequest(c.Server, name, subject, params)
 	if err != nil {
 		return nil, err
@@ -163,7 +163,7 @@ func (c *Client) GetDek(ctx context.Context, name string, subject string, params
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UndeleteDekVersions(ctx context.Context, name string, subject string, params *UndeleteDekVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UndeleteDekVersions(ctx context.Context, name string, subject string, params *UndeleteDekVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUndeleteDekVersionsRequest(c.Server, name, subject, params)
 	if err != nil {
 		return nil, err
@@ -174,7 +174,7 @@ func (c *Client) UndeleteDekVersions(ctx context.Context, name string, subject s
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetDekVersions(ctx context.Context, name string, subject string, params *GetDekVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetDekVersions(ctx context.Context, name string, subject string, params *GetDekVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetDekVersionsRequest(c.Server, name, subject, params)
 	if err != nil {
 		return nil, err
@@ -185,7 +185,7 @@ func (c *Client) GetDekVersions(ctx context.Context, name string, subject string
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteDekVersion(ctx context.Context, name string, subject string, version string, params *DeleteDekVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteDekVersion(ctx context.Context, name string, subject string, version string, params *DeleteDekVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteDekVersionRequest(c.Server, name, subject, version, params)
 	if err != nil {
 		return nil, err
@@ -196,7 +196,7 @@ func (c *Client) DeleteDekVersion(ctx context.Context, name string, subject stri
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetDekByVersion(ctx context.Context, name string, subject string, version string, params *GetDekByVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetDekByVersion(ctx context.Context, name string, subject string, version string, params *GetDekByVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetDekByVersionRequest(c.Server, name, subject, version, params)
 	if err != nil {
 		return nil, err
@@ -207,7 +207,7 @@ func (c *Client) GetDekByVersion(ctx context.Context, name string, subject strin
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UndeleteDekVersion(ctx context.Context, name string, subject string, version string, params *UndeleteDekVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UndeleteDekVersion(ctx context.Context, name string, subject string, version string, params *UndeleteDekVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUndeleteDekVersionRequest(c.Server, name, subject, version, params)
 	if err != nil {
 		return nil, err

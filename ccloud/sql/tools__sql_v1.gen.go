@@ -64,7 +64,7 @@ type GetSqlv1Tool200JSONResponseBodyApiVersion string
 type GetSqlv1Tool200JSONResponseBodyKind string
 type CreateSqlv1ToolJSONRequestBody CreateSqlv1ToolJSONBody
 
-func (c *Client) ListSqlv1Tools(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, params *ListSqlv1ToolsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListSqlv1Tools(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, params *ListSqlv1ToolsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSqlv1ToolsRequest(c.Server, organizationId, environmentId, databaseName, params)
 	if err != nil {
 		return nil, err
@@ -75,7 +75,7 @@ func (c *Client) ListSqlv1Tools(ctx context.Context, organizationId openapi_type
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateSqlv1ToolWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateSqlv1ToolWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateSqlv1ToolRequestWithBody(c.Server, organizationId, environmentId, databaseName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -86,7 +86,7 @@ func (c *Client) CreateSqlv1ToolWithBody(ctx context.Context, organizationId ope
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateSqlv1Tool(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, body CreateSqlv1ToolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateSqlv1Tool(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, body CreateSqlv1ToolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateSqlv1ToolRequest(c.Server, organizationId, environmentId, databaseName, body)
 	if err != nil {
 		return nil, err
@@ -97,7 +97,7 @@ func (c *Client) CreateSqlv1Tool(ctx context.Context, organizationId openapi_typ
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteSqlv1Tool(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, toolName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteSqlv1Tool(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, toolName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteSqlv1ToolRequest(c.Server, organizationId, environmentId, databaseName, toolName)
 	if err != nil {
 		return nil, err
@@ -108,7 +108,7 @@ func (c *Client) DeleteSqlv1Tool(ctx context.Context, organizationId openapi_typ
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetSqlv1Tool(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, toolName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetSqlv1Tool(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, toolName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSqlv1ToolRequest(c.Server, organizationId, environmentId, databaseName, toolName)
 	if err != nil {
 		return nil, err

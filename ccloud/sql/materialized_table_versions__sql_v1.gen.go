@@ -24,7 +24,7 @@ type ListSqlv1MaterializedTableVersionsParams struct {
 	PageToken *string `form:"page_token,omitempty" json:"page_token,omitempty"`
 }
 
-func (c *Client) ListSqlv1MaterializedTableVersions(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, params *ListSqlv1MaterializedTableVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListSqlv1MaterializedTableVersions(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, params *ListSqlv1MaterializedTableVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSqlv1MaterializedTableVersionsRequest(c.Server, organizationId, environmentId, kafkaClusterId, tableName, params)
 	if err != nil {
 		return nil, err
@@ -35,7 +35,7 @@ func (c *Client) ListSqlv1MaterializedTableVersions(ctx context.Context, organiz
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetSqlv1MaterializedTableVersion(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, version int32, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetSqlv1MaterializedTableVersion(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, version int32, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSqlv1MaterializedTableVersionRequest(c.Server, organizationId, environmentId, kafkaClusterId, tableName, version)
 	if err != nil {
 		return nil, err

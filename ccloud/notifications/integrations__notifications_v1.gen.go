@@ -106,7 +106,7 @@ type CreateNotificationsV1IntegrationJSONRequestBody CreateNotificationsV1Integr
 type UpdateNotificationsV1IntegrationJSONRequestBody = NotificationsV1Integration
 type TestNotificationsV1IntegrationJSONRequestBody TestNotificationsV1IntegrationJSONBody
 
-func (c *Client) ListNotificationsV1Integrations(ctx context.Context, params *ListNotificationsV1IntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListNotificationsV1Integrations(ctx context.Context, params *ListNotificationsV1IntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNotificationsV1IntegrationsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -117,7 +117,7 @@ func (c *Client) ListNotificationsV1Integrations(ctx context.Context, params *Li
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNotificationsV1IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNotificationsV1IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNotificationsV1IntegrationRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -128,7 +128,7 @@ func (c *Client) CreateNotificationsV1IntegrationWithBody(ctx context.Context, c
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateNotificationsV1Integration(ctx context.Context, body CreateNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateNotificationsV1Integration(ctx context.Context, body CreateNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNotificationsV1IntegrationRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -139,7 +139,7 @@ func (c *Client) CreateNotificationsV1Integration(ctx context.Context, body Crea
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteNotificationsV1Integration(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteNotificationsV1Integration(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteNotificationsV1IntegrationRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -150,7 +150,7 @@ func (c *Client) DeleteNotificationsV1Integration(ctx context.Context, id string
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetNotificationsV1Integration(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetNotificationsV1Integration(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNotificationsV1IntegrationRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -161,7 +161,7 @@ func (c *Client) GetNotificationsV1Integration(ctx context.Context, id string, r
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNotificationsV1IntegrationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNotificationsV1IntegrationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNotificationsV1IntegrationRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -172,7 +172,7 @@ func (c *Client) UpdateNotificationsV1IntegrationWithBody(ctx context.Context, i
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateNotificationsV1Integration(ctx context.Context, id string, body UpdateNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateNotificationsV1Integration(ctx context.Context, id string, body UpdateNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNotificationsV1IntegrationRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -183,7 +183,7 @@ func (c *Client) UpdateNotificationsV1Integration(ctx context.Context, id string
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) TestNotificationsV1IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) TestNotificationsV1IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTestNotificationsV1IntegrationRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -194,7 +194,7 @@ func (c *Client) TestNotificationsV1IntegrationWithBody(ctx context.Context, con
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) TestNotificationsV1Integration(ctx context.Context, body TestNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) TestNotificationsV1Integration(ctx context.Context, body TestNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTestNotificationsV1IntegrationRequest(c.Server, body)
 	if err != nil {
 		return nil, err

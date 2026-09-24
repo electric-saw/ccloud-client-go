@@ -30,7 +30,7 @@ type UpdateOrgV2Organization200JSONResponseBodyApiVersion string
 type UpdateOrgV2Organization200JSONResponseBodyKind string
 type UpdateOrgV2OrganizationJSONRequestBody = OrgV2Organization
 
-func (c *Client) ListOrgV2Organizations(ctx context.Context, params *ListOrgV2OrganizationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListOrgV2Organizations(ctx context.Context, params *ListOrgV2OrganizationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListOrgV2OrganizationsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -41,7 +41,7 @@ func (c *Client) ListOrgV2Organizations(ctx context.Context, params *ListOrgV2Or
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetOrgV2Organization(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetOrgV2Organization(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetOrgV2OrganizationRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -52,7 +52,7 @@ func (c *Client) GetOrgV2Organization(ctx context.Context, id string, reqEditors
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateOrgV2OrganizationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateOrgV2OrganizationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateOrgV2OrganizationRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -63,7 +63,7 @@ func (c *Client) UpdateOrgV2OrganizationWithBody(ctx context.Context, id string,
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateOrgV2Organization(ctx context.Context, id string, body UpdateOrgV2OrganizationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateOrgV2Organization(ctx context.Context, id string, body UpdateOrgV2OrganizationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateOrgV2OrganizationRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err

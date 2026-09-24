@@ -82,7 +82,7 @@ type UpdateIamV2CertificateIdentityPool200JSONResponseBodyKind string
 type CreateIamV2CertificateIdentityPoolJSONRequestBody CreateIamV2CertificateIdentityPoolJSONBody
 type UpdateIamV2CertificateIdentityPoolJSONRequestBody = IamV2CertificateIdentityPool
 
-func (c *Client) ListIamV2CertificateIdentityPools(ctx context.Context, certificateAuthorityId string, params *ListIamV2CertificateIdentityPoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ListIamV2CertificateIdentityPools(ctx context.Context, certificateAuthorityId string, params *ListIamV2CertificateIdentityPoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIamV2CertificateIdentityPoolsRequest(c.Server, certificateAuthorityId, params)
 	if err != nil {
 		return nil, err
@@ -93,7 +93,7 @@ func (c *Client) ListIamV2CertificateIdentityPools(ctx context.Context, certific
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateIamV2CertificateIdentityPoolWithBody(ctx context.Context, certificateAuthorityId string, params *CreateIamV2CertificateIdentityPoolParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateIamV2CertificateIdentityPoolWithBody(ctx context.Context, certificateAuthorityId string, params *CreateIamV2CertificateIdentityPoolParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2CertificateIdentityPoolRequestWithBody(c.Server, certificateAuthorityId, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -104,7 +104,7 @@ func (c *Client) CreateIamV2CertificateIdentityPoolWithBody(ctx context.Context,
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) CreateIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, params *CreateIamV2CertificateIdentityPoolParams, body CreateIamV2CertificateIdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) CreateIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, params *CreateIamV2CertificateIdentityPoolParams, body CreateIamV2CertificateIdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2CertificateIdentityPoolRequest(c.Server, certificateAuthorityId, params, body)
 	if err != nil {
 		return nil, err
@@ -115,7 +115,7 @@ func (c *Client) CreateIamV2CertificateIdentityPool(ctx context.Context, certifi
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) DeleteIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) DeleteIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIamV2CertificateIdentityPoolRequest(c.Server, certificateAuthorityId, id)
 	if err != nil {
 		return nil, err
@@ -126,7 +126,7 @@ func (c *Client) DeleteIamV2CertificateIdentityPool(ctx context.Context, certifi
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) GetIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) GetIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2CertificateIdentityPoolRequest(c.Server, certificateAuthorityId, id)
 	if err != nil {
 		return nil, err
@@ -137,7 +137,7 @@ func (c *Client) GetIamV2CertificateIdentityPool(ctx context.Context, certificat
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateIamV2CertificateIdentityPoolWithBody(ctx context.Context, certificateAuthorityId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateIamV2CertificateIdentityPoolWithBody(ctx context.Context, certificateAuthorityId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2CertificateIdentityPoolRequestWithBody(c.Server, certificateAuthorityId, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -148,7 +148,7 @@ func (c *Client) UpdateIamV2CertificateIdentityPoolWithBody(ctx context.Context,
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) UpdateIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, id string, body UpdateIamV2CertificateIdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) UpdateIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, id string, body UpdateIamV2CertificateIdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2CertificateIdentityPoolRequest(c.Server, certificateAuthorityId, id, body)
 	if err != nil {
 		return nil, err

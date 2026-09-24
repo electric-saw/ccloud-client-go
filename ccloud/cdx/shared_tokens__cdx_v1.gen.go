@@ -83,7 +83,7 @@ type ResourcesCdxV1SharedTokenJSONBodyKind string
 type RedeemCdxV1SharedTokenJSONRequestBody RedeemCdxV1SharedTokenJSONBody
 type ResourcesCdxV1SharedTokenJSONRequestBody ResourcesCdxV1SharedTokenJSONBody
 
-func (c *Client) RedeemCdxV1SharedTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) RedeemCdxV1SharedTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRedeemCdxV1SharedTokenRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -94,7 +94,7 @@ func (c *Client) RedeemCdxV1SharedTokenWithBody(ctx context.Context, contentType
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) RedeemCdxV1SharedToken(ctx context.Context, body RedeemCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) RedeemCdxV1SharedToken(ctx context.Context, body RedeemCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRedeemCdxV1SharedTokenRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -105,7 +105,7 @@ func (c *Client) RedeemCdxV1SharedToken(ctx context.Context, body RedeemCdxV1Sha
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ResourcesCdxV1SharedTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ResourcesCdxV1SharedTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewResourcesCdxV1SharedTokenRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -116,7 +116,7 @@ func (c *Client) ResourcesCdxV1SharedTokenWithBody(ctx context.Context, contentT
 	}
 	return c.Client.Do(req)
 }
-func (c *Client) ResourcesCdxV1SharedToken(ctx context.Context, body ResourcesCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) ResourcesCdxV1SharedToken(ctx context.Context, body ResourcesCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewResourcesCdxV1SharedTokenRequest(c.Server, body)
 	if err != nil {
 		return nil, err

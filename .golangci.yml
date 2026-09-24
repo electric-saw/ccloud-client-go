@@ -1,5 +1,8 @@
 version: "2"
 
+run:
+  timeout: 5m
+
 linters:
   enable:
     - errcheck
@@ -9,6 +12,13 @@ linters:
     errcheck:
       exclude-functions:
         - (io.Closer).Close
-        - (*net/http.Response.Body).Close
         - (net/http.ResponseWriter).Write
-        - (*github.com/hashicorp/go-retryablehttp.Response.Body).Close
+  exclusions:
+    rules:
+      # Generated code: skip linters for files ending in .gen.go (includes
+      # client.gen.go); keep hand-written glue (ccloud/ccloud.go) covered.
+      - path: \.gen\.go$
+        linters:
+          - errcheck
+          - staticcheck
+          - gocyclo

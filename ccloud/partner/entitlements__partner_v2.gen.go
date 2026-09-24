@@ -91,7 +91,7 @@ type GetPartnerV2Entitlement200JSONResponseBodyApiVersion string
 type GetPartnerV2Entitlement200JSONResponseBodyKind string
 type CreatePartnerV2EntitlementJSONRequestBody CreatePartnerV2EntitlementJSONBody
 
-func (c *oasClient) ListPartnerV2Entitlements(ctx context.Context, params *ListPartnerV2EntitlementsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listPartnerV2Entitlements(ctx context.Context, params *ListPartnerV2EntitlementsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListPartnerV2EntitlementsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -102,7 +102,7 @@ func (c *oasClient) ListPartnerV2Entitlements(ctx context.Context, params *ListP
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreatePartnerV2EntitlementWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createPartnerV2EntitlementWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreatePartnerV2EntitlementRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -113,7 +113,7 @@ func (c *oasClient) CreatePartnerV2EntitlementWithBody(ctx context.Context, cont
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreatePartnerV2Entitlement(ctx context.Context, body CreatePartnerV2EntitlementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createPartnerV2Entitlement(ctx context.Context, body CreatePartnerV2EntitlementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreatePartnerV2EntitlementRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (c *oasClient) CreatePartnerV2Entitlement(ctx context.Context, body CreateP
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetPartnerV2Entitlement(ctx context.Context, id string, params *GetPartnerV2EntitlementParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getPartnerV2Entitlement(ctx context.Context, id string, params *GetPartnerV2EntitlementParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetPartnerV2EntitlementRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -565,28 +565,28 @@ type GetPartnerV2EntitlementResponse struct {
 }
 
 func (c *ClientWithResponses) ListPartnerV2EntitlementsWithResponse(ctx context.Context, params *ListPartnerV2EntitlementsParams, reqEditors ...RequestEditorFn) (*ListPartnerV2EntitlementsResponse, error) {
-	rsp, err := c.ListPartnerV2Entitlements(ctx, params, reqEditors...)
+	rsp, err := c.listPartnerV2Entitlements(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListPartnerV2EntitlementsResponse(rsp)
 }
 func (c *ClientWithResponses) CreatePartnerV2EntitlementWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatePartnerV2EntitlementResponse, error) {
-	rsp, err := c.CreatePartnerV2EntitlementWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createPartnerV2EntitlementWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreatePartnerV2EntitlementResponse(rsp)
 }
 func (c *ClientWithResponses) CreatePartnerV2EntitlementWithResponse(ctx context.Context, body CreatePartnerV2EntitlementJSONRequestBody, reqEditors ...RequestEditorFn) (*CreatePartnerV2EntitlementResponse, error) {
-	rsp, err := c.CreatePartnerV2Entitlement(ctx, body, reqEditors...)
+	rsp, err := c.createPartnerV2Entitlement(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreatePartnerV2EntitlementResponse(rsp)
 }
 func (c *ClientWithResponses) GetPartnerV2EntitlementWithResponse(ctx context.Context, id string, params *GetPartnerV2EntitlementParams, reqEditors ...RequestEditorFn) (*GetPartnerV2EntitlementResponse, error) {
-	rsp, err := c.GetPartnerV2Entitlement(ctx, id, params, reqEditors...)
+	rsp, err := c.getPartnerV2Entitlement(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

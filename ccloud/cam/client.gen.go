@@ -1054,7 +1054,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListCamV1ConnectArtifacts List of Connect Artifacts
 	//
@@ -1063,7 +1063,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all connect artifacts.
 	//
 	// Corresponds with GET /cam/v1/connect-artifacts (the `ListCamV1ConnectArtifacts` operationId).
-	ListCamV1ConnectArtifacts(ctx context.Context, params *ListCamV1ConnectArtifactsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listCamV1ConnectArtifacts(ctx context.Context, params *ListCamV1ConnectArtifactsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateCamV1ConnectArtifactWithBody Create a new Connect Artifact.
 	//
@@ -1074,7 +1074,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /cam/v1/connect-artifacts (the `CreateCamV1ConnectArtifact` operationId).
-	CreateCamV1ConnectArtifactWithBody(ctx context.Context, params *CreateCamV1ConnectArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createCamV1ConnectArtifactWithBody(ctx context.Context, params *CreateCamV1ConnectArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateCamV1ConnectArtifact Create a new Connect Artifact.
 	//
@@ -1085,7 +1085,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /cam/v1/connect-artifacts (the `CreateCamV1ConnectArtifact` operationId).
-	CreateCamV1ConnectArtifact(ctx context.Context, params *CreateCamV1ConnectArtifactParams, body CreateCamV1ConnectArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createCamV1ConnectArtifact(ctx context.Context, params *CreateCamV1ConnectArtifactParams, body CreateCamV1ConnectArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteCamV1ConnectArtifact Delete a Connect Artifact
 	//
@@ -1096,7 +1096,7 @@ type ClientInterface interface {
 	// This request fails if existing workloads are using this artifact.
 	//
 	// Corresponds with DELETE /cam/v1/connect-artifacts/{id} (the `DeleteCamV1ConnectArtifact` operationId).
-	DeleteCamV1ConnectArtifact(ctx context.Context, id string, params *DeleteCamV1ConnectArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteCamV1ConnectArtifact(ctx context.Context, id string, params *DeleteCamV1ConnectArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCamV1ConnectArtifact Read a Connect Artifact
 	//
@@ -1105,7 +1105,7 @@ type ClientInterface interface {
 	// Make a request to read a connect artifact.
 	//
 	// Corresponds with GET /cam/v1/connect-artifacts/{id} (the `GetCamV1ConnectArtifact` operationId).
-	GetCamV1ConnectArtifact(ctx context.Context, id string, params *GetCamV1ConnectArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getCamV1ConnectArtifact(ctx context.Context, id string, params *GetCamV1ConnectArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PresignedUploadUrlCamV1PresignedUrlWithBody Request a presigned upload URL for a new Connect Artifact.
 	//
@@ -1116,7 +1116,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /cam/v1/presigned-upload-url (the `PresignedUploadUrlCamV1PresignedUrl` operationId).
-	PresignedUploadUrlCamV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	presignedUploadUrlCamV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PresignedUploadUrlCamV1PresignedUrl Request a presigned upload URL for a new Connect Artifact.
 	//
@@ -1127,10 +1127,10 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /cam/v1/presigned-upload-url (the `PresignedUploadUrlCamV1PresignedUrl` operationId).
-	PresignedUploadUrlCamV1PresignedUrl(ctx context.Context, body PresignedUploadUrlCamV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	presignedUploadUrlCamV1PresignedUrl(ctx context.Context, body PresignedUploadUrlCamV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *oasClient) PresignedUploadUrlCamV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) presignedUploadUrlCamV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPresignedUploadUrlCamV1PresignedUrlRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -1141,7 +1141,7 @@ func (c *oasClient) PresignedUploadUrlCamV1PresignedUrlWithBody(ctx context.Cont
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) PresignedUploadUrlCamV1PresignedUrl(ctx context.Context, body PresignedUploadUrlCamV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) presignedUploadUrlCamV1PresignedUrl(ctx context.Context, body PresignedUploadUrlCamV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPresignedUploadUrlCamV1PresignedUrlRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -1203,7 +1203,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -1223,89 +1223,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListCamV1ConnectArtifactsWithResponse List of Connect Artifacts
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all connect artifacts.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cam/v1/connect-artifacts (the `ListCamV1ConnectArtifacts` operationId).
-	ListCamV1ConnectArtifactsWithResponse(ctx context.Context, params *ListCamV1ConnectArtifactsParams, reqEditors ...RequestEditorFn) (*ListCamV1ConnectArtifactsResponse, error)
-
-	// CreateCamV1ConnectArtifactWithBodyWithResponse Create a new Connect Artifact.
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a connect artifact.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /cam/v1/connect-artifacts (the `CreateCamV1ConnectArtifact` operationId).
-	CreateCamV1ConnectArtifactWithBodyWithResponse(ctx context.Context, params *CreateCamV1ConnectArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCamV1ConnectArtifactResponse, error)
-
-	// CreateCamV1ConnectArtifactWithResponse Create a new Connect Artifact.
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a connect artifact.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /cam/v1/connect-artifacts (the `CreateCamV1ConnectArtifact` operationId).
-	CreateCamV1ConnectArtifactWithResponse(ctx context.Context, params *CreateCamV1ConnectArtifactParams, body CreateCamV1ConnectArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCamV1ConnectArtifactResponse, error)
-
-	// DeleteCamV1ConnectArtifactWithResponse Delete a Connect Artifact
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a connect artifact.
-	//
-	// This request fails if existing workloads are using this artifact.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /cam/v1/connect-artifacts/{id} (the `DeleteCamV1ConnectArtifact` operationId).
-	DeleteCamV1ConnectArtifactWithResponse(ctx context.Context, id string, params *DeleteCamV1ConnectArtifactParams, reqEditors ...RequestEditorFn) (*DeleteCamV1ConnectArtifactResponse, error)
-
-	// GetCamV1ConnectArtifactWithResponse Read a Connect Artifact
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a connect artifact.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cam/v1/connect-artifacts/{id} (the `GetCamV1ConnectArtifact` operationId).
-	GetCamV1ConnectArtifactWithResponse(ctx context.Context, id string, params *GetCamV1ConnectArtifactParams, reqEditors ...RequestEditorFn) (*GetCamV1ConnectArtifactResponse, error)
-
-	// PresignedUploadUrlCamV1PresignedUrlWithBodyWithResponse Request a presigned upload URL for a new Connect Artifact.
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Request a presigned upload URL to upload a Connect Artifact archive.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /cam/v1/presigned-upload-url (the `PresignedUploadUrlCamV1PresignedUrl` operationId).
-	PresignedUploadUrlCamV1PresignedUrlWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PresignedUploadUrlCamV1PresignedUrlResponse, error)
-
-	// PresignedUploadUrlCamV1PresignedUrlWithResponse Request a presigned upload URL for a new Connect Artifact.
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Request a presigned upload URL to upload a Connect Artifact archive.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /cam/v1/presigned-upload-url (the `PresignedUploadUrlCamV1PresignedUrl` operationId).
-	PresignedUploadUrlCamV1PresignedUrlWithResponse(ctx context.Context, body PresignedUploadUrlCamV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*PresignedUploadUrlCamV1PresignedUrlResponse, error)
-}
-
 func (r ListCamV1ConnectArtifactsResponse) GetJSON200() *CamV1ConnectArtifactList {
 	return r.JSON200
 }
@@ -1658,14 +1575,14 @@ func (r PresignedUploadUrlCamV1PresignedUrlResponse) ContentType() string {
 	return ""
 }
 func (c *ClientWithResponses) PresignedUploadUrlCamV1PresignedUrlWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PresignedUploadUrlCamV1PresignedUrlResponse, error) {
-	rsp, err := c.PresignedUploadUrlCamV1PresignedUrlWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.presignedUploadUrlCamV1PresignedUrlWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParsePresignedUploadUrlCamV1PresignedUrlResponse(rsp)
 }
 func (c *ClientWithResponses) PresignedUploadUrlCamV1PresignedUrlWithResponse(ctx context.Context, body PresignedUploadUrlCamV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*PresignedUploadUrlCamV1PresignedUrlResponse, error) {
-	rsp, err := c.PresignedUploadUrlCamV1PresignedUrl(ctx, body, reqEditors...)
+	rsp, err := c.presignedUploadUrlCamV1PresignedUrl(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

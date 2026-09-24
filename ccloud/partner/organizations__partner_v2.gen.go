@@ -28,7 +28,7 @@ type GetPartnerV2Organization200JSONResponseBody_SsoConfig struct {
 	union json.RawMessage
 }
 
-func (c *oasClient) ListPartnerV2Organizations(ctx context.Context, params *ListPartnerV2OrganizationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listPartnerV2Organizations(ctx context.Context, params *ListPartnerV2OrganizationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListPartnerV2OrganizationsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -39,7 +39,7 @@ func (c *oasClient) ListPartnerV2Organizations(ctx context.Context, params *List
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetPartnerV2Organization(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getPartnerV2Organization(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetPartnerV2OrganizationRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -263,14 +263,14 @@ type GetPartnerV2OrganizationResponse struct {
 }
 
 func (c *ClientWithResponses) ListPartnerV2OrganizationsWithResponse(ctx context.Context, params *ListPartnerV2OrganizationsParams, reqEditors ...RequestEditorFn) (*ListPartnerV2OrganizationsResponse, error) {
-	rsp, err := c.ListPartnerV2Organizations(ctx, params, reqEditors...)
+	rsp, err := c.listPartnerV2Organizations(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListPartnerV2OrganizationsResponse(rsp)
 }
 func (c *ClientWithResponses) GetPartnerV2OrganizationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetPartnerV2OrganizationResponse, error) {
-	rsp, err := c.GetPartnerV2Organization(ctx, id, reqEditors...)
+	rsp, err := c.getPartnerV2Organization(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

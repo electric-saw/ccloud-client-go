@@ -58,7 +58,7 @@ type GetServiceQuotaV1AppliedQuotaParams struct {
 type GetServiceQuotaV1AppliedQuota200JSONResponseBodyApiVersion string
 type GetServiceQuotaV1AppliedQuota200JSONResponseBodyKind string
 
-func (c *oasClient) ListServiceQuotaV1AppliedQuotas(ctx context.Context, params *ListServiceQuotaV1AppliedQuotasParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listServiceQuotaV1AppliedQuotas(ctx context.Context, params *ListServiceQuotaV1AppliedQuotasParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListServiceQuotaV1AppliedQuotasRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -69,7 +69,7 @@ func (c *oasClient) ListServiceQuotaV1AppliedQuotas(ctx context.Context, params 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetServiceQuotaV1AppliedQuota(ctx context.Context, id string, params *GetServiceQuotaV1AppliedQuotaParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getServiceQuotaV1AppliedQuota(ctx context.Context, id string, params *GetServiceQuotaV1AppliedQuotaParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetServiceQuotaV1AppliedQuotaRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -460,14 +460,14 @@ type GetServiceQuotaV1AppliedQuotaResponse struct {
 }
 
 func (c *ClientWithResponses) ListServiceQuotaV1AppliedQuotasWithResponse(ctx context.Context, params *ListServiceQuotaV1AppliedQuotasParams, reqEditors ...RequestEditorFn) (*ListServiceQuotaV1AppliedQuotasResponse, error) {
-	rsp, err := c.ListServiceQuotaV1AppliedQuotas(ctx, params, reqEditors...)
+	rsp, err := c.listServiceQuotaV1AppliedQuotas(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListServiceQuotaV1AppliedQuotasResponse(rsp)
 }
 func (c *ClientWithResponses) GetServiceQuotaV1AppliedQuotaWithResponse(ctx context.Context, id string, params *GetServiceQuotaV1AppliedQuotaParams, reqEditors ...RequestEditorFn) (*GetServiceQuotaV1AppliedQuotaResponse, error) {
-	rsp, err := c.GetServiceQuotaV1AppliedQuota(ctx, id, params, reqEditors...)
+	rsp, err := c.getServiceQuotaV1AppliedQuota(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

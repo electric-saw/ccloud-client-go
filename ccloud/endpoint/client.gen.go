@@ -799,7 +799,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListEndpointV1Endpoints List of Endpoints
 	//
@@ -808,7 +808,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all endpoints.
 	//
 	// Corresponds with GET /endpoint/v1/endpoints (the `ListEndpointV1Endpoints` operationId).
-	ListEndpointV1Endpoints(ctx context.Context, params *ListEndpointV1EndpointsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listEndpointV1Endpoints(ctx context.Context, params *ListEndpointV1EndpointsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -826,7 +826,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -846,21 +846,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListEndpointV1EndpointsWithResponse List of Endpoints
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all endpoints.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /endpoint/v1/endpoints (the `ListEndpointV1Endpoints` operationId).
-	ListEndpointV1EndpointsWithResponse(ctx context.Context, params *ListEndpointV1EndpointsParams, reqEditors ...RequestEditorFn) (*ListEndpointV1EndpointsResponse, error)
-}
-
 func (r ListEndpointV1EndpointsResponse) GetJSON200() *struct {
 	// ApiVersion APIVersion defines the schema version of this representation of a resource.
 	ApiVersion ListEndpointV1Endpoints200JSONResponseBodyApiVersion `json:"api_version"`

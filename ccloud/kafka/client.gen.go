@@ -1271,7 +1271,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// GetKafkaCluster Get Cluster
 	//
@@ -1280,7 +1280,7 @@ type ClientInterface interface {
 	// Return the Kafka cluster with the specified ``cluster_id``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id} (the `GetKafkaCluster` operationId).
-	GetKafkaCluster(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaCluster(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteKafkaAcls Delete ACLs
 	//
@@ -1289,7 +1289,7 @@ type ClientInterface interface {
 	// Delete the ACLs that match the search criteria.
 	//
 	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/acls (the `DeleteKafkaAcls` operationId).
-	DeleteKafkaAcls(ctx context.Context, clusterId ClusterId, params *DeleteKafkaAclsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteKafkaAcls(ctx context.Context, clusterId ClusterId, params *DeleteKafkaAclsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaAcls List ACLs
 	//
@@ -1303,7 +1303,7 @@ type ClientInterface interface {
 	// Return a list of ACLs that match the search criteria.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/acls (the `GetKafkaAcls` operationId).
-	GetKafkaAcls(ctx context.Context, clusterId ClusterId, params *GetKafkaAclsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaAcls(ctx context.Context, clusterId ClusterId, params *GetKafkaAclsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKafkaAclsWithBody Create an ACL
 	//
@@ -1314,7 +1314,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/acls (the `CreateKafkaAcls` operationId).
-	CreateKafkaAclsWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKafkaAclsWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKafkaAcls Create an ACL
 	//
@@ -1325,7 +1325,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/acls (the `CreateKafkaAcls` operationId).
-	CreateKafkaAcls(ctx context.Context, clusterId ClusterId, body CreateKafkaAclsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKafkaAcls(ctx context.Context, clusterId ClusterId, body CreateKafkaAclsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// BatchCreateKafkaAclsWithBody Batch Create ACLs
 	//
@@ -1336,7 +1336,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/acls:batch (the `BatchCreateKafkaAcls` operationId).
-	BatchCreateKafkaAclsWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	batchCreateKafkaAclsWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// BatchCreateKafkaAcls Batch Create ACLs
 	//
@@ -1347,7 +1347,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/acls:batch (the `BatchCreateKafkaAcls` operationId).
-	BatchCreateKafkaAcls(ctx context.Context, clusterId ClusterId, body BatchCreateKafkaAclsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	batchCreateKafkaAcls(ctx context.Context, clusterId ClusterId, body BatchCreateKafkaAclsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaClusterConfigs List Dynamic Broker Configs
 	//
@@ -1357,7 +1357,7 @@ type ClientInterface interface {
 	// cluster. Returns an empty list if there are no dynamic cluster-wide broker configuration parameters.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/broker-configs (the `ListKafkaClusterConfigs` operationId).
-	ListKafkaClusterConfigs(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaClusterConfigs(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteKafkaClusterConfig Reset Dynamic Broker Config
 	//
@@ -1367,7 +1367,7 @@ type ClientInterface interface {
 	// default value by deleting a dynamic cluster-wide configuration.
 	//
 	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/broker-configs/{name} (the `DeleteKafkaClusterConfig` operationId).
-	DeleteKafkaClusterConfig(ctx context.Context, clusterId ClusterId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteKafkaClusterConfig(ctx context.Context, clusterId ClusterId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaClusterConfig Get Dynamic Broker Config
 	//
@@ -1376,7 +1376,7 @@ type ClientInterface interface {
 	// Return the dynamic cluster-wide broker configuration parameter specified by ``name``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/broker-configs/{name} (the `GetKafkaClusterConfig` operationId).
-	GetKafkaClusterConfig(ctx context.Context, clusterId ClusterId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaClusterConfig(ctx context.Context, clusterId ClusterId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaClusterConfigWithBody Update Dynamic Broker Config
 	//
@@ -1387,7 +1387,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/broker-configs/{name} (the `UpdateKafkaClusterConfig` operationId).
-	UpdateKafkaClusterConfigWithBody(ctx context.Context, clusterId ClusterId, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaClusterConfigWithBody(ctx context.Context, clusterId ClusterId, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaClusterConfig Update Dynamic Broker Config
 	//
@@ -1398,7 +1398,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/broker-configs/{name} (the `UpdateKafkaClusterConfig` operationId).
-	UpdateKafkaClusterConfig(ctx context.Context, clusterId ClusterId, name ConfigName, body UpdateKafkaClusterConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaClusterConfig(ctx context.Context, clusterId ClusterId, name ConfigName, body UpdateKafkaClusterConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaClusterConfigsWithBody Batch Alter Dynamic Broker Configs
 	//
@@ -1409,7 +1409,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/broker-configs:alter (the `UpdateKafkaClusterConfigs` operationId).
-	UpdateKafkaClusterConfigsWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaClusterConfigsWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaClusterConfigs Batch Alter Dynamic Broker Configs
 	//
@@ -1420,7 +1420,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/broker-configs:alter (the `UpdateKafkaClusterConfigs` operationId).
-	UpdateKafkaClusterConfigs(ctx context.Context, clusterId ClusterId, body UpdateKafkaClusterConfigsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaClusterConfigs(ctx context.Context, clusterId ClusterId, body UpdateKafkaClusterConfigsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaConsumerGroups List Consumer Groups
 	//
@@ -1430,7 +1430,7 @@ type ClientInterface interface {
 	// Kafka cluster.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/consumer-groups (the `ListKafkaConsumerGroups` operationId).
-	ListKafkaConsumerGroups(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaConsumerGroups(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaConsumerGroup Get Consumer Group
 	//
@@ -1439,7 +1439,7 @@ type ClientInterface interface {
 	// Return the consumer group specified by the ``consumer_group_id``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id} (the `GetKafkaConsumerGroup` operationId).
-	GetKafkaConsumerGroup(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaConsumerGroup(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaConsumers List Consumers
 	//
@@ -1449,7 +1449,7 @@ type ClientInterface interface {
 	// group.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/consumers (the `ListKafkaConsumers` operationId).
-	ListKafkaConsumers(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaConsumers(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaConsumer Get Consumer
 	//
@@ -1458,7 +1458,7 @@ type ClientInterface interface {
 	// Return the consumer specified by the ``consumer_id``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/consumers/{consumer_id} (the `GetKafkaConsumer` operationId).
-	GetKafkaConsumer(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaConsumer(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaConsumerGroupLagSummary Get Consumer Group Lag Summary
 	//
@@ -1468,7 +1468,7 @@ type ClientInterface interface {
 	// specified consumer group.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lag-summary (the `GetKafkaConsumerGroupLagSummary` operationId).
-	GetKafkaConsumerGroupLagSummary(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaConsumerGroupLagSummary(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaConsumerLags List Consumer Lags
 	//
@@ -1478,7 +1478,7 @@ type ClientInterface interface {
 	// specified consumer group.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags (the `ListKafkaConsumerLags` operationId).
-	ListKafkaConsumerLags(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaConsumerLags(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaConsumerLag Get Consumer Lag
 	//
@@ -1487,7 +1487,7 @@ type ClientInterface interface {
 	// Return the consumer lag on a partition with the given `partition_id`.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags/{topic_name}/partitions/{partition_id} (the `GetKafkaConsumerLag` operationId).
-	GetKafkaConsumerLag(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, topicName TopicName, partitionId PartitionId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaConsumerLag(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, topicName TopicName, partitionId PartitionId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaGroupConfigs List all configs of the group
 	//
@@ -1496,7 +1496,7 @@ type ClientInterface interface {
 	// List all configurations for the specified group. This API supports consumer groups, share groups, and streams groups.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/groups/{group_id}/configs (the `ListKafkaGroupConfigs` operationId).
-	ListKafkaGroupConfigs(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaGroupConfigs(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteKafkaGroupConfig Delete group config
 	//
@@ -1505,7 +1505,7 @@ type ClientInterface interface {
 	// Delete the dynamic configuration override with the specified name for the specified group. After deletion, the default group configuration will be applied. This API supports consumer groups, share groups, and streams groups.
 	//
 	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/groups/{group_id}/configs/{name} (the `DeleteKafkaGroupConfig` operationId).
-	DeleteKafkaGroupConfig(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteKafkaGroupConfig(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaGroupConfig Get group config
 	//
@@ -1514,7 +1514,7 @@ type ClientInterface interface {
 	// Get the configuration with the specified name for the specified group. This API supports consumer groups, share groups, and streams groups.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/groups/{group_id}/configs/{name} (the `GetKafkaGroupConfig` operationId).
-	GetKafkaGroupConfig(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaGroupConfig(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaGroupConfigWithBody Update group config
 	//
@@ -1525,7 +1525,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/groups/{group_id}/configs/{name} (the `UpdateKafkaGroupConfig` operationId).
-	UpdateKafkaGroupConfigWithBody(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaGroupConfigWithBody(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaGroupConfig Update group config
 	//
@@ -1536,7 +1536,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/groups/{group_id}/configs/{name} (the `UpdateKafkaGroupConfig` operationId).
-	UpdateKafkaGroupConfig(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, body UpdateKafkaGroupConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaGroupConfig(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, body UpdateKafkaGroupConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaGroupConfigBatchWithBody Batch Alter Group Configs
 	//
@@ -1547,7 +1547,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/groups/{group_id}/configs:alter (the `UpdateKafkaGroupConfigBatch` operationId).
-	UpdateKafkaGroupConfigBatchWithBody(ctx context.Context, clusterId ClusterId, groupId GroupId, params *UpdateKafkaGroupConfigBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaGroupConfigBatchWithBody(ctx context.Context, clusterId ClusterId, groupId GroupId, params *UpdateKafkaGroupConfigBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaGroupConfigBatch Batch Alter Group Configs
 	//
@@ -1558,7 +1558,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/groups/{group_id}/configs:alter (the `UpdateKafkaGroupConfigBatch` operationId).
-	UpdateKafkaGroupConfigBatch(ctx context.Context, clusterId ClusterId, groupId GroupId, params *UpdateKafkaGroupConfigBatchParams, body UpdateKafkaGroupConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaGroupConfigBatch(ctx context.Context, clusterId ClusterId, groupId GroupId, params *UpdateKafkaGroupConfigBatchParams, body UpdateKafkaGroupConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaLinks List all cluster links in the dest cluster
 	//
@@ -1567,7 +1567,7 @@ type ClientInterface interface {
 	// ``link_id`` in ``ListLinksResponseData`` is deprecated and may be removed in a future release. Use the new ``cluster_link_id`` instead.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/links (the `ListKafkaLinks` operationId).
-	ListKafkaLinks(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaLinks(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKafkaLinkWithBody Create a cluster link
 	//
@@ -1579,7 +1579,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links (the `CreateKafkaLink` operationId).
-	CreateKafkaLinkWithBody(ctx context.Context, clusterId ClusterId, params *CreateKafkaLinkParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKafkaLinkWithBody(ctx context.Context, clusterId ClusterId, params *CreateKafkaLinkParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKafkaLink Create a cluster link
 	//
@@ -1591,7 +1591,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links (the `CreateKafkaLink` operationId).
-	CreateKafkaLink(ctx context.Context, clusterId ClusterId, params *CreateKafkaLinkParams, body CreateKafkaLinkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKafkaLink(ctx context.Context, clusterId ClusterId, params *CreateKafkaLinkParams, body CreateKafkaLinkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaMirrorTopics List mirror topics
 	//
@@ -1600,14 +1600,14 @@ type ClientInterface interface {
 	// List all mirror topics in the cluster
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/links/-/mirrors (the `ListKafkaMirrorTopics` operationId).
-	ListKafkaMirrorTopics(ctx context.Context, clusterId ClusterId, params *ListKafkaMirrorTopicsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaMirrorTopics(ctx context.Context, clusterId ClusterId, params *ListKafkaMirrorTopicsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteKafkaLink Delete the cluster link
 	//
 	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 	//
 	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/links/{link_name} (the `DeleteKafkaLink` operationId).
-	DeleteKafkaLink(ctx context.Context, clusterId ClusterId, linkName LinkName, params *DeleteKafkaLinkParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteKafkaLink(ctx context.Context, clusterId ClusterId, linkName LinkName, params *DeleteKafkaLinkParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaLink Describe the cluster link
 	//
@@ -1616,28 +1616,28 @@ type ClientInterface interface {
 	// ``link_id`` in ``ListLinksResponseData`` is deprecated and may be removed in a future release. Use the new ``cluster_link_id`` instead.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/links/{link_name} (the `GetKafkaLink` operationId).
-	GetKafkaLink(ctx context.Context, clusterId ClusterId, linkName LinkName, params *GetKafkaLinkParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaLink(ctx context.Context, clusterId ClusterId, linkName LinkName, params *GetKafkaLinkParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaLinkConfigs List all configs of the cluster link
 	//
 	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs (the `ListKafkaLinkConfigs` operationId).
-	ListKafkaLinkConfigs(ctx context.Context, clusterId ClusterId, linkName LinkName, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaLinkConfigs(ctx context.Context, clusterId ClusterId, linkName LinkName, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteKafkaLinkConfig Reset the given config to default value
 	//
 	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 	//
 	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs/{config_name} (the `DeleteKafkaLinkConfig` operationId).
-	DeleteKafkaLinkConfig(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteKafkaLinkConfig(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaLinkConfigs Describe the config under the cluster link
 	//
 	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs/{config_name} (the `GetKafkaLinkConfigs` operationId).
-	GetKafkaLinkConfigs(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaLinkConfigs(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaLinkConfigWithBody Alter the config under the cluster link
 	//
@@ -1646,7 +1646,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs/{config_name} (the `UpdateKafkaLinkConfig` operationId).
-	UpdateKafkaLinkConfigWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaLinkConfigWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaLinkConfig Alter the config under the cluster link
 	//
@@ -1655,7 +1655,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs/{config_name} (the `UpdateKafkaLinkConfig` operationId).
-	UpdateKafkaLinkConfig(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, body UpdateKafkaLinkConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaLinkConfig(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, body UpdateKafkaLinkConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaLinkConfigBatchWithBody Batch Alter Cluster Link Configs
 	//
@@ -1666,7 +1666,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs:alter (the `UpdateKafkaLinkConfigBatch` operationId).
-	UpdateKafkaLinkConfigBatchWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaLinkConfigBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaLinkConfigBatchWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaLinkConfigBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaLinkConfigBatch Batch Alter Cluster Link Configs
 	//
@@ -1677,7 +1677,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs:alter (the `UpdateKafkaLinkConfigBatch` operationId).
-	UpdateKafkaLinkConfigBatch(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaLinkConfigBatchParams, body UpdateKafkaLinkConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaLinkConfigBatch(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaLinkConfigBatchParams, body UpdateKafkaLinkConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaMirrorTopicsUnderLink List mirror topics
 	//
@@ -1686,7 +1686,7 @@ type ClientInterface interface {
 	// List all mirror topics under the link
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors (the `ListKafkaMirrorTopicsUnderLink` operationId).
-	ListKafkaMirrorTopicsUnderLink(ctx context.Context, clusterId ClusterId, linkName LinkName, params *ListKafkaMirrorTopicsUnderLinkParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaMirrorTopicsUnderLink(ctx context.Context, clusterId ClusterId, linkName LinkName, params *ListKafkaMirrorTopicsUnderLinkParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKafkaMirrorTopicWithBody Create a mirror topic
 	//
@@ -1698,7 +1698,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors (the `CreateKafkaMirrorTopic` operationId).
-	CreateKafkaMirrorTopicWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKafkaMirrorTopicWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKafkaMirrorTopic Create a mirror topic
 	//
@@ -1710,14 +1710,14 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors (the `CreateKafkaMirrorTopic` operationId).
-	CreateKafkaMirrorTopic(ctx context.Context, clusterId ClusterId, linkName LinkName, body CreateKafkaMirrorTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKafkaMirrorTopic(ctx context.Context, clusterId ClusterId, linkName LinkName, body CreateKafkaMirrorTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReadKafkaMirrorTopic Describe the mirror topic
 	//
 	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors/{mirror_topic_name} (the `ReadKafkaMirrorTopic` operationId).
-	ReadKafkaMirrorTopic(ctx context.Context, clusterId ClusterId, linkName LinkName, mirrorTopicName MirrorTopicName, params *ReadKafkaMirrorTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	readKafkaMirrorTopic(ctx context.Context, clusterId ClusterId, linkName LinkName, mirrorTopicName MirrorTopicName, params *ReadKafkaMirrorTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaMirrorTopicsFailoverWithBody Failover the mirror topics
 	//
@@ -1726,7 +1726,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:failover (the `UpdateKafkaMirrorTopicsFailover` operationId).
-	UpdateKafkaMirrorTopicsFailoverWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsFailoverParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaMirrorTopicsFailoverWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsFailoverParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaMirrorTopicsFailover Failover the mirror topics
 	//
@@ -1735,7 +1735,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:failover (the `UpdateKafkaMirrorTopicsFailover` operationId).
-	UpdateKafkaMirrorTopicsFailover(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsFailoverParams, body UpdateKafkaMirrorTopicsFailoverJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaMirrorTopicsFailover(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsFailoverParams, body UpdateKafkaMirrorTopicsFailoverJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaMirrorTopicsPauseWithBody Pause the mirror topics
 	//
@@ -1744,7 +1744,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:pause (the `UpdateKafkaMirrorTopicsPause` operationId).
-	UpdateKafkaMirrorTopicsPauseWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPauseParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaMirrorTopicsPauseWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPauseParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaMirrorTopicsPause Pause the mirror topics
 	//
@@ -1753,7 +1753,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:pause (the `UpdateKafkaMirrorTopicsPause` operationId).
-	UpdateKafkaMirrorTopicsPause(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPauseParams, body UpdateKafkaMirrorTopicsPauseJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaMirrorTopicsPause(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPauseParams, body UpdateKafkaMirrorTopicsPauseJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaMirrorTopicsPromoteWithBody Promote the mirror topics
 	//
@@ -1762,7 +1762,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote (the `UpdateKafkaMirrorTopicsPromote` operationId).
-	UpdateKafkaMirrorTopicsPromoteWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPromoteParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaMirrorTopicsPromoteWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPromoteParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaMirrorTopicsPromote Promote the mirror topics
 	//
@@ -1771,7 +1771,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote (the `UpdateKafkaMirrorTopicsPromote` operationId).
-	UpdateKafkaMirrorTopicsPromote(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPromoteParams, body UpdateKafkaMirrorTopicsPromoteJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaMirrorTopicsPromote(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPromoteParams, body UpdateKafkaMirrorTopicsPromoteJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaMirrorTopicsResumeWithBody Resume the mirror topics
 	//
@@ -1780,7 +1780,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:resume (the `UpdateKafkaMirrorTopicsResume` operationId).
-	UpdateKafkaMirrorTopicsResumeWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsResumeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaMirrorTopicsResumeWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsResumeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaMirrorTopicsResume Resume the mirror topics
 	//
@@ -1789,7 +1789,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:resume (the `UpdateKafkaMirrorTopicsResume` operationId).
-	UpdateKafkaMirrorTopicsResume(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsResumeParams, body UpdateKafkaMirrorTopicsResumeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaMirrorTopicsResume(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsResumeParams, body UpdateKafkaMirrorTopicsResumeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaMirrorTopicsReverseAndPauseMirrorWithBody Reverse the local mirror topic and Pause the remote mirror topic
 	//
@@ -1798,7 +1798,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-pause-mirror (the `UpdateKafkaMirrorTopicsReverseAndPauseMirror` operationId).
-	UpdateKafkaMirrorTopicsReverseAndPauseMirrorWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndPauseMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaMirrorTopicsReverseAndPauseMirrorWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndPauseMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaMirrorTopicsReverseAndPauseMirror Reverse the local mirror topic and Pause the remote mirror topic
 	//
@@ -1807,7 +1807,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-pause-mirror (the `UpdateKafkaMirrorTopicsReverseAndPauseMirror` operationId).
-	UpdateKafkaMirrorTopicsReverseAndPauseMirror(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndPauseMirrorParams, body UpdateKafkaMirrorTopicsReverseAndPauseMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaMirrorTopicsReverseAndPauseMirror(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndPauseMirrorParams, body UpdateKafkaMirrorTopicsReverseAndPauseMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaMirrorTopicsReverseAndStartMirrorWithBody Reverse the local mirror topic and start the remote mirror topic
 	//
@@ -1816,7 +1816,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-start-mirror (the `UpdateKafkaMirrorTopicsReverseAndStartMirror` operationId).
-	UpdateKafkaMirrorTopicsReverseAndStartMirrorWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndStartMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaMirrorTopicsReverseAndStartMirrorWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndStartMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaMirrorTopicsReverseAndStartMirror Reverse the local mirror topic and start the remote mirror topic
 	//
@@ -1825,7 +1825,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-start-mirror (the `UpdateKafkaMirrorTopicsReverseAndStartMirror` operationId).
-	UpdateKafkaMirrorTopicsReverseAndStartMirror(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndStartMirrorParams, body UpdateKafkaMirrorTopicsReverseAndStartMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaMirrorTopicsReverseAndStartMirror(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndStartMirrorParams, body UpdateKafkaMirrorTopicsReverseAndStartMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorWithBody Truncates the local topic to the remote stopped mirror log end offsets and restores mirroring to the local topic to mirror from the remote topic
 	//
@@ -1834,7 +1834,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:truncate-and-restore (the `UpdateKafkaMirrorTopicsTruncateAndRestoreMirror` operationId).
-	UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaMirrorTopicsTruncateAndRestoreMirrorWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaMirrorTopicsTruncateAndRestoreMirror Truncates the local topic to the remote stopped mirror log end offsets and restores mirroring to the local topic to mirror from the remote topic
 	//
@@ -1843,7 +1843,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:truncate-and-restore (the `UpdateKafkaMirrorTopicsTruncateAndRestoreMirror` operationId).
-	UpdateKafkaMirrorTopicsTruncateAndRestoreMirror(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorParams, body UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaMirrorTopicsTruncateAndRestoreMirror(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorParams, body UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaShareGroups List Share Groups
 	//
@@ -1852,7 +1852,7 @@ type ClientInterface interface {
 	// Kafka cluster.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/share-groups (the `ListKafkaShareGroups` operationId).
-	ListKafkaShareGroups(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaShareGroups(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteKafkaShareGroup Delete Share Group
 	//
@@ -1861,7 +1861,7 @@ type ClientInterface interface {
 	// Delete the share group specified by the ``group_id``.
 	//
 	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/share-groups/{group_id} (the `DeleteKafkaShareGroup` operationId).
-	DeleteKafkaShareGroup(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteKafkaShareGroup(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaShareGroup Get Share Group
 	//
@@ -1869,7 +1869,7 @@ type ClientInterface interface {
 	// Return the share group specified by the ``group_id``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/share-groups/{group_id} (the `GetKafkaShareGroup` operationId).
-	GetKafkaShareGroup(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaShareGroup(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaShareGroupConsumers List Share Group Consumers
 	//
@@ -1878,7 +1878,7 @@ type ClientInterface interface {
 	// group.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}/consumers (the `ListKafkaShareGroupConsumers` operationId).
-	ListKafkaShareGroupConsumers(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaShareGroupConsumers(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaShareGroupConsumer Get Share Group Consumer
 	//
@@ -1886,7 +1886,7 @@ type ClientInterface interface {
 	// Return the consumer specified by the ``consumer_id``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}/consumers/{consumer_id} (the `GetKafkaShareGroupConsumer` operationId).
-	GetKafkaShareGroupConsumer(ctx context.Context, clusterId ClusterId, groupId GroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaShareGroupConsumer(ctx context.Context, clusterId ClusterId, groupId GroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaShareGroupConsumerAssignments List Share Group Consumer Assignments
 	//
@@ -1894,7 +1894,7 @@ type ClientInterface interface {
 	// Return the consumer assignments specified by the ``consumer_id``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}/consumers/{consumer_id}/assignments (the `ListKafkaShareGroupConsumerAssignments` operationId).
-	ListKafkaShareGroupConsumerAssignments(ctx context.Context, clusterId ClusterId, groupId GroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaShareGroupConsumerAssignments(ctx context.Context, clusterId ClusterId, groupId GroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaStreamsGroups List Streams Groups
 	//
@@ -1902,7 +1902,7 @@ type ClientInterface interface {
 	// Return the list of streams groups that belong to the specified Kafka cluster
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups (the `ListKafkaStreamsGroups` operationId).
-	ListKafkaStreamsGroups(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaStreamsGroups(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaStreamsGroup Get Streams Group
 	//
@@ -1910,7 +1910,7 @@ type ClientInterface interface {
 	// Return the streams group specified by the ``group_id``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id} (the `GetKafkaStreamsGroup` operationId).
-	GetKafkaStreamsGroup(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaStreamsGroup(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaStreamsGroupMembers List Streams Group Members
 	//
@@ -1918,7 +1918,7 @@ type ClientInterface interface {
 	// Return a list of members that belong to the specified streams group.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members (the `ListKafkaStreamsGroupMembers` operationId).
-	ListKafkaStreamsGroupMembers(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaStreamsGroupMembers(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaStreamsGroupMember Get Streams Group Member
 	//
@@ -1926,7 +1926,7 @@ type ClientInterface interface {
 	// Return the members specified by the ``member_id``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id} (the `GetKafkaStreamsGroupMember` operationId).
-	GetKafkaStreamsGroupMember(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaStreamsGroupMember(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaStreamsGroupMemberAssignments Get Streams Group Member Assignments
 	//
@@ -1934,7 +1934,7 @@ type ClientInterface interface {
 	// Return the assignments of the member specified by the ``member_id``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/assignments (the `GetKafkaStreamsGroupMemberAssignments` operationId).
-	GetKafkaStreamsGroupMemberAssignments(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaStreamsGroupMemberAssignments(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaStreamsGroupMemberAssignmentTasks List Streams Group Assignments of a Specific Type
 	//
@@ -1942,7 +1942,7 @@ type ClientInterface interface {
 	// Return the tasks of the member specified by the ``member_id``, and the type ``assignments_type``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/assignments/{assignments_type} (the `ListKafkaStreamsGroupMemberAssignmentTasks` operationId).
-	ListKafkaStreamsGroupMemberAssignmentTasks(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaStreamsGroupMemberAssignmentTasks(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaStreamsGroupMemberAssignmentTaskPartitions List Streams Group Assignments Task Partitions of a Specific Type and Subtopology
 	//
@@ -1950,7 +1950,7 @@ type ClientInterface interface {
 	// Return the tasks of the member specified by the ``member_id``, and the type ``assignments_type``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/assignments/{assignments_type}/subtopologies/{subtopology_id} (the `GetKafkaStreamsGroupMemberAssignmentTaskPartitions` operationId).
-	GetKafkaStreamsGroupMemberAssignmentTaskPartitions(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaStreamsGroupMemberAssignmentTaskPartitions(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaStreamsGroupMemberTargetAssignments Get Streams Group Member Target Assignments
 	//
@@ -1958,7 +1958,7 @@ type ClientInterface interface {
 	// Return the target assignments of the member specified by the ``member_id``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/target-assignments (the `GetKafkaStreamsGroupMemberTargetAssignments` operationId).
-	GetKafkaStreamsGroupMemberTargetAssignments(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaStreamsGroupMemberTargetAssignments(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaStreamsGroupMemberTargetAssignmentTasks List Streams Group Target Assignments of a Specific Type
 	//
@@ -1966,7 +1966,7 @@ type ClientInterface interface {
 	// Return the target tasks of the member specified by the ``member_id``, and the type ``assignments_type``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/target-assignments/{assignments_type} (the `ListKafkaStreamsGroupMemberTargetAssignmentTasks` operationId).
-	ListKafkaStreamsGroupMemberTargetAssignmentTasks(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaStreamsGroupMemberTargetAssignmentTasks(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaStreamsGroupMemberTargetAssignmentTaskPartitions List Streams Group Target Assignments Task Partitions of a Specific Type and Subtopology
 	//
@@ -1974,7 +1974,7 @@ type ClientInterface interface {
 	// Return the tasks of the member specified by the ``member_id``, and the type ``assignments_type``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/target-assignments/{assignments_type}/subtopologies/{subtopology_id} (the `GetKafkaStreamsGroupMemberTargetAssignmentTaskPartitions` operationId).
-	GetKafkaStreamsGroupMemberTargetAssignmentTaskPartitions(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaStreamsGroupMemberTargetAssignmentTaskPartitions(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaStreamsGroupSubtopologies List Streams Group Subtopologies
 	//
@@ -1982,7 +1982,7 @@ type ClientInterface interface {
 	// Return a list of subtopologies that belong to the specified streams group.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/subtopologies (the `ListKafkaStreamsGroupSubtopologies` operationId).
-	ListKafkaStreamsGroupSubtopologies(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaStreamsGroupSubtopologies(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaStreamsGroupSubtopology Get Streams Group Subtopology
 	//
@@ -1990,7 +1990,7 @@ type ClientInterface interface {
 	// Return the subtopology specified by the ``subtopology_id``.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/subtopologies/{subtopology_id} (the `GetKafkaStreamsGroupSubtopology` operationId).
-	GetKafkaStreamsGroupSubtopology(ctx context.Context, clusterId ClusterId, groupId GroupId, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaStreamsGroupSubtopology(ctx context.Context, clusterId ClusterId, groupId GroupId, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaTopics List Topics
 	//
@@ -1999,7 +1999,7 @@ type ClientInterface interface {
 	// Return the list of topics that belong to the specified Kafka cluster.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics (the `ListKafkaTopics` operationId).
-	ListKafkaTopics(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaTopics(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKafkaTopicWithBody Create Topic
 	//
@@ -2013,7 +2013,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/topics (the `CreateKafkaTopic` operationId).
-	CreateKafkaTopicWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKafkaTopicWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKafkaTopic Create Topic
 	//
@@ -2027,7 +2027,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/topics (the `CreateKafkaTopic` operationId).
-	CreateKafkaTopic(ctx context.Context, clusterId ClusterId, body CreateKafkaTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKafkaTopic(ctx context.Context, clusterId ClusterId, body CreateKafkaTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaAllTopicConfigs List All Topic Configs
 	//
@@ -2037,7 +2037,7 @@ type ClientInterface interface {
 	// cluster.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics/-/configs (the `ListKafkaAllTopicConfigs` operationId).
-	ListKafkaAllTopicConfigs(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaAllTopicConfigs(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteKafkaTopic Delete Topic
 	//
@@ -2046,7 +2046,7 @@ type ClientInterface interface {
 	// Delete the topic with the given `topic_name`.
 	//
 	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/topics/{topic_name} (the `DeleteKafkaTopic` operationId).
-	DeleteKafkaTopic(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteKafkaTopic(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaTopic Get Topic
 	//
@@ -2055,7 +2055,7 @@ type ClientInterface interface {
 	// Return the topic with the given `topic_name`.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics/{topic_name} (the `GetKafkaTopic` operationId).
-	GetKafkaTopic(ctx context.Context, clusterId ClusterId, topicName TopicName, params *GetKafkaTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaTopic(ctx context.Context, clusterId ClusterId, topicName TopicName, params *GetKafkaTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdatePartitionCountKafkaTopicWithBody Update Partition Count
 	//
@@ -2067,7 +2067,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /kafka/v3/clusters/{cluster_id}/topics/{topic_name} (the `UpdatePartitionCountKafkaTopic` operationId).
-	UpdatePartitionCountKafkaTopicWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updatePartitionCountKafkaTopicWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdatePartitionCountKafkaTopic Update Partition Count
 	//
@@ -2079,7 +2079,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /kafka/v3/clusters/{cluster_id}/topics/{topic_name} (the `UpdatePartitionCountKafkaTopic` operationId).
-	UpdatePartitionCountKafkaTopic(ctx context.Context, clusterId ClusterId, topicName TopicName, body UpdatePartitionCountKafkaTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updatePartitionCountKafkaTopic(ctx context.Context, clusterId ClusterId, topicName TopicName, body UpdatePartitionCountKafkaTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaTopicConfigs List Topic Configs
 	//
@@ -2088,7 +2088,7 @@ type ClientInterface interface {
 	// Return the list of configuration parameters that belong to the specified topic.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs (the `ListKafkaTopicConfigs` operationId).
-	ListKafkaTopicConfigs(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaTopicConfigs(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteKafkaTopicConfig Reset Topic Config
 	//
@@ -2097,7 +2097,7 @@ type ClientInterface interface {
 	// Reset the configuration parameter with given `name` to its default value.
 	//
 	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} (the `DeleteKafkaTopicConfig` operationId).
-	DeleteKafkaTopicConfig(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteKafkaTopicConfig(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaTopicConfig Get Topic Config
 	//
@@ -2106,7 +2106,7 @@ type ClientInterface interface {
 	// Return the configuration parameter with the given `name`.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} (the `GetKafkaTopicConfig` operationId).
-	GetKafkaTopicConfig(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaTopicConfig(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaTopicConfigWithBody Update Topic Config
 	//
@@ -2119,7 +2119,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} (the `UpdateKafkaTopicConfig` operationId).
-	UpdateKafkaTopicConfigWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaTopicConfigWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaTopicConfig Update Topic Config
 	//
@@ -2132,7 +2132,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} (the `UpdateKafkaTopicConfig` operationId).
-	UpdateKafkaTopicConfig(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, body UpdateKafkaTopicConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaTopicConfig(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, body UpdateKafkaTopicConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaTopicConfigBatchWithBody Batch Alter Topic Configs
 	//
@@ -2145,7 +2145,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs:alter (the `UpdateKafkaTopicConfigBatch` operationId).
-	UpdateKafkaTopicConfigBatchWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaTopicConfigBatchWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaTopicConfigBatch Batch Alter Topic Configs
 	//
@@ -2158,7 +2158,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs:alter (the `UpdateKafkaTopicConfigBatch` operationId).
-	UpdateKafkaTopicConfigBatch(ctx context.Context, clusterId ClusterId, topicName TopicName, body UpdateKafkaTopicConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaTopicConfigBatch(ctx context.Context, clusterId ClusterId, topicName TopicName, body UpdateKafkaTopicConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaDefaultTopicConfigs List New Topic Default Configs
 	//
@@ -2167,7 +2167,7 @@ type ClientInterface interface {
 	// List the default configuration parameters used if the topic were to be newly created.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/default-configs (the `ListKafkaDefaultTopicConfigs` operationId).
-	ListKafkaDefaultTopicConfigs(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaDefaultTopicConfigs(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListKafkaPartitions List Partitions
 	//
@@ -2176,7 +2176,7 @@ type ClientInterface interface {
 	// Return the list of partitions that belong to the specified topic.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/partitions (the `ListKafkaPartitions` operationId).
-	ListKafkaPartitions(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaPartitions(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaPartition Get Partition
 	//
@@ -2185,7 +2185,7 @@ type ClientInterface interface {
 	// Return the partition with the given `partition_id`.
 	//
 	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/partitions/{partition_id} (the `GetKafkaPartition` operationId).
-	GetKafkaPartition(ctx context.Context, clusterId ClusterId, topicName TopicName, partitionId PartitionId, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaPartition(ctx context.Context, clusterId ClusterId, topicName TopicName, partitionId PartitionId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ProduceRecordWithBody Produce Records
 	//
@@ -2211,7 +2211,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/records (the `ProduceRecord` operationId).
-	ProduceRecordWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	produceRecordWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ProduceRecord Produce Records
 	//
@@ -2237,7 +2237,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/records (the `ProduceRecord` operationId).
-	ProduceRecord(ctx context.Context, clusterId ClusterId, topicName TopicName, body ProduceRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	produceRecord(ctx context.Context, clusterId ClusterId, topicName TopicName, body ProduceRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -2255,7 +2255,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -2275,1082 +2275,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// GetKafkaClusterWithResponse Get Cluster
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return the Kafka cluster with the specified ``cluster_id``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id} (the `GetKafkaCluster` operationId).
-	GetKafkaClusterWithResponse(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*GetKafkaClusterResponse, error)
-
-	// DeleteKafkaAclsWithResponse Delete ACLs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Delete the ACLs that match the search criteria.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/acls (the `DeleteKafkaAcls` operationId).
-	DeleteKafkaAclsWithResponse(ctx context.Context, clusterId ClusterId, params *DeleteKafkaAclsParams, reqEditors ...RequestEditorFn) (*DeleteKafkaAclsResponse, error)
-
-	// GetKafkaAclsWithResponse List ACLs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// - When calling `/acls` without the `principal` parameter, service
-	//   accounts are returned in numeric ID format (e.g., `User:12345`).
-	// - To retrieve service accounts in the `sa-xxx` format, use
-	//   `/acls?principal=UserV2:*`.
-	// - The `principal` parameter supports both legacy `User:` format and
-	//   new `UserV2:` format for service accounts.
-	// Return a list of ACLs that match the search criteria.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/acls (the `GetKafkaAcls` operationId).
-	GetKafkaAclsWithResponse(ctx context.Context, clusterId ClusterId, params *GetKafkaAclsParams, reqEditors ...RequestEditorFn) (*GetKafkaAclsResponse, error)
-
-	// CreateKafkaAclsWithBodyWithResponse Create an ACL
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Create an ACL.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/acls (the `CreateKafkaAcls` operationId).
-	CreateKafkaAclsWithBodyWithResponse(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateKafkaAclsResponse, error)
-
-	// CreateKafkaAclsWithResponse Create an ACL
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Create an ACL.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/acls (the `CreateKafkaAcls` operationId).
-	CreateKafkaAclsWithResponse(ctx context.Context, clusterId ClusterId, body CreateKafkaAclsJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKafkaAclsResponse, error)
-
-	// BatchCreateKafkaAclsWithBodyWithResponse Batch Create ACLs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Create ACLs.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/acls:batch (the `BatchCreateKafkaAcls` operationId).
-	BatchCreateKafkaAclsWithBodyWithResponse(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*BatchCreateKafkaAclsResponse, error)
-
-	// BatchCreateKafkaAclsWithResponse Batch Create ACLs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Create ACLs.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/acls:batch (the `BatchCreateKafkaAcls` operationId).
-	BatchCreateKafkaAclsWithResponse(ctx context.Context, clusterId ClusterId, body BatchCreateKafkaAclsJSONRequestBody, reqEditors ...RequestEditorFn) (*BatchCreateKafkaAclsResponse, error)
-
-	// ListKafkaClusterConfigsWithResponse List Dynamic Broker Configs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return a list of dynamic cluster-wide broker configuration parameters for the specified Kafka
-	// cluster. Returns an empty list if there are no dynamic cluster-wide broker configuration parameters.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/broker-configs (the `ListKafkaClusterConfigs` operationId).
-	ListKafkaClusterConfigsWithResponse(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*ListKafkaClusterConfigsResponse, error)
-
-	// DeleteKafkaClusterConfigWithResponse Reset Dynamic Broker Config
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Reset the configuration parameter specified by ``name`` to its
-	// default value by deleting a dynamic cluster-wide configuration.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/broker-configs/{name} (the `DeleteKafkaClusterConfig` operationId).
-	DeleteKafkaClusterConfigWithResponse(ctx context.Context, clusterId ClusterId, name ConfigName, reqEditors ...RequestEditorFn) (*DeleteKafkaClusterConfigResponse, error)
-
-	// GetKafkaClusterConfigWithResponse Get Dynamic Broker Config
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return the dynamic cluster-wide broker configuration parameter specified by ``name``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/broker-configs/{name} (the `GetKafkaClusterConfig` operationId).
-	GetKafkaClusterConfigWithResponse(ctx context.Context, clusterId ClusterId, name ConfigName, reqEditors ...RequestEditorFn) (*GetKafkaClusterConfigResponse, error)
-
-	// UpdateKafkaClusterConfigWithBodyWithResponse Update Dynamic Broker Config
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Update the dynamic cluster-wide broker configuration parameter specified by ``name``.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/broker-configs/{name} (the `UpdateKafkaClusterConfig` operationId).
-	UpdateKafkaClusterConfigWithBodyWithResponse(ctx context.Context, clusterId ClusterId, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaClusterConfigResponse, error)
-
-	// UpdateKafkaClusterConfigWithResponse Update Dynamic Broker Config
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Update the dynamic cluster-wide broker configuration parameter specified by ``name``.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/broker-configs/{name} (the `UpdateKafkaClusterConfig` operationId).
-	UpdateKafkaClusterConfigWithResponse(ctx context.Context, clusterId ClusterId, name ConfigName, body UpdateKafkaClusterConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaClusterConfigResponse, error)
-
-	// UpdateKafkaClusterConfigsWithBodyWithResponse Batch Alter Dynamic Broker Configs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Update or delete a set of dynamic cluster-wide broker configuration parameters.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/broker-configs:alter (the `UpdateKafkaClusterConfigs` operationId).
-	UpdateKafkaClusterConfigsWithBodyWithResponse(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaClusterConfigsResponse, error)
-
-	// UpdateKafkaClusterConfigsWithResponse Batch Alter Dynamic Broker Configs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Update or delete a set of dynamic cluster-wide broker configuration parameters.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/broker-configs:alter (the `UpdateKafkaClusterConfigs` operationId).
-	UpdateKafkaClusterConfigsWithResponse(ctx context.Context, clusterId ClusterId, body UpdateKafkaClusterConfigsJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaClusterConfigsResponse, error)
-
-	// ListKafkaConsumerGroupsWithResponse List Consumer Groups
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return the list of consumer groups that belong to the specified
-	// Kafka cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/consumer-groups (the `ListKafkaConsumerGroups` operationId).
-	ListKafkaConsumerGroupsWithResponse(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*ListKafkaConsumerGroupsResponse, error)
-
-	// GetKafkaConsumerGroupWithResponse Get Consumer Group
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return the consumer group specified by the ``consumer_group_id``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id} (the `GetKafkaConsumerGroup` operationId).
-	GetKafkaConsumerGroupWithResponse(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*GetKafkaConsumerGroupResponse, error)
-
-	// ListKafkaConsumersWithResponse List Consumers
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return a list of consumers that belong to the specified consumer
-	// group.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/consumers (the `ListKafkaConsumers` operationId).
-	ListKafkaConsumersWithResponse(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*ListKafkaConsumersResponse, error)
-
-	// GetKafkaConsumerWithResponse Get Consumer
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return the consumer specified by the ``consumer_id``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/consumers/{consumer_id} (the `GetKafkaConsumer` operationId).
-	GetKafkaConsumerWithResponse(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*GetKafkaConsumerResponse, error)
-
-	// GetKafkaConsumerGroupLagSummaryWithResponse Get Consumer Group Lag Summary
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters only](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters%20only-%23bc8540)](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#dedicated-cluster)
-	//
-	// Return the maximum and total lag of the consumers belonging to the
-	// specified consumer group.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lag-summary (the `GetKafkaConsumerGroupLagSummary` operationId).
-	GetKafkaConsumerGroupLagSummaryWithResponse(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*GetKafkaConsumerGroupLagSummaryResponse, error)
-
-	// ListKafkaConsumerLagsWithResponse List Consumer Lags
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters only](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters%20only-%23bc8540)](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#dedicated-cluster)
-	//
-	// Return a list of consumer lags of the consumers belonging to the
-	// specified consumer group.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags (the `ListKafkaConsumerLags` operationId).
-	ListKafkaConsumerLagsWithResponse(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, reqEditors ...RequestEditorFn) (*ListKafkaConsumerLagsResponse, error)
-
-	// GetKafkaConsumerLagWithResponse Get Consumer Lag
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Available in dedicated clusters only](https://img.shields.io/badge/-Available%20in%20dedicated%20clusters%20only-%23bc8540)](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#dedicated-cluster)
-	//
-	// Return the consumer lag on a partition with the given `partition_id`.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/consumer-groups/{consumer_group_id}/lags/{topic_name}/partitions/{partition_id} (the `GetKafkaConsumerLag` operationId).
-	GetKafkaConsumerLagWithResponse(ctx context.Context, clusterId ClusterId, consumerGroupId ConsumerGroupId, topicName TopicName, partitionId PartitionId, reqEditors ...RequestEditorFn) (*GetKafkaConsumerLagResponse, error)
-
-	// ListKafkaGroupConfigsWithResponse List all configs of the group
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// List all configurations for the specified group. This API supports consumer groups, share groups, and streams groups.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/groups/{group_id}/configs (the `ListKafkaGroupConfigs` operationId).
-	ListKafkaGroupConfigsWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*ListKafkaGroupConfigsResponse, error)
-
-	// DeleteKafkaGroupConfigWithResponse Delete group config
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Delete the dynamic configuration override with the specified name for the specified group. After deletion, the default group configuration will be applied. This API supports consumer groups, share groups, and streams groups.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/groups/{group_id}/configs/{name} (the `DeleteKafkaGroupConfig` operationId).
-	DeleteKafkaGroupConfigWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, reqEditors ...RequestEditorFn) (*DeleteKafkaGroupConfigResponse, error)
-
-	// GetKafkaGroupConfigWithResponse Get group config
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Get the configuration with the specified name for the specified group. This API supports consumer groups, share groups, and streams groups.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/groups/{group_id}/configs/{name} (the `GetKafkaGroupConfig` operationId).
-	GetKafkaGroupConfigWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, reqEditors ...RequestEditorFn) (*GetKafkaGroupConfigResponse, error)
-
-	// UpdateKafkaGroupConfigWithBodyWithResponse Update group config
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Update the configuration with the specified name for the specified group. This API supports consumer groups, share groups, and streams groups.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/groups/{group_id}/configs/{name} (the `UpdateKafkaGroupConfig` operationId).
-	UpdateKafkaGroupConfigWithBodyWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaGroupConfigResponse, error)
-
-	// UpdateKafkaGroupConfigWithResponse Update group config
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Update the configuration with the specified name for the specified group. This API supports consumer groups, share groups, and streams groups.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/groups/{group_id}/configs/{name} (the `UpdateKafkaGroupConfig` operationId).
-	UpdateKafkaGroupConfigWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, body UpdateKafkaGroupConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaGroupConfigResponse, error)
-
-	// UpdateKafkaGroupConfigBatchWithBodyWithResponse Batch Alter Group Configs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Batch alter configurations for the specified group. This API supports consumer groups, share groups, and streams groups.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/groups/{group_id}/configs:alter (the `UpdateKafkaGroupConfigBatch` operationId).
-	UpdateKafkaGroupConfigBatchWithBodyWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, params *UpdateKafkaGroupConfigBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaGroupConfigBatchResponse, error)
-
-	// UpdateKafkaGroupConfigBatchWithResponse Batch Alter Group Configs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Batch alter configurations for the specified group. This API supports consumer groups, share groups, and streams groups.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/groups/{group_id}/configs:alter (the `UpdateKafkaGroupConfigBatch` operationId).
-	UpdateKafkaGroupConfigBatchWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, params *UpdateKafkaGroupConfigBatchParams, body UpdateKafkaGroupConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaGroupConfigBatchResponse, error)
-
-	// ListKafkaLinksWithResponse List all cluster links in the dest cluster
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// ``link_id`` in ``ListLinksResponseData`` is deprecated and may be removed in a future release. Use the new ``cluster_link_id`` instead.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/links (the `ListKafkaLinks` operationId).
-	ListKafkaLinksWithResponse(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*ListKafkaLinksResponse, error)
-
-	// CreateKafkaLinkWithBodyWithResponse Create a cluster link
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Cluster link creation requires source cluster security configurations in
-	// the configs JSON section of the data request payload.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links (the `CreateKafkaLink` operationId).
-	CreateKafkaLinkWithBodyWithResponse(ctx context.Context, clusterId ClusterId, params *CreateKafkaLinkParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateKafkaLinkResponse, error)
-
-	// CreateKafkaLinkWithResponse Create a cluster link
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Cluster link creation requires source cluster security configurations in
-	// the configs JSON section of the data request payload.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links (the `CreateKafkaLink` operationId).
-	CreateKafkaLinkWithResponse(ctx context.Context, clusterId ClusterId, params *CreateKafkaLinkParams, body CreateKafkaLinkJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKafkaLinkResponse, error)
-
-	// ListKafkaMirrorTopicsWithResponse List mirror topics
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// List all mirror topics in the cluster
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/links/-/mirrors (the `ListKafkaMirrorTopics` operationId).
-	ListKafkaMirrorTopicsWithResponse(ctx context.Context, clusterId ClusterId, params *ListKafkaMirrorTopicsParams, reqEditors ...RequestEditorFn) (*ListKafkaMirrorTopicsResponse, error)
-
-	// DeleteKafkaLinkWithResponse Delete the cluster link
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/links/{link_name} (the `DeleteKafkaLink` operationId).
-	DeleteKafkaLinkWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *DeleteKafkaLinkParams, reqEditors ...RequestEditorFn) (*DeleteKafkaLinkResponse, error)
-
-	// GetKafkaLinkWithResponse Describe the cluster link
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// ``link_id`` in ``ListLinksResponseData`` is deprecated and may be removed in a future release. Use the new ``cluster_link_id`` instead.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/links/{link_name} (the `GetKafkaLink` operationId).
-	GetKafkaLinkWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *GetKafkaLinkParams, reqEditors ...RequestEditorFn) (*GetKafkaLinkResponse, error)
-
-	// ListKafkaLinkConfigsWithResponse List all configs of the cluster link
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs (the `ListKafkaLinkConfigs` operationId).
-	ListKafkaLinkConfigsWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, reqEditors ...RequestEditorFn) (*ListKafkaLinkConfigsResponse, error)
-
-	// DeleteKafkaLinkConfigWithResponse Reset the given config to default value
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs/{config_name} (the `DeleteKafkaLinkConfig` operationId).
-	DeleteKafkaLinkConfigWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, reqEditors ...RequestEditorFn) (*DeleteKafkaLinkConfigResponse, error)
-
-	// GetKafkaLinkConfigsWithResponse Describe the config under the cluster link
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs/{config_name} (the `GetKafkaLinkConfigs` operationId).
-	GetKafkaLinkConfigsWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, reqEditors ...RequestEditorFn) (*GetKafkaLinkConfigsResponse, error)
-
-	// UpdateKafkaLinkConfigWithBodyWithResponse Alter the config under the cluster link
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs/{config_name} (the `UpdateKafkaLinkConfig` operationId).
-	UpdateKafkaLinkConfigWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaLinkConfigResponse, error)
-
-	// UpdateKafkaLinkConfigWithResponse Alter the config under the cluster link
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs/{config_name} (the `UpdateKafkaLinkConfig` operationId).
-	UpdateKafkaLinkConfigWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, body UpdateKafkaLinkConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaLinkConfigResponse, error)
-
-	// UpdateKafkaLinkConfigBatchWithBodyWithResponse Batch Alter Cluster Link Configs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Batch Alter Cluster Link Configs
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs:alter (the `UpdateKafkaLinkConfigBatch` operationId).
-	UpdateKafkaLinkConfigBatchWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaLinkConfigBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaLinkConfigBatchResponse, error)
-
-	// UpdateKafkaLinkConfigBatchWithResponse Batch Alter Cluster Link Configs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Batch Alter Cluster Link Configs
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/links/{link_name}/configs:alter (the `UpdateKafkaLinkConfigBatch` operationId).
-	UpdateKafkaLinkConfigBatchWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaLinkConfigBatchParams, body UpdateKafkaLinkConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaLinkConfigBatchResponse, error)
-
-	// ListKafkaMirrorTopicsUnderLinkWithResponse List mirror topics
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// List all mirror topics under the link
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors (the `ListKafkaMirrorTopicsUnderLink` operationId).
-	ListKafkaMirrorTopicsUnderLinkWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *ListKafkaMirrorTopicsUnderLinkParams, reqEditors ...RequestEditorFn) (*ListKafkaMirrorTopicsUnderLinkResponse, error)
-
-	// CreateKafkaMirrorTopicWithBodyWithResponse Create a mirror topic
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Create a topic in the destination cluster mirroring a topic in
-	// the source cluster
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors (the `CreateKafkaMirrorTopic` operationId).
-	CreateKafkaMirrorTopicWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateKafkaMirrorTopicResponse, error)
-
-	// CreateKafkaMirrorTopicWithResponse Create a mirror topic
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Create a topic in the destination cluster mirroring a topic in
-	// the source cluster
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors (the `CreateKafkaMirrorTopic` operationId).
-	CreateKafkaMirrorTopicWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, body CreateKafkaMirrorTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKafkaMirrorTopicResponse, error)
-
-	// ReadKafkaMirrorTopicWithResponse Describe the mirror topic
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors/{mirror_topic_name} (the `ReadKafkaMirrorTopic` operationId).
-	ReadKafkaMirrorTopicWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, mirrorTopicName MirrorTopicName, params *ReadKafkaMirrorTopicParams, reqEditors ...RequestEditorFn) (*ReadKafkaMirrorTopicResponse, error)
-
-	// UpdateKafkaMirrorTopicsFailoverWithBodyWithResponse Failover the mirror topics
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:failover (the `UpdateKafkaMirrorTopicsFailover` operationId).
-	UpdateKafkaMirrorTopicsFailoverWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsFailoverParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsFailoverResponse, error)
-
-	// UpdateKafkaMirrorTopicsFailoverWithResponse Failover the mirror topics
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:failover (the `UpdateKafkaMirrorTopicsFailover` operationId).
-	UpdateKafkaMirrorTopicsFailoverWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsFailoverParams, body UpdateKafkaMirrorTopicsFailoverJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsFailoverResponse, error)
-
-	// UpdateKafkaMirrorTopicsPauseWithBodyWithResponse Pause the mirror topics
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:pause (the `UpdateKafkaMirrorTopicsPause` operationId).
-	UpdateKafkaMirrorTopicsPauseWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPauseParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsPauseResponse, error)
-
-	// UpdateKafkaMirrorTopicsPauseWithResponse Pause the mirror topics
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:pause (the `UpdateKafkaMirrorTopicsPause` operationId).
-	UpdateKafkaMirrorTopicsPauseWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPauseParams, body UpdateKafkaMirrorTopicsPauseJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsPauseResponse, error)
-
-	// UpdateKafkaMirrorTopicsPromoteWithBodyWithResponse Promote the mirror topics
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote (the `UpdateKafkaMirrorTopicsPromote` operationId).
-	UpdateKafkaMirrorTopicsPromoteWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPromoteParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsPromoteResponse, error)
-
-	// UpdateKafkaMirrorTopicsPromoteWithResponse Promote the mirror topics
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:promote (the `UpdateKafkaMirrorTopicsPromote` operationId).
-	UpdateKafkaMirrorTopicsPromoteWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPromoteParams, body UpdateKafkaMirrorTopicsPromoteJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsPromoteResponse, error)
-
-	// UpdateKafkaMirrorTopicsResumeWithBodyWithResponse Resume the mirror topics
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:resume (the `UpdateKafkaMirrorTopicsResume` operationId).
-	UpdateKafkaMirrorTopicsResumeWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsResumeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsResumeResponse, error)
-
-	// UpdateKafkaMirrorTopicsResumeWithResponse Resume the mirror topics
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:resume (the `UpdateKafkaMirrorTopicsResume` operationId).
-	UpdateKafkaMirrorTopicsResumeWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsResumeParams, body UpdateKafkaMirrorTopicsResumeJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsResumeResponse, error)
-
-	// UpdateKafkaMirrorTopicsReverseAndPauseMirrorWithBodyWithResponse Reverse the local mirror topic and Pause the remote mirror topic
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-pause-mirror (the `UpdateKafkaMirrorTopicsReverseAndPauseMirror` operationId).
-	UpdateKafkaMirrorTopicsReverseAndPauseMirrorWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndPauseMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsReverseAndPauseMirrorResponse, error)
-
-	// UpdateKafkaMirrorTopicsReverseAndPauseMirrorWithResponse Reverse the local mirror topic and Pause the remote mirror topic
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-pause-mirror (the `UpdateKafkaMirrorTopicsReverseAndPauseMirror` operationId).
-	UpdateKafkaMirrorTopicsReverseAndPauseMirrorWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndPauseMirrorParams, body UpdateKafkaMirrorTopicsReverseAndPauseMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsReverseAndPauseMirrorResponse, error)
-
-	// UpdateKafkaMirrorTopicsReverseAndStartMirrorWithBodyWithResponse Reverse the local mirror topic and start the remote mirror topic
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-start-mirror (the `UpdateKafkaMirrorTopicsReverseAndStartMirror` operationId).
-	UpdateKafkaMirrorTopicsReverseAndStartMirrorWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndStartMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsReverseAndStartMirrorResponse, error)
-
-	// UpdateKafkaMirrorTopicsReverseAndStartMirrorWithResponse Reverse the local mirror topic and start the remote mirror topic
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:reverse-and-start-mirror (the `UpdateKafkaMirrorTopicsReverseAndStartMirror` operationId).
-	UpdateKafkaMirrorTopicsReverseAndStartMirrorWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndStartMirrorParams, body UpdateKafkaMirrorTopicsReverseAndStartMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsReverseAndStartMirrorResponse, error)
-
-	// UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorWithBodyWithResponse Truncates the local topic to the remote stopped mirror log end offsets and restores mirroring to the local topic to mirror from the remote topic
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:truncate-and-restore (the `UpdateKafkaMirrorTopicsTruncateAndRestoreMirror` operationId).
-	UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorResponse, error)
-
-	// UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorWithResponse Truncates the local topic to the remote stopped mirror log end offsets and restores mirroring to the local topic to mirror from the remote topic
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/links/{link_name}/mirrors:truncate-and-restore (the `UpdateKafkaMirrorTopicsTruncateAndRestoreMirror` operationId).
-	UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorParams, body UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorResponse, error)
-
-	// ListKafkaShareGroupsWithResponse List Share Groups
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return the list of share groups that belong to the specified
-	// Kafka cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/share-groups (the `ListKafkaShareGroups` operationId).
-	ListKafkaShareGroupsWithResponse(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*ListKafkaShareGroupsResponse, error)
-
-	// DeleteKafkaShareGroupWithResponse Delete Share Group
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Delete the share group specified by the ``group_id``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/share-groups/{group_id} (the `DeleteKafkaShareGroup` operationId).
-	DeleteKafkaShareGroupWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*DeleteKafkaShareGroupResponse, error)
-
-	// GetKafkaShareGroupWithResponse Get Share Group
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return the share group specified by the ``group_id``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/share-groups/{group_id} (the `GetKafkaShareGroup` operationId).
-	GetKafkaShareGroupWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*GetKafkaShareGroupResponse, error)
-
-	// ListKafkaShareGroupConsumersWithResponse List Share Group Consumers
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return a list of consumers that belong to the specified share
-	// group.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}/consumers (the `ListKafkaShareGroupConsumers` operationId).
-	ListKafkaShareGroupConsumersWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*ListKafkaShareGroupConsumersResponse, error)
-
-	// GetKafkaShareGroupConsumerWithResponse Get Share Group Consumer
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return the consumer specified by the ``consumer_id``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}/consumers/{consumer_id} (the `GetKafkaShareGroupConsumer` operationId).
-	GetKafkaShareGroupConsumerWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*GetKafkaShareGroupConsumerResponse, error)
-
-	// ListKafkaShareGroupConsumerAssignmentsWithResponse List Share Group Consumer Assignments
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return the consumer assignments specified by the ``consumer_id``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/share-groups/{group_id}/consumers/{consumer_id}/assignments (the `ListKafkaShareGroupConsumerAssignments` operationId).
-	ListKafkaShareGroupConsumerAssignmentsWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*ListKafkaShareGroupConsumerAssignmentsResponse, error)
-
-	// ListKafkaStreamsGroupsWithResponse List Streams Groups
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return the list of streams groups that belong to the specified Kafka cluster
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups (the `ListKafkaStreamsGroups` operationId).
-	ListKafkaStreamsGroupsWithResponse(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*ListKafkaStreamsGroupsResponse, error)
-
-	// GetKafkaStreamsGroupWithResponse Get Streams Group
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return the streams group specified by the ``group_id``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id} (the `GetKafkaStreamsGroup` operationId).
-	GetKafkaStreamsGroupWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*GetKafkaStreamsGroupResponse, error)
-
-	// ListKafkaStreamsGroupMembersWithResponse List Streams Group Members
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return a list of members that belong to the specified streams group.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members (the `ListKafkaStreamsGroupMembers` operationId).
-	ListKafkaStreamsGroupMembersWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*ListKafkaStreamsGroupMembersResponse, error)
-
-	// GetKafkaStreamsGroupMemberWithResponse Get Streams Group Member
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return the members specified by the ``member_id``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id} (the `GetKafkaStreamsGroupMember` operationId).
-	GetKafkaStreamsGroupMemberWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*GetKafkaStreamsGroupMemberResponse, error)
-
-	// GetKafkaStreamsGroupMemberAssignmentsWithResponse Get Streams Group Member Assignments
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return the assignments of the member specified by the ``member_id``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/assignments (the `GetKafkaStreamsGroupMemberAssignments` operationId).
-	GetKafkaStreamsGroupMemberAssignmentsWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*GetKafkaStreamsGroupMemberAssignmentsResponse, error)
-
-	// ListKafkaStreamsGroupMemberAssignmentTasksWithResponse List Streams Group Assignments of a Specific Type
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return the tasks of the member specified by the ``member_id``, and the type ``assignments_type``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/assignments/{assignments_type} (the `ListKafkaStreamsGroupMemberAssignmentTasks` operationId).
-	ListKafkaStreamsGroupMemberAssignmentTasksWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, reqEditors ...RequestEditorFn) (*ListKafkaStreamsGroupMemberAssignmentTasksResponse, error)
-
-	// GetKafkaStreamsGroupMemberAssignmentTaskPartitionsWithResponse List Streams Group Assignments Task Partitions of a Specific Type and Subtopology
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return the tasks of the member specified by the ``member_id``, and the type ``assignments_type``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/assignments/{assignments_type}/subtopologies/{subtopology_id} (the `GetKafkaStreamsGroupMemberAssignmentTaskPartitions` operationId).
-	GetKafkaStreamsGroupMemberAssignmentTaskPartitionsWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*GetKafkaStreamsGroupMemberAssignmentTaskPartitionsResponse, error)
-
-	// GetKafkaStreamsGroupMemberTargetAssignmentsWithResponse Get Streams Group Member Target Assignments
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return the target assignments of the member specified by the ``member_id``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/target-assignments (the `GetKafkaStreamsGroupMemberTargetAssignments` operationId).
-	GetKafkaStreamsGroupMemberTargetAssignmentsWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*GetKafkaStreamsGroupMemberTargetAssignmentsResponse, error)
-
-	// ListKafkaStreamsGroupMemberTargetAssignmentTasksWithResponse List Streams Group Target Assignments of a Specific Type
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return the target tasks of the member specified by the ``member_id``, and the type ``assignments_type``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/target-assignments/{assignments_type} (the `ListKafkaStreamsGroupMemberTargetAssignmentTasks` operationId).
-	ListKafkaStreamsGroupMemberTargetAssignmentTasksWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, reqEditors ...RequestEditorFn) (*ListKafkaStreamsGroupMemberTargetAssignmentTasksResponse, error)
-
-	// GetKafkaStreamsGroupMemberTargetAssignmentTaskPartitionsWithResponse List Streams Group Target Assignments Task Partitions of a Specific Type and Subtopology
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return the tasks of the member specified by the ``member_id``, and the type ``assignments_type``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/members/{member_id}/target-assignments/{assignments_type}/subtopologies/{subtopology_id} (the `GetKafkaStreamsGroupMemberTargetAssignmentTaskPartitions` operationId).
-	GetKafkaStreamsGroupMemberTargetAssignmentTaskPartitionsWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*GetKafkaStreamsGroupMemberTargetAssignmentTaskPartitionsResponse, error)
-
-	// ListKafkaStreamsGroupSubtopologiesWithResponse List Streams Group Subtopologies
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return a list of subtopologies that belong to the specified streams group.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/subtopologies (the `ListKafkaStreamsGroupSubtopologies` operationId).
-	ListKafkaStreamsGroupSubtopologiesWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*ListKafkaStreamsGroupSubtopologiesResponse, error)
-
-	// GetKafkaStreamsGroupSubtopologyWithResponse Get Streams Group Subtopology
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	// Return the subtopology specified by the ``subtopology_id``.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/streams-groups/{group_id}/subtopologies/{subtopology_id} (the `GetKafkaStreamsGroupSubtopology` operationId).
-	GetKafkaStreamsGroupSubtopologyWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*GetKafkaStreamsGroupSubtopologyResponse, error)
-
-	// ListKafkaTopicsWithResponse List Topics
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return the list of topics that belong to the specified Kafka cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics (the `ListKafkaTopics` operationId).
-	ListKafkaTopicsWithResponse(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*ListKafkaTopicsResponse, error)
-
-	// CreateKafkaTopicWithBodyWithResponse Create Topic
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Create a topic.
-	// Also supports a dry-run mode that only validates whether the topic creation would succeed
-	// if the ``validate_only`` request property is explicitly specified and set to true. Note that
-	// when dry-run mode is being used the response status would be 200 OK instead of 201 Created.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/topics (the `CreateKafkaTopic` operationId).
-	CreateKafkaTopicWithBodyWithResponse(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateKafkaTopicResponse, error)
-
-	// CreateKafkaTopicWithResponse Create Topic
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Create a topic.
-	// Also supports a dry-run mode that only validates whether the topic creation would succeed
-	// if the ``validate_only`` request property is explicitly specified and set to true. Note that
-	// when dry-run mode is being used the response status would be 200 OK instead of 201 Created.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/topics (the `CreateKafkaTopic` operationId).
-	CreateKafkaTopicWithResponse(ctx context.Context, clusterId ClusterId, body CreateKafkaTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKafkaTopicResponse, error)
-
-	// ListKafkaAllTopicConfigsWithResponse List All Topic Configs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return the list of configuration parameters for all topics hosted by the specified
-	// cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics/-/configs (the `ListKafkaAllTopicConfigs` operationId).
-	ListKafkaAllTopicConfigsWithResponse(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*ListKafkaAllTopicConfigsResponse, error)
-
-	// DeleteKafkaTopicWithResponse Delete Topic
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Delete the topic with the given `topic_name`.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/topics/{topic_name} (the `DeleteKafkaTopic` operationId).
-	DeleteKafkaTopicWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*DeleteKafkaTopicResponse, error)
-
-	// GetKafkaTopicWithResponse Get Topic
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return the topic with the given `topic_name`.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics/{topic_name} (the `GetKafkaTopic` operationId).
-	GetKafkaTopicWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, params *GetKafkaTopicParams, reqEditors ...RequestEditorFn) (*GetKafkaTopicResponse, error)
-
-	// UpdatePartitionCountKafkaTopicWithBodyWithResponse Update Partition Count
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Increase the number of partitions for a topic. To update other topic
-	// configurations, see https://docs.confluent.io/cloud/current/api.html#tag/Configs-(v3)/operation/updateKafkaTopicConfig.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /kafka/v3/clusters/{cluster_id}/topics/{topic_name} (the `UpdatePartitionCountKafkaTopic` operationId).
-	UpdatePartitionCountKafkaTopicWithBodyWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdatePartitionCountKafkaTopicResponse, error)
-
-	// UpdatePartitionCountKafkaTopicWithResponse Update Partition Count
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Increase the number of partitions for a topic. To update other topic
-	// configurations, see https://docs.confluent.io/cloud/current/api.html#tag/Configs-(v3)/operation/updateKafkaTopicConfig.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /kafka/v3/clusters/{cluster_id}/topics/{topic_name} (the `UpdatePartitionCountKafkaTopic` operationId).
-	UpdatePartitionCountKafkaTopicWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, body UpdatePartitionCountKafkaTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdatePartitionCountKafkaTopicResponse, error)
-
-	// ListKafkaTopicConfigsWithResponse List Topic Configs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return the list of configuration parameters that belong to the specified topic.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs (the `ListKafkaTopicConfigs` operationId).
-	ListKafkaTopicConfigsWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*ListKafkaTopicConfigsResponse, error)
-
-	// DeleteKafkaTopicConfigWithResponse Reset Topic Config
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Reset the configuration parameter with given `name` to its default value.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} (the `DeleteKafkaTopicConfig` operationId).
-	DeleteKafkaTopicConfigWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, reqEditors ...RequestEditorFn) (*DeleteKafkaTopicConfigResponse, error)
-
-	// GetKafkaTopicConfigWithResponse Get Topic Config
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return the configuration parameter with the given `name`.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} (the `GetKafkaTopicConfig` operationId).
-	GetKafkaTopicConfigWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, reqEditors ...RequestEditorFn) (*GetKafkaTopicConfigResponse, error)
-
-	// UpdateKafkaTopicConfigWithBodyWithResponse Update Topic Config
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Update the configuration parameter with given `name`. To update the
-	// number of partitions, see
-	// https://docs.confluent.io/cloud/current/api.html#tag/Topic-(v3)/operation/updatePartitionCountKafkaTopic.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} (the `UpdateKafkaTopicConfig` operationId).
-	UpdateKafkaTopicConfigWithBodyWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaTopicConfigResponse, error)
-
-	// UpdateKafkaTopicConfigWithResponse Update Topic Config
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Update the configuration parameter with given `name`. To update the
-	// number of partitions, see
-	// https://docs.confluent.io/cloud/current/api.html#tag/Topic-(v3)/operation/updatePartitionCountKafkaTopic.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs/{name} (the `UpdateKafkaTopicConfig` operationId).
-	UpdateKafkaTopicConfigWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, body UpdateKafkaTopicConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaTopicConfigResponse, error)
-
-	// UpdateKafkaTopicConfigBatchWithBodyWithResponse Batch Alter Topic Configs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Update or delete a set of topic configuration parameters.
-	// Also supports a dry-run mode that only validates whether the operation would succeed if the
-	// ``validate_only`` request property is explicitly specified and set to true.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs:alter (the `UpdateKafkaTopicConfigBatch` operationId).
-	UpdateKafkaTopicConfigBatchWithBodyWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaTopicConfigBatchResponse, error)
-
-	// UpdateKafkaTopicConfigBatchWithResponse Batch Alter Topic Configs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Update or delete a set of topic configuration parameters.
-	// Also supports a dry-run mode that only validates whether the operation would succeed if the
-	// ``validate_only`` request property is explicitly specified and set to true.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/configs:alter (the `UpdateKafkaTopicConfigBatch` operationId).
-	UpdateKafkaTopicConfigBatchWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, body UpdateKafkaTopicConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaTopicConfigBatchResponse, error)
-
-	// ListKafkaDefaultTopicConfigsWithResponse List New Topic Default Configs
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// List the default configuration parameters used if the topic were to be newly created.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/default-configs (the `ListKafkaDefaultTopicConfigs` operationId).
-	ListKafkaDefaultTopicConfigsWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*ListKafkaDefaultTopicConfigsResponse, error)
-
-	// ListKafkaPartitionsWithResponse List Partitions
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return the list of partitions that belong to the specified topic.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/partitions (the `ListKafkaPartitions` operationId).
-	ListKafkaPartitionsWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*ListKafkaPartitionsResponse, error)
-
-	// GetKafkaPartitionWithResponse Get Partition
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return the partition with the given `partition_id`.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/partitions/{partition_id} (the `GetKafkaPartition` operationId).
-	GetKafkaPartitionWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, partitionId PartitionId, reqEditors ...RequestEditorFn) (*GetKafkaPartitionResponse, error)
-
-	// ProduceRecordWithBodyWithResponse Produce Records
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Produce records to the given topic, returning delivery reports for each
-	// record produced. This API can be used in streaming mode by setting
-	// "Transfer-Encoding: chunked" header. For as long as the connection is
-	// kept open, the server will keep accepting records. Records are streamed
-	// to and from the server as Concatenated JSON. For each record sent to the
-	// server, the server will asynchronously send back a delivery report, in
-	// the same order, each with its own error_code. An error_code of 200
-	// indicates success. The HTTP status code will be HTTP 200 OK as long as
-	// the connection is successfully established. To identify records that
-	// have encountered an error, check the error_code of each delivery report.
-	//
-	// Note that the cluster_id is validated only when running in Confluent Cloud.
-	//
-	// This API currently does not support Schema Registry integration. Sending
-	// schemas is not supported. Only BINARY, JSON, and STRING formats are
-	// supported.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/records (the `ProduceRecord` operationId).
-	ProduceRecordWithBodyWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ProduceRecordResponse, error)
-
-	// ProduceRecordWithResponse Produce Records
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Produce records to the given topic, returning delivery reports for each
-	// record produced. This API can be used in streaming mode by setting
-	// "Transfer-Encoding: chunked" header. For as long as the connection is
-	// kept open, the server will keep accepting records. Records are streamed
-	// to and from the server as Concatenated JSON. For each record sent to the
-	// server, the server will asynchronously send back a delivery report, in
-	// the same order, each with its own error_code. An error_code of 200
-	// indicates success. The HTTP status code will be HTTP 200 OK as long as
-	// the connection is successfully established. To identify records that
-	// have encountered an error, check the error_code of each delivery report.
-	//
-	// Note that the cluster_id is validated only when running in Confluent Cloud.
-	//
-	// This API currently does not support Schema Registry integration. Sending
-	// schemas is not supported. Only BINARY, JSON, and STRING formats are
-	// supported.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/records (the `ProduceRecord` operationId).
-	ProduceRecordWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, body ProduceRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*ProduceRecordResponse, error)
-}
-
 func (r GetKafkaClusterResponse) GetJSON200() *GetClusterResponse {
 	return r.JSON200
 }

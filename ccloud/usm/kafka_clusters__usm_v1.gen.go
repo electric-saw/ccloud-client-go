@@ -67,7 +67,7 @@ type GetUsmV1KafkaCluster200JSONResponseBodyApiVersion string
 type GetUsmV1KafkaCluster200JSONResponseBodyKind string
 type CreateUsmV1KafkaClusterJSONRequestBody CreateUsmV1KafkaClusterJSONBody
 
-func (c *oasClient) ListUsmV1KafkaClusters(ctx context.Context, params *ListUsmV1KafkaClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listUsmV1KafkaClusters(ctx context.Context, params *ListUsmV1KafkaClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListUsmV1KafkaClustersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -78,7 +78,7 @@ func (c *oasClient) ListUsmV1KafkaClusters(ctx context.Context, params *ListUsmV
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateUsmV1KafkaClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createUsmV1KafkaClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateUsmV1KafkaClusterRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -89,7 +89,7 @@ func (c *oasClient) CreateUsmV1KafkaClusterWithBody(ctx context.Context, content
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateUsmV1KafkaCluster(ctx context.Context, body CreateUsmV1KafkaClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createUsmV1KafkaCluster(ctx context.Context, body CreateUsmV1KafkaClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateUsmV1KafkaClusterRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -100,7 +100,7 @@ func (c *oasClient) CreateUsmV1KafkaCluster(ctx context.Context, body CreateUsmV
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteUsmV1KafkaCluster(ctx context.Context, id string, params *DeleteUsmV1KafkaClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteUsmV1KafkaCluster(ctx context.Context, id string, params *DeleteUsmV1KafkaClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteUsmV1KafkaClusterRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -111,7 +111,7 @@ func (c *oasClient) DeleteUsmV1KafkaCluster(ctx context.Context, id string, para
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetUsmV1KafkaCluster(ctx context.Context, id string, params *GetUsmV1KafkaClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getUsmV1KafkaCluster(ctx context.Context, id string, params *GetUsmV1KafkaClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetUsmV1KafkaClusterRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -648,35 +648,35 @@ type GetUsmV1KafkaClusterResponse struct {
 }
 
 func (c *ClientWithResponses) ListUsmV1KafkaClustersWithResponse(ctx context.Context, params *ListUsmV1KafkaClustersParams, reqEditors ...RequestEditorFn) (*ListUsmV1KafkaClustersResponse, error) {
-	rsp, err := c.ListUsmV1KafkaClusters(ctx, params, reqEditors...)
+	rsp, err := c.listUsmV1KafkaClusters(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListUsmV1KafkaClustersResponse(rsp)
 }
 func (c *ClientWithResponses) CreateUsmV1KafkaClusterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateUsmV1KafkaClusterResponse, error) {
-	rsp, err := c.CreateUsmV1KafkaClusterWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createUsmV1KafkaClusterWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateUsmV1KafkaClusterResponse(rsp)
 }
 func (c *ClientWithResponses) CreateUsmV1KafkaClusterWithResponse(ctx context.Context, body CreateUsmV1KafkaClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateUsmV1KafkaClusterResponse, error) {
-	rsp, err := c.CreateUsmV1KafkaCluster(ctx, body, reqEditors...)
+	rsp, err := c.createUsmV1KafkaCluster(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateUsmV1KafkaClusterResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteUsmV1KafkaClusterWithResponse(ctx context.Context, id string, params *DeleteUsmV1KafkaClusterParams, reqEditors ...RequestEditorFn) (*DeleteUsmV1KafkaClusterResponse, error) {
-	rsp, err := c.DeleteUsmV1KafkaCluster(ctx, id, params, reqEditors...)
+	rsp, err := c.deleteUsmV1KafkaCluster(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteUsmV1KafkaClusterResponse(rsp)
 }
 func (c *ClientWithResponses) GetUsmV1KafkaClusterWithResponse(ctx context.Context, id string, params *GetUsmV1KafkaClusterParams, reqEditors ...RequestEditorFn) (*GetUsmV1KafkaClusterResponse, error) {
-	rsp, err := c.GetUsmV1KafkaCluster(ctx, id, params, reqEditors...)
+	rsp, err := c.getUsmV1KafkaCluster(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

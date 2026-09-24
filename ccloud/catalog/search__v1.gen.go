@@ -77,7 +77,7 @@ type SearchUsingBasicParams struct {
 }
 type SearchUsingBasicParamsSortOrder string
 
-func (c *oasClient) SearchUsingAttribute(ctx context.Context, params *SearchUsingAttributeParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) searchUsingAttribute(ctx context.Context, params *SearchUsingAttributeParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSearchUsingAttributeRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -88,7 +88,7 @@ func (c *oasClient) SearchUsingAttribute(ctx context.Context, params *SearchUsin
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) SearchUsingBasic(ctx context.Context, params *SearchUsingBasicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) searchUsingBasic(ctx context.Context, params *SearchUsingBasicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSearchUsingBasicRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -422,14 +422,14 @@ type SearchUsingBasicResponse struct {
 }
 
 func (c *ClientWithResponses) SearchUsingAttributeWithResponse(ctx context.Context, params *SearchUsingAttributeParams, reqEditors ...RequestEditorFn) (*SearchUsingAttributeResponse, error) {
-	rsp, err := c.SearchUsingAttribute(ctx, params, reqEditors...)
+	rsp, err := c.searchUsingAttribute(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseSearchUsingAttributeResponse(rsp)
 }
 func (c *ClientWithResponses) SearchUsingBasicWithResponse(ctx context.Context, params *SearchUsingBasicParams, reqEditors ...RequestEditorFn) (*SearchUsingBasicResponse, error) {
-	rsp, err := c.SearchUsingBasic(ctx, params, reqEditors...)
+	rsp, err := c.searchUsingBasic(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

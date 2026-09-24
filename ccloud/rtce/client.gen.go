@@ -1035,7 +1035,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListRtceV1Regions List of Regions
 	//
@@ -1044,7 +1044,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all regions.
 	//
 	// Corresponds with GET /rtce/v1/regions (the `ListRtceV1Regions` operationId).
-	ListRtceV1Regions(ctx context.Context, params *ListRtceV1RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listRtceV1Regions(ctx context.Context, params *ListRtceV1RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListRtceV1RtceTopics List of Rtce Topics
 	//
@@ -1053,7 +1053,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all rtce topics.
 	//
 	// Corresponds with GET /rtce/v1/rtce-topics (the `ListRtceV1RtceTopics` operationId).
-	ListRtceV1RtceTopics(ctx context.Context, params *ListRtceV1RtceTopicsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listRtceV1RtceTopics(ctx context.Context, params *ListRtceV1RtceTopicsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateRtceV1RtceTopicWithBody Create a Rtce Topic
 	//
@@ -1064,7 +1064,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /rtce/v1/rtce-topics (the `CreateRtceV1RtceTopic` operationId).
-	CreateRtceV1RtceTopicWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createRtceV1RtceTopicWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateRtceV1RtceTopic Create a Rtce Topic
 	//
@@ -1075,7 +1075,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /rtce/v1/rtce-topics (the `CreateRtceV1RtceTopic` operationId).
-	CreateRtceV1RtceTopic(ctx context.Context, body CreateRtceV1RtceTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createRtceV1RtceTopic(ctx context.Context, body CreateRtceV1RtceTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteRtceV1RtceTopic Delete a Rtce Topic
 	//
@@ -1084,7 +1084,7 @@ type ClientInterface interface {
 	// Make a request to delete a rtce topic.
 	//
 	// Corresponds with DELETE /rtce/v1/rtce-topics/{topic_name} (the `DeleteRtceV1RtceTopic` operationId).
-	DeleteRtceV1RtceTopic(ctx context.Context, topicName string, params *DeleteRtceV1RtceTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteRtceV1RtceTopic(ctx context.Context, topicName string, params *DeleteRtceV1RtceTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetRtceV1RtceTopic Read a Rtce Topic
 	//
@@ -1093,7 +1093,7 @@ type ClientInterface interface {
 	// Make a request to read a rtce topic.
 	//
 	// Corresponds with GET /rtce/v1/rtce-topics/{topic_name} (the `GetRtceV1RtceTopic` operationId).
-	GetRtceV1RtceTopic(ctx context.Context, topicName string, params *GetRtceV1RtceTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getRtceV1RtceTopic(ctx context.Context, topicName string, params *GetRtceV1RtceTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateRtceV1RtceTopicWithBody Update a Rtce Topic
 	//
@@ -1104,7 +1104,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /rtce/v1/rtce-topics/{topic_name} (the `UpdateRtceV1RtceTopic` operationId).
-	UpdateRtceV1RtceTopicWithBody(ctx context.Context, topicName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateRtceV1RtceTopicWithBody(ctx context.Context, topicName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateRtceV1RtceTopic Update a Rtce Topic
 	//
@@ -1115,7 +1115,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /rtce/v1/rtce-topics/{topic_name} (the `UpdateRtceV1RtceTopic` operationId).
-	UpdateRtceV1RtceTopic(ctx context.Context, topicName string, body UpdateRtceV1RtceTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateRtceV1RtceTopic(ctx context.Context, topicName string, body UpdateRtceV1RtceTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -1133,7 +1133,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -1153,98 +1153,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListRtceV1RegionsWithResponse List of Regions
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all regions.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /rtce/v1/regions (the `ListRtceV1Regions` operationId).
-	ListRtceV1RegionsWithResponse(ctx context.Context, params *ListRtceV1RegionsParams, reqEditors ...RequestEditorFn) (*ListRtceV1RegionsResponse, error)
-
-	// ListRtceV1RtceTopicsWithResponse List of Rtce Topics
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all rtce topics.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /rtce/v1/rtce-topics (the `ListRtceV1RtceTopics` operationId).
-	ListRtceV1RtceTopicsWithResponse(ctx context.Context, params *ListRtceV1RtceTopicsParams, reqEditors ...RequestEditorFn) (*ListRtceV1RtceTopicsResponse, error)
-
-	// CreateRtceV1RtceTopicWithBodyWithResponse Create a Rtce Topic
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a rtce topic.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /rtce/v1/rtce-topics (the `CreateRtceV1RtceTopic` operationId).
-	CreateRtceV1RtceTopicWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRtceV1RtceTopicResponse, error)
-
-	// CreateRtceV1RtceTopicWithResponse Create a Rtce Topic
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a rtce topic.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /rtce/v1/rtce-topics (the `CreateRtceV1RtceTopic` operationId).
-	CreateRtceV1RtceTopicWithResponse(ctx context.Context, body CreateRtceV1RtceTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRtceV1RtceTopicResponse, error)
-
-	// DeleteRtceV1RtceTopicWithResponse Delete a Rtce Topic
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a rtce topic.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /rtce/v1/rtce-topics/{topic_name} (the `DeleteRtceV1RtceTopic` operationId).
-	DeleteRtceV1RtceTopicWithResponse(ctx context.Context, topicName string, params *DeleteRtceV1RtceTopicParams, reqEditors ...RequestEditorFn) (*DeleteRtceV1RtceTopicResponse, error)
-
-	// GetRtceV1RtceTopicWithResponse Read a Rtce Topic
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a rtce topic.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /rtce/v1/rtce-topics/{topic_name} (the `GetRtceV1RtceTopic` operationId).
-	GetRtceV1RtceTopicWithResponse(ctx context.Context, topicName string, params *GetRtceV1RtceTopicParams, reqEditors ...RequestEditorFn) (*GetRtceV1RtceTopicResponse, error)
-
-	// UpdateRtceV1RtceTopicWithBodyWithResponse Update a Rtce Topic
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a rtce topic.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /rtce/v1/rtce-topics/{topic_name} (the `UpdateRtceV1RtceTopic` operationId).
-	UpdateRtceV1RtceTopicWithBodyWithResponse(ctx context.Context, topicName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRtceV1RtceTopicResponse, error)
-
-	// UpdateRtceV1RtceTopicWithResponse Update a Rtce Topic
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a rtce topic.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /rtce/v1/rtce-topics/{topic_name} (the `UpdateRtceV1RtceTopic` operationId).
-	UpdateRtceV1RtceTopicWithResponse(ctx context.Context, topicName string, body UpdateRtceV1RtceTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRtceV1RtceTopicResponse, error)
-}
-
 func (r ListRtceV1RegionsResponse) GetJSON200() *RtceV1RegionList {
 	return r.JSON200
 }

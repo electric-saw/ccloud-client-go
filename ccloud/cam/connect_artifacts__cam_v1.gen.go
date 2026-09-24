@@ -85,7 +85,7 @@ type GetCamV1ConnectArtifact200JSONResponseBodyApiVersion string
 type GetCamV1ConnectArtifact200JSONResponseBodyKind string
 type CreateCamV1ConnectArtifactJSONRequestBody CreateCamV1ConnectArtifactJSONBody
 
-func (c *oasClient) ListCamV1ConnectArtifacts(ctx context.Context, params *ListCamV1ConnectArtifactsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listCamV1ConnectArtifacts(ctx context.Context, params *ListCamV1ConnectArtifactsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListCamV1ConnectArtifactsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -96,7 +96,7 @@ func (c *oasClient) ListCamV1ConnectArtifacts(ctx context.Context, params *ListC
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateCamV1ConnectArtifactWithBody(ctx context.Context, params *CreateCamV1ConnectArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createCamV1ConnectArtifactWithBody(ctx context.Context, params *CreateCamV1ConnectArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateCamV1ConnectArtifactRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -107,7 +107,7 @@ func (c *oasClient) CreateCamV1ConnectArtifactWithBody(ctx context.Context, para
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateCamV1ConnectArtifact(ctx context.Context, params *CreateCamV1ConnectArtifactParams, body CreateCamV1ConnectArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createCamV1ConnectArtifact(ctx context.Context, params *CreateCamV1ConnectArtifactParams, body CreateCamV1ConnectArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateCamV1ConnectArtifactRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err
@@ -118,7 +118,7 @@ func (c *oasClient) CreateCamV1ConnectArtifact(ctx context.Context, params *Crea
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteCamV1ConnectArtifact(ctx context.Context, id string, params *DeleteCamV1ConnectArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteCamV1ConnectArtifact(ctx context.Context, id string, params *DeleteCamV1ConnectArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteCamV1ConnectArtifactRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -129,7 +129,7 @@ func (c *oasClient) DeleteCamV1ConnectArtifact(ctx context.Context, id string, p
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetCamV1ConnectArtifact(ctx context.Context, id string, params *GetCamV1ConnectArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getCamV1ConnectArtifact(ctx context.Context, id string, params *GetCamV1ConnectArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCamV1ConnectArtifactRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -702,35 +702,35 @@ type GetCamV1ConnectArtifactResponse struct {
 }
 
 func (c *ClientWithResponses) ListCamV1ConnectArtifactsWithResponse(ctx context.Context, params *ListCamV1ConnectArtifactsParams, reqEditors ...RequestEditorFn) (*ListCamV1ConnectArtifactsResponse, error) {
-	rsp, err := c.ListCamV1ConnectArtifacts(ctx, params, reqEditors...)
+	rsp, err := c.listCamV1ConnectArtifacts(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListCamV1ConnectArtifactsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateCamV1ConnectArtifactWithBodyWithResponse(ctx context.Context, params *CreateCamV1ConnectArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCamV1ConnectArtifactResponse, error) {
-	rsp, err := c.CreateCamV1ConnectArtifactWithBody(ctx, params, contentType, body, reqEditors...)
+	rsp, err := c.createCamV1ConnectArtifactWithBody(ctx, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateCamV1ConnectArtifactResponse(rsp)
 }
 func (c *ClientWithResponses) CreateCamV1ConnectArtifactWithResponse(ctx context.Context, params *CreateCamV1ConnectArtifactParams, body CreateCamV1ConnectArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCamV1ConnectArtifactResponse, error) {
-	rsp, err := c.CreateCamV1ConnectArtifact(ctx, params, body, reqEditors...)
+	rsp, err := c.createCamV1ConnectArtifact(ctx, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateCamV1ConnectArtifactResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteCamV1ConnectArtifactWithResponse(ctx context.Context, id string, params *DeleteCamV1ConnectArtifactParams, reqEditors ...RequestEditorFn) (*DeleteCamV1ConnectArtifactResponse, error) {
-	rsp, err := c.DeleteCamV1ConnectArtifact(ctx, id, params, reqEditors...)
+	rsp, err := c.deleteCamV1ConnectArtifact(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteCamV1ConnectArtifactResponse(rsp)
 }
 func (c *ClientWithResponses) GetCamV1ConnectArtifactWithResponse(ctx context.Context, id string, params *GetCamV1ConnectArtifactParams, reqEditors ...RequestEditorFn) (*GetCamV1ConnectArtifactResponse, error) {
-	rsp, err := c.GetCamV1ConnectArtifact(ctx, id, params, reqEditors...)
+	rsp, err := c.getCamV1ConnectArtifact(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

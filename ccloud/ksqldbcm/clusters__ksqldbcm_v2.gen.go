@@ -75,7 +75,7 @@ type GetKsqldbcmV2Cluster200JSONResponseBodyApiVersion string
 type GetKsqldbcmV2Cluster200JSONResponseBodyKind string
 type CreateKsqldbcmV2ClusterJSONRequestBody CreateKsqldbcmV2ClusterJSONBody
 
-func (c *oasClient) ListKsqldbcmV2Clusters(ctx context.Context, params *ListKsqldbcmV2ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKsqldbcmV2Clusters(ctx context.Context, params *ListKsqldbcmV2ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKsqldbcmV2ClustersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -86,7 +86,7 @@ func (c *oasClient) ListKsqldbcmV2Clusters(ctx context.Context, params *ListKsql
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateKsqldbcmV2ClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createKsqldbcmV2ClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKsqldbcmV2ClusterRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -97,7 +97,7 @@ func (c *oasClient) CreateKsqldbcmV2ClusterWithBody(ctx context.Context, content
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateKsqldbcmV2Cluster(ctx context.Context, body CreateKsqldbcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createKsqldbcmV2Cluster(ctx context.Context, body CreateKsqldbcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKsqldbcmV2ClusterRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -108,7 +108,7 @@ func (c *oasClient) CreateKsqldbcmV2Cluster(ctx context.Context, body CreateKsql
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteKsqldbcmV2Cluster(ctx context.Context, id string, params *DeleteKsqldbcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteKsqldbcmV2Cluster(ctx context.Context, id string, params *DeleteKsqldbcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteKsqldbcmV2ClusterRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -119,7 +119,7 @@ func (c *oasClient) DeleteKsqldbcmV2Cluster(ctx context.Context, id string, para
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKsqldbcmV2Cluster(ctx context.Context, id string, params *GetKsqldbcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKsqldbcmV2Cluster(ctx context.Context, id string, params *GetKsqldbcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKsqldbcmV2ClusterRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -674,35 +674,35 @@ type GetKsqldbcmV2ClusterResponse struct {
 }
 
 func (c *ClientWithResponses) ListKsqldbcmV2ClustersWithResponse(ctx context.Context, params *ListKsqldbcmV2ClustersParams, reqEditors ...RequestEditorFn) (*ListKsqldbcmV2ClustersResponse, error) {
-	rsp, err := c.ListKsqldbcmV2Clusters(ctx, params, reqEditors...)
+	rsp, err := c.listKsqldbcmV2Clusters(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKsqldbcmV2ClustersResponse(rsp)
 }
 func (c *ClientWithResponses) CreateKsqldbcmV2ClusterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateKsqldbcmV2ClusterResponse, error) {
-	rsp, err := c.CreateKsqldbcmV2ClusterWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createKsqldbcmV2ClusterWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateKsqldbcmV2ClusterResponse(rsp)
 }
 func (c *ClientWithResponses) CreateKsqldbcmV2ClusterWithResponse(ctx context.Context, body CreateKsqldbcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKsqldbcmV2ClusterResponse, error) {
-	rsp, err := c.CreateKsqldbcmV2Cluster(ctx, body, reqEditors...)
+	rsp, err := c.createKsqldbcmV2Cluster(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateKsqldbcmV2ClusterResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteKsqldbcmV2ClusterWithResponse(ctx context.Context, id string, params *DeleteKsqldbcmV2ClusterParams, reqEditors ...RequestEditorFn) (*DeleteKsqldbcmV2ClusterResponse, error) {
-	rsp, err := c.DeleteKsqldbcmV2Cluster(ctx, id, params, reqEditors...)
+	rsp, err := c.deleteKsqldbcmV2Cluster(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteKsqldbcmV2ClusterResponse(rsp)
 }
 func (c *ClientWithResponses) GetKsqldbcmV2ClusterWithResponse(ctx context.Context, id string, params *GetKsqldbcmV2ClusterParams, reqEditors ...RequestEditorFn) (*GetKsqldbcmV2ClusterResponse, error) {
-	rsp, err := c.GetKsqldbcmV2Cluster(ctx, id, params, reqEditors...)
+	rsp, err := c.getKsqldbcmV2Cluster(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

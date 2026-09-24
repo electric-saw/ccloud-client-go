@@ -1433,7 +1433,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// PartialEntityUpdateWithBody Update an Entity Attribute
 	//
@@ -1444,7 +1444,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /catalog/v1/entity (the `PartialEntityUpdate` operationId).
-	PartialEntityUpdateWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	partialEntityUpdateWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PartialEntityUpdate Update an Entity Attribute
 	//
@@ -1455,7 +1455,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /catalog/v1/entity (the `PartialEntityUpdate` operationId).
-	PartialEntityUpdate(ctx context.Context, body PartialEntityUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	partialEntityUpdate(ctx context.Context, body PartialEntityUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateBusinessMetadataWithBody Bulk Create Business Metadata
 	//
@@ -1466,7 +1466,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /catalog/v1/entity/businessmetadata (the `CreateBusinessMetadata` operationId).
-	CreateBusinessMetadataWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createBusinessMetadataWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateBusinessMetadata Bulk Create Business Metadata
 	//
@@ -1477,7 +1477,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /catalog/v1/entity/businessmetadata (the `CreateBusinessMetadata` operationId).
-	CreateBusinessMetadata(ctx context.Context, body CreateBusinessMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createBusinessMetadata(ctx context.Context, body CreateBusinessMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateBusinessMetadataWithBody Bulk Update Business Metadata
 	//
@@ -1488,7 +1488,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /catalog/v1/entity/businessmetadata (the `UpdateBusinessMetadata` operationId).
-	UpdateBusinessMetadataWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateBusinessMetadataWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateBusinessMetadata Bulk Update Business Metadata
 	//
@@ -1499,7 +1499,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /catalog/v1/entity/businessmetadata (the `UpdateBusinessMetadata` operationId).
-	UpdateBusinessMetadata(ctx context.Context, body UpdateBusinessMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateBusinessMetadata(ctx context.Context, body UpdateBusinessMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateTagsWithBody Bulk Create Tags
 	//
@@ -1510,7 +1510,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /catalog/v1/entity/tags (the `CreateTags` operationId).
-	CreateTagsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createTagsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateTags Bulk Create Tags
 	//
@@ -1521,7 +1521,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /catalog/v1/entity/tags (the `CreateTags` operationId).
-	CreateTags(ctx context.Context, body CreateTagsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createTags(ctx context.Context, body CreateTagsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTagsWithBody Bulk Update Tags
 	//
@@ -1532,7 +1532,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /catalog/v1/entity/tags (the `UpdateTags` operationId).
-	UpdateTagsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTagsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTags Bulk Update Tags
 	//
@@ -1543,7 +1543,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /catalog/v1/entity/tags (the `UpdateTags` operationId).
-	UpdateTags(ctx context.Context, body UpdateTagsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTags(ctx context.Context, body UpdateTagsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetByUniqueAttributes Read an Entity
 	//
@@ -1552,7 +1552,7 @@ type ClientInterface interface {
 	// Fetch complete definition of an entity given its type and unique attribute.
 	//
 	// Corresponds with GET /catalog/v1/entity/type/{typeName}/name/{qualifiedName} (the `GetByUniqueAttributes` operationId).
-	GetByUniqueAttributes(ctx context.Context, typeName string, qualifiedName string, params *GetByUniqueAttributesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getByUniqueAttributes(ctx context.Context, typeName string, qualifiedName string, params *GetByUniqueAttributesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetBusinessMetadata Read Business Metadata for an Entity
 	//
@@ -1562,7 +1562,7 @@ type ClientInterface interface {
 	// by a qualified name.
 	//
 	// Corresponds with GET /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata (the `GetBusinessMetadata` operationId).
-	GetBusinessMetadata(ctx context.Context, typeName string, qualifiedName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getBusinessMetadata(ctx context.Context, typeName string, qualifiedName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteBusinessMetadata Delete a Business Metadata for an Entity
 	//
@@ -1571,7 +1571,7 @@ type ClientInterface interface {
 	// Delete a business metadata on an entity.
 	//
 	// Corresponds with DELETE /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName} (the `DeleteBusinessMetadata` operationId).
-	DeleteBusinessMetadata(ctx context.Context, typeName string, qualifiedName string, bmName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteBusinessMetadata(ctx context.Context, typeName string, qualifiedName string, bmName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetTags Read Tags for an Entity
 	//
@@ -1580,7 +1580,7 @@ type ClientInterface interface {
 	// Gets the list of tags for a given entity represented by a qualified name.
 	//
 	// Corresponds with GET /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags (the `GetTags` operationId).
-	GetTags(ctx context.Context, typeName string, qualifiedName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getTags(ctx context.Context, typeName string, qualifiedName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteTag Delete a Tag for an Entity
 	//
@@ -1589,7 +1589,7 @@ type ClientInterface interface {
 	// Delete a tag for an entity.
 	//
 	// Corresponds with DELETE /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName} (the `DeleteTag` operationId).
-	DeleteTag(ctx context.Context, typeName string, qualifiedName string, tagName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteTag(ctx context.Context, typeName string, qualifiedName string, tagName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// SearchUsingAttribute Search by Attribute
 	//
@@ -1598,7 +1598,7 @@ type ClientInterface interface {
 	// Retrieve data for the specified attribute search query.
 	//
 	// Corresponds with GET /catalog/v1/search/attribute (the `SearchUsingAttribute` operationId).
-	SearchUsingAttribute(ctx context.Context, params *SearchUsingAttributeParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	searchUsingAttribute(ctx context.Context, params *SearchUsingAttributeParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// SearchUsingBasic Search by Fulltext Query
 	//
@@ -1607,7 +1607,7 @@ type ClientInterface interface {
 	// Retrieve data for the specified fulltext query.
 	//
 	// Corresponds with GET /catalog/v1/search/basic (the `SearchUsingBasic` operationId).
-	SearchUsingBasic(ctx context.Context, params *SearchUsingBasicParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	searchUsingBasic(ctx context.Context, params *SearchUsingBasicParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetAllBusinessMetadataDefs Bulk Read Business Metadata Definitions
 	//
@@ -1616,7 +1616,7 @@ type ClientInterface interface {
 	// Bulk retrieval API for retrieving business metadata definitions.
 	//
 	// Corresponds with GET /catalog/v1/types/businessmetadatadefs (the `GetAllBusinessMetadataDefs` operationId).
-	GetAllBusinessMetadataDefs(ctx context.Context, params *GetAllBusinessMetadataDefsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getAllBusinessMetadataDefs(ctx context.Context, params *GetAllBusinessMetadataDefsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateBusinessMetadataDefsWithBody Bulk Create Business Metadata Definitions
 	//
@@ -1627,7 +1627,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /catalog/v1/types/businessmetadatadefs (the `CreateBusinessMetadataDefs` operationId).
-	CreateBusinessMetadataDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createBusinessMetadataDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateBusinessMetadataDefs Bulk Create Business Metadata Definitions
 	//
@@ -1638,7 +1638,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /catalog/v1/types/businessmetadatadefs (the `CreateBusinessMetadataDefs` operationId).
-	CreateBusinessMetadataDefs(ctx context.Context, body CreateBusinessMetadataDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createBusinessMetadataDefs(ctx context.Context, body CreateBusinessMetadataDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateBusinessMetadataDefsWithBody Bulk Update Business Metadata Definitions
 	//
@@ -1649,7 +1649,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /catalog/v1/types/businessmetadatadefs (the `UpdateBusinessMetadataDefs` operationId).
-	UpdateBusinessMetadataDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateBusinessMetadataDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateBusinessMetadataDefs Bulk Update Business Metadata Definitions
 	//
@@ -1660,7 +1660,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /catalog/v1/types/businessmetadatadefs (the `UpdateBusinessMetadataDefs` operationId).
-	UpdateBusinessMetadataDefs(ctx context.Context, body UpdateBusinessMetadataDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateBusinessMetadataDefs(ctx context.Context, body UpdateBusinessMetadataDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteBusinessMetadataDef Delete Business Metadata Definition
 	//
@@ -1669,7 +1669,7 @@ type ClientInterface interface {
 	// Delete API for business metadata definition identified by its name.
 	//
 	// Corresponds with DELETE /catalog/v1/types/businessmetadatadefs/{bmName} (the `DeleteBusinessMetadataDef` operationId).
-	DeleteBusinessMetadataDef(ctx context.Context, bmName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteBusinessMetadataDef(ctx context.Context, bmName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetBusinessMetadataDefByName Read Business Metadata Definition
 	//
@@ -1678,7 +1678,7 @@ type ClientInterface interface {
 	// Get the business metadata definition with the given name.
 	//
 	// Corresponds with GET /catalog/v1/types/businessmetadatadefs/{bmName} (the `GetBusinessMetadataDefByName` operationId).
-	GetBusinessMetadataDefByName(ctx context.Context, bmName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getBusinessMetadataDefByName(ctx context.Context, bmName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetAllTagDefs Bulk Read Tag Definitions
 	//
@@ -1687,7 +1687,7 @@ type ClientInterface interface {
 	// Bulk retrieval API for retrieving tag definitions.
 	//
 	// Corresponds with GET /catalog/v1/types/tagdefs (the `GetAllTagDefs` operationId).
-	GetAllTagDefs(ctx context.Context, params *GetAllTagDefsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getAllTagDefs(ctx context.Context, params *GetAllTagDefsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateTagDefsWithBody Bulk Create Tag Definitions
 	//
@@ -1698,7 +1698,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /catalog/v1/types/tagdefs (the `CreateTagDefs` operationId).
-	CreateTagDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createTagDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateTagDefs Bulk Create Tag Definitions
 	//
@@ -1709,7 +1709,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /catalog/v1/types/tagdefs (the `CreateTagDefs` operationId).
-	CreateTagDefs(ctx context.Context, body CreateTagDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createTagDefs(ctx context.Context, body CreateTagDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTagDefsWithBody Bulk Update Tag Definitions
 	//
@@ -1720,7 +1720,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /catalog/v1/types/tagdefs (the `UpdateTagDefs` operationId).
-	UpdateTagDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTagDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTagDefs Bulk Update Tag Definitions
 	//
@@ -1731,7 +1731,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /catalog/v1/types/tagdefs (the `UpdateTagDefs` operationId).
-	UpdateTagDefs(ctx context.Context, body UpdateTagDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTagDefs(ctx context.Context, body UpdateTagDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteTagDef Delete Tag Definition
 	//
@@ -1740,7 +1740,7 @@ type ClientInterface interface {
 	// Delete API for tag definition identified by its name.
 	//
 	// Corresponds with DELETE /catalog/v1/types/tagdefs/{tagName} (the `DeleteTagDef` operationId).
-	DeleteTagDef(ctx context.Context, tagName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteTagDef(ctx context.Context, tagName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetTagDefByName Read Tag Definition
 	//
@@ -1749,7 +1749,7 @@ type ClientInterface interface {
 	// Get the tag definition with the given name.
 	//
 	// Corresponds with GET /catalog/v1/types/tagdefs/{tagName} (the `GetTagDefByName` operationId).
-	GetTagDefByName(ctx context.Context, tagName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getTagDefByName(ctx context.Context, tagName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -1767,7 +1767,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -1787,352 +1787,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// PartialEntityUpdateWithBodyWithResponse Update an Entity Attribute
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Partially update an entity attribute.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /catalog/v1/entity (the `PartialEntityUpdate` operationId).
-	PartialEntityUpdateWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PartialEntityUpdateResponse, error)
-
-	// PartialEntityUpdateWithResponse Update an Entity Attribute
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Partially update an entity attribute.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /catalog/v1/entity (the `PartialEntityUpdate` operationId).
-	PartialEntityUpdateWithResponse(ctx context.Context, body PartialEntityUpdateJSONRequestBody, reqEditors ...RequestEditorFn) (*PartialEntityUpdateResponse, error)
-
-	// CreateBusinessMetadataWithBodyWithResponse Bulk Create Business Metadata
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk API to create multiple business metadata.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /catalog/v1/entity/businessmetadata (the `CreateBusinessMetadata` operationId).
-	CreateBusinessMetadataWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateBusinessMetadataResponse, error)
-
-	// CreateBusinessMetadataWithResponse Bulk Create Business Metadata
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk API to create multiple business metadata.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /catalog/v1/entity/businessmetadata (the `CreateBusinessMetadata` operationId).
-	CreateBusinessMetadataWithResponse(ctx context.Context, body CreateBusinessMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateBusinessMetadataResponse, error)
-
-	// UpdateBusinessMetadataWithBodyWithResponse Bulk Update Business Metadata
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk API to update multiple business metadata.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /catalog/v1/entity/businessmetadata (the `UpdateBusinessMetadata` operationId).
-	UpdateBusinessMetadataWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateBusinessMetadataResponse, error)
-
-	// UpdateBusinessMetadataWithResponse Bulk Update Business Metadata
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk API to update multiple business metadata.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /catalog/v1/entity/businessmetadata (the `UpdateBusinessMetadata` operationId).
-	UpdateBusinessMetadataWithResponse(ctx context.Context, body UpdateBusinessMetadataJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateBusinessMetadataResponse, error)
-
-	// CreateTagsWithBodyWithResponse Bulk Create Tags
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk API to create multiple tags.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /catalog/v1/entity/tags (the `CreateTags` operationId).
-	CreateTagsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateTagsResponse, error)
-
-	// CreateTagsWithResponse Bulk Create Tags
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk API to create multiple tags.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /catalog/v1/entity/tags (the `CreateTags` operationId).
-	CreateTagsWithResponse(ctx context.Context, body CreateTagsJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateTagsResponse, error)
-
-	// UpdateTagsWithBodyWithResponse Bulk Update Tags
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk API to update multiple tags.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /catalog/v1/entity/tags (the `UpdateTags` operationId).
-	UpdateTagsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateTagsResponse, error)
-
-	// UpdateTagsWithResponse Bulk Update Tags
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk API to update multiple tags.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /catalog/v1/entity/tags (the `UpdateTags` operationId).
-	UpdateTagsWithResponse(ctx context.Context, body UpdateTagsJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateTagsResponse, error)
-
-	// GetByUniqueAttributesWithResponse Read an Entity
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Fetch complete definition of an entity given its type and unique attribute.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /catalog/v1/entity/type/{typeName}/name/{qualifiedName} (the `GetByUniqueAttributes` operationId).
-	GetByUniqueAttributesWithResponse(ctx context.Context, typeName string, qualifiedName string, params *GetByUniqueAttributesParams, reqEditors ...RequestEditorFn) (*GetByUniqueAttributesResponse, error)
-
-	// GetBusinessMetadataWithResponse Read Business Metadata for an Entity
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Gets the list of business metadata for a given entity represented
-	// by a qualified name.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata (the `GetBusinessMetadata` operationId).
-	GetBusinessMetadataWithResponse(ctx context.Context, typeName string, qualifiedName string, reqEditors ...RequestEditorFn) (*GetBusinessMetadataResponse, error)
-
-	// DeleteBusinessMetadataWithResponse Delete a Business Metadata for an Entity
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Delete a business metadata on an entity.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName} (the `DeleteBusinessMetadata` operationId).
-	DeleteBusinessMetadataWithResponse(ctx context.Context, typeName string, qualifiedName string, bmName string, reqEditors ...RequestEditorFn) (*DeleteBusinessMetadataResponse, error)
-
-	// GetTagsWithResponse Read Tags for an Entity
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Gets the list of tags for a given entity represented by a qualified name.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags (the `GetTags` operationId).
-	GetTagsWithResponse(ctx context.Context, typeName string, qualifiedName string, reqEditors ...RequestEditorFn) (*GetTagsResponse, error)
-
-	// DeleteTagWithResponse Delete a Tag for an Entity
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Delete a tag for an entity.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName} (the `DeleteTag` operationId).
-	DeleteTagWithResponse(ctx context.Context, typeName string, qualifiedName string, tagName string, reqEditors ...RequestEditorFn) (*DeleteTagResponse, error)
-
-	// SearchUsingAttributeWithResponse Search by Attribute
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve data for the specified attribute search query.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /catalog/v1/search/attribute (the `SearchUsingAttribute` operationId).
-	SearchUsingAttributeWithResponse(ctx context.Context, params *SearchUsingAttributeParams, reqEditors ...RequestEditorFn) (*SearchUsingAttributeResponse, error)
-
-	// SearchUsingBasicWithResponse Search by Fulltext Query
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve data for the specified fulltext query.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /catalog/v1/search/basic (the `SearchUsingBasic` operationId).
-	SearchUsingBasicWithResponse(ctx context.Context, params *SearchUsingBasicParams, reqEditors ...RequestEditorFn) (*SearchUsingBasicResponse, error)
-
-	// GetAllBusinessMetadataDefsWithResponse Bulk Read Business Metadata Definitions
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk retrieval API for retrieving business metadata definitions.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /catalog/v1/types/businessmetadatadefs (the `GetAllBusinessMetadataDefs` operationId).
-	GetAllBusinessMetadataDefsWithResponse(ctx context.Context, params *GetAllBusinessMetadataDefsParams, reqEditors ...RequestEditorFn) (*GetAllBusinessMetadataDefsResponse, error)
-
-	// CreateBusinessMetadataDefsWithBodyWithResponse Bulk Create Business Metadata Definitions
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk create API for business metadata definitions.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /catalog/v1/types/businessmetadatadefs (the `CreateBusinessMetadataDefs` operationId).
-	CreateBusinessMetadataDefsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateBusinessMetadataDefsResponse, error)
-
-	// CreateBusinessMetadataDefsWithResponse Bulk Create Business Metadata Definitions
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk create API for business metadata definitions.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /catalog/v1/types/businessmetadatadefs (the `CreateBusinessMetadataDefs` operationId).
-	CreateBusinessMetadataDefsWithResponse(ctx context.Context, body CreateBusinessMetadataDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateBusinessMetadataDefsResponse, error)
-
-	// UpdateBusinessMetadataDefsWithBodyWithResponse Bulk Update Business Metadata Definitions
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk update API for business metadata definitions.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /catalog/v1/types/businessmetadatadefs (the `UpdateBusinessMetadataDefs` operationId).
-	UpdateBusinessMetadataDefsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateBusinessMetadataDefsResponse, error)
-
-	// UpdateBusinessMetadataDefsWithResponse Bulk Update Business Metadata Definitions
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk update API for business metadata definitions.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /catalog/v1/types/businessmetadatadefs (the `UpdateBusinessMetadataDefs` operationId).
-	UpdateBusinessMetadataDefsWithResponse(ctx context.Context, body UpdateBusinessMetadataDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateBusinessMetadataDefsResponse, error)
-
-	// DeleteBusinessMetadataDefWithResponse Delete Business Metadata Definition
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Delete API for business metadata definition identified by its name.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /catalog/v1/types/businessmetadatadefs/{bmName} (the `DeleteBusinessMetadataDef` operationId).
-	DeleteBusinessMetadataDefWithResponse(ctx context.Context, bmName string, reqEditors ...RequestEditorFn) (*DeleteBusinessMetadataDefResponse, error)
-
-	// GetBusinessMetadataDefByNameWithResponse Read Business Metadata Definition
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Get the business metadata definition with the given name.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /catalog/v1/types/businessmetadatadefs/{bmName} (the `GetBusinessMetadataDefByName` operationId).
-	GetBusinessMetadataDefByNameWithResponse(ctx context.Context, bmName string, reqEditors ...RequestEditorFn) (*GetBusinessMetadataDefByNameResponse, error)
-
-	// GetAllTagDefsWithResponse Bulk Read Tag Definitions
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk retrieval API for retrieving tag definitions.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /catalog/v1/types/tagdefs (the `GetAllTagDefs` operationId).
-	GetAllTagDefsWithResponse(ctx context.Context, params *GetAllTagDefsParams, reqEditors ...RequestEditorFn) (*GetAllTagDefsResponse, error)
-
-	// CreateTagDefsWithBodyWithResponse Bulk Create Tag Definitions
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk create API for tag definitions.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /catalog/v1/types/tagdefs (the `CreateTagDefs` operationId).
-	CreateTagDefsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateTagDefsResponse, error)
-
-	// CreateTagDefsWithResponse Bulk Create Tag Definitions
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk create API for tag definitions.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /catalog/v1/types/tagdefs (the `CreateTagDefs` operationId).
-	CreateTagDefsWithResponse(ctx context.Context, body CreateTagDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateTagDefsResponse, error)
-
-	// UpdateTagDefsWithBodyWithResponse Bulk Update Tag Definitions
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk update API for tag definitions.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /catalog/v1/types/tagdefs (the `UpdateTagDefs` operationId).
-	UpdateTagDefsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateTagDefsResponse, error)
-
-	// UpdateTagDefsWithResponse Bulk Update Tag Definitions
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Bulk update API for tag definitions.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /catalog/v1/types/tagdefs (the `UpdateTagDefs` operationId).
-	UpdateTagDefsWithResponse(ctx context.Context, body UpdateTagDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateTagDefsResponse, error)
-
-	// DeleteTagDefWithResponse Delete Tag Definition
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Delete API for tag definition identified by its name.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /catalog/v1/types/tagdefs/{tagName} (the `DeleteTagDef` operationId).
-	DeleteTagDefWithResponse(ctx context.Context, tagName string, reqEditors ...RequestEditorFn) (*DeleteTagDefResponse, error)
-
-	// GetTagDefByNameWithResponse Read Tag Definition
-	//
-	// [![Generally Available](https://img.shields.io/badge/Lifecycle%20Stage-Generally%20Available-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Get the tag definition with the given name.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /catalog/v1/types/tagdefs/{tagName} (the `GetTagDefByName` operationId).
-	GetTagDefByNameWithResponse(ctx context.Context, tagName string, reqEditors ...RequestEditorFn) (*GetTagDefByNameResponse, error)
-}
-
 func (r PartialEntityUpdateResponse) GetJSON200() *EntityPartialUpdateResponse {
 	return r.JSON200
 }

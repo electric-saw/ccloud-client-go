@@ -2156,7 +2156,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListSqlv1Agents List all agents
 	//
@@ -2165,7 +2165,7 @@ type ClientInterface interface {
 	// Retrieve a sorted and paginated list of all agents.
 	//
 	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/agents (the `ListSqlv1Agents` operationId).
-	ListSqlv1Agents(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1AgentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listSqlv1Agents(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1AgentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListSqlv1Connections List of Connections
 	//
@@ -2174,7 +2174,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered and paginated list of all Connections.
 	//
 	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections (the `ListSqlv1Connections` operationId).
-	ListSqlv1Connections(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1ConnectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listSqlv1Connections(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1ConnectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateSqlv1ConnectionWithBody Create a Connection
 	//
@@ -2185,7 +2185,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections (the `CreateSqlv1Connection` operationId).
-	CreateSqlv1ConnectionWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createSqlv1ConnectionWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateSqlv1Connection Create a Connection
 	//
@@ -2196,7 +2196,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections (the `CreateSqlv1Connection` operationId).
-	CreateSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, body CreateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, body CreateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteSqlv1Connection Delete a Connection
 	//
@@ -2205,7 +2205,7 @@ type ClientInterface interface {
 	// Make a request to delete a statement.
 	//
 	// Corresponds with DELETE /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} (the `DeleteSqlv1Connection` operationId).
-	DeleteSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSqlv1Connection Read a Connection
 	//
@@ -2214,7 +2214,7 @@ type ClientInterface interface {
 	// Make a request to read a Connection.
 	//
 	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} (the `GetSqlv1Connection` operationId).
-	GetSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateSqlv1ConnectionWithBody Update a Connection
 	//
@@ -2225,7 +2225,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} (the `UpdateSqlv1Connection` operationId).
-	UpdateSqlv1ConnectionWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateSqlv1ConnectionWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateSqlv1Connection Update a Connection
 	//
@@ -2236,7 +2236,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} (the `UpdateSqlv1Connection` operationId).
-	UpdateSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, body UpdateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, body UpdateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListSqlv1Tools List of Tools
 	//
@@ -2245,7 +2245,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all Tools.
 	//
 	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools (the `ListSqlv1Tools` operationId).
-	ListSqlv1Tools(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, params *ListSqlv1ToolsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listSqlv1Tools(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, params *ListSqlv1ToolsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateSqlv1ToolWithBody Create a Tool
 	//
@@ -2256,7 +2256,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools (the `CreateSqlv1Tool` operationId).
-	CreateSqlv1ToolWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createSqlv1ToolWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateSqlv1Tool Create a Tool
 	//
@@ -2267,7 +2267,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools (the `CreateSqlv1Tool` operationId).
-	CreateSqlv1Tool(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, body CreateSqlv1ToolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createSqlv1Tool(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, body CreateSqlv1ToolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteSqlv1Tool Delete a Tool
 	//
@@ -2276,7 +2276,7 @@ type ClientInterface interface {
 	// Make a request to delete a Tool.
 	//
 	// Corresponds with DELETE /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools/{tool_name} (the `DeleteSqlv1Tool` operationId).
-	DeleteSqlv1Tool(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, toolName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteSqlv1Tool(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, toolName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSqlv1Tool Read a Tool
 	//
@@ -2285,7 +2285,7 @@ type ClientInterface interface {
 	// Make a request to read a Tool.
 	//
 	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools/{tool_name} (the `GetSqlv1Tool` operationId).
-	GetSqlv1Tool(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, toolName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSqlv1Tool(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, toolName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateSqlv1AgentWithBody Create an Agent
 	//
@@ -2296,7 +2296,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents (the `CreateSqlv1Agent` operationId).
-	CreateSqlv1AgentWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createSqlv1AgentWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateSqlv1Agent Create an Agent
 	//
@@ -2307,7 +2307,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents (the `CreateSqlv1Agent` operationId).
-	CreateSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, body CreateSqlv1AgentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, body CreateSqlv1AgentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteSqlv1Agent Delete an Agent
 	//
@@ -2316,7 +2316,7 @@ type ClientInterface interface {
 	// Delete a specific Agent by name.
 	//
 	// Corresponds with DELETE /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents/{agent_name} (the `DeleteSqlv1Agent` operationId).
-	DeleteSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSqlv1Agent Read an Agent
 	//
@@ -2325,7 +2325,7 @@ type ClientInterface interface {
 	// Retrieve a specific Agent by name.
 	//
 	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents/{agent_name} (the `GetSqlv1Agent` operationId).
-	GetSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateSqlv1AgentWithBody Alter an Agent
 	//
@@ -2337,7 +2337,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents/{agent_name} (the `UpdateSqlv1Agent` operationId).
-	UpdateSqlv1AgentWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateSqlv1AgentWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateSqlv1Agent Alter an Agent
 	//
@@ -2349,7 +2349,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents/{agent_name} (the `UpdateSqlv1Agent` operationId).
-	UpdateSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, body UpdateSqlv1AgentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, body UpdateSqlv1AgentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateSqlv1MaterializedTableWithBody Create a materialized table
 	//
@@ -2360,7 +2360,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables (the `CreateSqlv1MaterializedTable` operationId).
-	CreateSqlv1MaterializedTableWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createSqlv1MaterializedTableWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateSqlv1MaterializedTable Create a materialized table
 	//
@@ -2371,7 +2371,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables (the `CreateSqlv1MaterializedTable` operationId).
-	CreateSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, body CreateSqlv1MaterializedTableJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, body CreateSqlv1MaterializedTableJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteSqlv1MaterializedTable Delete a materialized table
 	//
@@ -2380,7 +2380,7 @@ type ClientInterface interface {
 	// Delete a specific Materialized Table by name.
 	//
 	// Corresponds with DELETE /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name} (the `DeleteSqlv1MaterializedTable` operationId).
-	DeleteSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSqlv1MaterializedTable Read a materialized table
 	//
@@ -2389,7 +2389,7 @@ type ClientInterface interface {
 	// Retrieve a specific Materialized Table by name.
 	//
 	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name} (the `GetSqlv1MaterializedTable` operationId).
-	GetSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateSqlv1MaterializedTableWithBody Update/Evolve a materialized table
 	//
@@ -2401,7 +2401,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name} (the `UpdateSqlv1MaterializedTable` operationId).
-	UpdateSqlv1MaterializedTableWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateSqlv1MaterializedTableWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateSqlv1MaterializedTable Update/Evolve a materialized table
 	//
@@ -2413,7 +2413,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name} (the `UpdateSqlv1MaterializedTable` operationId).
-	UpdateSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, body UpdateSqlv1MaterializedTableJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateSqlv1MaterializedTable(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, body UpdateSqlv1MaterializedTableJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListSqlv1MaterializedTableVersions List all the versions of a materialized table
 	//
@@ -2422,7 +2422,7 @@ type ClientInterface interface {
 	// Retrieve a sorted and paginated list of all versions for a specific Materialized Table.
 	//
 	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}/versions (the `ListSqlv1MaterializedTableVersions` operationId).
-	ListSqlv1MaterializedTableVersions(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, params *ListSqlv1MaterializedTableVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listSqlv1MaterializedTableVersions(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, params *ListSqlv1MaterializedTableVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSqlv1MaterializedTableVersion Read a materialized table version
 	//
@@ -2431,7 +2431,7 @@ type ClientInterface interface {
 	// Retrieve a specific version of a Materialized Table.
 	//
 	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}/versions/{version} (the `GetSqlv1MaterializedTableVersion` operationId).
-	GetSqlv1MaterializedTableVersion(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, version int32, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSqlv1MaterializedTableVersion(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, version int32, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListSqlv1MaterializedTables List all materialized tables
 	//
@@ -2440,7 +2440,7 @@ type ClientInterface interface {
 	// Retrieve a sorted and paginated list of all materialized tables.
 	//
 	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/materialized-tables (the `ListSqlv1MaterializedTables` operationId).
-	ListSqlv1MaterializedTables(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1MaterializedTablesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listSqlv1MaterializedTables(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1MaterializedTablesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSqlv1StatementResult Read Statement Result
 	//
@@ -2449,7 +2449,7 @@ type ClientInterface interface {
 	// Read Statement Result.
 	//
 	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results (the `GetSqlv1StatementResult` operationId).
-	GetSqlv1StatementResult(ctx context.Context, organizationId openapi_types.UUID, environmentId string, name string, params *GetSqlv1StatementResultParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSqlv1StatementResult(ctx context.Context, organizationId openapi_types.UUID, environmentId string, name string, params *GetSqlv1StatementResultParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSqlv1StatementExceptions List of Statement Exceptions
 	//
@@ -2458,7 +2458,7 @@ type ClientInterface interface {
 	// Retrieve a list of the 10 most recent statement exceptions.
 	//
 	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}/exceptions (the `GetSqlv1StatementExceptions` operationId).
-	GetSqlv1StatementExceptions(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSqlv1StatementExceptions(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -2476,7 +2476,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -2496,344 +2496,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListSqlv1AgentsWithResponse List all agents
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted and paginated list of all agents.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/agents (the `ListSqlv1Agents` operationId).
-	ListSqlv1AgentsWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1AgentsParams, reqEditors ...RequestEditorFn) (*ListSqlv1AgentsResponse, error)
-
-	// ListSqlv1ConnectionsWithResponse List of Connections
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered and paginated list of all Connections.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections (the `ListSqlv1Connections` operationId).
-	ListSqlv1ConnectionsWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1ConnectionsParams, reqEditors ...RequestEditorFn) (*ListSqlv1ConnectionsResponse, error)
-
-	// CreateSqlv1ConnectionWithBodyWithResponse Create a Connection
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a Connection.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections (the `CreateSqlv1Connection` operationId).
-	CreateSqlv1ConnectionWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSqlv1ConnectionResponse, error)
-
-	// CreateSqlv1ConnectionWithResponse Create a Connection
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a Connection.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections (the `CreateSqlv1Connection` operationId).
-	CreateSqlv1ConnectionWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, body CreateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateSqlv1ConnectionResponse, error)
-
-	// DeleteSqlv1ConnectionWithResponse Delete a Connection
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a statement.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} (the `DeleteSqlv1Connection` operationId).
-	DeleteSqlv1ConnectionWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*DeleteSqlv1ConnectionResponse, error)
-
-	// GetSqlv1ConnectionWithResponse Read a Connection
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a Connection.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} (the `GetSqlv1Connection` operationId).
-	GetSqlv1ConnectionWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*GetSqlv1ConnectionResponse, error)
-
-	// UpdateSqlv1ConnectionWithBodyWithResponse Update a Connection
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a connection.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} (the `UpdateSqlv1Connection` operationId).
-	UpdateSqlv1ConnectionWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSqlv1ConnectionResponse, error)
-
-	// UpdateSqlv1ConnectionWithResponse Update a Connection
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a connection.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/connections/{connection_name} (the `UpdateSqlv1Connection` operationId).
-	UpdateSqlv1ConnectionWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, body UpdateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSqlv1ConnectionResponse, error)
-
-	// ListSqlv1ToolsWithResponse List of Tools
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all Tools.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools (the `ListSqlv1Tools` operationId).
-	ListSqlv1ToolsWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, params *ListSqlv1ToolsParams, reqEditors ...RequestEditorFn) (*ListSqlv1ToolsResponse, error)
-
-	// CreateSqlv1ToolWithBodyWithResponse Create a Tool
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a Tool.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools (the `CreateSqlv1Tool` operationId).
-	CreateSqlv1ToolWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSqlv1ToolResponse, error)
-
-	// CreateSqlv1ToolWithResponse Create a Tool
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a Tool.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools (the `CreateSqlv1Tool` operationId).
-	CreateSqlv1ToolWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, body CreateSqlv1ToolJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateSqlv1ToolResponse, error)
-
-	// DeleteSqlv1ToolWithResponse Delete a Tool
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a Tool.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools/{tool_name} (the `DeleteSqlv1Tool` operationId).
-	DeleteSqlv1ToolWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, toolName string, reqEditors ...RequestEditorFn) (*DeleteSqlv1ToolResponse, error)
-
-	// GetSqlv1ToolWithResponse Read a Tool
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a Tool.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{database_name}/tools/{tool_name} (the `GetSqlv1Tool` operationId).
-	GetSqlv1ToolWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, databaseName string, toolName string, reqEditors ...RequestEditorFn) (*GetSqlv1ToolResponse, error)
-
-	// CreateSqlv1AgentWithBodyWithResponse Create an Agent
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an Agent.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents (the `CreateSqlv1Agent` operationId).
-	CreateSqlv1AgentWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSqlv1AgentResponse, error)
-
-	// CreateSqlv1AgentWithResponse Create an Agent
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an Agent.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents (the `CreateSqlv1Agent` operationId).
-	CreateSqlv1AgentWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, body CreateSqlv1AgentJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateSqlv1AgentResponse, error)
-
-	// DeleteSqlv1AgentWithResponse Delete an Agent
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Delete a specific Agent by name.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents/{agent_name} (the `DeleteSqlv1Agent` operationId).
-	DeleteSqlv1AgentWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, reqEditors ...RequestEditorFn) (*DeleteSqlv1AgentResponse, error)
-
-	// GetSqlv1AgentWithResponse Read an Agent
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a specific Agent by name.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents/{agent_name} (the `GetSqlv1Agent` operationId).
-	GetSqlv1AgentWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, reqEditors ...RequestEditorFn) (*GetSqlv1AgentResponse, error)
-
-	// UpdateSqlv1AgentWithBodyWithResponse Alter an Agent
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an Agent's mutable fields.
-	// Mutable fields include: `description`, `model`, `prompt`, and `properties`.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents/{agent_name} (the `UpdateSqlv1Agent` operationId).
-	UpdateSqlv1AgentWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSqlv1AgentResponse, error)
-
-	// UpdateSqlv1AgentWithResponse Alter an Agent
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300af91)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an Agent's mutable fields.
-	// Mutable fields include: `description`, `model`, `prompt`, and `properties`.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/agents/{agent_name} (the `UpdateSqlv1Agent` operationId).
-	UpdateSqlv1AgentWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, body UpdateSqlv1AgentJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSqlv1AgentResponse, error)
-
-	// CreateSqlv1MaterializedTableWithBodyWithResponse Create a materialized table
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Create a new Materialized Table.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables (the `CreateSqlv1MaterializedTable` operationId).
-	CreateSqlv1MaterializedTableWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSqlv1MaterializedTableResponse, error)
-
-	// CreateSqlv1MaterializedTableWithResponse Create a materialized table
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Create a new Materialized Table.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables (the `CreateSqlv1MaterializedTable` operationId).
-	CreateSqlv1MaterializedTableWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, body CreateSqlv1MaterializedTableJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateSqlv1MaterializedTableResponse, error)
-
-	// DeleteSqlv1MaterializedTableWithResponse Delete a materialized table
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Delete a specific Materialized Table by name.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name} (the `DeleteSqlv1MaterializedTable` operationId).
-	DeleteSqlv1MaterializedTableWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, reqEditors ...RequestEditorFn) (*DeleteSqlv1MaterializedTableResponse, error)
-
-	// GetSqlv1MaterializedTableWithResponse Read a materialized table
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a specific Materialized Table by name.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name} (the `GetSqlv1MaterializedTable` operationId).
-	GetSqlv1MaterializedTableWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, reqEditors ...RequestEditorFn) (*GetSqlv1MaterializedTableResponse, error)
-
-	// UpdateSqlv1MaterializedTableWithBodyWithResponse Update/Evolve a materialized table
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a Materialized Table's mutable fields.
-	// Mutable fields include: `query`, `stopped`, `compute_pool_id`, `principal`, `columns`, `watermark`, `constraints` and `table_options`.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name} (the `UpdateSqlv1MaterializedTable` operationId).
-	UpdateSqlv1MaterializedTableWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSqlv1MaterializedTableResponse, error)
-
-	// UpdateSqlv1MaterializedTableWithResponse Update/Evolve a materialized table
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a Materialized Table's mutable fields.
-	// Mutable fields include: `query`, `stopped`, `compute_pool_id`, `principal`, `columns`, `watermark`, `constraints` and `table_options`.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name} (the `UpdateSqlv1MaterializedTable` operationId).
-	UpdateSqlv1MaterializedTableWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, body UpdateSqlv1MaterializedTableJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSqlv1MaterializedTableResponse, error)
-
-	// ListSqlv1MaterializedTableVersionsWithResponse List all the versions of a materialized table
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted and paginated list of all versions for a specific Materialized Table.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}/versions (the `ListSqlv1MaterializedTableVersions` operationId).
-	ListSqlv1MaterializedTableVersionsWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, params *ListSqlv1MaterializedTableVersionsParams, reqEditors ...RequestEditorFn) (*ListSqlv1MaterializedTableVersionsResponse, error)
-
-	// GetSqlv1MaterializedTableVersionWithResponse Read a materialized table version
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a specific version of a Materialized Table.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/databases/{kafka_cluster_id}/materialized-tables/{table_name}/versions/{version} (the `GetSqlv1MaterializedTableVersion` operationId).
-	GetSqlv1MaterializedTableVersionWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, version int32, reqEditors ...RequestEditorFn) (*GetSqlv1MaterializedTableVersionResponse, error)
-
-	// ListSqlv1MaterializedTablesWithResponse List all materialized tables
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted and paginated list of all materialized tables.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/materialized-tables (the `ListSqlv1MaterializedTables` operationId).
-	ListSqlv1MaterializedTablesWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1MaterializedTablesParams, reqEditors ...RequestEditorFn) (*ListSqlv1MaterializedTablesResponse, error)
-
-	// GetSqlv1StatementResultWithResponse Read Statement Result
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Read Statement Result.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{name}/results (the `GetSqlv1StatementResult` operationId).
-	GetSqlv1StatementResultWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, name string, params *GetSqlv1StatementResultParams, reqEditors ...RequestEditorFn) (*GetSqlv1StatementResultResponse, error)
-
-	// GetSqlv1StatementExceptionsWithResponse List of Statement Exceptions
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a list of the 10 most recent statement exceptions.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name}/exceptions (the `GetSqlv1StatementExceptions` operationId).
-	GetSqlv1StatementExceptionsWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*GetSqlv1StatementExceptionsResponse, error)
-}
-
 func (r ListSqlv1AgentsResponse) GetJSON200() *SqlV1AgentList {
 	return r.JSON200
 }

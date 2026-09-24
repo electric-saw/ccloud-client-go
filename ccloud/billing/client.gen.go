@@ -719,7 +719,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListBillingV1Costs List of Costs
 	//
@@ -728,7 +728,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all costs.
 	//
 	// Corresponds with GET /billing/v1/costs (the `ListBillingV1Costs` operationId).
-	ListBillingV1Costs(ctx context.Context, params *ListBillingV1CostsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listBillingV1Costs(ctx context.Context, params *ListBillingV1CostsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -746,7 +746,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -766,21 +766,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListBillingV1CostsWithResponse List of Costs
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all costs.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /billing/v1/costs (the `ListBillingV1Costs` operationId).
-	ListBillingV1CostsWithResponse(ctx context.Context, params *ListBillingV1CostsParams, reqEditors ...RequestEditorFn) (*ListBillingV1CostsResponse, error)
-}
-
 func (r ListBillingV1CostsResponse) GetJSON200() *BillingV1CostList {
 	return r.JSON200
 }

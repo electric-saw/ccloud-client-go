@@ -15,7 +15,7 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
-func (c *oasClient) ListKafkaStreamsGroups(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaStreamsGroups(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaStreamsGroupsRequest(c.Server, clusterId)
 	if err != nil {
 		return nil, err
@@ -26,7 +26,7 @@ func (c *oasClient) ListKafkaStreamsGroups(ctx context.Context, clusterId Cluste
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaStreamsGroup(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaStreamsGroup(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaStreamsGroupRequest(c.Server, clusterId, groupId)
 	if err != nil {
 		return nil, err
@@ -37,7 +37,7 @@ func (c *oasClient) GetKafkaStreamsGroup(ctx context.Context, clusterId ClusterI
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListKafkaStreamsGroupMembers(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaStreamsGroupMembers(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaStreamsGroupMembersRequest(c.Server, clusterId, groupId)
 	if err != nil {
 		return nil, err
@@ -48,7 +48,7 @@ func (c *oasClient) ListKafkaStreamsGroupMembers(ctx context.Context, clusterId 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaStreamsGroupMember(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaStreamsGroupMember(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaStreamsGroupMemberRequest(c.Server, clusterId, groupId, memberId)
 	if err != nil {
 		return nil, err
@@ -59,7 +59,7 @@ func (c *oasClient) GetKafkaStreamsGroupMember(ctx context.Context, clusterId Cl
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaStreamsGroupMemberAssignments(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaStreamsGroupMemberAssignments(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaStreamsGroupMemberAssignmentsRequest(c.Server, clusterId, groupId, memberId)
 	if err != nil {
 		return nil, err
@@ -70,7 +70,7 @@ func (c *oasClient) GetKafkaStreamsGroupMemberAssignments(ctx context.Context, c
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListKafkaStreamsGroupMemberAssignmentTasks(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaStreamsGroupMemberAssignmentTasks(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaStreamsGroupMemberAssignmentTasksRequest(c.Server, clusterId, groupId, memberId, assignmentsType)
 	if err != nil {
 		return nil, err
@@ -81,7 +81,7 @@ func (c *oasClient) ListKafkaStreamsGroupMemberAssignmentTasks(ctx context.Conte
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaStreamsGroupMemberAssignmentTaskPartitions(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaStreamsGroupMemberAssignmentTaskPartitions(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaStreamsGroupMemberAssignmentTaskPartitionsRequest(c.Server, clusterId, groupId, memberId, assignmentsType, subtopologyId)
 	if err != nil {
 		return nil, err
@@ -92,7 +92,7 @@ func (c *oasClient) GetKafkaStreamsGroupMemberAssignmentTaskPartitions(ctx conte
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaStreamsGroupMemberTargetAssignments(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaStreamsGroupMemberTargetAssignments(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaStreamsGroupMemberTargetAssignmentsRequest(c.Server, clusterId, groupId, memberId)
 	if err != nil {
 		return nil, err
@@ -103,7 +103,7 @@ func (c *oasClient) GetKafkaStreamsGroupMemberTargetAssignments(ctx context.Cont
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListKafkaStreamsGroupMemberTargetAssignmentTasks(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaStreamsGroupMemberTargetAssignmentTasks(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaStreamsGroupMemberTargetAssignmentTasksRequest(c.Server, clusterId, groupId, memberId, assignmentsType)
 	if err != nil {
 		return nil, err
@@ -114,7 +114,7 @@ func (c *oasClient) ListKafkaStreamsGroupMemberTargetAssignmentTasks(ctx context
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaStreamsGroupMemberTargetAssignmentTaskPartitions(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaStreamsGroupMemberTargetAssignmentTaskPartitions(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaStreamsGroupMemberTargetAssignmentTaskPartitionsRequest(c.Server, clusterId, groupId, memberId, assignmentsType, subtopologyId)
 	if err != nil {
 		return nil, err
@@ -125,7 +125,7 @@ func (c *oasClient) GetKafkaStreamsGroupMemberTargetAssignmentTaskPartitions(ctx
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListKafkaStreamsGroupSubtopologies(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaStreamsGroupSubtopologies(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaStreamsGroupSubtopologiesRequest(c.Server, clusterId, groupId)
 	if err != nil {
 		return nil, err
@@ -136,7 +136,7 @@ func (c *oasClient) ListKafkaStreamsGroupSubtopologies(ctx context.Context, clus
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaStreamsGroupSubtopology(ctx context.Context, clusterId ClusterId, groupId GroupId, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaStreamsGroupSubtopology(ctx context.Context, clusterId ClusterId, groupId GroupId, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaStreamsGroupSubtopologyRequest(c.Server, clusterId, groupId, subtopologyId)
 	if err != nil {
 		return nil, err
@@ -877,84 +877,84 @@ type GetKafkaStreamsGroupSubtopologyResponse struct {
 }
 
 func (c *ClientWithResponses) ListKafkaStreamsGroupsWithResponse(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*ListKafkaStreamsGroupsResponse, error) {
-	rsp, err := c.ListKafkaStreamsGroups(ctx, clusterId, reqEditors...)
+	rsp, err := c.listKafkaStreamsGroups(ctx, clusterId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaStreamsGroupsResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaStreamsGroupWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*GetKafkaStreamsGroupResponse, error) {
-	rsp, err := c.GetKafkaStreamsGroup(ctx, clusterId, groupId, reqEditors...)
+	rsp, err := c.getKafkaStreamsGroup(ctx, clusterId, groupId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKafkaStreamsGroupResponse(rsp)
 }
 func (c *ClientWithResponses) ListKafkaStreamsGroupMembersWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*ListKafkaStreamsGroupMembersResponse, error) {
-	rsp, err := c.ListKafkaStreamsGroupMembers(ctx, clusterId, groupId, reqEditors...)
+	rsp, err := c.listKafkaStreamsGroupMembers(ctx, clusterId, groupId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaStreamsGroupMembersResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaStreamsGroupMemberWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*GetKafkaStreamsGroupMemberResponse, error) {
-	rsp, err := c.GetKafkaStreamsGroupMember(ctx, clusterId, groupId, memberId, reqEditors...)
+	rsp, err := c.getKafkaStreamsGroupMember(ctx, clusterId, groupId, memberId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKafkaStreamsGroupMemberResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaStreamsGroupMemberAssignmentsWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*GetKafkaStreamsGroupMemberAssignmentsResponse, error) {
-	rsp, err := c.GetKafkaStreamsGroupMemberAssignments(ctx, clusterId, groupId, memberId, reqEditors...)
+	rsp, err := c.getKafkaStreamsGroupMemberAssignments(ctx, clusterId, groupId, memberId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKafkaStreamsGroupMemberAssignmentsResponse(rsp)
 }
 func (c *ClientWithResponses) ListKafkaStreamsGroupMemberAssignmentTasksWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, reqEditors ...RequestEditorFn) (*ListKafkaStreamsGroupMemberAssignmentTasksResponse, error) {
-	rsp, err := c.ListKafkaStreamsGroupMemberAssignmentTasks(ctx, clusterId, groupId, memberId, assignmentsType, reqEditors...)
+	rsp, err := c.listKafkaStreamsGroupMemberAssignmentTasks(ctx, clusterId, groupId, memberId, assignmentsType, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaStreamsGroupMemberAssignmentTasksResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaStreamsGroupMemberAssignmentTaskPartitionsWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*GetKafkaStreamsGroupMemberAssignmentTaskPartitionsResponse, error) {
-	rsp, err := c.GetKafkaStreamsGroupMemberAssignmentTaskPartitions(ctx, clusterId, groupId, memberId, assignmentsType, subtopologyId, reqEditors...)
+	rsp, err := c.getKafkaStreamsGroupMemberAssignmentTaskPartitions(ctx, clusterId, groupId, memberId, assignmentsType, subtopologyId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKafkaStreamsGroupMemberAssignmentTaskPartitionsResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaStreamsGroupMemberTargetAssignmentsWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, reqEditors ...RequestEditorFn) (*GetKafkaStreamsGroupMemberTargetAssignmentsResponse, error) {
-	rsp, err := c.GetKafkaStreamsGroupMemberTargetAssignments(ctx, clusterId, groupId, memberId, reqEditors...)
+	rsp, err := c.getKafkaStreamsGroupMemberTargetAssignments(ctx, clusterId, groupId, memberId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKafkaStreamsGroupMemberTargetAssignmentsResponse(rsp)
 }
 func (c *ClientWithResponses) ListKafkaStreamsGroupMemberTargetAssignmentTasksWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, reqEditors ...RequestEditorFn) (*ListKafkaStreamsGroupMemberTargetAssignmentTasksResponse, error) {
-	rsp, err := c.ListKafkaStreamsGroupMemberTargetAssignmentTasks(ctx, clusterId, groupId, memberId, assignmentsType, reqEditors...)
+	rsp, err := c.listKafkaStreamsGroupMemberTargetAssignmentTasks(ctx, clusterId, groupId, memberId, assignmentsType, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaStreamsGroupMemberTargetAssignmentTasksResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaStreamsGroupMemberTargetAssignmentTaskPartitionsWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, memberId MemberId, assignmentsType AssignmentsType, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*GetKafkaStreamsGroupMemberTargetAssignmentTaskPartitionsResponse, error) {
-	rsp, err := c.GetKafkaStreamsGroupMemberTargetAssignmentTaskPartitions(ctx, clusterId, groupId, memberId, assignmentsType, subtopologyId, reqEditors...)
+	rsp, err := c.getKafkaStreamsGroupMemberTargetAssignmentTaskPartitions(ctx, clusterId, groupId, memberId, assignmentsType, subtopologyId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKafkaStreamsGroupMemberTargetAssignmentTaskPartitionsResponse(rsp)
 }
 func (c *ClientWithResponses) ListKafkaStreamsGroupSubtopologiesWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*ListKafkaStreamsGroupSubtopologiesResponse, error) {
-	rsp, err := c.ListKafkaStreamsGroupSubtopologies(ctx, clusterId, groupId, reqEditors...)
+	rsp, err := c.listKafkaStreamsGroupSubtopologies(ctx, clusterId, groupId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaStreamsGroupSubtopologiesResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaStreamsGroupSubtopologyWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, subtopologyId SubtopologyId, reqEditors ...RequestEditorFn) (*GetKafkaStreamsGroupSubtopologyResponse, error) {
-	rsp, err := c.GetKafkaStreamsGroupSubtopology(ctx, clusterId, groupId, subtopologyId, reqEditors...)
+	rsp, err := c.getKafkaStreamsGroupSubtopology(ctx, clusterId, groupId, subtopologyId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

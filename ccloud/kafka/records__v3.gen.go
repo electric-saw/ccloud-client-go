@@ -18,7 +18,7 @@ import (
 
 type ProduceRecordJSONRequestBody = ProduceRequest
 
-func (c *oasClient) ProduceRecordWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) produceRecordWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewProduceRecordRequestWithBody(c.Server, clusterId, topicName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -29,7 +29,7 @@ func (c *oasClient) ProduceRecordWithBody(ctx context.Context, clusterId Cluster
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ProduceRecord(ctx context.Context, clusterId ClusterId, topicName TopicName, body ProduceRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) produceRecord(ctx context.Context, clusterId ClusterId, topicName TopicName, body ProduceRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewProduceRecordRequest(c.Server, clusterId, topicName, body)
 	if err != nil {
 		return nil, err
@@ -115,14 +115,14 @@ type ProduceRecordResponse struct {
 }
 
 func (c *ClientWithResponses) ProduceRecordWithBodyWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ProduceRecordResponse, error) {
-	rsp, err := c.ProduceRecordWithBody(ctx, clusterId, topicName, contentType, body, reqEditors...)
+	rsp, err := c.produceRecordWithBody(ctx, clusterId, topicName, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseProduceRecordResponse(rsp)
 }
 func (c *ClientWithResponses) ProduceRecordWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, body ProduceRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*ProduceRecordResponse, error) {
-	rsp, err := c.ProduceRecord(ctx, clusterId, topicName, body, reqEditors...)
+	rsp, err := c.produceRecord(ctx, clusterId, topicName, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

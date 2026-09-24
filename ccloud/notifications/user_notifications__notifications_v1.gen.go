@@ -108,7 +108,7 @@ type MarkAllNotificationsV1UserNotificationsParams struct {
 type UpdateNotificationsV1UserNotificationJSONRequestBody = NotificationsV1UserNotification
 type MarkAllNotificationsV1UserNotificationsJSONRequestBody = NotificationsV1UpdateUserNotificationsReadRequest
 
-func (c *oasClient) ListNotificationsV1UserNotifications(ctx context.Context, params *ListNotificationsV1UserNotificationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listNotificationsV1UserNotifications(ctx context.Context, params *ListNotificationsV1UserNotificationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNotificationsV1UserNotificationsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -119,7 +119,7 @@ func (c *oasClient) ListNotificationsV1UserNotifications(ctx context.Context, pa
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetNotificationsV1UserNotification(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getNotificationsV1UserNotification(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNotificationsV1UserNotificationRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -130,7 +130,7 @@ func (c *oasClient) GetNotificationsV1UserNotification(ctx context.Context, id s
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateNotificationsV1UserNotificationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateNotificationsV1UserNotificationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNotificationsV1UserNotificationRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -141,7 +141,7 @@ func (c *oasClient) UpdateNotificationsV1UserNotificationWithBody(ctx context.Co
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateNotificationsV1UserNotification(ctx context.Context, id string, body UpdateNotificationsV1UserNotificationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateNotificationsV1UserNotification(ctx context.Context, id string, body UpdateNotificationsV1UserNotificationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNotificationsV1UserNotificationRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -152,7 +152,7 @@ func (c *oasClient) UpdateNotificationsV1UserNotification(ctx context.Context, i
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) MarkAllNotificationsV1UserNotificationsWithBody(ctx context.Context, params *MarkAllNotificationsV1UserNotificationsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) markAllNotificationsV1UserNotificationsWithBody(ctx context.Context, params *MarkAllNotificationsV1UserNotificationsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewMarkAllNotificationsV1UserNotificationsRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -163,7 +163,7 @@ func (c *oasClient) MarkAllNotificationsV1UserNotificationsWithBody(ctx context.
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) MarkAllNotificationsV1UserNotifications(ctx context.Context, params *MarkAllNotificationsV1UserNotificationsParams, body MarkAllNotificationsV1UserNotificationsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) markAllNotificationsV1UserNotifications(ctx context.Context, params *MarkAllNotificationsV1UserNotificationsParams, body MarkAllNotificationsV1UserNotificationsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewMarkAllNotificationsV1UserNotificationsRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err
@@ -174,7 +174,7 @@ func (c *oasClient) MarkAllNotificationsV1UserNotifications(ctx context.Context,
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetNotificationsV1UserNotificationsSummary(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getNotificationsV1UserNotificationsSummary(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNotificationsV1UserNotificationsSummaryRequest(c.Server)
 	if err != nil {
 		return nil, err
@@ -990,49 +990,49 @@ type GetNotificationsV1UserNotificationsSummaryResponse struct {
 }
 
 func (c *ClientWithResponses) ListNotificationsV1UserNotificationsWithResponse(ctx context.Context, params *ListNotificationsV1UserNotificationsParams, reqEditors ...RequestEditorFn) (*ListNotificationsV1UserNotificationsResponse, error) {
-	rsp, err := c.ListNotificationsV1UserNotifications(ctx, params, reqEditors...)
+	rsp, err := c.listNotificationsV1UserNotifications(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListNotificationsV1UserNotificationsResponse(rsp)
 }
 func (c *ClientWithResponses) GetNotificationsV1UserNotificationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetNotificationsV1UserNotificationResponse, error) {
-	rsp, err := c.GetNotificationsV1UserNotification(ctx, id, reqEditors...)
+	rsp, err := c.getNotificationsV1UserNotification(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetNotificationsV1UserNotificationResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateNotificationsV1UserNotificationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1UserNotificationResponse, error) {
-	rsp, err := c.UpdateNotificationsV1UserNotificationWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateNotificationsV1UserNotificationWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateNotificationsV1UserNotificationResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateNotificationsV1UserNotificationWithResponse(ctx context.Context, id string, body UpdateNotificationsV1UserNotificationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1UserNotificationResponse, error) {
-	rsp, err := c.UpdateNotificationsV1UserNotification(ctx, id, body, reqEditors...)
+	rsp, err := c.updateNotificationsV1UserNotification(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateNotificationsV1UserNotificationResponse(rsp)
 }
 func (c *ClientWithResponses) MarkAllNotificationsV1UserNotificationsWithBodyWithResponse(ctx context.Context, params *MarkAllNotificationsV1UserNotificationsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MarkAllNotificationsV1UserNotificationsResponse, error) {
-	rsp, err := c.MarkAllNotificationsV1UserNotificationsWithBody(ctx, params, contentType, body, reqEditors...)
+	rsp, err := c.markAllNotificationsV1UserNotificationsWithBody(ctx, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseMarkAllNotificationsV1UserNotificationsResponse(rsp)
 }
 func (c *ClientWithResponses) MarkAllNotificationsV1UserNotificationsWithResponse(ctx context.Context, params *MarkAllNotificationsV1UserNotificationsParams, body MarkAllNotificationsV1UserNotificationsJSONRequestBody, reqEditors ...RequestEditorFn) (*MarkAllNotificationsV1UserNotificationsResponse, error) {
-	rsp, err := c.MarkAllNotificationsV1UserNotifications(ctx, params, body, reqEditors...)
+	rsp, err := c.markAllNotificationsV1UserNotifications(ctx, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseMarkAllNotificationsV1UserNotificationsResponse(rsp)
 }
 func (c *ClientWithResponses) GetNotificationsV1UserNotificationsSummaryWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetNotificationsV1UserNotificationsSummaryResponse, error) {
-	rsp, err := c.GetNotificationsV1UserNotificationsSummary(ctx, reqEditors...)
+	rsp, err := c.getNotificationsV1UserNotificationsSummary(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

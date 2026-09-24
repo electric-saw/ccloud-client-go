@@ -8520,7 +8520,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListNetworkingV1AccessPoints List of Access Points
 	//
@@ -8529,7 +8529,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all access points.
 	//
 	// Corresponds with GET /networking/v1/access-points (the `ListNetworkingV1AccessPoints` operationId).
-	ListNetworkingV1AccessPoints(ctx context.Context, params *ListNetworkingV1AccessPointsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNetworkingV1AccessPoints(ctx context.Context, params *ListNetworkingV1AccessPointsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1AccessPointWithBody Create an Access Point
 	//
@@ -8540,7 +8540,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /networking/v1/access-points (the `CreateNetworkingV1AccessPoint` operationId).
-	CreateNetworkingV1AccessPointWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1AccessPointWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1AccessPoint Create an Access Point
 	//
@@ -8551,7 +8551,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /networking/v1/access-points (the `CreateNetworkingV1AccessPoint` operationId).
-	CreateNetworkingV1AccessPoint(ctx context.Context, body CreateNetworkingV1AccessPointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1AccessPoint(ctx context.Context, body CreateNetworkingV1AccessPointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNetworkingV1AccessPoint Delete an Access Point
 	//
@@ -8560,7 +8560,7 @@ type ClientInterface interface {
 	// Make a request to delete an access point.
 	//
 	// Corresponds with DELETE /networking/v1/access-points/{id} (the `DeleteNetworkingV1AccessPoint` operationId).
-	DeleteNetworkingV1AccessPoint(ctx context.Context, id string, params *DeleteNetworkingV1AccessPointParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNetworkingV1AccessPoint(ctx context.Context, id string, params *DeleteNetworkingV1AccessPointParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNetworkingV1AccessPoint Read an Access Point
 	//
@@ -8569,7 +8569,7 @@ type ClientInterface interface {
 	// Make a request to read an access point.
 	//
 	// Corresponds with GET /networking/v1/access-points/{id} (the `GetNetworkingV1AccessPoint` operationId).
-	GetNetworkingV1AccessPoint(ctx context.Context, id string, params *GetNetworkingV1AccessPointParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNetworkingV1AccessPoint(ctx context.Context, id string, params *GetNetworkingV1AccessPointParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1AccessPointWithBody Update an Access Point
 	//
@@ -8580,7 +8580,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /networking/v1/access-points/{id} (the `UpdateNetworkingV1AccessPoint` operationId).
-	UpdateNetworkingV1AccessPointWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1AccessPointWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1AccessPoint Update an Access Point
 	//
@@ -8591,7 +8591,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /networking/v1/access-points/{id} (the `UpdateNetworkingV1AccessPoint` operationId).
-	UpdateNetworkingV1AccessPoint(ctx context.Context, id string, body UpdateNetworkingV1AccessPointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1AccessPoint(ctx context.Context, id string, body UpdateNetworkingV1AccessPointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNetworkingV1DnsForwarders List of DNS Forwarders
 	//
@@ -8600,7 +8600,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all DNS forwarders.
 	//
 	// Corresponds with GET /networking/v1/dns-forwarders (the `ListNetworkingV1DnsForwarders` operationId).
-	ListNetworkingV1DnsForwarders(ctx context.Context, params *ListNetworkingV1DnsForwardersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNetworkingV1DnsForwarders(ctx context.Context, params *ListNetworkingV1DnsForwardersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1DnsForwarderWithBody Create a DNS Forwarder
 	//
@@ -8611,7 +8611,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /networking/v1/dns-forwarders (the `CreateNetworkingV1DnsForwarder` operationId).
-	CreateNetworkingV1DnsForwarderWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1DnsForwarderWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1DnsForwarder Create a DNS Forwarder
 	//
@@ -8622,7 +8622,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /networking/v1/dns-forwarders (the `CreateNetworkingV1DnsForwarder` operationId).
-	CreateNetworkingV1DnsForwarder(ctx context.Context, body CreateNetworkingV1DnsForwarderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1DnsForwarder(ctx context.Context, body CreateNetworkingV1DnsForwarderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNetworkingV1DnsForwarder Delete a DNS Forwarder
 	//
@@ -8631,7 +8631,7 @@ type ClientInterface interface {
 	// Make a request to delete a DNS forwarder.
 	//
 	// Corresponds with DELETE /networking/v1/dns-forwarders/{id} (the `DeleteNetworkingV1DnsForwarder` operationId).
-	DeleteNetworkingV1DnsForwarder(ctx context.Context, id string, params *DeleteNetworkingV1DnsForwarderParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNetworkingV1DnsForwarder(ctx context.Context, id string, params *DeleteNetworkingV1DnsForwarderParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNetworkingV1DnsForwarder Read a DNS Forwarder
 	//
@@ -8640,7 +8640,7 @@ type ClientInterface interface {
 	// Make a request to read a DNS forwarder.
 	//
 	// Corresponds with GET /networking/v1/dns-forwarders/{id} (the `GetNetworkingV1DnsForwarder` operationId).
-	GetNetworkingV1DnsForwarder(ctx context.Context, id string, params *GetNetworkingV1DnsForwarderParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNetworkingV1DnsForwarder(ctx context.Context, id string, params *GetNetworkingV1DnsForwarderParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1DnsForwarderWithBody Update a DNS Forwarder
 	//
@@ -8651,7 +8651,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /networking/v1/dns-forwarders/{id} (the `UpdateNetworkingV1DnsForwarder` operationId).
-	UpdateNetworkingV1DnsForwarderWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1DnsForwarderWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1DnsForwarder Update a DNS Forwarder
 	//
@@ -8662,7 +8662,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /networking/v1/dns-forwarders/{id} (the `UpdateNetworkingV1DnsForwarder` operationId).
-	UpdateNetworkingV1DnsForwarder(ctx context.Context, id string, body UpdateNetworkingV1DnsForwarderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1DnsForwarder(ctx context.Context, id string, body UpdateNetworkingV1DnsForwarderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNetworkingV1DnsRecords List of DNS Records
 	//
@@ -8671,7 +8671,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all DNS records.
 	//
 	// Corresponds with GET /networking/v1/dns-records (the `ListNetworkingV1DnsRecords` operationId).
-	ListNetworkingV1DnsRecords(ctx context.Context, params *ListNetworkingV1DnsRecordsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNetworkingV1DnsRecords(ctx context.Context, params *ListNetworkingV1DnsRecordsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1DnsRecordWithBody Create a DNS Record
 	//
@@ -8682,7 +8682,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /networking/v1/dns-records (the `CreateNetworkingV1DnsRecord` operationId).
-	CreateNetworkingV1DnsRecordWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1DnsRecordWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1DnsRecord Create a DNS Record
 	//
@@ -8693,7 +8693,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /networking/v1/dns-records (the `CreateNetworkingV1DnsRecord` operationId).
-	CreateNetworkingV1DnsRecord(ctx context.Context, body CreateNetworkingV1DnsRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1DnsRecord(ctx context.Context, body CreateNetworkingV1DnsRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNetworkingV1DnsRecord Delete a DNS Record
 	//
@@ -8702,7 +8702,7 @@ type ClientInterface interface {
 	// Make a request to delete a DNS record.
 	//
 	// Corresponds with DELETE /networking/v1/dns-records/{id} (the `DeleteNetworkingV1DnsRecord` operationId).
-	DeleteNetworkingV1DnsRecord(ctx context.Context, id string, params *DeleteNetworkingV1DnsRecordParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNetworkingV1DnsRecord(ctx context.Context, id string, params *DeleteNetworkingV1DnsRecordParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNetworkingV1DnsRecord Read a DNS Record
 	//
@@ -8711,7 +8711,7 @@ type ClientInterface interface {
 	// Make a request to read a DNS record.
 	//
 	// Corresponds with GET /networking/v1/dns-records/{id} (the `GetNetworkingV1DnsRecord` operationId).
-	GetNetworkingV1DnsRecord(ctx context.Context, id string, params *GetNetworkingV1DnsRecordParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNetworkingV1DnsRecord(ctx context.Context, id string, params *GetNetworkingV1DnsRecordParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1DnsRecordWithBody Update a DNS Record
 	//
@@ -8722,7 +8722,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /networking/v1/dns-records/{id} (the `UpdateNetworkingV1DnsRecord` operationId).
-	UpdateNetworkingV1DnsRecordWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1DnsRecordWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1DnsRecord Update a DNS Record
 	//
@@ -8733,7 +8733,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /networking/v1/dns-records/{id} (the `UpdateNetworkingV1DnsRecord` operationId).
-	UpdateNetworkingV1DnsRecord(ctx context.Context, id string, body UpdateNetworkingV1DnsRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1DnsRecord(ctx context.Context, id string, body UpdateNetworkingV1DnsRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNetworkingV1Gateways List of Gateways
 	//
@@ -8742,7 +8742,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all gateways.
 	//
 	// Corresponds with GET /networking/v1/gateways (the `ListNetworkingV1Gateways` operationId).
-	ListNetworkingV1Gateways(ctx context.Context, params *ListNetworkingV1GatewaysParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNetworkingV1Gateways(ctx context.Context, params *ListNetworkingV1GatewaysParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1GatewayWithBody Create a Gateway
 	//
@@ -8753,7 +8753,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /networking/v1/gateways (the `CreateNetworkingV1Gateway` operationId).
-	CreateNetworkingV1GatewayWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1GatewayWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1Gateway Create a Gateway
 	//
@@ -8764,7 +8764,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /networking/v1/gateways (the `CreateNetworkingV1Gateway` operationId).
-	CreateNetworkingV1Gateway(ctx context.Context, body CreateNetworkingV1GatewayJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1Gateway(ctx context.Context, body CreateNetworkingV1GatewayJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNetworkingV1Gateway Delete a Gateway
 	//
@@ -8773,7 +8773,7 @@ type ClientInterface interface {
 	// Make a request to delete a gateway.
 	//
 	// Corresponds with DELETE /networking/v1/gateways/{id} (the `DeleteNetworkingV1Gateway` operationId).
-	DeleteNetworkingV1Gateway(ctx context.Context, id string, params *DeleteNetworkingV1GatewayParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNetworkingV1Gateway(ctx context.Context, id string, params *DeleteNetworkingV1GatewayParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNetworkingV1Gateway Read a Gateway
 	//
@@ -8782,7 +8782,7 @@ type ClientInterface interface {
 	// Make a request to read a gateway.
 	//
 	// Corresponds with GET /networking/v1/gateways/{id} (the `GetNetworkingV1Gateway` operationId).
-	GetNetworkingV1Gateway(ctx context.Context, id string, params *GetNetworkingV1GatewayParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNetworkingV1Gateway(ctx context.Context, id string, params *GetNetworkingV1GatewayParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1GatewayWithBody Update a Gateway
 	//
@@ -8793,7 +8793,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /networking/v1/gateways/{id} (the `UpdateNetworkingV1Gateway` operationId).
-	UpdateNetworkingV1GatewayWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1GatewayWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1Gateway Update a Gateway
 	//
@@ -8804,7 +8804,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /networking/v1/gateways/{id} (the `UpdateNetworkingV1Gateway` operationId).
-	UpdateNetworkingV1Gateway(ctx context.Context, id string, body UpdateNetworkingV1GatewayJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1Gateway(ctx context.Context, id string, body UpdateNetworkingV1GatewayJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNetworkingV1IpAddresses List of IP Addresses
 	//
@@ -8815,7 +8815,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all IP Addresses.
 	//
 	// Corresponds with GET /networking/v1/ip-addresses (the `ListNetworkingV1IpAddresses` operationId).
-	ListNetworkingV1IpAddresses(ctx context.Context, params *ListNetworkingV1IpAddressesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNetworkingV1IpAddresses(ctx context.Context, params *ListNetworkingV1IpAddressesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNetworkingV1NetworkLinkEndpoints List of Network Link Endpoints
 	//
@@ -8824,7 +8824,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all network link endpoints.
 	//
 	// Corresponds with GET /networking/v1/network-link-endpoints (the `ListNetworkingV1NetworkLinkEndpoints` operationId).
-	ListNetworkingV1NetworkLinkEndpoints(ctx context.Context, params *ListNetworkingV1NetworkLinkEndpointsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNetworkingV1NetworkLinkEndpoints(ctx context.Context, params *ListNetworkingV1NetworkLinkEndpointsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1NetworkLinkEndpointWithBody Create a Network Link Endpoint
 	//
@@ -8835,7 +8835,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /networking/v1/network-link-endpoints (the `CreateNetworkingV1NetworkLinkEndpoint` operationId).
-	CreateNetworkingV1NetworkLinkEndpointWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1NetworkLinkEndpointWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1NetworkLinkEndpoint Create a Network Link Endpoint
 	//
@@ -8846,7 +8846,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /networking/v1/network-link-endpoints (the `CreateNetworkingV1NetworkLinkEndpoint` operationId).
-	CreateNetworkingV1NetworkLinkEndpoint(ctx context.Context, body CreateNetworkingV1NetworkLinkEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1NetworkLinkEndpoint(ctx context.Context, body CreateNetworkingV1NetworkLinkEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNetworkingV1NetworkLinkEndpoint Delete a Network Link Endpoint
 	//
@@ -8855,7 +8855,7 @@ type ClientInterface interface {
 	// Make a request to delete a network link endpoint.
 	//
 	// Corresponds with DELETE /networking/v1/network-link-endpoints/{id} (the `DeleteNetworkingV1NetworkLinkEndpoint` operationId).
-	DeleteNetworkingV1NetworkLinkEndpoint(ctx context.Context, id string, params *DeleteNetworkingV1NetworkLinkEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNetworkingV1NetworkLinkEndpoint(ctx context.Context, id string, params *DeleteNetworkingV1NetworkLinkEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNetworkingV1NetworkLinkEndpoint Read a Network Link Endpoint
 	//
@@ -8864,7 +8864,7 @@ type ClientInterface interface {
 	// Make a request to read a network link endpoint.
 	//
 	// Corresponds with GET /networking/v1/network-link-endpoints/{id} (the `GetNetworkingV1NetworkLinkEndpoint` operationId).
-	GetNetworkingV1NetworkLinkEndpoint(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNetworkingV1NetworkLinkEndpoint(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1NetworkLinkEndpointWithBody Update a Network Link Endpoint
 	//
@@ -8875,7 +8875,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /networking/v1/network-link-endpoints/{id} (the `UpdateNetworkingV1NetworkLinkEndpoint` operationId).
-	UpdateNetworkingV1NetworkLinkEndpointWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1NetworkLinkEndpointWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1NetworkLinkEndpoint Update a Network Link Endpoint
 	//
@@ -8886,7 +8886,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /networking/v1/network-link-endpoints/{id} (the `UpdateNetworkingV1NetworkLinkEndpoint` operationId).
-	UpdateNetworkingV1NetworkLinkEndpoint(ctx context.Context, id string, body UpdateNetworkingV1NetworkLinkEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1NetworkLinkEndpoint(ctx context.Context, id string, body UpdateNetworkingV1NetworkLinkEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNetworkingV1NetworkLinkServiceAssociations List of Network Link Service Associations
 	//
@@ -8895,7 +8895,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all network link service associations.
 	//
 	// Corresponds with GET /networking/v1/network-link-service-associations (the `ListNetworkingV1NetworkLinkServiceAssociations` operationId).
-	ListNetworkingV1NetworkLinkServiceAssociations(ctx context.Context, params *ListNetworkingV1NetworkLinkServiceAssociationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNetworkingV1NetworkLinkServiceAssociations(ctx context.Context, params *ListNetworkingV1NetworkLinkServiceAssociationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNetworkingV1NetworkLinkServiceAssociation Read a Network Link Service Association
 	//
@@ -8904,7 +8904,7 @@ type ClientInterface interface {
 	// Make a request to read a network link service association.
 	//
 	// Corresponds with GET /networking/v1/network-link-service-associations/{id} (the `GetNetworkingV1NetworkLinkServiceAssociation` operationId).
-	GetNetworkingV1NetworkLinkServiceAssociation(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkServiceAssociationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNetworkingV1NetworkLinkServiceAssociation(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkServiceAssociationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNetworkingV1NetworkLinkServices List of Network Link Services
 	//
@@ -8913,7 +8913,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all network link services.
 	//
 	// Corresponds with GET /networking/v1/network-link-services (the `ListNetworkingV1NetworkLinkServices` operationId).
-	ListNetworkingV1NetworkLinkServices(ctx context.Context, params *ListNetworkingV1NetworkLinkServicesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNetworkingV1NetworkLinkServices(ctx context.Context, params *ListNetworkingV1NetworkLinkServicesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1NetworkLinkServiceWithBody Create a Network Link Service
 	//
@@ -8924,7 +8924,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /networking/v1/network-link-services (the `CreateNetworkingV1NetworkLinkService` operationId).
-	CreateNetworkingV1NetworkLinkServiceWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1NetworkLinkServiceWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1NetworkLinkService Create a Network Link Service
 	//
@@ -8935,7 +8935,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /networking/v1/network-link-services (the `CreateNetworkingV1NetworkLinkService` operationId).
-	CreateNetworkingV1NetworkLinkService(ctx context.Context, body CreateNetworkingV1NetworkLinkServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1NetworkLinkService(ctx context.Context, body CreateNetworkingV1NetworkLinkServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNetworkingV1NetworkLinkService Delete a Network Link Service
 	//
@@ -8944,7 +8944,7 @@ type ClientInterface interface {
 	// Make a request to delete a network link service.
 	//
 	// Corresponds with DELETE /networking/v1/network-link-services/{id} (the `DeleteNetworkingV1NetworkLinkService` operationId).
-	DeleteNetworkingV1NetworkLinkService(ctx context.Context, id string, params *DeleteNetworkingV1NetworkLinkServiceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNetworkingV1NetworkLinkService(ctx context.Context, id string, params *DeleteNetworkingV1NetworkLinkServiceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNetworkingV1NetworkLinkService Read a Network Link Service
 	//
@@ -8953,7 +8953,7 @@ type ClientInterface interface {
 	// Make a request to read a network link service.
 	//
 	// Corresponds with GET /networking/v1/network-link-services/{id} (the `GetNetworkingV1NetworkLinkService` operationId).
-	GetNetworkingV1NetworkLinkService(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkServiceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNetworkingV1NetworkLinkService(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkServiceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1NetworkLinkServiceWithBody Update a Network Link Service
 	//
@@ -8964,7 +8964,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /networking/v1/network-link-services/{id} (the `UpdateNetworkingV1NetworkLinkService` operationId).
-	UpdateNetworkingV1NetworkLinkServiceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1NetworkLinkServiceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1NetworkLinkService Update a Network Link Service
 	//
@@ -8975,7 +8975,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /networking/v1/network-link-services/{id} (the `UpdateNetworkingV1NetworkLinkService` operationId).
-	UpdateNetworkingV1NetworkLinkService(ctx context.Context, id string, body UpdateNetworkingV1NetworkLinkServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1NetworkLinkService(ctx context.Context, id string, body UpdateNetworkingV1NetworkLinkServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNetworkingV1Networks List of Networks
 	//
@@ -8984,7 +8984,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all networks.
 	//
 	// Corresponds with GET /networking/v1/networks (the `ListNetworkingV1Networks` operationId).
-	ListNetworkingV1Networks(ctx context.Context, params *ListNetworkingV1NetworksParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNetworkingV1Networks(ctx context.Context, params *ListNetworkingV1NetworksParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1NetworkWithBody Create a Network
 	//
@@ -8995,7 +8995,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /networking/v1/networks (the `CreateNetworkingV1Network` operationId).
-	CreateNetworkingV1NetworkWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1NetworkWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1Network Create a Network
 	//
@@ -9006,7 +9006,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /networking/v1/networks (the `CreateNetworkingV1Network` operationId).
-	CreateNetworkingV1Network(ctx context.Context, body CreateNetworkingV1NetworkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1Network(ctx context.Context, body CreateNetworkingV1NetworkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNetworkingV1Network Delete a Network
 	//
@@ -9015,7 +9015,7 @@ type ClientInterface interface {
 	// Make a request to delete a network.
 	//
 	// Corresponds with DELETE /networking/v1/networks/{id} (the `DeleteNetworkingV1Network` operationId).
-	DeleteNetworkingV1Network(ctx context.Context, id string, params *DeleteNetworkingV1NetworkParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNetworkingV1Network(ctx context.Context, id string, params *DeleteNetworkingV1NetworkParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNetworkingV1Network Read a Network
 	//
@@ -9024,7 +9024,7 @@ type ClientInterface interface {
 	// Make a request to read a network.
 	//
 	// Corresponds with GET /networking/v1/networks/{id} (the `GetNetworkingV1Network` operationId).
-	GetNetworkingV1Network(ctx context.Context, id string, params *GetNetworkingV1NetworkParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNetworkingV1Network(ctx context.Context, id string, params *GetNetworkingV1NetworkParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1NetworkWithBody Update a Network
 	//
@@ -9035,7 +9035,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /networking/v1/networks/{id} (the `UpdateNetworkingV1Network` operationId).
-	UpdateNetworkingV1NetworkWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1NetworkWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1Network Update a Network
 	//
@@ -9046,7 +9046,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /networking/v1/networks/{id} (the `UpdateNetworkingV1Network` operationId).
-	UpdateNetworkingV1Network(ctx context.Context, id string, body UpdateNetworkingV1NetworkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1Network(ctx context.Context, id string, body UpdateNetworkingV1NetworkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNetworkingV1Peerings List of Peerings
 	//
@@ -9055,7 +9055,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all peerings.
 	//
 	// Corresponds with GET /networking/v1/peerings (the `ListNetworkingV1Peerings` operationId).
-	ListNetworkingV1Peerings(ctx context.Context, params *ListNetworkingV1PeeringsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNetworkingV1Peerings(ctx context.Context, params *ListNetworkingV1PeeringsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1PeeringWithBody Create a Peering
 	//
@@ -9066,7 +9066,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /networking/v1/peerings (the `CreateNetworkingV1Peering` operationId).
-	CreateNetworkingV1PeeringWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1PeeringWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1Peering Create a Peering
 	//
@@ -9077,7 +9077,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /networking/v1/peerings (the `CreateNetworkingV1Peering` operationId).
-	CreateNetworkingV1Peering(ctx context.Context, body CreateNetworkingV1PeeringJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1Peering(ctx context.Context, body CreateNetworkingV1PeeringJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNetworkingV1Peering Delete a Peering
 	//
@@ -9086,7 +9086,7 @@ type ClientInterface interface {
 	// Make a request to delete a peering.
 	//
 	// Corresponds with DELETE /networking/v1/peerings/{id} (the `DeleteNetworkingV1Peering` operationId).
-	DeleteNetworkingV1Peering(ctx context.Context, id string, params *DeleteNetworkingV1PeeringParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNetworkingV1Peering(ctx context.Context, id string, params *DeleteNetworkingV1PeeringParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNetworkingV1Peering Read a Peering
 	//
@@ -9095,7 +9095,7 @@ type ClientInterface interface {
 	// Make a request to read a peering.
 	//
 	// Corresponds with GET /networking/v1/peerings/{id} (the `GetNetworkingV1Peering` operationId).
-	GetNetworkingV1Peering(ctx context.Context, id string, params *GetNetworkingV1PeeringParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNetworkingV1Peering(ctx context.Context, id string, params *GetNetworkingV1PeeringParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1PeeringWithBody Update a Peering
 	//
@@ -9106,7 +9106,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /networking/v1/peerings/{id} (the `UpdateNetworkingV1Peering` operationId).
-	UpdateNetworkingV1PeeringWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1PeeringWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1Peering Update a Peering
 	//
@@ -9117,7 +9117,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /networking/v1/peerings/{id} (the `UpdateNetworkingV1Peering` operationId).
-	UpdateNetworkingV1Peering(ctx context.Context, id string, body UpdateNetworkingV1PeeringJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1Peering(ctx context.Context, id string, body UpdateNetworkingV1PeeringJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNetworkingV1PrivateLinkAccesses List of Private Link Accesses
 	//
@@ -9126,7 +9126,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all private link accesses.
 	//
 	// Corresponds with GET /networking/v1/private-link-accesses (the `ListNetworkingV1PrivateLinkAccesses` operationId).
-	ListNetworkingV1PrivateLinkAccesses(ctx context.Context, params *ListNetworkingV1PrivateLinkAccessesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNetworkingV1PrivateLinkAccesses(ctx context.Context, params *ListNetworkingV1PrivateLinkAccessesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1PrivateLinkAccessWithBody Create a Private Link Access
 	//
@@ -9137,7 +9137,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /networking/v1/private-link-accesses (the `CreateNetworkingV1PrivateLinkAccess` operationId).
-	CreateNetworkingV1PrivateLinkAccessWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1PrivateLinkAccessWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1PrivateLinkAccess Create a Private Link Access
 	//
@@ -9148,7 +9148,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /networking/v1/private-link-accesses (the `CreateNetworkingV1PrivateLinkAccess` operationId).
-	CreateNetworkingV1PrivateLinkAccess(ctx context.Context, body CreateNetworkingV1PrivateLinkAccessJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1PrivateLinkAccess(ctx context.Context, body CreateNetworkingV1PrivateLinkAccessJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNetworkingV1PrivateLinkAccess Delete a Private Link Access
 	//
@@ -9157,7 +9157,7 @@ type ClientInterface interface {
 	// Make a request to delete a private link access.
 	//
 	// Corresponds with DELETE /networking/v1/private-link-accesses/{id} (the `DeleteNetworkingV1PrivateLinkAccess` operationId).
-	DeleteNetworkingV1PrivateLinkAccess(ctx context.Context, id string, params *DeleteNetworkingV1PrivateLinkAccessParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNetworkingV1PrivateLinkAccess(ctx context.Context, id string, params *DeleteNetworkingV1PrivateLinkAccessParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNetworkingV1PrivateLinkAccess Read a Private Link Access
 	//
@@ -9166,7 +9166,7 @@ type ClientInterface interface {
 	// Make a request to read a private link access.
 	//
 	// Corresponds with GET /networking/v1/private-link-accesses/{id} (the `GetNetworkingV1PrivateLinkAccess` operationId).
-	GetNetworkingV1PrivateLinkAccess(ctx context.Context, id string, params *GetNetworkingV1PrivateLinkAccessParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNetworkingV1PrivateLinkAccess(ctx context.Context, id string, params *GetNetworkingV1PrivateLinkAccessParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1PrivateLinkAccessWithBody Update a Private Link Access
 	//
@@ -9177,7 +9177,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /networking/v1/private-link-accesses/{id} (the `UpdateNetworkingV1PrivateLinkAccess` operationId).
-	UpdateNetworkingV1PrivateLinkAccessWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1PrivateLinkAccessWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1PrivateLinkAccess Update a Private Link Access
 	//
@@ -9188,7 +9188,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /networking/v1/private-link-accesses/{id} (the `UpdateNetworkingV1PrivateLinkAccess` operationId).
-	UpdateNetworkingV1PrivateLinkAccess(ctx context.Context, id string, body UpdateNetworkingV1PrivateLinkAccessJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1PrivateLinkAccess(ctx context.Context, id string, body UpdateNetworkingV1PrivateLinkAccessJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNetworkingV1PrivateLinkAttachmentConnections List of Private Link Attachment Connections
 	//
@@ -9197,7 +9197,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all private link attachment connections.
 	//
 	// Corresponds with GET /networking/v1/private-link-attachment-connections (the `ListNetworkingV1PrivateLinkAttachmentConnections` operationId).
-	ListNetworkingV1PrivateLinkAttachmentConnections(ctx context.Context, params *ListNetworkingV1PrivateLinkAttachmentConnectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNetworkingV1PrivateLinkAttachmentConnections(ctx context.Context, params *ListNetworkingV1PrivateLinkAttachmentConnectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1PrivateLinkAttachmentConnectionWithBody Create a Private Link Attachment Connection
 	//
@@ -9208,7 +9208,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /networking/v1/private-link-attachment-connections (the `CreateNetworkingV1PrivateLinkAttachmentConnection` operationId).
-	CreateNetworkingV1PrivateLinkAttachmentConnectionWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1PrivateLinkAttachmentConnectionWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1PrivateLinkAttachmentConnection Create a Private Link Attachment Connection
 	//
@@ -9219,7 +9219,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /networking/v1/private-link-attachment-connections (the `CreateNetworkingV1PrivateLinkAttachmentConnection` operationId).
-	CreateNetworkingV1PrivateLinkAttachmentConnection(ctx context.Context, body CreateNetworkingV1PrivateLinkAttachmentConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1PrivateLinkAttachmentConnection(ctx context.Context, body CreateNetworkingV1PrivateLinkAttachmentConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNetworkingV1PrivateLinkAttachmentConnection Delete a Private Link Attachment Connection
 	//
@@ -9228,7 +9228,7 @@ type ClientInterface interface {
 	// Make a request to delete a private link attachment connection.
 	//
 	// Corresponds with DELETE /networking/v1/private-link-attachment-connections/{id} (the `DeleteNetworkingV1PrivateLinkAttachmentConnection` operationId).
-	DeleteNetworkingV1PrivateLinkAttachmentConnection(ctx context.Context, id string, params *DeleteNetworkingV1PrivateLinkAttachmentConnectionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNetworkingV1PrivateLinkAttachmentConnection(ctx context.Context, id string, params *DeleteNetworkingV1PrivateLinkAttachmentConnectionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNetworkingV1PrivateLinkAttachmentConnection Read a Private Link Attachment Connection
 	//
@@ -9237,7 +9237,7 @@ type ClientInterface interface {
 	// Make a request to read a private link attachment connection.
 	//
 	// Corresponds with GET /networking/v1/private-link-attachment-connections/{id} (the `GetNetworkingV1PrivateLinkAttachmentConnection` operationId).
-	GetNetworkingV1PrivateLinkAttachmentConnection(ctx context.Context, id string, params *GetNetworkingV1PrivateLinkAttachmentConnectionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNetworkingV1PrivateLinkAttachmentConnection(ctx context.Context, id string, params *GetNetworkingV1PrivateLinkAttachmentConnectionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1PrivateLinkAttachmentConnectionWithBody Update a Private Link Attachment Connection
 	//
@@ -9248,7 +9248,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /networking/v1/private-link-attachment-connections/{id} (the `UpdateNetworkingV1PrivateLinkAttachmentConnection` operationId).
-	UpdateNetworkingV1PrivateLinkAttachmentConnectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1PrivateLinkAttachmentConnectionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1PrivateLinkAttachmentConnection Update a Private Link Attachment Connection
 	//
@@ -9259,7 +9259,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /networking/v1/private-link-attachment-connections/{id} (the `UpdateNetworkingV1PrivateLinkAttachmentConnection` operationId).
-	UpdateNetworkingV1PrivateLinkAttachmentConnection(ctx context.Context, id string, body UpdateNetworkingV1PrivateLinkAttachmentConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1PrivateLinkAttachmentConnection(ctx context.Context, id string, body UpdateNetworkingV1PrivateLinkAttachmentConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNetworkingV1PrivateLinkAttachments List of Private Link Attachments
 	//
@@ -9268,7 +9268,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all private link attachments.
 	//
 	// Corresponds with GET /networking/v1/private-link-attachments (the `ListNetworkingV1PrivateLinkAttachments` operationId).
-	ListNetworkingV1PrivateLinkAttachments(ctx context.Context, params *ListNetworkingV1PrivateLinkAttachmentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNetworkingV1PrivateLinkAttachments(ctx context.Context, params *ListNetworkingV1PrivateLinkAttachmentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1PrivateLinkAttachmentWithBody Create a Private Link Attachment
 	//
@@ -9279,7 +9279,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /networking/v1/private-link-attachments (the `CreateNetworkingV1PrivateLinkAttachment` operationId).
-	CreateNetworkingV1PrivateLinkAttachmentWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1PrivateLinkAttachmentWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1PrivateLinkAttachment Create a Private Link Attachment
 	//
@@ -9290,7 +9290,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /networking/v1/private-link-attachments (the `CreateNetworkingV1PrivateLinkAttachment` operationId).
-	CreateNetworkingV1PrivateLinkAttachment(ctx context.Context, body CreateNetworkingV1PrivateLinkAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1PrivateLinkAttachment(ctx context.Context, body CreateNetworkingV1PrivateLinkAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNetworkingV1PrivateLinkAttachment Delete a Private Link Attachment
 	//
@@ -9299,7 +9299,7 @@ type ClientInterface interface {
 	// Make a request to delete a private link attachment.
 	//
 	// Corresponds with DELETE /networking/v1/private-link-attachments/{id} (the `DeleteNetworkingV1PrivateLinkAttachment` operationId).
-	DeleteNetworkingV1PrivateLinkAttachment(ctx context.Context, id string, params *DeleteNetworkingV1PrivateLinkAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNetworkingV1PrivateLinkAttachment(ctx context.Context, id string, params *DeleteNetworkingV1PrivateLinkAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNetworkingV1PrivateLinkAttachment Read a Private Link Attachment
 	//
@@ -9308,7 +9308,7 @@ type ClientInterface interface {
 	// Make a request to read a private link attachment.
 	//
 	// Corresponds with GET /networking/v1/private-link-attachments/{id} (the `GetNetworkingV1PrivateLinkAttachment` operationId).
-	GetNetworkingV1PrivateLinkAttachment(ctx context.Context, id string, params *GetNetworkingV1PrivateLinkAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNetworkingV1PrivateLinkAttachment(ctx context.Context, id string, params *GetNetworkingV1PrivateLinkAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1PrivateLinkAttachmentWithBody Update a Private Link Attachment
 	//
@@ -9319,7 +9319,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /networking/v1/private-link-attachments/{id} (the `UpdateNetworkingV1PrivateLinkAttachment` operationId).
-	UpdateNetworkingV1PrivateLinkAttachmentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1PrivateLinkAttachmentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1PrivateLinkAttachment Update a Private Link Attachment
 	//
@@ -9330,7 +9330,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /networking/v1/private-link-attachments/{id} (the `UpdateNetworkingV1PrivateLinkAttachment` operationId).
-	UpdateNetworkingV1PrivateLinkAttachment(ctx context.Context, id string, body UpdateNetworkingV1PrivateLinkAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1PrivateLinkAttachment(ctx context.Context, id string, body UpdateNetworkingV1PrivateLinkAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNetworkingV1TransitGatewayAttachments List of Transit Gateway Attachments
 	//
@@ -9339,7 +9339,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all transit gateway attachments.
 	//
 	// Corresponds with GET /networking/v1/transit-gateway-attachments (the `ListNetworkingV1TransitGatewayAttachments` operationId).
-	ListNetworkingV1TransitGatewayAttachments(ctx context.Context, params *ListNetworkingV1TransitGatewayAttachmentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNetworkingV1TransitGatewayAttachments(ctx context.Context, params *ListNetworkingV1TransitGatewayAttachmentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1TransitGatewayAttachmentWithBody Create a Transit Gateway Attachment
 	//
@@ -9350,7 +9350,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /networking/v1/transit-gateway-attachments (the `CreateNetworkingV1TransitGatewayAttachment` operationId).
-	CreateNetworkingV1TransitGatewayAttachmentWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1TransitGatewayAttachmentWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNetworkingV1TransitGatewayAttachment Create a Transit Gateway Attachment
 	//
@@ -9361,7 +9361,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /networking/v1/transit-gateway-attachments (the `CreateNetworkingV1TransitGatewayAttachment` operationId).
-	CreateNetworkingV1TransitGatewayAttachment(ctx context.Context, body CreateNetworkingV1TransitGatewayAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNetworkingV1TransitGatewayAttachment(ctx context.Context, body CreateNetworkingV1TransitGatewayAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNetworkingV1TransitGatewayAttachment Delete a Transit Gateway Attachment
 	//
@@ -9370,7 +9370,7 @@ type ClientInterface interface {
 	// Make a request to delete a transit gateway attachment.
 	//
 	// Corresponds with DELETE /networking/v1/transit-gateway-attachments/{id} (the `DeleteNetworkingV1TransitGatewayAttachment` operationId).
-	DeleteNetworkingV1TransitGatewayAttachment(ctx context.Context, id string, params *DeleteNetworkingV1TransitGatewayAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNetworkingV1TransitGatewayAttachment(ctx context.Context, id string, params *DeleteNetworkingV1TransitGatewayAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNetworkingV1TransitGatewayAttachment Read a Transit Gateway Attachment
 	//
@@ -9379,7 +9379,7 @@ type ClientInterface interface {
 	// Make a request to read a transit gateway attachment.
 	//
 	// Corresponds with GET /networking/v1/transit-gateway-attachments/{id} (the `GetNetworkingV1TransitGatewayAttachment` operationId).
-	GetNetworkingV1TransitGatewayAttachment(ctx context.Context, id string, params *GetNetworkingV1TransitGatewayAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNetworkingV1TransitGatewayAttachment(ctx context.Context, id string, params *GetNetworkingV1TransitGatewayAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1TransitGatewayAttachmentWithBody Update a Transit Gateway Attachment
 	//
@@ -9390,7 +9390,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /networking/v1/transit-gateway-attachments/{id} (the `UpdateNetworkingV1TransitGatewayAttachment` operationId).
-	UpdateNetworkingV1TransitGatewayAttachmentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1TransitGatewayAttachmentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNetworkingV1TransitGatewayAttachment Update a Transit Gateway Attachment
 	//
@@ -9401,7 +9401,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /networking/v1/transit-gateway-attachments/{id} (the `UpdateNetworkingV1TransitGatewayAttachment` operationId).
-	UpdateNetworkingV1TransitGatewayAttachment(ctx context.Context, id string, body UpdateNetworkingV1TransitGatewayAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNetworkingV1TransitGatewayAttachment(ctx context.Context, id string, body UpdateNetworkingV1TransitGatewayAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -9419,7 +9419,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -9439,969 +9439,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListNetworkingV1AccessPointsWithResponse List of Access Points
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all access points.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/access-points (the `ListNetworkingV1AccessPoints` operationId).
-	ListNetworkingV1AccessPointsWithResponse(ctx context.Context, params *ListNetworkingV1AccessPointsParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1AccessPointsResponse, error)
-
-	// CreateNetworkingV1AccessPointWithBodyWithResponse Create an Access Point
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an access point.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/access-points (the `CreateNetworkingV1AccessPoint` operationId).
-	CreateNetworkingV1AccessPointWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1AccessPointResponse, error)
-
-	// CreateNetworkingV1AccessPointWithResponse Create an Access Point
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an access point.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/access-points (the `CreateNetworkingV1AccessPoint` operationId).
-	CreateNetworkingV1AccessPointWithResponse(ctx context.Context, body CreateNetworkingV1AccessPointJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1AccessPointResponse, error)
-
-	// DeleteNetworkingV1AccessPointWithResponse Delete an Access Point
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete an access point.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /networking/v1/access-points/{id} (the `DeleteNetworkingV1AccessPoint` operationId).
-	DeleteNetworkingV1AccessPointWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1AccessPointParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1AccessPointResponse, error)
-
-	// GetNetworkingV1AccessPointWithResponse Read an Access Point
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read an access point.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/access-points/{id} (the `GetNetworkingV1AccessPoint` operationId).
-	GetNetworkingV1AccessPointWithResponse(ctx context.Context, id string, params *GetNetworkingV1AccessPointParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1AccessPointResponse, error)
-
-	// UpdateNetworkingV1AccessPointWithBodyWithResponse Update an Access Point
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an access point.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/access-points/{id} (the `UpdateNetworkingV1AccessPoint` operationId).
-	UpdateNetworkingV1AccessPointWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1AccessPointResponse, error)
-
-	// UpdateNetworkingV1AccessPointWithResponse Update an Access Point
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an access point.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/access-points/{id} (the `UpdateNetworkingV1AccessPoint` operationId).
-	UpdateNetworkingV1AccessPointWithResponse(ctx context.Context, id string, body UpdateNetworkingV1AccessPointJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1AccessPointResponse, error)
-
-	// ListNetworkingV1DnsForwardersWithResponse List of DNS Forwarders
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all DNS forwarders.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/dns-forwarders (the `ListNetworkingV1DnsForwarders` operationId).
-	ListNetworkingV1DnsForwardersWithResponse(ctx context.Context, params *ListNetworkingV1DnsForwardersParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1DnsForwardersResponse, error)
-
-	// CreateNetworkingV1DnsForwarderWithBodyWithResponse Create a DNS Forwarder
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a DNS forwarder.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/dns-forwarders (the `CreateNetworkingV1DnsForwarder` operationId).
-	CreateNetworkingV1DnsForwarderWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1DnsForwarderResponse, error)
-
-	// CreateNetworkingV1DnsForwarderWithResponse Create a DNS Forwarder
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a DNS forwarder.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/dns-forwarders (the `CreateNetworkingV1DnsForwarder` operationId).
-	CreateNetworkingV1DnsForwarderWithResponse(ctx context.Context, body CreateNetworkingV1DnsForwarderJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1DnsForwarderResponse, error)
-
-	// DeleteNetworkingV1DnsForwarderWithResponse Delete a DNS Forwarder
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a DNS forwarder.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /networking/v1/dns-forwarders/{id} (the `DeleteNetworkingV1DnsForwarder` operationId).
-	DeleteNetworkingV1DnsForwarderWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1DnsForwarderParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1DnsForwarderResponse, error)
-
-	// GetNetworkingV1DnsForwarderWithResponse Read a DNS Forwarder
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a DNS forwarder.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/dns-forwarders/{id} (the `GetNetworkingV1DnsForwarder` operationId).
-	GetNetworkingV1DnsForwarderWithResponse(ctx context.Context, id string, params *GetNetworkingV1DnsForwarderParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1DnsForwarderResponse, error)
-
-	// UpdateNetworkingV1DnsForwarderWithBodyWithResponse Update a DNS Forwarder
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a DNS forwarder.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/dns-forwarders/{id} (the `UpdateNetworkingV1DnsForwarder` operationId).
-	UpdateNetworkingV1DnsForwarderWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1DnsForwarderResponse, error)
-
-	// UpdateNetworkingV1DnsForwarderWithResponse Update a DNS Forwarder
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a DNS forwarder.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/dns-forwarders/{id} (the `UpdateNetworkingV1DnsForwarder` operationId).
-	UpdateNetworkingV1DnsForwarderWithResponse(ctx context.Context, id string, body UpdateNetworkingV1DnsForwarderJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1DnsForwarderResponse, error)
-
-	// ListNetworkingV1DnsRecordsWithResponse List of DNS Records
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all DNS records.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/dns-records (the `ListNetworkingV1DnsRecords` operationId).
-	ListNetworkingV1DnsRecordsWithResponse(ctx context.Context, params *ListNetworkingV1DnsRecordsParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1DnsRecordsResponse, error)
-
-	// CreateNetworkingV1DnsRecordWithBodyWithResponse Create a DNS Record
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a DNS record.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/dns-records (the `CreateNetworkingV1DnsRecord` operationId).
-	CreateNetworkingV1DnsRecordWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1DnsRecordResponse, error)
-
-	// CreateNetworkingV1DnsRecordWithResponse Create a DNS Record
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a DNS record.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/dns-records (the `CreateNetworkingV1DnsRecord` operationId).
-	CreateNetworkingV1DnsRecordWithResponse(ctx context.Context, body CreateNetworkingV1DnsRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1DnsRecordResponse, error)
-
-	// DeleteNetworkingV1DnsRecordWithResponse Delete a DNS Record
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a DNS record.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /networking/v1/dns-records/{id} (the `DeleteNetworkingV1DnsRecord` operationId).
-	DeleteNetworkingV1DnsRecordWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1DnsRecordParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1DnsRecordResponse, error)
-
-	// GetNetworkingV1DnsRecordWithResponse Read a DNS Record
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a DNS record.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/dns-records/{id} (the `GetNetworkingV1DnsRecord` operationId).
-	GetNetworkingV1DnsRecordWithResponse(ctx context.Context, id string, params *GetNetworkingV1DnsRecordParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1DnsRecordResponse, error)
-
-	// UpdateNetworkingV1DnsRecordWithBodyWithResponse Update a DNS Record
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a DNS record.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/dns-records/{id} (the `UpdateNetworkingV1DnsRecord` operationId).
-	UpdateNetworkingV1DnsRecordWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1DnsRecordResponse, error)
-
-	// UpdateNetworkingV1DnsRecordWithResponse Update a DNS Record
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a DNS record.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/dns-records/{id} (the `UpdateNetworkingV1DnsRecord` operationId).
-	UpdateNetworkingV1DnsRecordWithResponse(ctx context.Context, id string, body UpdateNetworkingV1DnsRecordJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1DnsRecordResponse, error)
-
-	// ListNetworkingV1GatewaysWithResponse List of Gateways
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all gateways.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/gateways (the `ListNetworkingV1Gateways` operationId).
-	ListNetworkingV1GatewaysWithResponse(ctx context.Context, params *ListNetworkingV1GatewaysParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1GatewaysResponse, error)
-
-	// CreateNetworkingV1GatewayWithBodyWithResponse Create a Gateway
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a gateway.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/gateways (the `CreateNetworkingV1Gateway` operationId).
-	CreateNetworkingV1GatewayWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1GatewayResponse, error)
-
-	// CreateNetworkingV1GatewayWithResponse Create a Gateway
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a gateway.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/gateways (the `CreateNetworkingV1Gateway` operationId).
-	CreateNetworkingV1GatewayWithResponse(ctx context.Context, body CreateNetworkingV1GatewayJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1GatewayResponse, error)
-
-	// DeleteNetworkingV1GatewayWithResponse Delete a Gateway
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a gateway.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /networking/v1/gateways/{id} (the `DeleteNetworkingV1Gateway` operationId).
-	DeleteNetworkingV1GatewayWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1GatewayParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1GatewayResponse, error)
-
-	// GetNetworkingV1GatewayWithResponse Read a Gateway
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a gateway.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/gateways/{id} (the `GetNetworkingV1Gateway` operationId).
-	GetNetworkingV1GatewayWithResponse(ctx context.Context, id string, params *GetNetworkingV1GatewayParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1GatewayResponse, error)
-
-	// UpdateNetworkingV1GatewayWithBodyWithResponse Update a Gateway
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a gateway.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/gateways/{id} (the `UpdateNetworkingV1Gateway` operationId).
-	UpdateNetworkingV1GatewayWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1GatewayResponse, error)
-
-	// UpdateNetworkingV1GatewayWithResponse Update a Gateway
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a gateway.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/gateways/{id} (the `UpdateNetworkingV1Gateway` operationId).
-	UpdateNetworkingV1GatewayWithResponse(ctx context.Context, id string, body UpdateNetworkingV1GatewayJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1GatewayResponse, error)
-
-	// ListNetworkingV1IpAddressesWithResponse List of IP Addresses
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Related guide: [Use Public Egress IP addresses on Confluent Cloud](https://docs.confluent.io/cloud/current/networking/static-egress-ip-addresses.html)
-	//
-	// Retrieve a sorted, filtered, paginated list of all IP Addresses.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/ip-addresses (the `ListNetworkingV1IpAddresses` operationId).
-	ListNetworkingV1IpAddressesWithResponse(ctx context.Context, params *ListNetworkingV1IpAddressesParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1IpAddressesResponse, error)
-
-	// ListNetworkingV1NetworkLinkEndpointsWithResponse List of Network Link Endpoints
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all network link endpoints.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/network-link-endpoints (the `ListNetworkingV1NetworkLinkEndpoints` operationId).
-	ListNetworkingV1NetworkLinkEndpointsWithResponse(ctx context.Context, params *ListNetworkingV1NetworkLinkEndpointsParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1NetworkLinkEndpointsResponse, error)
-
-	// CreateNetworkingV1NetworkLinkEndpointWithBodyWithResponse Create a Network Link Endpoint
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a network link endpoint.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/network-link-endpoints (the `CreateNetworkingV1NetworkLinkEndpoint` operationId).
-	CreateNetworkingV1NetworkLinkEndpointWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1NetworkLinkEndpointResponse, error)
-
-	// CreateNetworkingV1NetworkLinkEndpointWithResponse Create a Network Link Endpoint
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a network link endpoint.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/network-link-endpoints (the `CreateNetworkingV1NetworkLinkEndpoint` operationId).
-	CreateNetworkingV1NetworkLinkEndpointWithResponse(ctx context.Context, body CreateNetworkingV1NetworkLinkEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1NetworkLinkEndpointResponse, error)
-
-	// DeleteNetworkingV1NetworkLinkEndpointWithResponse Delete a Network Link Endpoint
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a network link endpoint.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /networking/v1/network-link-endpoints/{id} (the `DeleteNetworkingV1NetworkLinkEndpoint` operationId).
-	DeleteNetworkingV1NetworkLinkEndpointWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1NetworkLinkEndpointParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1NetworkLinkEndpointResponse, error)
-
-	// GetNetworkingV1NetworkLinkEndpointWithResponse Read a Network Link Endpoint
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a network link endpoint.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/network-link-endpoints/{id} (the `GetNetworkingV1NetworkLinkEndpoint` operationId).
-	GetNetworkingV1NetworkLinkEndpointWithResponse(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkEndpointParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1NetworkLinkEndpointResponse, error)
-
-	// UpdateNetworkingV1NetworkLinkEndpointWithBodyWithResponse Update a Network Link Endpoint
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a network link endpoint.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/network-link-endpoints/{id} (the `UpdateNetworkingV1NetworkLinkEndpoint` operationId).
-	UpdateNetworkingV1NetworkLinkEndpointWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1NetworkLinkEndpointResponse, error)
-
-	// UpdateNetworkingV1NetworkLinkEndpointWithResponse Update a Network Link Endpoint
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a network link endpoint.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/network-link-endpoints/{id} (the `UpdateNetworkingV1NetworkLinkEndpoint` operationId).
-	UpdateNetworkingV1NetworkLinkEndpointWithResponse(ctx context.Context, id string, body UpdateNetworkingV1NetworkLinkEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1NetworkLinkEndpointResponse, error)
-
-	// ListNetworkingV1NetworkLinkServiceAssociationsWithResponse List of Network Link Service Associations
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all network link service associations.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/network-link-service-associations (the `ListNetworkingV1NetworkLinkServiceAssociations` operationId).
-	ListNetworkingV1NetworkLinkServiceAssociationsWithResponse(ctx context.Context, params *ListNetworkingV1NetworkLinkServiceAssociationsParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1NetworkLinkServiceAssociationsResponse, error)
-
-	// GetNetworkingV1NetworkLinkServiceAssociationWithResponse Read a Network Link Service Association
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a network link service association.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/network-link-service-associations/{id} (the `GetNetworkingV1NetworkLinkServiceAssociation` operationId).
-	GetNetworkingV1NetworkLinkServiceAssociationWithResponse(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkServiceAssociationParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1NetworkLinkServiceAssociationResponse, error)
-
-	// ListNetworkingV1NetworkLinkServicesWithResponse List of Network Link Services
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all network link services.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/network-link-services (the `ListNetworkingV1NetworkLinkServices` operationId).
-	ListNetworkingV1NetworkLinkServicesWithResponse(ctx context.Context, params *ListNetworkingV1NetworkLinkServicesParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1NetworkLinkServicesResponse, error)
-
-	// CreateNetworkingV1NetworkLinkServiceWithBodyWithResponse Create a Network Link Service
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a network link service.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/network-link-services (the `CreateNetworkingV1NetworkLinkService` operationId).
-	CreateNetworkingV1NetworkLinkServiceWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1NetworkLinkServiceResponse, error)
-
-	// CreateNetworkingV1NetworkLinkServiceWithResponse Create a Network Link Service
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a network link service.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/network-link-services (the `CreateNetworkingV1NetworkLinkService` operationId).
-	CreateNetworkingV1NetworkLinkServiceWithResponse(ctx context.Context, body CreateNetworkingV1NetworkLinkServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1NetworkLinkServiceResponse, error)
-
-	// DeleteNetworkingV1NetworkLinkServiceWithResponse Delete a Network Link Service
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a network link service.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /networking/v1/network-link-services/{id} (the `DeleteNetworkingV1NetworkLinkService` operationId).
-	DeleteNetworkingV1NetworkLinkServiceWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1NetworkLinkServiceParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1NetworkLinkServiceResponse, error)
-
-	// GetNetworkingV1NetworkLinkServiceWithResponse Read a Network Link Service
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a network link service.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/network-link-services/{id} (the `GetNetworkingV1NetworkLinkService` operationId).
-	GetNetworkingV1NetworkLinkServiceWithResponse(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkServiceParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1NetworkLinkServiceResponse, error)
-
-	// UpdateNetworkingV1NetworkLinkServiceWithBodyWithResponse Update a Network Link Service
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a network link service.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/network-link-services/{id} (the `UpdateNetworkingV1NetworkLinkService` operationId).
-	UpdateNetworkingV1NetworkLinkServiceWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1NetworkLinkServiceResponse, error)
-
-	// UpdateNetworkingV1NetworkLinkServiceWithResponse Update a Network Link Service
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a network link service.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/network-link-services/{id} (the `UpdateNetworkingV1NetworkLinkService` operationId).
-	UpdateNetworkingV1NetworkLinkServiceWithResponse(ctx context.Context, id string, body UpdateNetworkingV1NetworkLinkServiceJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1NetworkLinkServiceResponse, error)
-
-	// ListNetworkingV1NetworksWithResponse List of Networks
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all networks.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/networks (the `ListNetworkingV1Networks` operationId).
-	ListNetworkingV1NetworksWithResponse(ctx context.Context, params *ListNetworkingV1NetworksParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1NetworksResponse, error)
-
-	// CreateNetworkingV1NetworkWithBodyWithResponse Create a Network
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a network.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/networks (the `CreateNetworkingV1Network` operationId).
-	CreateNetworkingV1NetworkWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1NetworkResponse, error)
-
-	// CreateNetworkingV1NetworkWithResponse Create a Network
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a network.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/networks (the `CreateNetworkingV1Network` operationId).
-	CreateNetworkingV1NetworkWithResponse(ctx context.Context, body CreateNetworkingV1NetworkJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1NetworkResponse, error)
-
-	// DeleteNetworkingV1NetworkWithResponse Delete a Network
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a network.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /networking/v1/networks/{id} (the `DeleteNetworkingV1Network` operationId).
-	DeleteNetworkingV1NetworkWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1NetworkParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1NetworkResponse, error)
-
-	// GetNetworkingV1NetworkWithResponse Read a Network
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a network.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/networks/{id} (the `GetNetworkingV1Network` operationId).
-	GetNetworkingV1NetworkWithResponse(ctx context.Context, id string, params *GetNetworkingV1NetworkParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1NetworkResponse, error)
-
-	// UpdateNetworkingV1NetworkWithBodyWithResponse Update a Network
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a network.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/networks/{id} (the `UpdateNetworkingV1Network` operationId).
-	UpdateNetworkingV1NetworkWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1NetworkResponse, error)
-
-	// UpdateNetworkingV1NetworkWithResponse Update a Network
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a network.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/networks/{id} (the `UpdateNetworkingV1Network` operationId).
-	UpdateNetworkingV1NetworkWithResponse(ctx context.Context, id string, body UpdateNetworkingV1NetworkJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1NetworkResponse, error)
-
-	// ListNetworkingV1PeeringsWithResponse List of Peerings
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all peerings.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/peerings (the `ListNetworkingV1Peerings` operationId).
-	ListNetworkingV1PeeringsWithResponse(ctx context.Context, params *ListNetworkingV1PeeringsParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1PeeringsResponse, error)
-
-	// CreateNetworkingV1PeeringWithBodyWithResponse Create a Peering
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a peering.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/peerings (the `CreateNetworkingV1Peering` operationId).
-	CreateNetworkingV1PeeringWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1PeeringResponse, error)
-
-	// CreateNetworkingV1PeeringWithResponse Create a Peering
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a peering.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/peerings (the `CreateNetworkingV1Peering` operationId).
-	CreateNetworkingV1PeeringWithResponse(ctx context.Context, body CreateNetworkingV1PeeringJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1PeeringResponse, error)
-
-	// DeleteNetworkingV1PeeringWithResponse Delete a Peering
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a peering.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /networking/v1/peerings/{id} (the `DeleteNetworkingV1Peering` operationId).
-	DeleteNetworkingV1PeeringWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1PeeringParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1PeeringResponse, error)
-
-	// GetNetworkingV1PeeringWithResponse Read a Peering
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a peering.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/peerings/{id} (the `GetNetworkingV1Peering` operationId).
-	GetNetworkingV1PeeringWithResponse(ctx context.Context, id string, params *GetNetworkingV1PeeringParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1PeeringResponse, error)
-
-	// UpdateNetworkingV1PeeringWithBodyWithResponse Update a Peering
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a peering.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/peerings/{id} (the `UpdateNetworkingV1Peering` operationId).
-	UpdateNetworkingV1PeeringWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1PeeringResponse, error)
-
-	// UpdateNetworkingV1PeeringWithResponse Update a Peering
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a peering.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/peerings/{id} (the `UpdateNetworkingV1Peering` operationId).
-	UpdateNetworkingV1PeeringWithResponse(ctx context.Context, id string, body UpdateNetworkingV1PeeringJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1PeeringResponse, error)
-
-	// ListNetworkingV1PrivateLinkAccessesWithResponse List of Private Link Accesses
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all private link accesses.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/private-link-accesses (the `ListNetworkingV1PrivateLinkAccesses` operationId).
-	ListNetworkingV1PrivateLinkAccessesWithResponse(ctx context.Context, params *ListNetworkingV1PrivateLinkAccessesParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1PrivateLinkAccessesResponse, error)
-
-	// CreateNetworkingV1PrivateLinkAccessWithBodyWithResponse Create a Private Link Access
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a private link access.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/private-link-accesses (the `CreateNetworkingV1PrivateLinkAccess` operationId).
-	CreateNetworkingV1PrivateLinkAccessWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1PrivateLinkAccessResponse, error)
-
-	// CreateNetworkingV1PrivateLinkAccessWithResponse Create a Private Link Access
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a private link access.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/private-link-accesses (the `CreateNetworkingV1PrivateLinkAccess` operationId).
-	CreateNetworkingV1PrivateLinkAccessWithResponse(ctx context.Context, body CreateNetworkingV1PrivateLinkAccessJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1PrivateLinkAccessResponse, error)
-
-	// DeleteNetworkingV1PrivateLinkAccessWithResponse Delete a Private Link Access
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a private link access.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /networking/v1/private-link-accesses/{id} (the `DeleteNetworkingV1PrivateLinkAccess` operationId).
-	DeleteNetworkingV1PrivateLinkAccessWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1PrivateLinkAccessParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1PrivateLinkAccessResponse, error)
-
-	// GetNetworkingV1PrivateLinkAccessWithResponse Read a Private Link Access
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a private link access.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/private-link-accesses/{id} (the `GetNetworkingV1PrivateLinkAccess` operationId).
-	GetNetworkingV1PrivateLinkAccessWithResponse(ctx context.Context, id string, params *GetNetworkingV1PrivateLinkAccessParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1PrivateLinkAccessResponse, error)
-
-	// UpdateNetworkingV1PrivateLinkAccessWithBodyWithResponse Update a Private Link Access
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a private link access.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/private-link-accesses/{id} (the `UpdateNetworkingV1PrivateLinkAccess` operationId).
-	UpdateNetworkingV1PrivateLinkAccessWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1PrivateLinkAccessResponse, error)
-
-	// UpdateNetworkingV1PrivateLinkAccessWithResponse Update a Private Link Access
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a private link access.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/private-link-accesses/{id} (the `UpdateNetworkingV1PrivateLinkAccess` operationId).
-	UpdateNetworkingV1PrivateLinkAccessWithResponse(ctx context.Context, id string, body UpdateNetworkingV1PrivateLinkAccessJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1PrivateLinkAccessResponse, error)
-
-	// ListNetworkingV1PrivateLinkAttachmentConnectionsWithResponse List of Private Link Attachment Connections
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all private link attachment connections.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/private-link-attachment-connections (the `ListNetworkingV1PrivateLinkAttachmentConnections` operationId).
-	ListNetworkingV1PrivateLinkAttachmentConnectionsWithResponse(ctx context.Context, params *ListNetworkingV1PrivateLinkAttachmentConnectionsParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1PrivateLinkAttachmentConnectionsResponse, error)
-
-	// CreateNetworkingV1PrivateLinkAttachmentConnectionWithBodyWithResponse Create a Private Link Attachment Connection
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a private link attachment connection.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/private-link-attachment-connections (the `CreateNetworkingV1PrivateLinkAttachmentConnection` operationId).
-	CreateNetworkingV1PrivateLinkAttachmentConnectionWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1PrivateLinkAttachmentConnectionResponse, error)
-
-	// CreateNetworkingV1PrivateLinkAttachmentConnectionWithResponse Create a Private Link Attachment Connection
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a private link attachment connection.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/private-link-attachment-connections (the `CreateNetworkingV1PrivateLinkAttachmentConnection` operationId).
-	CreateNetworkingV1PrivateLinkAttachmentConnectionWithResponse(ctx context.Context, body CreateNetworkingV1PrivateLinkAttachmentConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1PrivateLinkAttachmentConnectionResponse, error)
-
-	// DeleteNetworkingV1PrivateLinkAttachmentConnectionWithResponse Delete a Private Link Attachment Connection
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a private link attachment connection.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /networking/v1/private-link-attachment-connections/{id} (the `DeleteNetworkingV1PrivateLinkAttachmentConnection` operationId).
-	DeleteNetworkingV1PrivateLinkAttachmentConnectionWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1PrivateLinkAttachmentConnectionParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1PrivateLinkAttachmentConnectionResponse, error)
-
-	// GetNetworkingV1PrivateLinkAttachmentConnectionWithResponse Read a Private Link Attachment Connection
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a private link attachment connection.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/private-link-attachment-connections/{id} (the `GetNetworkingV1PrivateLinkAttachmentConnection` operationId).
-	GetNetworkingV1PrivateLinkAttachmentConnectionWithResponse(ctx context.Context, id string, params *GetNetworkingV1PrivateLinkAttachmentConnectionParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1PrivateLinkAttachmentConnectionResponse, error)
-
-	// UpdateNetworkingV1PrivateLinkAttachmentConnectionWithBodyWithResponse Update a Private Link Attachment Connection
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a private link attachment connection.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/private-link-attachment-connections/{id} (the `UpdateNetworkingV1PrivateLinkAttachmentConnection` operationId).
-	UpdateNetworkingV1PrivateLinkAttachmentConnectionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1PrivateLinkAttachmentConnectionResponse, error)
-
-	// UpdateNetworkingV1PrivateLinkAttachmentConnectionWithResponse Update a Private Link Attachment Connection
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a private link attachment connection.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/private-link-attachment-connections/{id} (the `UpdateNetworkingV1PrivateLinkAttachmentConnection` operationId).
-	UpdateNetworkingV1PrivateLinkAttachmentConnectionWithResponse(ctx context.Context, id string, body UpdateNetworkingV1PrivateLinkAttachmentConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1PrivateLinkAttachmentConnectionResponse, error)
-
-	// ListNetworkingV1PrivateLinkAttachmentsWithResponse List of Private Link Attachments
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all private link attachments.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/private-link-attachments (the `ListNetworkingV1PrivateLinkAttachments` operationId).
-	ListNetworkingV1PrivateLinkAttachmentsWithResponse(ctx context.Context, params *ListNetworkingV1PrivateLinkAttachmentsParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1PrivateLinkAttachmentsResponse, error)
-
-	// CreateNetworkingV1PrivateLinkAttachmentWithBodyWithResponse Create a Private Link Attachment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a private link attachment.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/private-link-attachments (the `CreateNetworkingV1PrivateLinkAttachment` operationId).
-	CreateNetworkingV1PrivateLinkAttachmentWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1PrivateLinkAttachmentResponse, error)
-
-	// CreateNetworkingV1PrivateLinkAttachmentWithResponse Create a Private Link Attachment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a private link attachment.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/private-link-attachments (the `CreateNetworkingV1PrivateLinkAttachment` operationId).
-	CreateNetworkingV1PrivateLinkAttachmentWithResponse(ctx context.Context, body CreateNetworkingV1PrivateLinkAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1PrivateLinkAttachmentResponse, error)
-
-	// DeleteNetworkingV1PrivateLinkAttachmentWithResponse Delete a Private Link Attachment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a private link attachment.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /networking/v1/private-link-attachments/{id} (the `DeleteNetworkingV1PrivateLinkAttachment` operationId).
-	DeleteNetworkingV1PrivateLinkAttachmentWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1PrivateLinkAttachmentParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1PrivateLinkAttachmentResponse, error)
-
-	// GetNetworkingV1PrivateLinkAttachmentWithResponse Read a Private Link Attachment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a private link attachment.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/private-link-attachments/{id} (the `GetNetworkingV1PrivateLinkAttachment` operationId).
-	GetNetworkingV1PrivateLinkAttachmentWithResponse(ctx context.Context, id string, params *GetNetworkingV1PrivateLinkAttachmentParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1PrivateLinkAttachmentResponse, error)
-
-	// UpdateNetworkingV1PrivateLinkAttachmentWithBodyWithResponse Update a Private Link Attachment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a private link attachment.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/private-link-attachments/{id} (the `UpdateNetworkingV1PrivateLinkAttachment` operationId).
-	UpdateNetworkingV1PrivateLinkAttachmentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1PrivateLinkAttachmentResponse, error)
-
-	// UpdateNetworkingV1PrivateLinkAttachmentWithResponse Update a Private Link Attachment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a private link attachment.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/private-link-attachments/{id} (the `UpdateNetworkingV1PrivateLinkAttachment` operationId).
-	UpdateNetworkingV1PrivateLinkAttachmentWithResponse(ctx context.Context, id string, body UpdateNetworkingV1PrivateLinkAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1PrivateLinkAttachmentResponse, error)
-
-	// ListNetworkingV1TransitGatewayAttachmentsWithResponse List of Transit Gateway Attachments
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all transit gateway attachments.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/transit-gateway-attachments (the `ListNetworkingV1TransitGatewayAttachments` operationId).
-	ListNetworkingV1TransitGatewayAttachmentsWithResponse(ctx context.Context, params *ListNetworkingV1TransitGatewayAttachmentsParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1TransitGatewayAttachmentsResponse, error)
-
-	// CreateNetworkingV1TransitGatewayAttachmentWithBodyWithResponse Create a Transit Gateway Attachment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a transit gateway attachment.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/transit-gateway-attachments (the `CreateNetworkingV1TransitGatewayAttachment` operationId).
-	CreateNetworkingV1TransitGatewayAttachmentWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1TransitGatewayAttachmentResponse, error)
-
-	// CreateNetworkingV1TransitGatewayAttachmentWithResponse Create a Transit Gateway Attachment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a transit gateway attachment.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /networking/v1/transit-gateway-attachments (the `CreateNetworkingV1TransitGatewayAttachment` operationId).
-	CreateNetworkingV1TransitGatewayAttachmentWithResponse(ctx context.Context, body CreateNetworkingV1TransitGatewayAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1TransitGatewayAttachmentResponse, error)
-
-	// DeleteNetworkingV1TransitGatewayAttachmentWithResponse Delete a Transit Gateway Attachment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a transit gateway attachment.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /networking/v1/transit-gateway-attachments/{id} (the `DeleteNetworkingV1TransitGatewayAttachment` operationId).
-	DeleteNetworkingV1TransitGatewayAttachmentWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1TransitGatewayAttachmentParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1TransitGatewayAttachmentResponse, error)
-
-	// GetNetworkingV1TransitGatewayAttachmentWithResponse Read a Transit Gateway Attachment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a transit gateway attachment.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /networking/v1/transit-gateway-attachments/{id} (the `GetNetworkingV1TransitGatewayAttachment` operationId).
-	GetNetworkingV1TransitGatewayAttachmentWithResponse(ctx context.Context, id string, params *GetNetworkingV1TransitGatewayAttachmentParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1TransitGatewayAttachmentResponse, error)
-
-	// UpdateNetworkingV1TransitGatewayAttachmentWithBodyWithResponse Update a Transit Gateway Attachment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a transit gateway attachment.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/transit-gateway-attachments/{id} (the `UpdateNetworkingV1TransitGatewayAttachment` operationId).
-	UpdateNetworkingV1TransitGatewayAttachmentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1TransitGatewayAttachmentResponse, error)
-
-	// UpdateNetworkingV1TransitGatewayAttachmentWithResponse Update a Transit Gateway Attachment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a transit gateway attachment.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /networking/v1/transit-gateway-attachments/{id} (the `UpdateNetworkingV1TransitGatewayAttachment` operationId).
-	UpdateNetworkingV1TransitGatewayAttachmentWithResponse(ctx context.Context, id string, body UpdateNetworkingV1TransitGatewayAttachmentJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1TransitGatewayAttachmentResponse, error)
-}
-
 func (r ListNetworkingV1AccessPointsResponse) GetJSON200() *struct {
 	// ApiVersion APIVersion defines the schema version of this representation of a resource.
 	ApiVersion ListNetworkingV1AccessPoints200JSONResponseBodyApiVersion `json:"api_version"`

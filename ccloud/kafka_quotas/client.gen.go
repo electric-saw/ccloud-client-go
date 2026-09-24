@@ -845,7 +845,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListKafkaQuotasV1ClientQuotas List of Client Quotas
 	//
@@ -854,7 +854,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all client quotas.
 	//
 	// Corresponds with GET /kafka-quotas/v1/client-quotas (the `ListKafkaQuotasV1ClientQuotas` operationId).
-	ListKafkaQuotasV1ClientQuotas(ctx context.Context, params *ListKafkaQuotasV1ClientQuotasParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKafkaQuotasV1ClientQuotas(ctx context.Context, params *ListKafkaQuotasV1ClientQuotasParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKafkaQuotasV1ClientQuotaWithBody Create a Client Quota
 	//
@@ -865,7 +865,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /kafka-quotas/v1/client-quotas (the `CreateKafkaQuotasV1ClientQuota` operationId).
-	CreateKafkaQuotasV1ClientQuotaWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKafkaQuotasV1ClientQuotaWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKafkaQuotasV1ClientQuota Create a Client Quota
 	//
@@ -876,7 +876,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /kafka-quotas/v1/client-quotas (the `CreateKafkaQuotasV1ClientQuota` operationId).
-	CreateKafkaQuotasV1ClientQuota(ctx context.Context, body CreateKafkaQuotasV1ClientQuotaJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKafkaQuotasV1ClientQuota(ctx context.Context, body CreateKafkaQuotasV1ClientQuotaJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteKafkaQuotasV1ClientQuota Delete a Client Quota
 	//
@@ -885,7 +885,7 @@ type ClientInterface interface {
 	// Make a request to delete a client quota.
 	//
 	// Corresponds with DELETE /kafka-quotas/v1/client-quotas/{id} (the `DeleteKafkaQuotasV1ClientQuota` operationId).
-	DeleteKafkaQuotasV1ClientQuota(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteKafkaQuotasV1ClientQuota(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKafkaQuotasV1ClientQuota Read a Client Quota
 	//
@@ -894,7 +894,7 @@ type ClientInterface interface {
 	// Make a request to read a client quota.
 	//
 	// Corresponds with GET /kafka-quotas/v1/client-quotas/{id} (the `GetKafkaQuotasV1ClientQuota` operationId).
-	GetKafkaQuotasV1ClientQuota(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKafkaQuotasV1ClientQuota(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaQuotasV1ClientQuotaWithBody Update a Client Quota
 	//
@@ -905,7 +905,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /kafka-quotas/v1/client-quotas/{id} (the `UpdateKafkaQuotasV1ClientQuota` operationId).
-	UpdateKafkaQuotasV1ClientQuotaWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaQuotasV1ClientQuotaWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateKafkaQuotasV1ClientQuota Update a Client Quota
 	//
@@ -916,7 +916,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /kafka-quotas/v1/client-quotas/{id} (the `UpdateKafkaQuotasV1ClientQuota` operationId).
-	UpdateKafkaQuotasV1ClientQuota(ctx context.Context, id string, body UpdateKafkaQuotasV1ClientQuotaJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateKafkaQuotasV1ClientQuota(ctx context.Context, id string, body UpdateKafkaQuotasV1ClientQuotaJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -934,7 +934,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -954,87 +954,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListKafkaQuotasV1ClientQuotasWithResponse List of Client Quotas
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all client quotas.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka-quotas/v1/client-quotas (the `ListKafkaQuotasV1ClientQuotas` operationId).
-	ListKafkaQuotasV1ClientQuotasWithResponse(ctx context.Context, params *ListKafkaQuotasV1ClientQuotasParams, reqEditors ...RequestEditorFn) (*ListKafkaQuotasV1ClientQuotasResponse, error)
-
-	// CreateKafkaQuotasV1ClientQuotaWithBodyWithResponse Create a Client Quota
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a client quota.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka-quotas/v1/client-quotas (the `CreateKafkaQuotasV1ClientQuota` operationId).
-	CreateKafkaQuotasV1ClientQuotaWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateKafkaQuotasV1ClientQuotaResponse, error)
-
-	// CreateKafkaQuotasV1ClientQuotaWithResponse Create a Client Quota
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a client quota.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /kafka-quotas/v1/client-quotas (the `CreateKafkaQuotasV1ClientQuota` operationId).
-	CreateKafkaQuotasV1ClientQuotaWithResponse(ctx context.Context, body CreateKafkaQuotasV1ClientQuotaJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKafkaQuotasV1ClientQuotaResponse, error)
-
-	// DeleteKafkaQuotasV1ClientQuotaWithResponse Delete a Client Quota
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a client quota.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /kafka-quotas/v1/client-quotas/{id} (the `DeleteKafkaQuotasV1ClientQuota` operationId).
-	DeleteKafkaQuotasV1ClientQuotaWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteKafkaQuotasV1ClientQuotaResponse, error)
-
-	// GetKafkaQuotasV1ClientQuotaWithResponse Read a Client Quota
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a client quota.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /kafka-quotas/v1/client-quotas/{id} (the `GetKafkaQuotasV1ClientQuota` operationId).
-	GetKafkaQuotasV1ClientQuotaWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetKafkaQuotasV1ClientQuotaResponse, error)
-
-	// UpdateKafkaQuotasV1ClientQuotaWithBodyWithResponse Update a Client Quota
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a client quota.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /kafka-quotas/v1/client-quotas/{id} (the `UpdateKafkaQuotasV1ClientQuota` operationId).
-	UpdateKafkaQuotasV1ClientQuotaWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaQuotasV1ClientQuotaResponse, error)
-
-	// UpdateKafkaQuotasV1ClientQuotaWithResponse Update a Client Quota
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a client quota.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /kafka-quotas/v1/client-quotas/{id} (the `UpdateKafkaQuotasV1ClientQuota` operationId).
-	UpdateKafkaQuotasV1ClientQuotaWithResponse(ctx context.Context, id string, body UpdateKafkaQuotasV1ClientQuotaJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaQuotasV1ClientQuotaResponse, error)
-}
-
 func (r ListKafkaQuotasV1ClientQuotasResponse) GetJSON200() *struct {
 	// ApiVersion APIVersion defines the schema version of this representation of a resource.
 	ApiVersion ListKafkaQuotasV1ClientQuotas200JSONResponseBodyApiVersion `json:"api_version"`

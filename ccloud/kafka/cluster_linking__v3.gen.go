@@ -96,7 +96,7 @@ type UpdateKafkaMirrorTopicsReverseAndPauseMirrorJSONRequestBody = AlterMirrorsR
 type UpdateKafkaMirrorTopicsReverseAndStartMirrorJSONRequestBody = AlterMirrorsRequestData
 type UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorJSONRequestBody = AlterMirrorsRequestData
 
-func (c *oasClient) ListKafkaLinks(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaLinks(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaLinksRequest(c.Server, clusterId)
 	if err != nil {
 		return nil, err
@@ -107,7 +107,7 @@ func (c *oasClient) ListKafkaLinks(ctx context.Context, clusterId ClusterId, req
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateKafkaLinkWithBody(ctx context.Context, clusterId ClusterId, params *CreateKafkaLinkParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createKafkaLinkWithBody(ctx context.Context, clusterId ClusterId, params *CreateKafkaLinkParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKafkaLinkRequestWithBody(c.Server, clusterId, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -118,7 +118,7 @@ func (c *oasClient) CreateKafkaLinkWithBody(ctx context.Context, clusterId Clust
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateKafkaLink(ctx context.Context, clusterId ClusterId, params *CreateKafkaLinkParams, body CreateKafkaLinkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createKafkaLink(ctx context.Context, clusterId ClusterId, params *CreateKafkaLinkParams, body CreateKafkaLinkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKafkaLinkRequest(c.Server, clusterId, params, body)
 	if err != nil {
 		return nil, err
@@ -129,7 +129,7 @@ func (c *oasClient) CreateKafkaLink(ctx context.Context, clusterId ClusterId, pa
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListKafkaMirrorTopics(ctx context.Context, clusterId ClusterId, params *ListKafkaMirrorTopicsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaMirrorTopics(ctx context.Context, clusterId ClusterId, params *ListKafkaMirrorTopicsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaMirrorTopicsRequest(c.Server, clusterId, params)
 	if err != nil {
 		return nil, err
@@ -140,7 +140,7 @@ func (c *oasClient) ListKafkaMirrorTopics(ctx context.Context, clusterId Cluster
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteKafkaLink(ctx context.Context, clusterId ClusterId, linkName LinkName, params *DeleteKafkaLinkParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteKafkaLink(ctx context.Context, clusterId ClusterId, linkName LinkName, params *DeleteKafkaLinkParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteKafkaLinkRequest(c.Server, clusterId, linkName, params)
 	if err != nil {
 		return nil, err
@@ -151,7 +151,7 @@ func (c *oasClient) DeleteKafkaLink(ctx context.Context, clusterId ClusterId, li
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaLink(ctx context.Context, clusterId ClusterId, linkName LinkName, params *GetKafkaLinkParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaLink(ctx context.Context, clusterId ClusterId, linkName LinkName, params *GetKafkaLinkParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaLinkRequest(c.Server, clusterId, linkName, params)
 	if err != nil {
 		return nil, err
@@ -162,7 +162,7 @@ func (c *oasClient) GetKafkaLink(ctx context.Context, clusterId ClusterId, linkN
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListKafkaLinkConfigs(ctx context.Context, clusterId ClusterId, linkName LinkName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaLinkConfigs(ctx context.Context, clusterId ClusterId, linkName LinkName, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaLinkConfigsRequest(c.Server, clusterId, linkName)
 	if err != nil {
 		return nil, err
@@ -173,7 +173,7 @@ func (c *oasClient) ListKafkaLinkConfigs(ctx context.Context, clusterId ClusterI
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteKafkaLinkConfig(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteKafkaLinkConfig(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteKafkaLinkConfigRequest(c.Server, clusterId, linkName, configName)
 	if err != nil {
 		return nil, err
@@ -184,7 +184,7 @@ func (c *oasClient) DeleteKafkaLinkConfig(ctx context.Context, clusterId Cluster
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaLinkConfigs(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaLinkConfigs(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaLinkConfigsRequest(c.Server, clusterId, linkName, configName)
 	if err != nil {
 		return nil, err
@@ -195,7 +195,7 @@ func (c *oasClient) GetKafkaLinkConfigs(ctx context.Context, clusterId ClusterId
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaLinkConfigWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaLinkConfigWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaLinkConfigRequestWithBody(c.Server, clusterId, linkName, configName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -206,7 +206,7 @@ func (c *oasClient) UpdateKafkaLinkConfigWithBody(ctx context.Context, clusterId
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaLinkConfig(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, body UpdateKafkaLinkConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaLinkConfig(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, body UpdateKafkaLinkConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaLinkConfigRequest(c.Server, clusterId, linkName, configName, body)
 	if err != nil {
 		return nil, err
@@ -217,7 +217,7 @@ func (c *oasClient) UpdateKafkaLinkConfig(ctx context.Context, clusterId Cluster
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaLinkConfigBatchWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaLinkConfigBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaLinkConfigBatchWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaLinkConfigBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaLinkConfigBatchRequestWithBody(c.Server, clusterId, linkName, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -228,7 +228,7 @@ func (c *oasClient) UpdateKafkaLinkConfigBatchWithBody(ctx context.Context, clus
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaLinkConfigBatch(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaLinkConfigBatchParams, body UpdateKafkaLinkConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaLinkConfigBatch(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaLinkConfigBatchParams, body UpdateKafkaLinkConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaLinkConfigBatchRequest(c.Server, clusterId, linkName, params, body)
 	if err != nil {
 		return nil, err
@@ -239,7 +239,7 @@ func (c *oasClient) UpdateKafkaLinkConfigBatch(ctx context.Context, clusterId Cl
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListKafkaMirrorTopicsUnderLink(ctx context.Context, clusterId ClusterId, linkName LinkName, params *ListKafkaMirrorTopicsUnderLinkParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaMirrorTopicsUnderLink(ctx context.Context, clusterId ClusterId, linkName LinkName, params *ListKafkaMirrorTopicsUnderLinkParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaMirrorTopicsUnderLinkRequest(c.Server, clusterId, linkName, params)
 	if err != nil {
 		return nil, err
@@ -250,7 +250,7 @@ func (c *oasClient) ListKafkaMirrorTopicsUnderLink(ctx context.Context, clusterI
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateKafkaMirrorTopicWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createKafkaMirrorTopicWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKafkaMirrorTopicRequestWithBody(c.Server, clusterId, linkName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -261,7 +261,7 @@ func (c *oasClient) CreateKafkaMirrorTopicWithBody(ctx context.Context, clusterI
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateKafkaMirrorTopic(ctx context.Context, clusterId ClusterId, linkName LinkName, body CreateKafkaMirrorTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createKafkaMirrorTopic(ctx context.Context, clusterId ClusterId, linkName LinkName, body CreateKafkaMirrorTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKafkaMirrorTopicRequest(c.Server, clusterId, linkName, body)
 	if err != nil {
 		return nil, err
@@ -272,7 +272,7 @@ func (c *oasClient) CreateKafkaMirrorTopic(ctx context.Context, clusterId Cluste
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ReadKafkaMirrorTopic(ctx context.Context, clusterId ClusterId, linkName LinkName, mirrorTopicName MirrorTopicName, params *ReadKafkaMirrorTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) readKafkaMirrorTopic(ctx context.Context, clusterId ClusterId, linkName LinkName, mirrorTopicName MirrorTopicName, params *ReadKafkaMirrorTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReadKafkaMirrorTopicRequest(c.Server, clusterId, linkName, mirrorTopicName, params)
 	if err != nil {
 		return nil, err
@@ -283,7 +283,7 @@ func (c *oasClient) ReadKafkaMirrorTopic(ctx context.Context, clusterId ClusterI
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaMirrorTopicsFailoverWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsFailoverParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaMirrorTopicsFailoverWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsFailoverParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaMirrorTopicsFailoverRequestWithBody(c.Server, clusterId, linkName, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -294,7 +294,7 @@ func (c *oasClient) UpdateKafkaMirrorTopicsFailoverWithBody(ctx context.Context,
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaMirrorTopicsFailover(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsFailoverParams, body UpdateKafkaMirrorTopicsFailoverJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaMirrorTopicsFailover(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsFailoverParams, body UpdateKafkaMirrorTopicsFailoverJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaMirrorTopicsFailoverRequest(c.Server, clusterId, linkName, params, body)
 	if err != nil {
 		return nil, err
@@ -305,7 +305,7 @@ func (c *oasClient) UpdateKafkaMirrorTopicsFailover(ctx context.Context, cluster
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaMirrorTopicsPauseWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPauseParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaMirrorTopicsPauseWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPauseParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaMirrorTopicsPauseRequestWithBody(c.Server, clusterId, linkName, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -316,7 +316,7 @@ func (c *oasClient) UpdateKafkaMirrorTopicsPauseWithBody(ctx context.Context, cl
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaMirrorTopicsPause(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPauseParams, body UpdateKafkaMirrorTopicsPauseJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaMirrorTopicsPause(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPauseParams, body UpdateKafkaMirrorTopicsPauseJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaMirrorTopicsPauseRequest(c.Server, clusterId, linkName, params, body)
 	if err != nil {
 		return nil, err
@@ -327,7 +327,7 @@ func (c *oasClient) UpdateKafkaMirrorTopicsPause(ctx context.Context, clusterId 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaMirrorTopicsPromoteWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPromoteParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaMirrorTopicsPromoteWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPromoteParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaMirrorTopicsPromoteRequestWithBody(c.Server, clusterId, linkName, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -338,7 +338,7 @@ func (c *oasClient) UpdateKafkaMirrorTopicsPromoteWithBody(ctx context.Context, 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaMirrorTopicsPromote(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPromoteParams, body UpdateKafkaMirrorTopicsPromoteJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaMirrorTopicsPromote(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPromoteParams, body UpdateKafkaMirrorTopicsPromoteJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaMirrorTopicsPromoteRequest(c.Server, clusterId, linkName, params, body)
 	if err != nil {
 		return nil, err
@@ -349,7 +349,7 @@ func (c *oasClient) UpdateKafkaMirrorTopicsPromote(ctx context.Context, clusterI
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaMirrorTopicsResumeWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsResumeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaMirrorTopicsResumeWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsResumeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaMirrorTopicsResumeRequestWithBody(c.Server, clusterId, linkName, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -360,7 +360,7 @@ func (c *oasClient) UpdateKafkaMirrorTopicsResumeWithBody(ctx context.Context, c
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaMirrorTopicsResume(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsResumeParams, body UpdateKafkaMirrorTopicsResumeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaMirrorTopicsResume(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsResumeParams, body UpdateKafkaMirrorTopicsResumeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaMirrorTopicsResumeRequest(c.Server, clusterId, linkName, params, body)
 	if err != nil {
 		return nil, err
@@ -371,7 +371,7 @@ func (c *oasClient) UpdateKafkaMirrorTopicsResume(ctx context.Context, clusterId
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaMirrorTopicsReverseAndPauseMirrorWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndPauseMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaMirrorTopicsReverseAndPauseMirrorWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndPauseMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequestWithBody(c.Server, clusterId, linkName, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -382,7 +382,7 @@ func (c *oasClient) UpdateKafkaMirrorTopicsReverseAndPauseMirrorWithBody(ctx con
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaMirrorTopicsReverseAndPauseMirror(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndPauseMirrorParams, body UpdateKafkaMirrorTopicsReverseAndPauseMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaMirrorTopicsReverseAndPauseMirror(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndPauseMirrorParams, body UpdateKafkaMirrorTopicsReverseAndPauseMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaMirrorTopicsReverseAndPauseMirrorRequest(c.Server, clusterId, linkName, params, body)
 	if err != nil {
 		return nil, err
@@ -393,7 +393,7 @@ func (c *oasClient) UpdateKafkaMirrorTopicsReverseAndPauseMirror(ctx context.Con
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaMirrorTopicsReverseAndStartMirrorWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndStartMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaMirrorTopicsReverseAndStartMirrorWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndStartMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaMirrorTopicsReverseAndStartMirrorRequestWithBody(c.Server, clusterId, linkName, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -404,7 +404,7 @@ func (c *oasClient) UpdateKafkaMirrorTopicsReverseAndStartMirrorWithBody(ctx con
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaMirrorTopicsReverseAndStartMirror(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndStartMirrorParams, body UpdateKafkaMirrorTopicsReverseAndStartMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaMirrorTopicsReverseAndStartMirror(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndStartMirrorParams, body UpdateKafkaMirrorTopicsReverseAndStartMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaMirrorTopicsReverseAndStartMirrorRequest(c.Server, clusterId, linkName, params, body)
 	if err != nil {
 		return nil, err
@@ -415,7 +415,7 @@ func (c *oasClient) UpdateKafkaMirrorTopicsReverseAndStartMirror(ctx context.Con
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaMirrorTopicsTruncateAndRestoreMirrorWithBody(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaMirrorTopicsTruncateAndRestoreMirrorRequestWithBody(c.Server, clusterId, linkName, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -426,7 +426,7 @@ func (c *oasClient) UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorWithBody(ctx 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaMirrorTopicsTruncateAndRestoreMirror(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorParams, body UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaMirrorTopicsTruncateAndRestoreMirror(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorParams, body UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaMirrorTopicsTruncateAndRestoreMirrorRequest(c.Server, clusterId, linkName, params, body)
 	if err != nil {
 		return nil, err
@@ -1998,217 +1998,217 @@ type UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorResponse struct {
 }
 
 func (c *ClientWithResponses) ListKafkaLinksWithResponse(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*ListKafkaLinksResponse, error) {
-	rsp, err := c.ListKafkaLinks(ctx, clusterId, reqEditors...)
+	rsp, err := c.listKafkaLinks(ctx, clusterId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaLinksResponse(rsp)
 }
 func (c *ClientWithResponses) CreateKafkaLinkWithBodyWithResponse(ctx context.Context, clusterId ClusterId, params *CreateKafkaLinkParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateKafkaLinkResponse, error) {
-	rsp, err := c.CreateKafkaLinkWithBody(ctx, clusterId, params, contentType, body, reqEditors...)
+	rsp, err := c.createKafkaLinkWithBody(ctx, clusterId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateKafkaLinkResponse(rsp)
 }
 func (c *ClientWithResponses) CreateKafkaLinkWithResponse(ctx context.Context, clusterId ClusterId, params *CreateKafkaLinkParams, body CreateKafkaLinkJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKafkaLinkResponse, error) {
-	rsp, err := c.CreateKafkaLink(ctx, clusterId, params, body, reqEditors...)
+	rsp, err := c.createKafkaLink(ctx, clusterId, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateKafkaLinkResponse(rsp)
 }
 func (c *ClientWithResponses) ListKafkaMirrorTopicsWithResponse(ctx context.Context, clusterId ClusterId, params *ListKafkaMirrorTopicsParams, reqEditors ...RequestEditorFn) (*ListKafkaMirrorTopicsResponse, error) {
-	rsp, err := c.ListKafkaMirrorTopics(ctx, clusterId, params, reqEditors...)
+	rsp, err := c.listKafkaMirrorTopics(ctx, clusterId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaMirrorTopicsResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteKafkaLinkWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *DeleteKafkaLinkParams, reqEditors ...RequestEditorFn) (*DeleteKafkaLinkResponse, error) {
-	rsp, err := c.DeleteKafkaLink(ctx, clusterId, linkName, params, reqEditors...)
+	rsp, err := c.deleteKafkaLink(ctx, clusterId, linkName, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteKafkaLinkResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaLinkWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *GetKafkaLinkParams, reqEditors ...RequestEditorFn) (*GetKafkaLinkResponse, error) {
-	rsp, err := c.GetKafkaLink(ctx, clusterId, linkName, params, reqEditors...)
+	rsp, err := c.getKafkaLink(ctx, clusterId, linkName, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKafkaLinkResponse(rsp)
 }
 func (c *ClientWithResponses) ListKafkaLinkConfigsWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, reqEditors ...RequestEditorFn) (*ListKafkaLinkConfigsResponse, error) {
-	rsp, err := c.ListKafkaLinkConfigs(ctx, clusterId, linkName, reqEditors...)
+	rsp, err := c.listKafkaLinkConfigs(ctx, clusterId, linkName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaLinkConfigsResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteKafkaLinkConfigWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, reqEditors ...RequestEditorFn) (*DeleteKafkaLinkConfigResponse, error) {
-	rsp, err := c.DeleteKafkaLinkConfig(ctx, clusterId, linkName, configName, reqEditors...)
+	rsp, err := c.deleteKafkaLinkConfig(ctx, clusterId, linkName, configName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteKafkaLinkConfigResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaLinkConfigsWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, reqEditors ...RequestEditorFn) (*GetKafkaLinkConfigsResponse, error) {
-	rsp, err := c.GetKafkaLinkConfigs(ctx, clusterId, linkName, configName, reqEditors...)
+	rsp, err := c.getKafkaLinkConfigs(ctx, clusterId, linkName, configName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKafkaLinkConfigsResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaLinkConfigWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaLinkConfigResponse, error) {
-	rsp, err := c.UpdateKafkaLinkConfigWithBody(ctx, clusterId, linkName, configName, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaLinkConfigWithBody(ctx, clusterId, linkName, configName, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaLinkConfigResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaLinkConfigWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, configName LinkConfigName, body UpdateKafkaLinkConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaLinkConfigResponse, error) {
-	rsp, err := c.UpdateKafkaLinkConfig(ctx, clusterId, linkName, configName, body, reqEditors...)
+	rsp, err := c.updateKafkaLinkConfig(ctx, clusterId, linkName, configName, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaLinkConfigResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaLinkConfigBatchWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaLinkConfigBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaLinkConfigBatchResponse, error) {
-	rsp, err := c.UpdateKafkaLinkConfigBatchWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaLinkConfigBatchWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaLinkConfigBatchResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaLinkConfigBatchWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaLinkConfigBatchParams, body UpdateKafkaLinkConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaLinkConfigBatchResponse, error) {
-	rsp, err := c.UpdateKafkaLinkConfigBatch(ctx, clusterId, linkName, params, body, reqEditors...)
+	rsp, err := c.updateKafkaLinkConfigBatch(ctx, clusterId, linkName, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaLinkConfigBatchResponse(rsp)
 }
 func (c *ClientWithResponses) ListKafkaMirrorTopicsUnderLinkWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *ListKafkaMirrorTopicsUnderLinkParams, reqEditors ...RequestEditorFn) (*ListKafkaMirrorTopicsUnderLinkResponse, error) {
-	rsp, err := c.ListKafkaMirrorTopicsUnderLink(ctx, clusterId, linkName, params, reqEditors...)
+	rsp, err := c.listKafkaMirrorTopicsUnderLink(ctx, clusterId, linkName, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaMirrorTopicsUnderLinkResponse(rsp)
 }
 func (c *ClientWithResponses) CreateKafkaMirrorTopicWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateKafkaMirrorTopicResponse, error) {
-	rsp, err := c.CreateKafkaMirrorTopicWithBody(ctx, clusterId, linkName, contentType, body, reqEditors...)
+	rsp, err := c.createKafkaMirrorTopicWithBody(ctx, clusterId, linkName, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateKafkaMirrorTopicResponse(rsp)
 }
 func (c *ClientWithResponses) CreateKafkaMirrorTopicWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, body CreateKafkaMirrorTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKafkaMirrorTopicResponse, error) {
-	rsp, err := c.CreateKafkaMirrorTopic(ctx, clusterId, linkName, body, reqEditors...)
+	rsp, err := c.createKafkaMirrorTopic(ctx, clusterId, linkName, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateKafkaMirrorTopicResponse(rsp)
 }
 func (c *ClientWithResponses) ReadKafkaMirrorTopicWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, mirrorTopicName MirrorTopicName, params *ReadKafkaMirrorTopicParams, reqEditors ...RequestEditorFn) (*ReadKafkaMirrorTopicResponse, error) {
-	rsp, err := c.ReadKafkaMirrorTopic(ctx, clusterId, linkName, mirrorTopicName, params, reqEditors...)
+	rsp, err := c.readKafkaMirrorTopic(ctx, clusterId, linkName, mirrorTopicName, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseReadKafkaMirrorTopicResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaMirrorTopicsFailoverWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsFailoverParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsFailoverResponse, error) {
-	rsp, err := c.UpdateKafkaMirrorTopicsFailoverWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaMirrorTopicsFailoverWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaMirrorTopicsFailoverResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaMirrorTopicsFailoverWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsFailoverParams, body UpdateKafkaMirrorTopicsFailoverJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsFailoverResponse, error) {
-	rsp, err := c.UpdateKafkaMirrorTopicsFailover(ctx, clusterId, linkName, params, body, reqEditors...)
+	rsp, err := c.updateKafkaMirrorTopicsFailover(ctx, clusterId, linkName, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaMirrorTopicsFailoverResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaMirrorTopicsPauseWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPauseParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsPauseResponse, error) {
-	rsp, err := c.UpdateKafkaMirrorTopicsPauseWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaMirrorTopicsPauseWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaMirrorTopicsPauseResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaMirrorTopicsPauseWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPauseParams, body UpdateKafkaMirrorTopicsPauseJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsPauseResponse, error) {
-	rsp, err := c.UpdateKafkaMirrorTopicsPause(ctx, clusterId, linkName, params, body, reqEditors...)
+	rsp, err := c.updateKafkaMirrorTopicsPause(ctx, clusterId, linkName, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaMirrorTopicsPauseResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaMirrorTopicsPromoteWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPromoteParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsPromoteResponse, error) {
-	rsp, err := c.UpdateKafkaMirrorTopicsPromoteWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaMirrorTopicsPromoteWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaMirrorTopicsPromoteResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaMirrorTopicsPromoteWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsPromoteParams, body UpdateKafkaMirrorTopicsPromoteJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsPromoteResponse, error) {
-	rsp, err := c.UpdateKafkaMirrorTopicsPromote(ctx, clusterId, linkName, params, body, reqEditors...)
+	rsp, err := c.updateKafkaMirrorTopicsPromote(ctx, clusterId, linkName, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaMirrorTopicsPromoteResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaMirrorTopicsResumeWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsResumeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsResumeResponse, error) {
-	rsp, err := c.UpdateKafkaMirrorTopicsResumeWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaMirrorTopicsResumeWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaMirrorTopicsResumeResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaMirrorTopicsResumeWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsResumeParams, body UpdateKafkaMirrorTopicsResumeJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsResumeResponse, error) {
-	rsp, err := c.UpdateKafkaMirrorTopicsResume(ctx, clusterId, linkName, params, body, reqEditors...)
+	rsp, err := c.updateKafkaMirrorTopicsResume(ctx, clusterId, linkName, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaMirrorTopicsResumeResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaMirrorTopicsReverseAndPauseMirrorWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndPauseMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsReverseAndPauseMirrorResponse, error) {
-	rsp, err := c.UpdateKafkaMirrorTopicsReverseAndPauseMirrorWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaMirrorTopicsReverseAndPauseMirrorWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaMirrorTopicsReverseAndPauseMirrorResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaMirrorTopicsReverseAndPauseMirrorWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndPauseMirrorParams, body UpdateKafkaMirrorTopicsReverseAndPauseMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsReverseAndPauseMirrorResponse, error) {
-	rsp, err := c.UpdateKafkaMirrorTopicsReverseAndPauseMirror(ctx, clusterId, linkName, params, body, reqEditors...)
+	rsp, err := c.updateKafkaMirrorTopicsReverseAndPauseMirror(ctx, clusterId, linkName, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaMirrorTopicsReverseAndPauseMirrorResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaMirrorTopicsReverseAndStartMirrorWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndStartMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsReverseAndStartMirrorResponse, error) {
-	rsp, err := c.UpdateKafkaMirrorTopicsReverseAndStartMirrorWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaMirrorTopicsReverseAndStartMirrorWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaMirrorTopicsReverseAndStartMirrorResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaMirrorTopicsReverseAndStartMirrorWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsReverseAndStartMirrorParams, body UpdateKafkaMirrorTopicsReverseAndStartMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsReverseAndStartMirrorResponse, error) {
-	rsp, err := c.UpdateKafkaMirrorTopicsReverseAndStartMirror(ctx, clusterId, linkName, params, body, reqEditors...)
+	rsp, err := c.updateKafkaMirrorTopicsReverseAndStartMirror(ctx, clusterId, linkName, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaMirrorTopicsReverseAndStartMirrorResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorWithBodyWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorResponse, error) {
-	rsp, err := c.UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaMirrorTopicsTruncateAndRestoreMirrorWithBody(ctx, clusterId, linkName, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaMirrorTopicsTruncateAndRestoreMirrorResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorWithResponse(ctx context.Context, clusterId ClusterId, linkName LinkName, params *UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorParams, body UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaMirrorTopicsTruncateAndRestoreMirrorResponse, error) {
-	rsp, err := c.UpdateKafkaMirrorTopicsTruncateAndRestoreMirror(ctx, clusterId, linkName, params, body, reqEditors...)
+	rsp, err := c.updateKafkaMirrorTopicsTruncateAndRestoreMirror(ctx, clusterId, linkName, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

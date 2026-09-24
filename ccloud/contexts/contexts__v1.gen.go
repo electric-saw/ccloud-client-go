@@ -23,7 +23,7 @@ type ListContextsParams struct {
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 }
 
-func (c *oasClient) ListContexts(ctx context.Context, params *ListContextsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listContexts(ctx context.Context, params *ListContextsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListContextsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -132,7 +132,7 @@ type ListContextsResponse struct {
 }
 
 func (c *ClientWithResponses) ListContextsWithResponse(ctx context.Context, params *ListContextsParams, reqEditors ...RequestEditorFn) (*ListContextsResponse, error) {
-	rsp, err := c.ListContexts(ctx, params, reqEditors...)
+	rsp, err := c.listContexts(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -26,7 +26,7 @@ type ListServiceQuotaV1ScopesParams struct {
 type GetServiceQuotaV1Scope200JSONResponseBodyApiVersion string
 type GetServiceQuotaV1Scope200JSONResponseBodyKind string
 
-func (c *oasClient) ListServiceQuotaV1Scopes(ctx context.Context, params *ListServiceQuotaV1ScopesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listServiceQuotaV1Scopes(ctx context.Context, params *ListServiceQuotaV1ScopesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListServiceQuotaV1ScopesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -37,7 +37,7 @@ func (c *oasClient) ListServiceQuotaV1Scopes(ctx context.Context, params *ListSe
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetServiceQuotaV1Scope(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getServiceQuotaV1Scope(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetServiceQuotaV1ScopeRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -282,14 +282,14 @@ type GetServiceQuotaV1ScopeResponse struct {
 }
 
 func (c *ClientWithResponses) ListServiceQuotaV1ScopesWithResponse(ctx context.Context, params *ListServiceQuotaV1ScopesParams, reqEditors ...RequestEditorFn) (*ListServiceQuotaV1ScopesResponse, error) {
-	rsp, err := c.ListServiceQuotaV1Scopes(ctx, params, reqEditors...)
+	rsp, err := c.listServiceQuotaV1Scopes(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListServiceQuotaV1ScopesResponse(rsp)
 }
 func (c *ClientWithResponses) GetServiceQuotaV1ScopeWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetServiceQuotaV1ScopeResponse, error) {
-	rsp, err := c.GetServiceQuotaV1Scope(ctx, id, reqEditors...)
+	rsp, err := c.getServiceQuotaV1Scope(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -850,7 +850,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListKsqldbcmV2Clusters List of Clusters
 	//
@@ -859,7 +859,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all clusters.
 	//
 	// Corresponds with GET /ksqldbcm/v2/clusters (the `ListKsqldbcmV2Clusters` operationId).
-	ListKsqldbcmV2Clusters(ctx context.Context, params *ListKsqldbcmV2ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listKsqldbcmV2Clusters(ctx context.Context, params *ListKsqldbcmV2ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKsqldbcmV2ClusterWithBody Create a Cluster
 	//
@@ -870,7 +870,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /ksqldbcm/v2/clusters (the `CreateKsqldbcmV2Cluster` operationId).
-	CreateKsqldbcmV2ClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKsqldbcmV2ClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKsqldbcmV2Cluster Create a Cluster
 	//
@@ -881,7 +881,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /ksqldbcm/v2/clusters (the `CreateKsqldbcmV2Cluster` operationId).
-	CreateKsqldbcmV2Cluster(ctx context.Context, body CreateKsqldbcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKsqldbcmV2Cluster(ctx context.Context, body CreateKsqldbcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteKsqldbcmV2Cluster Delete a Cluster
 	//
@@ -890,7 +890,7 @@ type ClientInterface interface {
 	// Make a request to delete a cluster.
 	//
 	// Corresponds with DELETE /ksqldbcm/v2/clusters/{id} (the `DeleteKsqldbcmV2Cluster` operationId).
-	DeleteKsqldbcmV2Cluster(ctx context.Context, id string, params *DeleteKsqldbcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteKsqldbcmV2Cluster(ctx context.Context, id string, params *DeleteKsqldbcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKsqldbcmV2Cluster Read a Cluster
 	//
@@ -899,7 +899,7 @@ type ClientInterface interface {
 	// Make a request to read a cluster.
 	//
 	// Corresponds with GET /ksqldbcm/v2/clusters/{id} (the `GetKsqldbcmV2Cluster` operationId).
-	GetKsqldbcmV2Cluster(ctx context.Context, id string, params *GetKsqldbcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKsqldbcmV2Cluster(ctx context.Context, id string, params *GetKsqldbcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -917,7 +917,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -937,65 +937,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListKsqldbcmV2ClustersWithResponse List of Clusters
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all clusters.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /ksqldbcm/v2/clusters (the `ListKsqldbcmV2Clusters` operationId).
-	ListKsqldbcmV2ClustersWithResponse(ctx context.Context, params *ListKsqldbcmV2ClustersParams, reqEditors ...RequestEditorFn) (*ListKsqldbcmV2ClustersResponse, error)
-
-	// CreateKsqldbcmV2ClusterWithBodyWithResponse Create a Cluster
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a cluster.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /ksqldbcm/v2/clusters (the `CreateKsqldbcmV2Cluster` operationId).
-	CreateKsqldbcmV2ClusterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateKsqldbcmV2ClusterResponse, error)
-
-	// CreateKsqldbcmV2ClusterWithResponse Create a Cluster
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a cluster.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /ksqldbcm/v2/clusters (the `CreateKsqldbcmV2Cluster` operationId).
-	CreateKsqldbcmV2ClusterWithResponse(ctx context.Context, body CreateKsqldbcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKsqldbcmV2ClusterResponse, error)
-
-	// DeleteKsqldbcmV2ClusterWithResponse Delete a Cluster
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /ksqldbcm/v2/clusters/{id} (the `DeleteKsqldbcmV2Cluster` operationId).
-	DeleteKsqldbcmV2ClusterWithResponse(ctx context.Context, id string, params *DeleteKsqldbcmV2ClusterParams, reqEditors ...RequestEditorFn) (*DeleteKsqldbcmV2ClusterResponse, error)
-
-	// GetKsqldbcmV2ClusterWithResponse Read a Cluster
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /ksqldbcm/v2/clusters/{id} (the `GetKsqldbcmV2Cluster` operationId).
-	GetKsqldbcmV2ClusterWithResponse(ctx context.Context, id string, params *GetKsqldbcmV2ClusterParams, reqEditors ...RequestEditorFn) (*GetKsqldbcmV2ClusterResponse, error)
-}
-
 func (r ListKsqldbcmV2ClustersResponse) GetJSON200() *struct {
 	// ApiVersion APIVersion defines the schema version of this representation of a resource.
 	ApiVersion ListKsqldbcmV2Clusters200JSONResponseBodyApiVersion `json:"api_version"`

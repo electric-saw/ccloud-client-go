@@ -88,7 +88,7 @@ type UpdateSqlv1AgentJSONBodyKind string
 type CreateSqlv1AgentJSONRequestBody CreateSqlv1AgentJSONBody
 type UpdateSqlv1AgentJSONRequestBody UpdateSqlv1AgentJSONBody
 
-func (c *oasClient) ListSqlv1Agents(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1AgentsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listSqlv1Agents(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1AgentsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSqlv1AgentsRequest(c.Server, organizationId, environmentId, params)
 	if err != nil {
 		return nil, err
@@ -99,7 +99,7 @@ func (c *oasClient) ListSqlv1Agents(ctx context.Context, organizationId openapi_
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateSqlv1AgentWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createSqlv1AgentWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateSqlv1AgentRequestWithBody(c.Server, organizationId, environmentId, kafkaClusterId, contentType, body)
 	if err != nil {
 		return nil, err
@@ -110,7 +110,7 @@ func (c *oasClient) CreateSqlv1AgentWithBody(ctx context.Context, organizationId
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, body CreateSqlv1AgentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, body CreateSqlv1AgentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateSqlv1AgentRequest(c.Server, organizationId, environmentId, kafkaClusterId, body)
 	if err != nil {
 		return nil, err
@@ -121,7 +121,7 @@ func (c *oasClient) CreateSqlv1Agent(ctx context.Context, organizationId openapi
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteSqlv1AgentRequest(c.Server, organizationId, environmentId, kafkaClusterId, agentName)
 	if err != nil {
 		return nil, err
@@ -132,7 +132,7 @@ func (c *oasClient) DeleteSqlv1Agent(ctx context.Context, organizationId openapi
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSqlv1AgentRequest(c.Server, organizationId, environmentId, kafkaClusterId, agentName)
 	if err != nil {
 		return nil, err
@@ -143,7 +143,7 @@ func (c *oasClient) GetSqlv1Agent(ctx context.Context, organizationId openapi_ty
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateSqlv1AgentWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateSqlv1AgentWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSqlv1AgentRequestWithBody(c.Server, organizationId, environmentId, kafkaClusterId, agentName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -154,7 +154,7 @@ func (c *oasClient) UpdateSqlv1AgentWithBody(ctx context.Context, organizationId
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, body UpdateSqlv1AgentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateSqlv1Agent(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, body UpdateSqlv1AgentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSqlv1AgentRequest(c.Server, organizationId, environmentId, kafkaClusterId, agentName, body)
 	if err != nil {
 		return nil, err
@@ -800,49 +800,49 @@ type UpdateSqlv1AgentResponse struct {
 }
 
 func (c *ClientWithResponses) ListSqlv1AgentsWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1AgentsParams, reqEditors ...RequestEditorFn) (*ListSqlv1AgentsResponse, error) {
-	rsp, err := c.ListSqlv1Agents(ctx, organizationId, environmentId, params, reqEditors...)
+	rsp, err := c.listSqlv1Agents(ctx, organizationId, environmentId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListSqlv1AgentsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateSqlv1AgentWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSqlv1AgentResponse, error) {
-	rsp, err := c.CreateSqlv1AgentWithBody(ctx, organizationId, environmentId, kafkaClusterId, contentType, body, reqEditors...)
+	rsp, err := c.createSqlv1AgentWithBody(ctx, organizationId, environmentId, kafkaClusterId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateSqlv1AgentResponse(rsp)
 }
 func (c *ClientWithResponses) CreateSqlv1AgentWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, body CreateSqlv1AgentJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateSqlv1AgentResponse, error) {
-	rsp, err := c.CreateSqlv1Agent(ctx, organizationId, environmentId, kafkaClusterId, body, reqEditors...)
+	rsp, err := c.createSqlv1Agent(ctx, organizationId, environmentId, kafkaClusterId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateSqlv1AgentResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteSqlv1AgentWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, reqEditors ...RequestEditorFn) (*DeleteSqlv1AgentResponse, error) {
-	rsp, err := c.DeleteSqlv1Agent(ctx, organizationId, environmentId, kafkaClusterId, agentName, reqEditors...)
+	rsp, err := c.deleteSqlv1Agent(ctx, organizationId, environmentId, kafkaClusterId, agentName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteSqlv1AgentResponse(rsp)
 }
 func (c *ClientWithResponses) GetSqlv1AgentWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, reqEditors ...RequestEditorFn) (*GetSqlv1AgentResponse, error) {
-	rsp, err := c.GetSqlv1Agent(ctx, organizationId, environmentId, kafkaClusterId, agentName, reqEditors...)
+	rsp, err := c.getSqlv1Agent(ctx, organizationId, environmentId, kafkaClusterId, agentName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetSqlv1AgentResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateSqlv1AgentWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSqlv1AgentResponse, error) {
-	rsp, err := c.UpdateSqlv1AgentWithBody(ctx, organizationId, environmentId, kafkaClusterId, agentName, contentType, body, reqEditors...)
+	rsp, err := c.updateSqlv1AgentWithBody(ctx, organizationId, environmentId, kafkaClusterId, agentName, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateSqlv1AgentResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateSqlv1AgentWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, agentName string, body UpdateSqlv1AgentJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSqlv1AgentResponse, error) {
-	rsp, err := c.UpdateSqlv1Agent(ctx, organizationId, environmentId, kafkaClusterId, agentName, body, reqEditors...)
+	rsp, err := c.updateSqlv1Agent(ctx, organizationId, environmentId, kafkaClusterId, agentName, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

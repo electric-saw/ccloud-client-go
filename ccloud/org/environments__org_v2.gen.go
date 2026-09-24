@@ -63,7 +63,7 @@ type UpdateOrgV2Environment200JSONResponseBodyKind string
 type CreateOrgV2EnvironmentJSONRequestBody CreateOrgV2EnvironmentJSONBody
 type UpdateOrgV2EnvironmentJSONRequestBody = OrgV2Environment
 
-func (c *oasClient) ListOrgV2Environments(ctx context.Context, params *ListOrgV2EnvironmentsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listOrgV2Environments(ctx context.Context, params *ListOrgV2EnvironmentsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListOrgV2EnvironmentsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -74,7 +74,7 @@ func (c *oasClient) ListOrgV2Environments(ctx context.Context, params *ListOrgV2
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateOrgV2EnvironmentWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createOrgV2EnvironmentWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateOrgV2EnvironmentRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -85,7 +85,7 @@ func (c *oasClient) CreateOrgV2EnvironmentWithBody(ctx context.Context, contentT
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateOrgV2Environment(ctx context.Context, body CreateOrgV2EnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createOrgV2Environment(ctx context.Context, body CreateOrgV2EnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateOrgV2EnvironmentRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -96,7 +96,7 @@ func (c *oasClient) CreateOrgV2Environment(ctx context.Context, body CreateOrgV2
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteOrgV2Environment(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteOrgV2Environment(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteOrgV2EnvironmentRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -107,7 +107,7 @@ func (c *oasClient) DeleteOrgV2Environment(ctx context.Context, id string, reqEd
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetOrgV2Environment(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getOrgV2Environment(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetOrgV2EnvironmentRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -118,7 +118,7 @@ func (c *oasClient) GetOrgV2Environment(ctx context.Context, id string, reqEdito
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateOrgV2EnvironmentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateOrgV2EnvironmentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateOrgV2EnvironmentRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -129,7 +129,7 @@ func (c *oasClient) UpdateOrgV2EnvironmentWithBody(ctx context.Context, id strin
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateOrgV2Environment(ctx context.Context, id string, body UpdateOrgV2EnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateOrgV2Environment(ctx context.Context, id string, body UpdateOrgV2EnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateOrgV2EnvironmentRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -763,49 +763,49 @@ type UpdateOrgV2EnvironmentResponse struct {
 }
 
 func (c *ClientWithResponses) ListOrgV2EnvironmentsWithResponse(ctx context.Context, params *ListOrgV2EnvironmentsParams, reqEditors ...RequestEditorFn) (*ListOrgV2EnvironmentsResponse, error) {
-	rsp, err := c.ListOrgV2Environments(ctx, params, reqEditors...)
+	rsp, err := c.listOrgV2Environments(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListOrgV2EnvironmentsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateOrgV2EnvironmentWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateOrgV2EnvironmentResponse, error) {
-	rsp, err := c.CreateOrgV2EnvironmentWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createOrgV2EnvironmentWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateOrgV2EnvironmentResponse(rsp)
 }
 func (c *ClientWithResponses) CreateOrgV2EnvironmentWithResponse(ctx context.Context, body CreateOrgV2EnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateOrgV2EnvironmentResponse, error) {
-	rsp, err := c.CreateOrgV2Environment(ctx, body, reqEditors...)
+	rsp, err := c.createOrgV2Environment(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateOrgV2EnvironmentResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteOrgV2EnvironmentWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteOrgV2EnvironmentResponse, error) {
-	rsp, err := c.DeleteOrgV2Environment(ctx, id, reqEditors...)
+	rsp, err := c.deleteOrgV2Environment(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteOrgV2EnvironmentResponse(rsp)
 }
 func (c *ClientWithResponses) GetOrgV2EnvironmentWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetOrgV2EnvironmentResponse, error) {
-	rsp, err := c.GetOrgV2Environment(ctx, id, reqEditors...)
+	rsp, err := c.getOrgV2Environment(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetOrgV2EnvironmentResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateOrgV2EnvironmentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateOrgV2EnvironmentResponse, error) {
-	rsp, err := c.UpdateOrgV2EnvironmentWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateOrgV2EnvironmentWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateOrgV2EnvironmentResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateOrgV2EnvironmentWithResponse(ctx context.Context, id string, body UpdateOrgV2EnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateOrgV2EnvironmentResponse, error) {
-	rsp, err := c.UpdateOrgV2Environment(ctx, id, body, reqEditors...)
+	rsp, err := c.updateOrgV2Environment(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

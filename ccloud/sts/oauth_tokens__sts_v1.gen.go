@@ -15,7 +15,7 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
-func (c *oasClient) ExchangeStsV1OauthTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) exchangeStsV1OauthTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewExchangeStsV1OauthTokenRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -85,14 +85,14 @@ type ExchangeStsV1OauthTokenResponse struct {
 }
 
 func (c *ClientWithResponses) ExchangeStsV1OauthTokenWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ExchangeStsV1OauthTokenResponse, error) {
-	rsp, err := c.ExchangeStsV1OauthTokenWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.exchangeStsV1OauthTokenWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseExchangeStsV1OauthTokenResponse(rsp)
 }
 func (c *ClientWithResponses) ExchangeStsV1OauthTokenWithFormdataBodyWithResponse(ctx context.Context, body ExchangeStsV1OauthTokenFormdataRequestBody, reqEditors ...RequestEditorFn) (*ExchangeStsV1OauthTokenResponse, error) {
-	rsp, err := c.ExchangeStsV1OauthTokenWithFormdataBody(ctx, body, reqEditors...)
+	rsp, err := c.exchangeStsV1OauthTokenWithFormdataBody(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

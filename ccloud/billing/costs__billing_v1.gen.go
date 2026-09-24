@@ -29,7 +29,7 @@ type ListBillingV1CostsParams struct {
 	PageToken *string `form:"page_token,omitempty" json:"page_token,omitempty"`
 }
 
-func (c *oasClient) ListBillingV1Costs(ctx context.Context, params *ListBillingV1CostsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listBillingV1Costs(ctx context.Context, params *ListBillingV1CostsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListBillingV1CostsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -175,7 +175,7 @@ type ListBillingV1CostsResponse struct {
 }
 
 func (c *ClientWithResponses) ListBillingV1CostsWithResponse(ctx context.Context, params *ListBillingV1CostsParams, reqEditors ...RequestEditorFn) (*ListBillingV1CostsResponse, error) {
-	rsp, err := c.ListBillingV1Costs(ctx, params, reqEditors...)
+	rsp, err := c.listBillingV1Costs(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

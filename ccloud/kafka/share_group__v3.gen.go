@@ -15,7 +15,7 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
-func (c *oasClient) ListKafkaShareGroups(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaShareGroups(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaShareGroupsRequest(c.Server, clusterId)
 	if err != nil {
 		return nil, err
@@ -26,7 +26,7 @@ func (c *oasClient) ListKafkaShareGroups(ctx context.Context, clusterId ClusterI
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteKafkaShareGroup(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteKafkaShareGroup(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteKafkaShareGroupRequest(c.Server, clusterId, groupId)
 	if err != nil {
 		return nil, err
@@ -37,7 +37,7 @@ func (c *oasClient) DeleteKafkaShareGroup(ctx context.Context, clusterId Cluster
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaShareGroup(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaShareGroup(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaShareGroupRequest(c.Server, clusterId, groupId)
 	if err != nil {
 		return nil, err
@@ -48,7 +48,7 @@ func (c *oasClient) GetKafkaShareGroup(ctx context.Context, clusterId ClusterId,
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListKafkaShareGroupConsumers(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaShareGroupConsumers(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaShareGroupConsumersRequest(c.Server, clusterId, groupId)
 	if err != nil {
 		return nil, err
@@ -59,7 +59,7 @@ func (c *oasClient) ListKafkaShareGroupConsumers(ctx context.Context, clusterId 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaShareGroupConsumer(ctx context.Context, clusterId ClusterId, groupId GroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaShareGroupConsumer(ctx context.Context, clusterId ClusterId, groupId GroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaShareGroupConsumerRequest(c.Server, clusterId, groupId, consumerId)
 	if err != nil {
 		return nil, err
@@ -70,7 +70,7 @@ func (c *oasClient) GetKafkaShareGroupConsumer(ctx context.Context, clusterId Cl
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListKafkaShareGroupConsumerAssignments(ctx context.Context, clusterId ClusterId, groupId GroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaShareGroupConsumerAssignments(ctx context.Context, clusterId ClusterId, groupId GroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaShareGroupConsumerAssignmentsRequest(c.Server, clusterId, groupId, consumerId)
 	if err != nil {
 		return nil, err
@@ -409,42 +409,42 @@ type ListKafkaShareGroupConsumerAssignmentsResponse struct {
 }
 
 func (c *ClientWithResponses) ListKafkaShareGroupsWithResponse(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*ListKafkaShareGroupsResponse, error) {
-	rsp, err := c.ListKafkaShareGroups(ctx, clusterId, reqEditors...)
+	rsp, err := c.listKafkaShareGroups(ctx, clusterId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaShareGroupsResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteKafkaShareGroupWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*DeleteKafkaShareGroupResponse, error) {
-	rsp, err := c.DeleteKafkaShareGroup(ctx, clusterId, groupId, reqEditors...)
+	rsp, err := c.deleteKafkaShareGroup(ctx, clusterId, groupId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteKafkaShareGroupResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaShareGroupWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*GetKafkaShareGroupResponse, error) {
-	rsp, err := c.GetKafkaShareGroup(ctx, clusterId, groupId, reqEditors...)
+	rsp, err := c.getKafkaShareGroup(ctx, clusterId, groupId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKafkaShareGroupResponse(rsp)
 }
 func (c *ClientWithResponses) ListKafkaShareGroupConsumersWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*ListKafkaShareGroupConsumersResponse, error) {
-	rsp, err := c.ListKafkaShareGroupConsumers(ctx, clusterId, groupId, reqEditors...)
+	rsp, err := c.listKafkaShareGroupConsumers(ctx, clusterId, groupId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaShareGroupConsumersResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaShareGroupConsumerWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*GetKafkaShareGroupConsumerResponse, error) {
-	rsp, err := c.GetKafkaShareGroupConsumer(ctx, clusterId, groupId, consumerId, reqEditors...)
+	rsp, err := c.getKafkaShareGroupConsumer(ctx, clusterId, groupId, consumerId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKafkaShareGroupConsumerResponse(rsp)
 }
 func (c *ClientWithResponses) ListKafkaShareGroupConsumerAssignmentsWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, consumerId ConsumerId, reqEditors ...RequestEditorFn) (*ListKafkaShareGroupConsumerAssignmentsResponse, error) {
-	rsp, err := c.ListKafkaShareGroupConsumerAssignments(ctx, clusterId, groupId, consumerId, reqEditors...)
+	rsp, err := c.listKafkaShareGroupConsumerAssignments(ctx, clusterId, groupId, consumerId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

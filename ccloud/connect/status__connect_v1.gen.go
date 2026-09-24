@@ -18,7 +18,7 @@ import (
 type ReadConnectv1ConnectorStatus200JSONResponseBodyConnectorState string
 type ReadConnectv1ConnectorStatus200JSONResponseBodyType string
 
-func (c *oasClient) ReadConnectv1ConnectorStatus(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) readConnectv1ConnectorStatus(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewReadConnectv1ConnectorStatusRequest(c.Server, environmentId, kafkaClusterId, connectorName)
 	if err != nil {
 		return nil, err
@@ -29,7 +29,7 @@ func (c *oasClient) ReadConnectv1ConnectorStatus(ctx context.Context, environmen
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListConnectv1ConnectorTasks(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listConnectv1ConnectorTasks(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListConnectv1ConnectorTasksRequest(c.Server, environmentId, kafkaClusterId, connectorName)
 	if err != nil {
 		return nil, err
@@ -208,14 +208,14 @@ type ListConnectv1ConnectorTasksResponse struct {
 }
 
 func (c *ClientWithResponses) ReadConnectv1ConnectorStatusWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*ReadConnectv1ConnectorStatusResponse, error) {
-	rsp, err := c.ReadConnectv1ConnectorStatus(ctx, environmentId, kafkaClusterId, connectorName, reqEditors...)
+	rsp, err := c.readConnectv1ConnectorStatus(ctx, environmentId, kafkaClusterId, connectorName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseReadConnectv1ConnectorStatusResponse(rsp)
 }
 func (c *ClientWithResponses) ListConnectv1ConnectorTasksWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*ListConnectv1ConnectorTasksResponse, error) {
-	rsp, err := c.ListConnectv1ConnectorTasks(ctx, environmentId, kafkaClusterId, connectorName, reqEditors...)
+	rsp, err := c.listConnectv1ConnectorTasks(ctx, environmentId, kafkaClusterId, connectorName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

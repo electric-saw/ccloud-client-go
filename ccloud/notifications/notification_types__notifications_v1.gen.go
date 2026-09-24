@@ -29,7 +29,7 @@ type ListNotificationsV1NotificationTypesParams struct {
 type GetNotificationsV1NotificationType200JSONResponseBodyApiVersion string
 type GetNotificationsV1NotificationType200JSONResponseBodyKind string
 
-func (c *oasClient) ListNotificationsV1NotificationTypes(ctx context.Context, params *ListNotificationsV1NotificationTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listNotificationsV1NotificationTypes(ctx context.Context, params *ListNotificationsV1NotificationTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNotificationsV1NotificationTypesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -40,7 +40,7 @@ func (c *oasClient) ListNotificationsV1NotificationTypes(ctx context.Context, pa
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetNotificationsV1NotificationType(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getNotificationsV1NotificationType(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNotificationsV1NotificationTypeRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -328,14 +328,14 @@ type GetNotificationsV1NotificationTypeResponse struct {
 }
 
 func (c *ClientWithResponses) ListNotificationsV1NotificationTypesWithResponse(ctx context.Context, params *ListNotificationsV1NotificationTypesParams, reqEditors ...RequestEditorFn) (*ListNotificationsV1NotificationTypesResponse, error) {
-	rsp, err := c.ListNotificationsV1NotificationTypes(ctx, params, reqEditors...)
+	rsp, err := c.listNotificationsV1NotificationTypes(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListNotificationsV1NotificationTypesResponse(rsp)
 }
 func (c *ClientWithResponses) GetNotificationsV1NotificationTypeWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetNotificationsV1NotificationTypeResponse, error) {
-	rsp, err := c.GetNotificationsV1NotificationType(ctx, id, reqEditors...)
+	rsp, err := c.getNotificationsV1NotificationType(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

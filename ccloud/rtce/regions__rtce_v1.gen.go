@@ -29,7 +29,7 @@ type ListRtceV1RegionsParams struct {
 	PageToken *string `form:"page_token,omitempty" json:"page_token,omitempty"`
 }
 
-func (c *oasClient) ListRtceV1Regions(ctx context.Context, params *ListRtceV1RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listRtceV1Regions(ctx context.Context, params *ListRtceV1RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListRtceV1RegionsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -183,7 +183,7 @@ type ListRtceV1RegionsResponse struct {
 }
 
 func (c *ClientWithResponses) ListRtceV1RegionsWithResponse(ctx context.Context, params *ListRtceV1RegionsParams, reqEditors ...RequestEditorFn) (*ListRtceV1RegionsResponse, error) {
-	rsp, err := c.ListRtceV1Regions(ctx, params, reqEditors...)
+	rsp, err := c.listRtceV1Regions(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

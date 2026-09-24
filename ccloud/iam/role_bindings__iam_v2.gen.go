@@ -74,7 +74,7 @@ type GetIamV2RoleBinding200JSONResponseBodyApiVersion string
 type GetIamV2RoleBinding200JSONResponseBodyKind string
 type CreateIamV2RoleBindingJSONRequestBody CreateIamV2RoleBindingJSONBody
 
-func (c *oasClient) ListIamV2RoleBindings(ctx context.Context, params *ListIamV2RoleBindingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listIamV2RoleBindings(ctx context.Context, params *ListIamV2RoleBindingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIamV2RoleBindingsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -85,7 +85,7 @@ func (c *oasClient) ListIamV2RoleBindings(ctx context.Context, params *ListIamV2
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateIamV2RoleBindingWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createIamV2RoleBindingWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2RoleBindingRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -96,7 +96,7 @@ func (c *oasClient) CreateIamV2RoleBindingWithBody(ctx context.Context, contentT
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateIamV2RoleBinding(ctx context.Context, body CreateIamV2RoleBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createIamV2RoleBinding(ctx context.Context, body CreateIamV2RoleBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2RoleBindingRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -107,7 +107,7 @@ func (c *oasClient) CreateIamV2RoleBinding(ctx context.Context, body CreateIamV2
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteIamV2RoleBinding(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteIamV2RoleBinding(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIamV2RoleBindingRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -118,7 +118,7 @@ func (c *oasClient) DeleteIamV2RoleBinding(ctx context.Context, id string, reqEd
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetIamV2RoleBinding(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getIamV2RoleBinding(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2RoleBindingRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -656,35 +656,35 @@ type GetIamV2RoleBindingResponse struct {
 }
 
 func (c *ClientWithResponses) ListIamV2RoleBindingsWithResponse(ctx context.Context, params *ListIamV2RoleBindingsParams, reqEditors ...RequestEditorFn) (*ListIamV2RoleBindingsResponse, error) {
-	rsp, err := c.ListIamV2RoleBindings(ctx, params, reqEditors...)
+	rsp, err := c.listIamV2RoleBindings(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListIamV2RoleBindingsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateIamV2RoleBindingWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2RoleBindingResponse, error) {
-	rsp, err := c.CreateIamV2RoleBindingWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createIamV2RoleBindingWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIamV2RoleBindingResponse(rsp)
 }
 func (c *ClientWithResponses) CreateIamV2RoleBindingWithResponse(ctx context.Context, body CreateIamV2RoleBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2RoleBindingResponse, error) {
-	rsp, err := c.CreateIamV2RoleBinding(ctx, body, reqEditors...)
+	rsp, err := c.createIamV2RoleBinding(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIamV2RoleBindingResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteIamV2RoleBindingWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2RoleBindingResponse, error) {
-	rsp, err := c.DeleteIamV2RoleBinding(ctx, id, reqEditors...)
+	rsp, err := c.deleteIamV2RoleBinding(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteIamV2RoleBindingResponse(rsp)
 }
 func (c *ClientWithResponses) GetIamV2RoleBindingWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2RoleBindingResponse, error) {
-	rsp, err := c.GetIamV2RoleBinding(ctx, id, reqEditors...)
+	rsp, err := c.getIamV2RoleBinding(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

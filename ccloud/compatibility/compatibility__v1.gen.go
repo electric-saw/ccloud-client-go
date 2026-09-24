@@ -34,7 +34,7 @@ type TestCompatibilityBySubjectNameJSONRequestBody = RegisterSchemaRequest
 type TestCompatibilityBySubjectNameApplicationVndSchemaregistryPlusJSONRequestBody = RegisterSchemaRequest
 type TestCompatibilityBySubjectNameApplicationVndSchemaregistryV1PlusJSONRequestBody = RegisterSchemaRequest
 
-func (c *oasClient) TestCompatibilityForSubjectWithBody(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) testCompatibilityForSubjectWithBody(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTestCompatibilityForSubjectRequestWithBody(c.Server, subject, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -45,7 +45,7 @@ func (c *oasClient) TestCompatibilityForSubjectWithBody(ctx context.Context, sub
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) TestCompatibilityForSubject(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) testCompatibilityForSubject(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTestCompatibilityForSubjectRequest(c.Server, subject, params, body)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func (c *oasClient) TestCompatibilityForSubject(ctx context.Context, subject str
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) TestCompatibilityForSubjectWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) testCompatibilityForSubjectWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTestCompatibilityForSubjectRequestWithApplicationVndSchemaregistryPlusJSONBody(c.Server, subject, params, body)
 	if err != nil {
 		return nil, err
@@ -67,7 +67,7 @@ func (c *oasClient) TestCompatibilityForSubjectWithApplicationVndSchemaregistryP
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) TestCompatibilityForSubjectWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) testCompatibilityForSubjectWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTestCompatibilityForSubjectRequestWithApplicationVndSchemaregistryV1PlusJSONBody(c.Server, subject, params, body)
 	if err != nil {
 		return nil, err
@@ -78,7 +78,7 @@ func (c *oasClient) TestCompatibilityForSubjectWithApplicationVndSchemaregistryV
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) TestCompatibilityBySubjectNameWithBody(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) testCompatibilityBySubjectNameWithBody(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTestCompatibilityBySubjectNameRequestWithBody(c.Server, subject, version, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -89,7 +89,7 @@ func (c *oasClient) TestCompatibilityBySubjectNameWithBody(ctx context.Context, 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) TestCompatibilityBySubjectName(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) testCompatibilityBySubjectName(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTestCompatibilityBySubjectNameRequest(c.Server, subject, version, params, body)
 	if err != nil {
 		return nil, err
@@ -100,7 +100,7 @@ func (c *oasClient) TestCompatibilityBySubjectName(ctx context.Context, subject 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) TestCompatibilityBySubjectNameWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) testCompatibilityBySubjectNameWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTestCompatibilityBySubjectNameRequestWithApplicationVndSchemaregistryPlusJSONBody(c.Server, subject, version, params, body)
 	if err != nil {
 		return nil, err
@@ -111,7 +111,7 @@ func (c *oasClient) TestCompatibilityBySubjectNameWithApplicationVndSchemaregist
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) TestCompatibilityBySubjectNameWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) testCompatibilityBySubjectNameWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTestCompatibilityBySubjectNameRequestWithApplicationVndSchemaregistryV1PlusJSONBody(c.Server, subject, version, params, body)
 	if err != nil {
 		return nil, err
@@ -364,56 +364,56 @@ type TestCompatibilityBySubjectNameResponse struct {
 }
 
 func (c *ClientWithResponses) TestCompatibilityForSubjectWithBodyWithResponse(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TestCompatibilityForSubjectResponse, error) {
-	rsp, err := c.TestCompatibilityForSubjectWithBody(ctx, subject, params, contentType, body, reqEditors...)
+	rsp, err := c.testCompatibilityForSubjectWithBody(ctx, subject, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseTestCompatibilityForSubjectResponse(rsp)
 }
 func (c *ClientWithResponses) TestCompatibilityForSubjectWithResponse(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectJSONRequestBody, reqEditors ...RequestEditorFn) (*TestCompatibilityForSubjectResponse, error) {
-	rsp, err := c.TestCompatibilityForSubject(ctx, subject, params, body, reqEditors...)
+	rsp, err := c.testCompatibilityForSubject(ctx, subject, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseTestCompatibilityForSubjectResponse(rsp)
 }
 func (c *ClientWithResponses) TestCompatibilityForSubjectWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*TestCompatibilityForSubjectResponse, error) {
-	rsp, err := c.TestCompatibilityForSubjectWithApplicationVndSchemaregistryPlusJSONBody(ctx, subject, params, body, reqEditors...)
+	rsp, err := c.testCompatibilityForSubjectWithApplicationVndSchemaregistryPlusJSONBody(ctx, subject, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseTestCompatibilityForSubjectResponse(rsp)
 }
 func (c *ClientWithResponses) TestCompatibilityForSubjectWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*TestCompatibilityForSubjectResponse, error) {
-	rsp, err := c.TestCompatibilityForSubjectWithApplicationVndSchemaregistryV1PlusJSONBody(ctx, subject, params, body, reqEditors...)
+	rsp, err := c.testCompatibilityForSubjectWithApplicationVndSchemaregistryV1PlusJSONBody(ctx, subject, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseTestCompatibilityForSubjectResponse(rsp)
 }
 func (c *ClientWithResponses) TestCompatibilityBySubjectNameWithBodyWithResponse(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TestCompatibilityBySubjectNameResponse, error) {
-	rsp, err := c.TestCompatibilityBySubjectNameWithBody(ctx, subject, version, params, contentType, body, reqEditors...)
+	rsp, err := c.testCompatibilityBySubjectNameWithBody(ctx, subject, version, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseTestCompatibilityBySubjectNameResponse(rsp)
 }
 func (c *ClientWithResponses) TestCompatibilityBySubjectNameWithResponse(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameJSONRequestBody, reqEditors ...RequestEditorFn) (*TestCompatibilityBySubjectNameResponse, error) {
-	rsp, err := c.TestCompatibilityBySubjectName(ctx, subject, version, params, body, reqEditors...)
+	rsp, err := c.testCompatibilityBySubjectName(ctx, subject, version, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseTestCompatibilityBySubjectNameResponse(rsp)
 }
 func (c *ClientWithResponses) TestCompatibilityBySubjectNameWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*TestCompatibilityBySubjectNameResponse, error) {
-	rsp, err := c.TestCompatibilityBySubjectNameWithApplicationVndSchemaregistryPlusJSONBody(ctx, subject, version, params, body, reqEditors...)
+	rsp, err := c.testCompatibilityBySubjectNameWithApplicationVndSchemaregistryPlusJSONBody(ctx, subject, version, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseTestCompatibilityBySubjectNameResponse(rsp)
 }
 func (c *ClientWithResponses) TestCompatibilityBySubjectNameWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*TestCompatibilityBySubjectNameResponse, error) {
-	rsp, err := c.TestCompatibilityBySubjectNameWithApplicationVndSchemaregistryV1PlusJSONBody(ctx, subject, version, params, body, reqEditors...)
+	rsp, err := c.testCompatibilityBySubjectNameWithApplicationVndSchemaregistryV1PlusJSONBody(ctx, subject, version, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

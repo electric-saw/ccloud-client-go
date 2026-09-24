@@ -1168,7 +1168,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListOrgV2Environments List of Environments
 	//
@@ -1177,7 +1177,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all environments.
 	//
 	// Corresponds with GET /org/v2/environments (the `ListOrgV2Environments` operationId).
-	ListOrgV2Environments(ctx context.Context, params *ListOrgV2EnvironmentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listOrgV2Environments(ctx context.Context, params *ListOrgV2EnvironmentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateOrgV2EnvironmentWithBody Create an Environment
 	//
@@ -1188,7 +1188,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /org/v2/environments (the `CreateOrgV2Environment` operationId).
-	CreateOrgV2EnvironmentWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createOrgV2EnvironmentWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateOrgV2Environment Create an Environment
 	//
@@ -1199,7 +1199,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /org/v2/environments (the `CreateOrgV2Environment` operationId).
-	CreateOrgV2Environment(ctx context.Context, body CreateOrgV2EnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createOrgV2Environment(ctx context.Context, body CreateOrgV2EnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteOrgV2Environment Delete an Environment
 	//
@@ -1211,7 +1211,7 @@ type ClientInterface interface {
 	// including all Kafka clusters, connectors, etc.
 	//
 	// Corresponds with DELETE /org/v2/environments/{id} (the `DeleteOrgV2Environment` operationId).
-	DeleteOrgV2Environment(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteOrgV2Environment(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetOrgV2Environment Read an Environment
 	//
@@ -1220,7 +1220,7 @@ type ClientInterface interface {
 	// Make a request to read an environment.
 	//
 	// Corresponds with GET /org/v2/environments/{id} (the `GetOrgV2Environment` operationId).
-	GetOrgV2Environment(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getOrgV2Environment(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateOrgV2EnvironmentWithBody Update an Environment
 	//
@@ -1231,7 +1231,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /org/v2/environments/{id} (the `UpdateOrgV2Environment` operationId).
-	UpdateOrgV2EnvironmentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateOrgV2EnvironmentWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateOrgV2Environment Update an Environment
 	//
@@ -1242,7 +1242,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /org/v2/environments/{id} (the `UpdateOrgV2Environment` operationId).
-	UpdateOrgV2Environment(ctx context.Context, id string, body UpdateOrgV2EnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateOrgV2Environment(ctx context.Context, id string, body UpdateOrgV2EnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListOrgV2Organizations List of Organizations
 	//
@@ -1251,7 +1251,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all organizations.
 	//
 	// Corresponds with GET /org/v2/organizations (the `ListOrgV2Organizations` operationId).
-	ListOrgV2Organizations(ctx context.Context, params *ListOrgV2OrganizationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listOrgV2Organizations(ctx context.Context, params *ListOrgV2OrganizationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetOrgV2Organization Read an Organization
 	//
@@ -1260,7 +1260,7 @@ type ClientInterface interface {
 	// Make a request to read an organization.
 	//
 	// Corresponds with GET /org/v2/organizations/{id} (the `GetOrgV2Organization` operationId).
-	GetOrgV2Organization(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getOrgV2Organization(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateOrgV2OrganizationWithBody Update an Organization
 	//
@@ -1271,7 +1271,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /org/v2/organizations/{id} (the `UpdateOrgV2Organization` operationId).
-	UpdateOrgV2OrganizationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateOrgV2OrganizationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateOrgV2Organization Update an Organization
 	//
@@ -1282,7 +1282,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /org/v2/organizations/{id} (the `UpdateOrgV2Organization` operationId).
-	UpdateOrgV2Organization(ctx context.Context, id string, body UpdateOrgV2OrganizationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateOrgV2Organization(ctx context.Context, id string, body UpdateOrgV2OrganizationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListOrgV2ScimTokens List of Scim Tokens
 	//
@@ -1291,7 +1291,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all scim tokens.
 	//
 	// Corresponds with GET /org/v2/scim-tokens (the `ListOrgV2ScimTokens` operationId).
-	ListOrgV2ScimTokens(ctx context.Context, params *ListOrgV2ScimTokensParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listOrgV2ScimTokens(ctx context.Context, params *ListOrgV2ScimTokensParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateOrgV2ScimTokenWithBody Create a Scim Token
 	//
@@ -1302,7 +1302,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /org/v2/scim-tokens (the `CreateOrgV2ScimToken` operationId).
-	CreateOrgV2ScimTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createOrgV2ScimTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateOrgV2ScimToken Create a Scim Token
 	//
@@ -1313,7 +1313,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /org/v2/scim-tokens (the `CreateOrgV2ScimToken` operationId).
-	CreateOrgV2ScimToken(ctx context.Context, body CreateOrgV2ScimTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createOrgV2ScimToken(ctx context.Context, body CreateOrgV2ScimTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteOrgV2ScimToken Delete a Scim Token
 	//
@@ -1322,7 +1322,7 @@ type ClientInterface interface {
 	// Make a request to delete a scim token.
 	//
 	// Corresponds with DELETE /org/v2/scim-tokens/{id} (the `DeleteOrgV2ScimToken` operationId).
-	DeleteOrgV2ScimToken(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteOrgV2ScimToken(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -1340,7 +1340,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -1360,178 +1360,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListOrgV2EnvironmentsWithResponse List of Environments
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all environments.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /org/v2/environments (the `ListOrgV2Environments` operationId).
-	ListOrgV2EnvironmentsWithResponse(ctx context.Context, params *ListOrgV2EnvironmentsParams, reqEditors ...RequestEditorFn) (*ListOrgV2EnvironmentsResponse, error)
-
-	// CreateOrgV2EnvironmentWithBodyWithResponse Create an Environment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an environment.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /org/v2/environments (the `CreateOrgV2Environment` operationId).
-	CreateOrgV2EnvironmentWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateOrgV2EnvironmentResponse, error)
-
-	// CreateOrgV2EnvironmentWithResponse Create an Environment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an environment.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /org/v2/environments (the `CreateOrgV2Environment` operationId).
-	CreateOrgV2EnvironmentWithResponse(ctx context.Context, body CreateOrgV2EnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateOrgV2EnvironmentResponse, error)
-
-	// DeleteOrgV2EnvironmentWithResponse Delete an Environment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete an environment.
-	//
-	// If successful, this request will also recursively delete all of the environment's associated resources,
-	// including all Kafka clusters, connectors, etc.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /org/v2/environments/{id} (the `DeleteOrgV2Environment` operationId).
-	DeleteOrgV2EnvironmentWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteOrgV2EnvironmentResponse, error)
-
-	// GetOrgV2EnvironmentWithResponse Read an Environment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read an environment.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /org/v2/environments/{id} (the `GetOrgV2Environment` operationId).
-	GetOrgV2EnvironmentWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetOrgV2EnvironmentResponse, error)
-
-	// UpdateOrgV2EnvironmentWithBodyWithResponse Update an Environment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an environment.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /org/v2/environments/{id} (the `UpdateOrgV2Environment` operationId).
-	UpdateOrgV2EnvironmentWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateOrgV2EnvironmentResponse, error)
-
-	// UpdateOrgV2EnvironmentWithResponse Update an Environment
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an environment.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /org/v2/environments/{id} (the `UpdateOrgV2Environment` operationId).
-	UpdateOrgV2EnvironmentWithResponse(ctx context.Context, id string, body UpdateOrgV2EnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateOrgV2EnvironmentResponse, error)
-
-	// ListOrgV2OrganizationsWithResponse List of Organizations
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all organizations.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /org/v2/organizations (the `ListOrgV2Organizations` operationId).
-	ListOrgV2OrganizationsWithResponse(ctx context.Context, params *ListOrgV2OrganizationsParams, reqEditors ...RequestEditorFn) (*ListOrgV2OrganizationsResponse, error)
-
-	// GetOrgV2OrganizationWithResponse Read an Organization
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read an organization.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /org/v2/organizations/{id} (the `GetOrgV2Organization` operationId).
-	GetOrgV2OrganizationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetOrgV2OrganizationResponse, error)
-
-	// UpdateOrgV2OrganizationWithBodyWithResponse Update an Organization
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an organization.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /org/v2/organizations/{id} (the `UpdateOrgV2Organization` operationId).
-	UpdateOrgV2OrganizationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateOrgV2OrganizationResponse, error)
-
-	// UpdateOrgV2OrganizationWithResponse Update an Organization
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an organization.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /org/v2/organizations/{id} (the `UpdateOrgV2Organization` operationId).
-	UpdateOrgV2OrganizationWithResponse(ctx context.Context, id string, body UpdateOrgV2OrganizationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateOrgV2OrganizationResponse, error)
-
-	// ListOrgV2ScimTokensWithResponse List of Scim Tokens
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all scim tokens.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /org/v2/scim-tokens (the `ListOrgV2ScimTokens` operationId).
-	ListOrgV2ScimTokensWithResponse(ctx context.Context, params *ListOrgV2ScimTokensParams, reqEditors ...RequestEditorFn) (*ListOrgV2ScimTokensResponse, error)
-
-	// CreateOrgV2ScimTokenWithBodyWithResponse Create a Scim Token
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a scim token.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /org/v2/scim-tokens (the `CreateOrgV2ScimToken` operationId).
-	CreateOrgV2ScimTokenWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateOrgV2ScimTokenResponse, error)
-
-	// CreateOrgV2ScimTokenWithResponse Create a Scim Token
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a scim token.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /org/v2/scim-tokens (the `CreateOrgV2ScimToken` operationId).
-	CreateOrgV2ScimTokenWithResponse(ctx context.Context, body CreateOrgV2ScimTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateOrgV2ScimTokenResponse, error)
-
-	// DeleteOrgV2ScimTokenWithResponse Delete a Scim Token
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a scim token.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /org/v2/scim-tokens/{id} (the `DeleteOrgV2ScimToken` operationId).
-	DeleteOrgV2ScimTokenWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteOrgV2ScimTokenResponse, error)
-}
-
 func (r ListOrgV2EnvironmentsResponse) GetJSON200() *OrgV2EnvironmentList {
 	return r.JSON200
 }

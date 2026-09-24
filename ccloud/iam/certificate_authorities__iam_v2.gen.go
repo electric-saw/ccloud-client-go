@@ -35,7 +35,7 @@ type UpdateIamV2CertificateAuthority200JSONResponseBodyKind string
 type CreateIamV2CertificateAuthorityJSONRequestBody = IamV2CreateCertRequest
 type UpdateIamV2CertificateAuthorityJSONRequestBody = IamV2UpdateCertRequest
 
-func (c *oasClient) ListIamV2CertificateAuthorities(ctx context.Context, params *ListIamV2CertificateAuthoritiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listIamV2CertificateAuthorities(ctx context.Context, params *ListIamV2CertificateAuthoritiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIamV2CertificateAuthoritiesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (c *oasClient) ListIamV2CertificateAuthorities(ctx context.Context, params 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateIamV2CertificateAuthorityWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createIamV2CertificateAuthorityWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2CertificateAuthorityRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -57,7 +57,7 @@ func (c *oasClient) CreateIamV2CertificateAuthorityWithBody(ctx context.Context,
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateIamV2CertificateAuthority(ctx context.Context, body CreateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createIamV2CertificateAuthority(ctx context.Context, body CreateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2CertificateAuthorityRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -68,7 +68,7 @@ func (c *oasClient) CreateIamV2CertificateAuthority(ctx context.Context, body Cr
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteIamV2CertificateAuthority(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteIamV2CertificateAuthority(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIamV2CertificateAuthorityRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -79,7 +79,7 @@ func (c *oasClient) DeleteIamV2CertificateAuthority(ctx context.Context, id stri
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetIamV2CertificateAuthority(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getIamV2CertificateAuthority(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2CertificateAuthorityRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -90,7 +90,7 @@ func (c *oasClient) GetIamV2CertificateAuthority(ctx context.Context, id string,
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateIamV2CertificateAuthorityWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateIamV2CertificateAuthorityWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2CertificateAuthorityRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -101,7 +101,7 @@ func (c *oasClient) UpdateIamV2CertificateAuthorityWithBody(ctx context.Context,
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateIamV2CertificateAuthority(ctx context.Context, id string, body UpdateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateIamV2CertificateAuthority(ctx context.Context, id string, body UpdateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2CertificateAuthorityRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -888,49 +888,49 @@ type UpdateIamV2CertificateAuthorityResponse struct {
 }
 
 func (c *ClientWithResponses) ListIamV2CertificateAuthoritiesWithResponse(ctx context.Context, params *ListIamV2CertificateAuthoritiesParams, reqEditors ...RequestEditorFn) (*ListIamV2CertificateAuthoritiesResponse, error) {
-	rsp, err := c.ListIamV2CertificateAuthorities(ctx, params, reqEditors...)
+	rsp, err := c.listIamV2CertificateAuthorities(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListIamV2CertificateAuthoritiesResponse(rsp)
 }
 func (c *ClientWithResponses) CreateIamV2CertificateAuthorityWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2CertificateAuthorityResponse, error) {
-	rsp, err := c.CreateIamV2CertificateAuthorityWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createIamV2CertificateAuthorityWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIamV2CertificateAuthorityResponse(rsp)
 }
 func (c *ClientWithResponses) CreateIamV2CertificateAuthorityWithResponse(ctx context.Context, body CreateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2CertificateAuthorityResponse, error) {
-	rsp, err := c.CreateIamV2CertificateAuthority(ctx, body, reqEditors...)
+	rsp, err := c.createIamV2CertificateAuthority(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIamV2CertificateAuthorityResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteIamV2CertificateAuthorityWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2CertificateAuthorityResponse, error) {
-	rsp, err := c.DeleteIamV2CertificateAuthority(ctx, id, reqEditors...)
+	rsp, err := c.deleteIamV2CertificateAuthority(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteIamV2CertificateAuthorityResponse(rsp)
 }
 func (c *ClientWithResponses) GetIamV2CertificateAuthorityWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2CertificateAuthorityResponse, error) {
-	rsp, err := c.GetIamV2CertificateAuthority(ctx, id, reqEditors...)
+	rsp, err := c.getIamV2CertificateAuthority(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetIamV2CertificateAuthorityResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateIamV2CertificateAuthorityWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2CertificateAuthorityResponse, error) {
-	rsp, err := c.UpdateIamV2CertificateAuthorityWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateIamV2CertificateAuthorityWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateIamV2CertificateAuthorityResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateIamV2CertificateAuthorityWithResponse(ctx context.Context, id string, body UpdateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2CertificateAuthorityResponse, error) {
-	rsp, err := c.UpdateIamV2CertificateAuthority(ctx, id, body, reqEditors...)
+	rsp, err := c.updateIamV2CertificateAuthority(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

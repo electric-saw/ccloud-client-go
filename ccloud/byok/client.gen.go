@@ -1610,7 +1610,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListByokV1Keys List of Keys
 	//
@@ -1619,7 +1619,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all keys.
 	//
 	// Corresponds with GET /byok/v1/keys (the `ListByokV1Keys` operationId).
-	ListByokV1Keys(ctx context.Context, params *ListByokV1KeysParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listByokV1Keys(ctx context.Context, params *ListByokV1KeysParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateByokV1KeyWithBody Create a Key
 	//
@@ -1630,7 +1630,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /byok/v1/keys (the `CreateByokV1Key` operationId).
-	CreateByokV1KeyWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createByokV1KeyWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateByokV1Key Create a Key
 	//
@@ -1641,7 +1641,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /byok/v1/keys (the `CreateByokV1Key` operationId).
-	CreateByokV1Key(ctx context.Context, body CreateByokV1KeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createByokV1Key(ctx context.Context, body CreateByokV1KeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteByokV1Key Delete a Key
 	//
@@ -1650,7 +1650,7 @@ type ClientInterface interface {
 	// Make a request to delete a key.
 	//
 	// Corresponds with DELETE /byok/v1/keys/{id} (the `DeleteByokV1Key` operationId).
-	DeleteByokV1Key(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteByokV1Key(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetByokV1Key Read a Key
 	//
@@ -1659,7 +1659,7 @@ type ClientInterface interface {
 	// Make a request to read a key.
 	//
 	// Corresponds with GET /byok/v1/keys/{id} (the `GetByokV1Key` operationId).
-	GetByokV1Key(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getByokV1Key(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateByokV1KeyWithBody Update a Key
 	//
@@ -1670,7 +1670,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /byok/v1/keys/{id} (the `UpdateByokV1Key` operationId).
-	UpdateByokV1KeyWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateByokV1KeyWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateByokV1Key Update a Key
 	//
@@ -1681,7 +1681,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /byok/v1/keys/{id} (the `UpdateByokV1Key` operationId).
-	UpdateByokV1Key(ctx context.Context, id string, body UpdateByokV1KeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateByokV1Key(ctx context.Context, id string, body UpdateByokV1KeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -1699,7 +1699,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -1719,87 +1719,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListByokV1KeysWithResponse List of Keys
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all keys.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /byok/v1/keys (the `ListByokV1Keys` operationId).
-	ListByokV1KeysWithResponse(ctx context.Context, params *ListByokV1KeysParams, reqEditors ...RequestEditorFn) (*ListByokV1KeysResponse, error)
-
-	// CreateByokV1KeyWithBodyWithResponse Create a Key
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a key.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /byok/v1/keys (the `CreateByokV1Key` operationId).
-	CreateByokV1KeyWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateByokV1KeyResponse, error)
-
-	// CreateByokV1KeyWithResponse Create a Key
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a key.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /byok/v1/keys (the `CreateByokV1Key` operationId).
-	CreateByokV1KeyWithResponse(ctx context.Context, body CreateByokV1KeyJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateByokV1KeyResponse, error)
-
-	// DeleteByokV1KeyWithResponse Delete a Key
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a key.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /byok/v1/keys/{id} (the `DeleteByokV1Key` operationId).
-	DeleteByokV1KeyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteByokV1KeyResponse, error)
-
-	// GetByokV1KeyWithResponse Read a Key
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a key.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /byok/v1/keys/{id} (the `GetByokV1Key` operationId).
-	GetByokV1KeyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetByokV1KeyResponse, error)
-
-	// UpdateByokV1KeyWithBodyWithResponse Update a Key
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a key.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /byok/v1/keys/{id} (the `UpdateByokV1Key` operationId).
-	UpdateByokV1KeyWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateByokV1KeyResponse, error)
-
-	// UpdateByokV1KeyWithResponse Update a Key
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a key.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /byok/v1/keys/{id} (the `UpdateByokV1Key` operationId).
-	UpdateByokV1KeyWithResponse(ctx context.Context, id string, body UpdateByokV1KeyJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateByokV1KeyResponse, error)
-}
-
 func (r ListByokV1KeysResponse) GetJSON200() *ByokV1KeyList {
 	return r.JSON200
 }

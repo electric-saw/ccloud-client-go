@@ -82,7 +82,7 @@ type UpdateSqlv1ConnectionJSONBodyKind string
 type CreateSqlv1ConnectionJSONRequestBody CreateSqlv1ConnectionJSONBody
 type UpdateSqlv1ConnectionJSONRequestBody UpdateSqlv1ConnectionJSONBody
 
-func (c *oasClient) ListSqlv1Connections(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1ConnectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listSqlv1Connections(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1ConnectionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSqlv1ConnectionsRequest(c.Server, organizationId, environmentId, params)
 	if err != nil {
 		return nil, err
@@ -93,7 +93,7 @@ func (c *oasClient) ListSqlv1Connections(ctx context.Context, organizationId ope
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateSqlv1ConnectionWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createSqlv1ConnectionWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateSqlv1ConnectionRequestWithBody(c.Server, organizationId, environmentId, contentType, body)
 	if err != nil {
 		return nil, err
@@ -104,7 +104,7 @@ func (c *oasClient) CreateSqlv1ConnectionWithBody(ctx context.Context, organizat
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, body CreateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, body CreateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateSqlv1ConnectionRequest(c.Server, organizationId, environmentId, body)
 	if err != nil {
 		return nil, err
@@ -115,7 +115,7 @@ func (c *oasClient) CreateSqlv1Connection(ctx context.Context, organizationId op
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteSqlv1ConnectionRequest(c.Server, organizationId, environmentId, connectionName)
 	if err != nil {
 		return nil, err
@@ -126,7 +126,7 @@ func (c *oasClient) DeleteSqlv1Connection(ctx context.Context, organizationId op
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSqlv1ConnectionRequest(c.Server, organizationId, environmentId, connectionName)
 	if err != nil {
 		return nil, err
@@ -137,7 +137,7 @@ func (c *oasClient) GetSqlv1Connection(ctx context.Context, organizationId opena
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateSqlv1ConnectionWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateSqlv1ConnectionWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSqlv1ConnectionRequestWithBody(c.Server, organizationId, environmentId, connectionName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -148,7 +148,7 @@ func (c *oasClient) UpdateSqlv1ConnectionWithBody(ctx context.Context, organizat
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, body UpdateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateSqlv1Connection(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, body UpdateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSqlv1ConnectionRequest(c.Server, organizationId, environmentId, connectionName, body)
 	if err != nil {
 		return nil, err
@@ -790,49 +790,49 @@ type UpdateSqlv1ConnectionResponse struct {
 }
 
 func (c *ClientWithResponses) ListSqlv1ConnectionsWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1ConnectionsParams, reqEditors ...RequestEditorFn) (*ListSqlv1ConnectionsResponse, error) {
-	rsp, err := c.ListSqlv1Connections(ctx, organizationId, environmentId, params, reqEditors...)
+	rsp, err := c.listSqlv1Connections(ctx, organizationId, environmentId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListSqlv1ConnectionsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateSqlv1ConnectionWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSqlv1ConnectionResponse, error) {
-	rsp, err := c.CreateSqlv1ConnectionWithBody(ctx, organizationId, environmentId, contentType, body, reqEditors...)
+	rsp, err := c.createSqlv1ConnectionWithBody(ctx, organizationId, environmentId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateSqlv1ConnectionResponse(rsp)
 }
 func (c *ClientWithResponses) CreateSqlv1ConnectionWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, body CreateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateSqlv1ConnectionResponse, error) {
-	rsp, err := c.CreateSqlv1Connection(ctx, organizationId, environmentId, body, reqEditors...)
+	rsp, err := c.createSqlv1Connection(ctx, organizationId, environmentId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateSqlv1ConnectionResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteSqlv1ConnectionWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*DeleteSqlv1ConnectionResponse, error) {
-	rsp, err := c.DeleteSqlv1Connection(ctx, organizationId, environmentId, connectionName, reqEditors...)
+	rsp, err := c.deleteSqlv1Connection(ctx, organizationId, environmentId, connectionName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteSqlv1ConnectionResponse(rsp)
 }
 func (c *ClientWithResponses) GetSqlv1ConnectionWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, reqEditors ...RequestEditorFn) (*GetSqlv1ConnectionResponse, error) {
-	rsp, err := c.GetSqlv1Connection(ctx, organizationId, environmentId, connectionName, reqEditors...)
+	rsp, err := c.getSqlv1Connection(ctx, organizationId, environmentId, connectionName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetSqlv1ConnectionResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateSqlv1ConnectionWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSqlv1ConnectionResponse, error) {
-	rsp, err := c.UpdateSqlv1ConnectionWithBody(ctx, organizationId, environmentId, connectionName, contentType, body, reqEditors...)
+	rsp, err := c.updateSqlv1ConnectionWithBody(ctx, organizationId, environmentId, connectionName, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateSqlv1ConnectionResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateSqlv1ConnectionWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, connectionName string, body UpdateSqlv1ConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSqlv1ConnectionResponse, error) {
-	rsp, err := c.UpdateSqlv1Connection(ctx, organizationId, environmentId, connectionName, body, reqEditors...)
+	rsp, err := c.updateSqlv1Connection(ctx, organizationId, environmentId, connectionName, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -44,7 +44,7 @@ type GetNetworkingV1NetworkLinkServiceAssociationParams struct {
 type GetNetworkingV1NetworkLinkServiceAssociation200JSONResponseBodyApiVersion string
 type GetNetworkingV1NetworkLinkServiceAssociation200JSONResponseBodyKind string
 
-func (c *oasClient) ListNetworkingV1NetworkLinkServiceAssociations(ctx context.Context, params *ListNetworkingV1NetworkLinkServiceAssociationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listNetworkingV1NetworkLinkServiceAssociations(ctx context.Context, params *ListNetworkingV1NetworkLinkServiceAssociationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNetworkingV1NetworkLinkServiceAssociationsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -55,7 +55,7 @@ func (c *oasClient) ListNetworkingV1NetworkLinkServiceAssociations(ctx context.C
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetNetworkingV1NetworkLinkServiceAssociation(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkServiceAssociationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getNetworkingV1NetworkLinkServiceAssociation(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkServiceAssociationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNetworkingV1NetworkLinkServiceAssociationRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -384,14 +384,14 @@ type GetNetworkingV1NetworkLinkServiceAssociationResponse struct {
 }
 
 func (c *ClientWithResponses) ListNetworkingV1NetworkLinkServiceAssociationsWithResponse(ctx context.Context, params *ListNetworkingV1NetworkLinkServiceAssociationsParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1NetworkLinkServiceAssociationsResponse, error) {
-	rsp, err := c.ListNetworkingV1NetworkLinkServiceAssociations(ctx, params, reqEditors...)
+	rsp, err := c.listNetworkingV1NetworkLinkServiceAssociations(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListNetworkingV1NetworkLinkServiceAssociationsResponse(rsp)
 }
 func (c *ClientWithResponses) GetNetworkingV1NetworkLinkServiceAssociationWithResponse(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkServiceAssociationParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1NetworkLinkServiceAssociationResponse, error) {
-	rsp, err := c.GetNetworkingV1NetworkLinkServiceAssociation(ctx, id, params, reqEditors...)
+	rsp, err := c.getNetworkingV1NetworkLinkServiceAssociation(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -32,7 +32,7 @@ type ListCdxV1ConsumerSharesParams struct {
 type GetCdxV1ConsumerShare200JSONResponseBodyApiVersion string
 type GetCdxV1ConsumerShare200JSONResponseBodyKind string
 
-func (c *oasClient) ListCdxV1ConsumerShares(ctx context.Context, params *ListCdxV1ConsumerSharesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listCdxV1ConsumerShares(ctx context.Context, params *ListCdxV1ConsumerSharesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListCdxV1ConsumerSharesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -43,7 +43,7 @@ func (c *oasClient) ListCdxV1ConsumerShares(ctx context.Context, params *ListCdx
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteCdxV1ConsumerShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteCdxV1ConsumerShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteCdxV1ConsumerShareRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -54,7 +54,7 @@ func (c *oasClient) DeleteCdxV1ConsumerShare(ctx context.Context, id string, req
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetCdxV1ConsumerShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getCdxV1ConsumerShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCdxV1ConsumerShareRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -430,21 +430,21 @@ type GetCdxV1ConsumerShareResponse struct {
 }
 
 func (c *ClientWithResponses) ListCdxV1ConsumerSharesWithResponse(ctx context.Context, params *ListCdxV1ConsumerSharesParams, reqEditors ...RequestEditorFn) (*ListCdxV1ConsumerSharesResponse, error) {
-	rsp, err := c.ListCdxV1ConsumerShares(ctx, params, reqEditors...)
+	rsp, err := c.listCdxV1ConsumerShares(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListCdxV1ConsumerSharesResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteCdxV1ConsumerShareWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCdxV1ConsumerShareResponse, error) {
-	rsp, err := c.DeleteCdxV1ConsumerShare(ctx, id, reqEditors...)
+	rsp, err := c.deleteCdxV1ConsumerShare(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteCdxV1ConsumerShareResponse(rsp)
 }
 func (c *ClientWithResponses) GetCdxV1ConsumerShareWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCdxV1ConsumerShareResponse, error) {
-	rsp, err := c.GetCdxV1ConsumerShare(ctx, id, reqEditors...)
+	rsp, err := c.getCdxV1ConsumerShare(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

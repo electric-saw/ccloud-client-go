@@ -478,14 +478,14 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// GetTopLevelMode Get global mode
 	//
 	// Retrieves global mode.
 	//
 	// Corresponds with GET /mode (the `GetTopLevelMode` operationId).
-	GetTopLevelMode(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getTopLevelMode(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTopLevelModeWithBody Update global mode
 	//
@@ -494,7 +494,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /mode (the `UpdateTopLevelMode` operationId).
-	UpdateTopLevelModeWithBody(ctx context.Context, params *UpdateTopLevelModeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTopLevelModeWithBody(ctx context.Context, params *UpdateTopLevelModeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTopLevelMode Update global mode
 	//
@@ -503,7 +503,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /mode (the `UpdateTopLevelMode` operationId).
-	UpdateTopLevelMode(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTopLevelMode(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTopLevelModeWithApplicationVndSchemaregistryPlusJSONBody Update global mode
 	//
@@ -512,7 +512,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry+json` content type.
 	//
 	// Corresponds with PUT /mode (the `UpdateTopLevelMode` operationId).
-	UpdateTopLevelModeWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTopLevelModeWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTopLevelModeWithApplicationVndSchemaregistryV1PlusJSONBody Update global mode
 	//
@@ -521,21 +521,21 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type.
 	//
 	// Corresponds with PUT /mode (the `UpdateTopLevelMode` operationId).
-	UpdateTopLevelModeWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTopLevelModeWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteSubjectMode Delete subject mode
 	//
 	// Deletes the specified subject-level mode and reverts to the global default.
 	//
 	// Corresponds with DELETE /mode/{subject} (the `DeleteSubjectMode` operationId).
-	DeleteSubjectMode(ctx context.Context, subject string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteSubjectMode(ctx context.Context, subject string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetMode Get subject mode
 	//
 	// Retrieves the subject mode.
 	//
 	// Corresponds with GET /mode/{subject} (the `GetMode` operationId).
-	GetMode(ctx context.Context, subject string, params *GetModeParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getMode(ctx context.Context, subject string, params *GetModeParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateModeWithBody Update subject mode
 	//
@@ -544,7 +544,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /mode/{subject} (the `UpdateMode` operationId).
-	UpdateModeWithBody(ctx context.Context, subject string, params *UpdateModeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateModeWithBody(ctx context.Context, subject string, params *UpdateModeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateMode Update subject mode
 	//
@@ -553,7 +553,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /mode/{subject} (the `UpdateMode` operationId).
-	UpdateMode(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateMode(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateModeWithApplicationVndSchemaregistryPlusJSONBody Update subject mode
 	//
@@ -562,7 +562,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry+json` content type.
 	//
 	// Corresponds with PUT /mode/{subject} (the `UpdateMode` operationId).
-	UpdateModeWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateModeWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateModeWithApplicationVndSchemaregistryV1PlusJSONBody Update subject mode
 	//
@@ -571,7 +571,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type.
 	//
 	// Corresponds with PUT /mode/{subject} (the `UpdateMode` operationId).
-	UpdateModeWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateModeWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func NewUpdateTopLevelModeRequestWithApplicationVndSchemaregistryPlusJSONBody(server string, params *UpdateTopLevelModeParams, body UpdateTopLevelModeApplicationVndSchemaregistryPlusJSONRequestBody) (*http.Request, error) {
@@ -625,7 +625,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -645,109 +645,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// GetTopLevelModeWithResponse Get global mode
-	//
-	// Retrieves global mode.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /mode (the `GetTopLevelMode` operationId).
-	GetTopLevelModeWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetTopLevelModeResponse, error)
-
-	// UpdateTopLevelModeWithBodyWithResponse Update global mode
-	//
-	// Update global mode. On success, echoes the original request back to the client.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /mode (the `UpdateTopLevelMode` operationId).
-	UpdateTopLevelModeWithBodyWithResponse(ctx context.Context, params *UpdateTopLevelModeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateTopLevelModeResponse, error)
-
-	// UpdateTopLevelModeWithResponse Update global mode
-	//
-	// Update global mode. On success, echoes the original request back to the client.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /mode (the `UpdateTopLevelMode` operationId).
-	UpdateTopLevelModeWithResponse(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateTopLevelModeResponse, error)
-
-	// UpdateTopLevelModeWithApplicationVndSchemaregistryPlusJSONBodyWithResponse Update global mode
-	//
-	// Update global mode. On success, echoes the original request back to the client.
-	//
-	// Takes a body of the `application/vnd.schemaregistry+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /mode (the `UpdateTopLevelMode` operationId).
-	UpdateTopLevelModeWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateTopLevelModeResponse, error)
-
-	// UpdateTopLevelModeWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse Update global mode
-	//
-	// Update global mode. On success, echoes the original request back to the client.
-	//
-	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /mode (the `UpdateTopLevelMode` operationId).
-	UpdateTopLevelModeWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, params *UpdateTopLevelModeParams, body UpdateTopLevelModeApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateTopLevelModeResponse, error)
-
-	// DeleteSubjectModeWithResponse Delete subject mode
-	//
-	// Deletes the specified subject-level mode and reverts to the global default.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /mode/{subject} (the `DeleteSubjectMode` operationId).
-	DeleteSubjectModeWithResponse(ctx context.Context, subject string, reqEditors ...RequestEditorFn) (*DeleteSubjectModeResponse, error)
-
-	// GetModeWithResponse Get subject mode
-	//
-	// Retrieves the subject mode.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /mode/{subject} (the `GetMode` operationId).
-	GetModeWithResponse(ctx context.Context, subject string, params *GetModeParams, reqEditors ...RequestEditorFn) (*GetModeResponse, error)
-
-	// UpdateModeWithBodyWithResponse Update subject mode
-	//
-	// Update mode for the specified subject. On success, echoes the original request back to the client.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /mode/{subject} (the `UpdateMode` operationId).
-	UpdateModeWithBodyWithResponse(ctx context.Context, subject string, params *UpdateModeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateModeResponse, error)
-
-	// UpdateModeWithResponse Update subject mode
-	//
-	// Update mode for the specified subject. On success, echoes the original request back to the client.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /mode/{subject} (the `UpdateMode` operationId).
-	UpdateModeWithResponse(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateModeResponse, error)
-
-	// UpdateModeWithApplicationVndSchemaregistryPlusJSONBodyWithResponse Update subject mode
-	//
-	// Update mode for the specified subject. On success, echoes the original request back to the client.
-	//
-	// Takes a body of the `application/vnd.schemaregistry+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /mode/{subject} (the `UpdateMode` operationId).
-	UpdateModeWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateModeResponse, error)
-
-	// UpdateModeWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse Update subject mode
-	//
-	// Update mode for the specified subject. On success, echoes the original request back to the client.
-	//
-	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /mode/{subject} (the `UpdateMode` operationId).
-	UpdateModeWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, subject string, params *UpdateModeParams, body UpdateModeApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateModeResponse, error)
-}
-
 func (r GetTopLevelModeResponse) GetApplicationjsonQs05200() *Mode {
 	return r.ApplicationjsonQs05200
 }

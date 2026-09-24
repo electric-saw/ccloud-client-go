@@ -30,7 +30,7 @@ type UpdateOrgV2Organization200JSONResponseBodyApiVersion string
 type UpdateOrgV2Organization200JSONResponseBodyKind string
 type UpdateOrgV2OrganizationJSONRequestBody = OrgV2Organization
 
-func (c *oasClient) ListOrgV2Organizations(ctx context.Context, params *ListOrgV2OrganizationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listOrgV2Organizations(ctx context.Context, params *ListOrgV2OrganizationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListOrgV2OrganizationsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -41,7 +41,7 @@ func (c *oasClient) ListOrgV2Organizations(ctx context.Context, params *ListOrgV
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetOrgV2Organization(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getOrgV2Organization(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetOrgV2OrganizationRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -52,7 +52,7 @@ func (c *oasClient) GetOrgV2Organization(ctx context.Context, id string, reqEdit
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateOrgV2OrganizationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateOrgV2OrganizationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateOrgV2OrganizationRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -63,7 +63,7 @@ func (c *oasClient) UpdateOrgV2OrganizationWithBody(ctx context.Context, id stri
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateOrgV2Organization(ctx context.Context, id string, body UpdateOrgV2OrganizationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateOrgV2Organization(ctx context.Context, id string, body UpdateOrgV2OrganizationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateOrgV2OrganizationRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -468,28 +468,28 @@ type UpdateOrgV2OrganizationResponse struct {
 }
 
 func (c *ClientWithResponses) ListOrgV2OrganizationsWithResponse(ctx context.Context, params *ListOrgV2OrganizationsParams, reqEditors ...RequestEditorFn) (*ListOrgV2OrganizationsResponse, error) {
-	rsp, err := c.ListOrgV2Organizations(ctx, params, reqEditors...)
+	rsp, err := c.listOrgV2Organizations(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListOrgV2OrganizationsResponse(rsp)
 }
 func (c *ClientWithResponses) GetOrgV2OrganizationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetOrgV2OrganizationResponse, error) {
-	rsp, err := c.GetOrgV2Organization(ctx, id, reqEditors...)
+	rsp, err := c.getOrgV2Organization(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetOrgV2OrganizationResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateOrgV2OrganizationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateOrgV2OrganizationResponse, error) {
-	rsp, err := c.UpdateOrgV2OrganizationWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateOrgV2OrganizationWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateOrgV2OrganizationResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateOrgV2OrganizationWithResponse(ctx context.Context, id string, body UpdateOrgV2OrganizationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateOrgV2OrganizationResponse, error) {
-	rsp, err := c.UpdateOrgV2Organization(ctx, id, body, reqEditors...)
+	rsp, err := c.updateOrgV2Organization(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

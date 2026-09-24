@@ -110,6 +110,7 @@ func cmdGen(args []string) error {
 		{"buildgroups", func() error { return cmdBuildgroups([]string{spec}) }},
 		{"oapi-codegen", cmdOapiCodegen},
 		{"split", func() error { return cmdSplit([]string{"build/groups.json", "build/opmap.json"}) }},
+		{"unexport", cmdUnexport},
 		{"facade", func() error { return cmdFacade([]string{"build/groups.json"}) }},
 		{"goimports", cmdGoimports},
 		{"gofmt", cmdGofmt},
@@ -183,9 +184,158 @@ func tagListYAML(tags string) string {
 	return strings.Join(lines, "\n")
 }
 
+// removeInterfaceBlock removes a `type NAME interface { ... }` declaration
+// (plus any preceding comment lines) from the source text.
+func removeInterfaceBlock(text, name string) string {
+	lines := strings.Split(text, "\n")
+	var out []string
+	inBlock := false
+	for i := 0; i < len(lines); i++ {
+		trimmed := strings.TrimSpace(lines[i])
+		if !inBlock && strings.HasPrefix(trimmed, "type "+name+" interface") {
+			inBlock = true
+			// drop preceding comment lines (backwards)
+			for len(out) > 0 {
+				last := strings.TrimSpace(out[len(out)-1])
+				if strings.HasPrefix(last, "//") || last == "" {
+					out = out[:len(out)-1]
+				} else {
+					break
+				}
+			}
+			continue
+		}
+		if inBlock {
+			if trimmed == "}" {
+				inBlock = false
+			}
+			continue
+		}
+		out = append(out, lines[i])
+	}
+	return strings.Join(out, "\n")
+}
+
 // cmdGoimports runs goimports -w over every generated .gen.go file.
 func cmdGoimports() error {
 	return run("sh", "-c", `find ccloud -name '*.gen.go' -exec goimports -w {} +`)
+}
+
+// cmdUnexport hides the plain http.Response methods from the public API.
+//
+// oapi-codegen always emits a plain client (now unexported `oasClient`) whose
+// methods return *http.Response, plus a `ClientInterface` that promotes those
+// methods into ClientWithResponses' public surface. Since the WithResponse
+// wrappers delegate to the plain methods, the plain methods must exist — but
+// they can be unexported (lowercase) so nothing exposes *http.Response.
+//
+// Renames, per generated package:
+//   - ClientInterface              -> clientInterface
+//   - ClientWithResponsesInterface  -> clientWithResponsesInterface
+//   - func (c *oasClient) Foo(...)  -> func (c *oasClient) foo(...)   (plain methods)
+//   - Foo(ctx ...) inside clientInterface -> foo(ctx ...)             (interface decls)
+//   - c.Foo(...)  in wrappers       -> c.foo(...)                     (their calls)
+func cmdUnexport() error {
+	files, err := filepath.Glob(filepath.Join("ccloud", "*", "*.gen.go"))
+	if err != nil {
+		return err
+	}
+	for _, file := range files {
+		src, err := os.ReadFile(file)
+		if err != nil {
+			return err
+		}
+		text := string(src)
+		orig := text
+
+		// interfaces: unexport the type names (declaration AND embedding reference)
+		text = strings.ReplaceAll(text, "type ClientInterface interface", "type clientInterface interface")
+		text = strings.ReplaceAll(text, "ClientInterface", "clientInterface")
+		text = strings.ReplaceAll(text, "type ClientWithResponsesInterface interface", "type clientWithResponsesInterface interface")
+		// remove the (unused) clientWithResponsesInterface block entirely —
+		// it's generated but never referenced, and it's not exported.
+		text = removeInterfaceBlock(text, "clientWithResponsesInterface")
+
+		// plain method definitions on oasClient: Foo( -> foo(
+		text = unexportPlainMethods(text)
+
+		// interface method declarations: inside clientInterface, Foo(ctx -> foo(ctx
+		text = unexportInterfaceMethods(text)
+
+		if text != orig {
+			if err := os.WriteFile(file, []byte(text), 0o644); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+// unexportPlainMethods lowercases the first letter of plain client methods:
+//
+//	func (c *oasClient) ListIamV2ApiKeys( -> func (c *oasClient) listIamV2ApiKeys(
+//	c.ListIamV2ApiKeys(                     -> c.listIamV2ApiKeys(   (wrapper delegations)
+//
+// It must NOT touch the exported WithResponse wrappers (c.XxxWithResponse()
+// are wrapper methods — they keep their exported names).
+func unexportPlainMethods(text string) string {
+	// 1) definitions on oasClient
+	reDef := regexp.MustCompile(`func \(c \*oasClient\) ([A-Z]\w*)\(`)
+	text = reDef.ReplaceAllStringFunc(text, func(m string) string {
+		sub := reDef.FindStringSubmatch(m)
+		return "func (c *oasClient) " + strings.ToLower(sub[1][:1]) + sub[1][1:] + "("
+	})
+	// 2) calls in wrappers: c.Foo( -> c.foo(  (including WithBody variants,
+	// which are plain methods; only WithResponse names are wrapper methods
+	// themselves and never called via c.)
+	reCall := regexp.MustCompile(`\bc\.([A-Z]\w*)\(`)
+	text = reCall.ReplaceAllStringFunc(text, func(m string) string {
+		sub := reCall.FindStringSubmatch(m)
+		name := sub[1]
+		if strings.HasSuffix(name, "WithResponse") {
+			return m
+		}
+		return "c." + strings.ToLower(name[:1]) + name[1:] + "("
+	})
+	return text
+}
+
+// unexportInterfaceMethods lowercases the plain-method declarations inside the
+// clientInterface block (they are promoted into ClientWithResponses; the
+// WithResponse wrapper methods in clientWithResponsesInterface stay exported).
+func unexportInterfaceMethods(text string) string {
+	var out strings.Builder
+	inClientIface := false
+	for _, line := range strings.Split(text, "\n") {
+		trimmed := strings.TrimSpace(line)
+		if strings.HasPrefix(trimmed, "type clientInterface interface") {
+			inClientIface = true
+			out.WriteString(line + "\n")
+			continue
+		}
+		if inClientIface && (strings.HasPrefix(trimmed, "type ") || trimmed == "}") {
+			// leaving the interface block (next type decl or closing brace)
+			if trimmed == "}" {
+				out.WriteString(line + "\n")
+				inClientIface = false
+				continue
+			}
+			inClientIface = false
+		}
+		if inClientIface {
+			// Foo(ctx ...) -> foo(ctx ...)  (method declaration inside interface)
+			// WithBody methods are ALSO plain (return *http.Response) — lowercase them.
+			// Only WithResponse wrappers stay exported (but those live in the
+			// clientWithResponsesInterface, not here).
+			m := regexp.MustCompile(`^\t([A-Z]\w*)\(`)
+			sub := m.FindStringSubmatch(line)
+			if sub != nil && !strings.HasSuffix(sub[1], "WithResponse") {
+				line = strings.Replace(line, sub[1], strings.ToLower(sub[1][:1])+sub[1][1:], 1)
+			}
+		}
+		out.WriteString(line + "\n")
+	}
+	return out.String()
 }
 
 // cmdGofmt formats ccloud/client.go and fails if any generated file is

@@ -1687,7 +1687,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListPartnerV2Entitlements List of Entitlements
 	//
@@ -1696,7 +1696,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all entitlements.
 	//
 	// Corresponds with GET /partner/v2/entitlements (the `ListPartnerV2Entitlements` operationId).
-	ListPartnerV2Entitlements(ctx context.Context, params *ListPartnerV2EntitlementsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listPartnerV2Entitlements(ctx context.Context, params *ListPartnerV2EntitlementsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreatePartnerV2EntitlementWithBody Create an Entitlement
 	//
@@ -1707,7 +1707,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /partner/v2/entitlements (the `CreatePartnerV2Entitlement` operationId).
-	CreatePartnerV2EntitlementWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createPartnerV2EntitlementWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreatePartnerV2Entitlement Create an Entitlement
 	//
@@ -1718,7 +1718,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /partner/v2/entitlements (the `CreatePartnerV2Entitlement` operationId).
-	CreatePartnerV2Entitlement(ctx context.Context, body CreatePartnerV2EntitlementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createPartnerV2Entitlement(ctx context.Context, body CreatePartnerV2EntitlementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetPartnerV2Entitlement Read an Entitlement
 	//
@@ -1727,7 +1727,7 @@ type ClientInterface interface {
 	// Make a request to read an entitlement.
 	//
 	// Corresponds with GET /partner/v2/entitlements/{id} (the `GetPartnerV2Entitlement` operationId).
-	GetPartnerV2Entitlement(ctx context.Context, id string, params *GetPartnerV2EntitlementParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getPartnerV2Entitlement(ctx context.Context, id string, params *GetPartnerV2EntitlementParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListPartnerV2Organizations List of Organizations
 	//
@@ -1736,7 +1736,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all organizations.
 	//
 	// Corresponds with GET /partner/v2/organizations (the `ListPartnerV2Organizations` operationId).
-	ListPartnerV2Organizations(ctx context.Context, params *ListPartnerV2OrganizationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listPartnerV2Organizations(ctx context.Context, params *ListPartnerV2OrganizationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetPartnerV2Organization Read an Organization
 	//
@@ -1745,7 +1745,7 @@ type ClientInterface interface {
 	// Make a request to read an organization.
 	//
 	// Corresponds with GET /partner/v2/organizations/{id} (the `GetPartnerV2Organization` operationId).
-	GetPartnerV2Organization(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getPartnerV2Organization(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// SignupWithBody Signup an Organization on behalf of a Customer
 	//
@@ -1761,7 +1761,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /partner/v2/signup (the `Signup` operationId).
-	SignupWithBody(ctx context.Context, params *SignupParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	signupWithBody(ctx context.Context, params *SignupParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// Signup Signup an Organization on behalf of a Customer
 	//
@@ -1777,7 +1777,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /partner/v2/signup (the `Signup` operationId).
-	Signup(ctx context.Context, params *SignupParams, body SignupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	signup(ctx context.Context, params *SignupParams, body SignupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ActivateSignupWithBody Activate an Incomplete Signup
 	//
@@ -1790,7 +1790,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /partner/v2/signup/activate (the `ActivateSignup` operationId).
-	ActivateSignupWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	activateSignupWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ActivateSignup Activate an Incomplete Signup
 	//
@@ -1803,7 +1803,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /partner/v2/signup/activate (the `ActivateSignup` operationId).
-	ActivateSignup(ctx context.Context, body ActivateSignupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	activateSignup(ctx context.Context, body ActivateSignupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// SignupPartnerV2LinkWithBody Signup a Customer by Linking to an Existing Organization
 	//
@@ -1814,7 +1814,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /partner/v2/signup/link (the `SignupPartnerV2Link` operationId).
-	SignupPartnerV2LinkWithBody(ctx context.Context, params *SignupPartnerV2LinkParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	signupPartnerV2LinkWithBody(ctx context.Context, params *SignupPartnerV2LinkParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// SignupPartnerV2Link Signup a Customer by Linking to an Existing Organization
 	//
@@ -1825,7 +1825,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /partner/v2/signup/link (the `SignupPartnerV2Link` operationId).
-	SignupPartnerV2Link(ctx context.Context, params *SignupPartnerV2LinkParams, body SignupPartnerV2LinkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	signupPartnerV2Link(ctx context.Context, params *SignupPartnerV2LinkParams, body SignupPartnerV2LinkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -1843,7 +1843,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -1863,156 +1863,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListPartnerV2EntitlementsWithResponse List of Entitlements
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Retrieve a sorted, filtered, paginated list of all entitlements.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /partner/v2/entitlements (the `ListPartnerV2Entitlements` operationId).
-	ListPartnerV2EntitlementsWithResponse(ctx context.Context, params *ListPartnerV2EntitlementsParams, reqEditors ...RequestEditorFn) (*ListPartnerV2EntitlementsResponse, error)
-
-	// CreatePartnerV2EntitlementWithBodyWithResponse Create an Entitlement
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to create an entitlement.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /partner/v2/entitlements (the `CreatePartnerV2Entitlement` operationId).
-	CreatePartnerV2EntitlementWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatePartnerV2EntitlementResponse, error)
-
-	// CreatePartnerV2EntitlementWithResponse Create an Entitlement
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to create an entitlement.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /partner/v2/entitlements (the `CreatePartnerV2Entitlement` operationId).
-	CreatePartnerV2EntitlementWithResponse(ctx context.Context, body CreatePartnerV2EntitlementJSONRequestBody, reqEditors ...RequestEditorFn) (*CreatePartnerV2EntitlementResponse, error)
-
-	// GetPartnerV2EntitlementWithResponse Read an Entitlement
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to read an entitlement.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /partner/v2/entitlements/{id} (the `GetPartnerV2Entitlement` operationId).
-	GetPartnerV2EntitlementWithResponse(ctx context.Context, id string, params *GetPartnerV2EntitlementParams, reqEditors ...RequestEditorFn) (*GetPartnerV2EntitlementResponse, error)
-
-	// ListPartnerV2OrganizationsWithResponse List of Organizations
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Retrieve a sorted, filtered, paginated list of all organizations.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /partner/v2/organizations (the `ListPartnerV2Organizations` operationId).
-	ListPartnerV2OrganizationsWithResponse(ctx context.Context, params *ListPartnerV2OrganizationsParams, reqEditors ...RequestEditorFn) (*ListPartnerV2OrganizationsResponse, error)
-
-	// GetPartnerV2OrganizationWithResponse Read an Organization
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to read an organization.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /partner/v2/organizations/{id} (the `GetPartnerV2Organization` operationId).
-	GetPartnerV2OrganizationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetPartnerV2OrganizationResponse, error)
-
-	// SignupWithBodyWithResponse Signup an Organization on behalf of a Customer
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Create an organization for a customer. You must pass in either an entitlement object reference (a url to
-	// a previously created entitlement) or entitlement details. If you pass in an entitlement object reference, we will link with the
-	// created entitlement. If you pass in the entitlement details, we will create the entitlement with the organization
-	// in a single transaction. If you pass in user details (email, given name, and family name), we will
-	// create a user as well. If you do not pass in user details, you MUST call `/partner/v2/signup/activate`
-	// with user details to complete signup.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /partner/v2/signup (the `Signup` operationId).
-	SignupWithBodyWithResponse(ctx context.Context, params *SignupParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SignupResponse, error)
-
-	// SignupWithResponse Signup an Organization on behalf of a Customer
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Create an organization for a customer. You must pass in either an entitlement object reference (a url to
-	// a previously created entitlement) or entitlement details. If you pass in an entitlement object reference, we will link with the
-	// created entitlement. If you pass in the entitlement details, we will create the entitlement with the organization
-	// in a single transaction. If you pass in user details (email, given name, and family name), we will
-	// create a user as well. If you do not pass in user details, you MUST call `/partner/v2/signup/activate`
-	// with user details to complete signup.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /partner/v2/signup (the `Signup` operationId).
-	SignupWithResponse(ctx context.Context, params *SignupParams, body SignupJSONRequestBody, reqEditors ...RequestEditorFn) (*SignupResponse, error)
-
-	// ActivateSignupWithBodyWithResponse Activate an Incomplete Signup
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Creates a user in the organization previously created in `/partner/v2/signup`. This completes the signup
-	// process if you did not pass in user details to `/partner/v2/signup`. Calling this endpoint if the signup
-	// process has been completed will result in a `409 Conflict` error.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /partner/v2/signup/activate (the `ActivateSignup` operationId).
-	ActivateSignupWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ActivateSignupResponse, error)
-
-	// ActivateSignupWithResponse Activate an Incomplete Signup
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Creates a user in the organization previously created in `/partner/v2/signup`. This completes the signup
-	// process if you did not pass in user details to `/partner/v2/signup`. Calling this endpoint if the signup
-	// process has been completed will result in a `409 Conflict` error.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /partner/v2/signup/activate (the `ActivateSignup` operationId).
-	ActivateSignupWithResponse(ctx context.Context, body ActivateSignupJSONRequestBody, reqEditors ...RequestEditorFn) (*ActivateSignupResponse, error)
-
-	// SignupPartnerV2LinkWithBodyWithResponse Signup a Customer by Linking to an Existing Organization
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Signup a customer by linking a new entitlement to an existing Confluent Cloud organization.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /partner/v2/signup/link (the `SignupPartnerV2Link` operationId).
-	SignupPartnerV2LinkWithBodyWithResponse(ctx context.Context, params *SignupPartnerV2LinkParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SignupPartnerV2LinkResponse, error)
-
-	// SignupPartnerV2LinkWithResponse Signup a Customer by Linking to an Existing Organization
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Partner v2](https://img.shields.io/badge/-Request%20Access%20To%20Partner%20v2-%23bc8540)](mailto:ccloud-api-access+partner-v2-early-access@confluent.io?subject=Request%20to%20join%20partner/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20partner/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Signup a customer by linking a new entitlement to an existing Confluent Cloud organization.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /partner/v2/signup/link (the `SignupPartnerV2Link` operationId).
-	SignupPartnerV2LinkWithResponse(ctx context.Context, params *SignupPartnerV2LinkParams, body SignupPartnerV2LinkJSONRequestBody, reqEditors ...RequestEditorFn) (*SignupPartnerV2LinkResponse, error)
-}
-
 func (r ListPartnerV2EntitlementsResponse) GetJSON200() *PartnerV2EntitlementList {
 	return r.JSON200
 }

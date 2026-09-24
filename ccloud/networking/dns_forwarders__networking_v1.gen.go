@@ -107,7 +107,7 @@ type UpdateNetworkingV1DnsForwarder200JSONResponseBodyKind string
 type CreateNetworkingV1DnsForwarderJSONRequestBody CreateNetworkingV1DnsForwarderJSONBody
 type UpdateNetworkingV1DnsForwarderJSONRequestBody UpdateNetworkingV1DnsForwarderJSONBody
 
-func (c *oasClient) ListNetworkingV1DnsForwarders(ctx context.Context, params *ListNetworkingV1DnsForwardersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listNetworkingV1DnsForwarders(ctx context.Context, params *ListNetworkingV1DnsForwardersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNetworkingV1DnsForwardersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -118,7 +118,7 @@ func (c *oasClient) ListNetworkingV1DnsForwarders(ctx context.Context, params *L
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateNetworkingV1DnsForwarderWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createNetworkingV1DnsForwarderWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1DnsForwarderRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -129,7 +129,7 @@ func (c *oasClient) CreateNetworkingV1DnsForwarderWithBody(ctx context.Context, 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateNetworkingV1DnsForwarder(ctx context.Context, body CreateNetworkingV1DnsForwarderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createNetworkingV1DnsForwarder(ctx context.Context, body CreateNetworkingV1DnsForwarderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1DnsForwarderRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -140,7 +140,7 @@ func (c *oasClient) CreateNetworkingV1DnsForwarder(ctx context.Context, body Cre
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteNetworkingV1DnsForwarder(ctx context.Context, id string, params *DeleteNetworkingV1DnsForwarderParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteNetworkingV1DnsForwarder(ctx context.Context, id string, params *DeleteNetworkingV1DnsForwarderParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteNetworkingV1DnsForwarderRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -151,7 +151,7 @@ func (c *oasClient) DeleteNetworkingV1DnsForwarder(ctx context.Context, id strin
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetNetworkingV1DnsForwarder(ctx context.Context, id string, params *GetNetworkingV1DnsForwarderParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getNetworkingV1DnsForwarder(ctx context.Context, id string, params *GetNetworkingV1DnsForwarderParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNetworkingV1DnsForwarderRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -162,7 +162,7 @@ func (c *oasClient) GetNetworkingV1DnsForwarder(ctx context.Context, id string, 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateNetworkingV1DnsForwarderWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateNetworkingV1DnsForwarderWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1DnsForwarderRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -173,7 +173,7 @@ func (c *oasClient) UpdateNetworkingV1DnsForwarderWithBody(ctx context.Context, 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateNetworkingV1DnsForwarder(ctx context.Context, id string, body UpdateNetworkingV1DnsForwarderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateNetworkingV1DnsForwarder(ctx context.Context, id string, body UpdateNetworkingV1DnsForwarderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1DnsForwarderRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -863,49 +863,49 @@ type UpdateNetworkingV1DnsForwarderResponse struct {
 }
 
 func (c *ClientWithResponses) ListNetworkingV1DnsForwardersWithResponse(ctx context.Context, params *ListNetworkingV1DnsForwardersParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1DnsForwardersResponse, error) {
-	rsp, err := c.ListNetworkingV1DnsForwarders(ctx, params, reqEditors...)
+	rsp, err := c.listNetworkingV1DnsForwarders(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListNetworkingV1DnsForwardersResponse(rsp)
 }
 func (c *ClientWithResponses) CreateNetworkingV1DnsForwarderWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1DnsForwarderResponse, error) {
-	rsp, err := c.CreateNetworkingV1DnsForwarderWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createNetworkingV1DnsForwarderWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateNetworkingV1DnsForwarderResponse(rsp)
 }
 func (c *ClientWithResponses) CreateNetworkingV1DnsForwarderWithResponse(ctx context.Context, body CreateNetworkingV1DnsForwarderJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1DnsForwarderResponse, error) {
-	rsp, err := c.CreateNetworkingV1DnsForwarder(ctx, body, reqEditors...)
+	rsp, err := c.createNetworkingV1DnsForwarder(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateNetworkingV1DnsForwarderResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteNetworkingV1DnsForwarderWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1DnsForwarderParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1DnsForwarderResponse, error) {
-	rsp, err := c.DeleteNetworkingV1DnsForwarder(ctx, id, params, reqEditors...)
+	rsp, err := c.deleteNetworkingV1DnsForwarder(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteNetworkingV1DnsForwarderResponse(rsp)
 }
 func (c *ClientWithResponses) GetNetworkingV1DnsForwarderWithResponse(ctx context.Context, id string, params *GetNetworkingV1DnsForwarderParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1DnsForwarderResponse, error) {
-	rsp, err := c.GetNetworkingV1DnsForwarder(ctx, id, params, reqEditors...)
+	rsp, err := c.getNetworkingV1DnsForwarder(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetNetworkingV1DnsForwarderResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateNetworkingV1DnsForwarderWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1DnsForwarderResponse, error) {
-	rsp, err := c.UpdateNetworkingV1DnsForwarderWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateNetworkingV1DnsForwarderWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateNetworkingV1DnsForwarderResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateNetworkingV1DnsForwarderWithResponse(ctx context.Context, id string, body UpdateNetworkingV1DnsForwarderJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1DnsForwarderResponse, error) {
-	rsp, err := c.UpdateNetworkingV1DnsForwarder(ctx, id, body, reqEditors...)
+	rsp, err := c.updateNetworkingV1DnsForwarder(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

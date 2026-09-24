@@ -83,7 +83,7 @@ type ResourcesCdxV1SharedTokenJSONBodyKind string
 type RedeemCdxV1SharedTokenJSONRequestBody RedeemCdxV1SharedTokenJSONBody
 type ResourcesCdxV1SharedTokenJSONRequestBody ResourcesCdxV1SharedTokenJSONBody
 
-func (c *oasClient) RedeemCdxV1SharedTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) redeemCdxV1SharedTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRedeemCdxV1SharedTokenRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -94,7 +94,7 @@ func (c *oasClient) RedeemCdxV1SharedTokenWithBody(ctx context.Context, contentT
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) RedeemCdxV1SharedToken(ctx context.Context, body RedeemCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) redeemCdxV1SharedToken(ctx context.Context, body RedeemCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRedeemCdxV1SharedTokenRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -105,7 +105,7 @@ func (c *oasClient) RedeemCdxV1SharedToken(ctx context.Context, body RedeemCdxV1
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ResourcesCdxV1SharedTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) resourcesCdxV1SharedTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewResourcesCdxV1SharedTokenRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -116,7 +116,7 @@ func (c *oasClient) ResourcesCdxV1SharedTokenWithBody(ctx context.Context, conte
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ResourcesCdxV1SharedToken(ctx context.Context, body ResourcesCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) resourcesCdxV1SharedToken(ctx context.Context, body ResourcesCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewResourcesCdxV1SharedTokenRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -322,28 +322,28 @@ type ResourcesCdxV1SharedTokenResponse struct {
 }
 
 func (c *ClientWithResponses) RedeemCdxV1SharedTokenWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RedeemCdxV1SharedTokenResponse, error) {
-	rsp, err := c.RedeemCdxV1SharedTokenWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.redeemCdxV1SharedTokenWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseRedeemCdxV1SharedTokenResponse(rsp)
 }
 func (c *ClientWithResponses) RedeemCdxV1SharedTokenWithResponse(ctx context.Context, body RedeemCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*RedeemCdxV1SharedTokenResponse, error) {
-	rsp, err := c.RedeemCdxV1SharedToken(ctx, body, reqEditors...)
+	rsp, err := c.redeemCdxV1SharedToken(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseRedeemCdxV1SharedTokenResponse(rsp)
 }
 func (c *ClientWithResponses) ResourcesCdxV1SharedTokenWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ResourcesCdxV1SharedTokenResponse, error) {
-	rsp, err := c.ResourcesCdxV1SharedTokenWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.resourcesCdxV1SharedTokenWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseResourcesCdxV1SharedTokenResponse(rsp)
 }
 func (c *ClientWithResponses) ResourcesCdxV1SharedTokenWithResponse(ctx context.Context, body ResourcesCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*ResourcesCdxV1SharedTokenResponse, error) {
-	rsp, err := c.ResourcesCdxV1SharedToken(ctx, body, reqEditors...)
+	rsp, err := c.resourcesCdxV1SharedToken(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

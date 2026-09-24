@@ -44,7 +44,7 @@ type ListEndpointV1EndpointsParams struct {
 type ListEndpointV1Endpoints200JSONResponseBodyApiVersion string
 type ListEndpointV1Endpoints200JSONResponseBodyKind string
 
-func (c *oasClient) ListEndpointV1Endpoints(ctx context.Context, params *ListEndpointV1EndpointsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listEndpointV1Endpoints(ctx context.Context, params *ListEndpointV1EndpointsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListEndpointV1EndpointsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -259,7 +259,7 @@ type ListEndpointV1EndpointsResponse struct {
 }
 
 func (c *ClientWithResponses) ListEndpointV1EndpointsWithResponse(ctx context.Context, params *ListEndpointV1EndpointsParams, reqEditors ...RequestEditorFn) (*ListEndpointV1EndpointsResponse, error) {
-	rsp, err := c.ListEndpointV1Endpoints(ctx, params, reqEditors...)
+	rsp, err := c.listEndpointV1Endpoints(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

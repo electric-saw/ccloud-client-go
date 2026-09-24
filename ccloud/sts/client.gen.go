@@ -649,7 +649,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ExchangeStsV1OauthTokenWithBody Exchange an OAuth Token
 	//
@@ -662,7 +662,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /sts/v1/oauth2/token (the `ExchangeStsV1OauthToken` operationId).
-	ExchangeStsV1OauthTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	exchangeStsV1OauthTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ExchangeStsV1OauthTokenWithFormdataBody Exchange an OAuth Token
 	//
@@ -675,10 +675,10 @@ type ClientInterface interface {
 	// Takes a body of the `application/x-www-form-urlencoded` content type.
 	//
 	// Corresponds with POST /sts/v1/oauth2/token (the `ExchangeStsV1OauthToken` operationId).
-	ExchangeStsV1OauthTokenWithFormdataBody(ctx context.Context, body ExchangeStsV1OauthTokenFormdataRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	exchangeStsV1OauthTokenWithFormdataBody(ctx context.Context, body ExchangeStsV1OauthTokenFormdataRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *oasClient) ExchangeStsV1OauthTokenWithFormdataBody(ctx context.Context, body ExchangeStsV1OauthTokenFormdataRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) exchangeStsV1OauthTokenWithFormdataBody(ctx context.Context, body ExchangeStsV1OauthTokenFormdataRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewExchangeStsV1OauthTokenRequestWithFormdataBody(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -713,7 +713,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -733,36 +733,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ExchangeStsV1OauthTokenWithBodyWithResponse Exchange an OAuth Token
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Use this operation to exchange an access token (JWT) issued by an external identity provider for
-	// an access token (JWT) issued by Confluent.This enables the use of external identities
-	// to access Confluent Cloud APIs.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /sts/v1/oauth2/token (the `ExchangeStsV1OauthToken` operationId).
-	ExchangeStsV1OauthTokenWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ExchangeStsV1OauthTokenResponse, error)
-
-	// ExchangeStsV1OauthTokenWithFormdataBodyWithResponse Exchange an OAuth Token
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Use this operation to exchange an access token (JWT) issued by an external identity provider for
-	// an access token (JWT) issued by Confluent.This enables the use of external identities
-	// to access Confluent Cloud APIs.
-	//
-	// Takes a body of the `application/x-www-form-urlencoded` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /sts/v1/oauth2/token (the `ExchangeStsV1OauthToken` operationId).
-	ExchangeStsV1OauthTokenWithFormdataBodyWithResponse(ctx context.Context, body ExchangeStsV1OauthTokenFormdataRequestBody, reqEditors ...RequestEditorFn) (*ExchangeStsV1OauthTokenResponse, error)
-}
-
 func (r ExchangeStsV1OauthTokenResponse) GetJSON200() *StsV1TokenExchangeReply {
 	return r.JSON200
 }

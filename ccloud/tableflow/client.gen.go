@@ -2307,7 +2307,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListTableflowV1CatalogIntegrations List of Catalog Integrations
 	//
@@ -2316,7 +2316,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all catalog integrations.
 	//
 	// Corresponds with GET /tableflow/v1/catalog-integrations (the `ListTableflowV1CatalogIntegrations` operationId).
-	ListTableflowV1CatalogIntegrations(ctx context.Context, params *ListTableflowV1CatalogIntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listTableflowV1CatalogIntegrations(ctx context.Context, params *ListTableflowV1CatalogIntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateTableflowV1CatalogIntegrationWithBody Create a Catalog Integration
 	//
@@ -2327,7 +2327,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /tableflow/v1/catalog-integrations (the `CreateTableflowV1CatalogIntegration` operationId).
-	CreateTableflowV1CatalogIntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createTableflowV1CatalogIntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateTableflowV1CatalogIntegration Create a Catalog Integration
 	//
@@ -2338,7 +2338,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /tableflow/v1/catalog-integrations (the `CreateTableflowV1CatalogIntegration` operationId).
-	CreateTableflowV1CatalogIntegration(ctx context.Context, body CreateTableflowV1CatalogIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createTableflowV1CatalogIntegration(ctx context.Context, body CreateTableflowV1CatalogIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteTableflowV1CatalogIntegration Delete a Catalog Integration
 	//
@@ -2347,7 +2347,7 @@ type ClientInterface interface {
 	// Make a request to delete a catalog integration.
 	//
 	// Corresponds with DELETE /tableflow/v1/catalog-integrations/{id} (the `DeleteTableflowV1CatalogIntegration` operationId).
-	DeleteTableflowV1CatalogIntegration(ctx context.Context, id string, params *DeleteTableflowV1CatalogIntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteTableflowV1CatalogIntegration(ctx context.Context, id string, params *DeleteTableflowV1CatalogIntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetTableflowV1CatalogIntegration Read a Catalog Integration
 	//
@@ -2356,7 +2356,7 @@ type ClientInterface interface {
 	// Make a request to read a catalog integration.
 	//
 	// Corresponds with GET /tableflow/v1/catalog-integrations/{id} (the `GetTableflowV1CatalogIntegration` operationId).
-	GetTableflowV1CatalogIntegration(ctx context.Context, id string, params *GetTableflowV1CatalogIntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getTableflowV1CatalogIntegration(ctx context.Context, id string, params *GetTableflowV1CatalogIntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTableflowV1CatalogIntegrationWithBody Update a Catalog Integration
 	//
@@ -2367,7 +2367,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /tableflow/v1/catalog-integrations/{id} (the `UpdateTableflowV1CatalogIntegration` operationId).
-	UpdateTableflowV1CatalogIntegrationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTableflowV1CatalogIntegrationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTableflowV1CatalogIntegration Update a Catalog Integration
 	//
@@ -2378,7 +2378,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /tableflow/v1/catalog-integrations/{id} (the `UpdateTableflowV1CatalogIntegration` operationId).
-	UpdateTableflowV1CatalogIntegration(ctx context.Context, id string, body UpdateTableflowV1CatalogIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTableflowV1CatalogIntegration(ctx context.Context, id string, body UpdateTableflowV1CatalogIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListTableflowV1Regions List of Regions
 	//
@@ -2387,7 +2387,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all regions.
 	//
 	// Corresponds with GET /tableflow/v1/regions (the `ListTableflowV1Regions` operationId).
-	ListTableflowV1Regions(ctx context.Context, params *ListTableflowV1RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listTableflowV1Regions(ctx context.Context, params *ListTableflowV1RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListTableflowV1TableflowTopics List of Tableflow Topics
 	//
@@ -2396,7 +2396,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all tableflow topics.
 	//
 	// Corresponds with GET /tableflow/v1/tableflow-topics (the `ListTableflowV1TableflowTopics` operationId).
-	ListTableflowV1TableflowTopics(ctx context.Context, params *ListTableflowV1TableflowTopicsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listTableflowV1TableflowTopics(ctx context.Context, params *ListTableflowV1TableflowTopicsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateTableflowV1TableflowTopicWithBody Create a Tableflow Topic
 	//
@@ -2407,7 +2407,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /tableflow/v1/tableflow-topics (the `CreateTableflowV1TableflowTopic` operationId).
-	CreateTableflowV1TableflowTopicWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createTableflowV1TableflowTopicWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateTableflowV1TableflowTopic Create a Tableflow Topic
 	//
@@ -2418,7 +2418,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /tableflow/v1/tableflow-topics (the `CreateTableflowV1TableflowTopic` operationId).
-	CreateTableflowV1TableflowTopic(ctx context.Context, body CreateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createTableflowV1TableflowTopic(ctx context.Context, body CreateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteTableflowV1TableflowTopic Delete a Tableflow Topic
 	//
@@ -2427,7 +2427,7 @@ type ClientInterface interface {
 	// Make a request to delete a tableflow topic.
 	//
 	// Corresponds with DELETE /tableflow/v1/tableflow-topics/{display_name} (the `DeleteTableflowV1TableflowTopic` operationId).
-	DeleteTableflowV1TableflowTopic(ctx context.Context, displayName string, params *DeleteTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteTableflowV1TableflowTopic(ctx context.Context, displayName string, params *DeleteTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetTableflowV1TableflowTopic Read a Tableflow Topic
 	//
@@ -2436,7 +2436,7 @@ type ClientInterface interface {
 	// Make a request to read a tableflow topic.
 	//
 	// Corresponds with GET /tableflow/v1/tableflow-topics/{display_name} (the `GetTableflowV1TableflowTopic` operationId).
-	GetTableflowV1TableflowTopic(ctx context.Context, displayName string, params *GetTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getTableflowV1TableflowTopic(ctx context.Context, displayName string, params *GetTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTableflowV1TableflowTopicWithBody Update a Tableflow Topic
 	//
@@ -2447,7 +2447,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /tableflow/v1/tableflow-topics/{display_name} (the `UpdateTableflowV1TableflowTopic` operationId).
-	UpdateTableflowV1TableflowTopicWithBody(ctx context.Context, displayName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTableflowV1TableflowTopicWithBody(ctx context.Context, displayName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTableflowV1TableflowTopic Update a Tableflow Topic
 	//
@@ -2458,7 +2458,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /tableflow/v1/tableflow-topics/{display_name} (the `UpdateTableflowV1TableflowTopic` operationId).
-	UpdateTableflowV1TableflowTopic(ctx context.Context, displayName string, body UpdateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTableflowV1TableflowTopic(ctx context.Context, displayName string, body UpdateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -2476,7 +2476,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -2496,175 +2496,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListTableflowV1CatalogIntegrationsWithResponse List of Catalog Integrations
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all catalog integrations.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /tableflow/v1/catalog-integrations (the `ListTableflowV1CatalogIntegrations` operationId).
-	ListTableflowV1CatalogIntegrationsWithResponse(ctx context.Context, params *ListTableflowV1CatalogIntegrationsParams, reqEditors ...RequestEditorFn) (*ListTableflowV1CatalogIntegrationsResponse, error)
-
-	// CreateTableflowV1CatalogIntegrationWithBodyWithResponse Create a Catalog Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a catalog integration.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /tableflow/v1/catalog-integrations (the `CreateTableflowV1CatalogIntegration` operationId).
-	CreateTableflowV1CatalogIntegrationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateTableflowV1CatalogIntegrationResponse, error)
-
-	// CreateTableflowV1CatalogIntegrationWithResponse Create a Catalog Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a catalog integration.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /tableflow/v1/catalog-integrations (the `CreateTableflowV1CatalogIntegration` operationId).
-	CreateTableflowV1CatalogIntegrationWithResponse(ctx context.Context, body CreateTableflowV1CatalogIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateTableflowV1CatalogIntegrationResponse, error)
-
-	// DeleteTableflowV1CatalogIntegrationWithResponse Delete a Catalog Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a catalog integration.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /tableflow/v1/catalog-integrations/{id} (the `DeleteTableflowV1CatalogIntegration` operationId).
-	DeleteTableflowV1CatalogIntegrationWithResponse(ctx context.Context, id string, params *DeleteTableflowV1CatalogIntegrationParams, reqEditors ...RequestEditorFn) (*DeleteTableflowV1CatalogIntegrationResponse, error)
-
-	// GetTableflowV1CatalogIntegrationWithResponse Read a Catalog Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a catalog integration.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /tableflow/v1/catalog-integrations/{id} (the `GetTableflowV1CatalogIntegration` operationId).
-	GetTableflowV1CatalogIntegrationWithResponse(ctx context.Context, id string, params *GetTableflowV1CatalogIntegrationParams, reqEditors ...RequestEditorFn) (*GetTableflowV1CatalogIntegrationResponse, error)
-
-	// UpdateTableflowV1CatalogIntegrationWithBodyWithResponse Update a Catalog Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a catalog integration.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /tableflow/v1/catalog-integrations/{id} (the `UpdateTableflowV1CatalogIntegration` operationId).
-	UpdateTableflowV1CatalogIntegrationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateTableflowV1CatalogIntegrationResponse, error)
-
-	// UpdateTableflowV1CatalogIntegrationWithResponse Update a Catalog Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a catalog integration.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /tableflow/v1/catalog-integrations/{id} (the `UpdateTableflowV1CatalogIntegration` operationId).
-	UpdateTableflowV1CatalogIntegrationWithResponse(ctx context.Context, id string, body UpdateTableflowV1CatalogIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateTableflowV1CatalogIntegrationResponse, error)
-
-	// ListTableflowV1RegionsWithResponse List of Regions
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all regions.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /tableflow/v1/regions (the `ListTableflowV1Regions` operationId).
-	ListTableflowV1RegionsWithResponse(ctx context.Context, params *ListTableflowV1RegionsParams, reqEditors ...RequestEditorFn) (*ListTableflowV1RegionsResponse, error)
-
-	// ListTableflowV1TableflowTopicsWithResponse List of Tableflow Topics
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all tableflow topics.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /tableflow/v1/tableflow-topics (the `ListTableflowV1TableflowTopics` operationId).
-	ListTableflowV1TableflowTopicsWithResponse(ctx context.Context, params *ListTableflowV1TableflowTopicsParams, reqEditors ...RequestEditorFn) (*ListTableflowV1TableflowTopicsResponse, error)
-
-	// CreateTableflowV1TableflowTopicWithBodyWithResponse Create a Tableflow Topic
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a tableflow topic.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /tableflow/v1/tableflow-topics (the `CreateTableflowV1TableflowTopic` operationId).
-	CreateTableflowV1TableflowTopicWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateTableflowV1TableflowTopicResponse, error)
-
-	// CreateTableflowV1TableflowTopicWithResponse Create a Tableflow Topic
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a tableflow topic.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /tableflow/v1/tableflow-topics (the `CreateTableflowV1TableflowTopic` operationId).
-	CreateTableflowV1TableflowTopicWithResponse(ctx context.Context, body CreateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateTableflowV1TableflowTopicResponse, error)
-
-	// DeleteTableflowV1TableflowTopicWithResponse Delete a Tableflow Topic
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a tableflow topic.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /tableflow/v1/tableflow-topics/{display_name} (the `DeleteTableflowV1TableflowTopic` operationId).
-	DeleteTableflowV1TableflowTopicWithResponse(ctx context.Context, displayName string, params *DeleteTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*DeleteTableflowV1TableflowTopicResponse, error)
-
-	// GetTableflowV1TableflowTopicWithResponse Read a Tableflow Topic
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a tableflow topic.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /tableflow/v1/tableflow-topics/{display_name} (the `GetTableflowV1TableflowTopic` operationId).
-	GetTableflowV1TableflowTopicWithResponse(ctx context.Context, displayName string, params *GetTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*GetTableflowV1TableflowTopicResponse, error)
-
-	// UpdateTableflowV1TableflowTopicWithBodyWithResponse Update a Tableflow Topic
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a tableflow topic.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /tableflow/v1/tableflow-topics/{display_name} (the `UpdateTableflowV1TableflowTopic` operationId).
-	UpdateTableflowV1TableflowTopicWithBodyWithResponse(ctx context.Context, displayName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateTableflowV1TableflowTopicResponse, error)
-
-	// UpdateTableflowV1TableflowTopicWithResponse Update a Tableflow Topic
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a tableflow topic.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /tableflow/v1/tableflow-topics/{display_name} (the `UpdateTableflowV1TableflowTopic` operationId).
-	UpdateTableflowV1TableflowTopicWithResponse(ctx context.Context, displayName string, body UpdateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateTableflowV1TableflowTopicResponse, error)
-}
-
 func (r ListTableflowV1CatalogIntegrationsResponse) GetJSON200() *struct {
 	// ApiVersion APIVersion defines the schema version of this representation of a resource.
 	ApiVersion ListTableflowV1CatalogIntegrations200JSONResponseBodyApiVersion `json:"api_version"`

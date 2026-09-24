@@ -69,7 +69,7 @@ type UpdateIamV2ApiKey200JSONResponseBodyKind string
 type CreateIamV2ApiKeyJSONRequestBody CreateIamV2ApiKeyJSONBody
 type UpdateIamV2ApiKeyJSONRequestBody = IamV2ApiKey
 
-func (c *oasClient) ListIamV2ApiKeys(ctx context.Context, params *ListIamV2ApiKeysParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listIamV2ApiKeys(ctx context.Context, params *ListIamV2ApiKeysParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIamV2ApiKeysRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -80,7 +80,7 @@ func (c *oasClient) ListIamV2ApiKeys(ctx context.Context, params *ListIamV2ApiKe
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateIamV2ApiKeyWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createIamV2ApiKeyWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2ApiKeyRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -91,7 +91,7 @@ func (c *oasClient) CreateIamV2ApiKeyWithBody(ctx context.Context, contentType s
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateIamV2ApiKey(ctx context.Context, body CreateIamV2ApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createIamV2ApiKey(ctx context.Context, body CreateIamV2ApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2ApiKeyRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -102,7 +102,7 @@ func (c *oasClient) CreateIamV2ApiKey(ctx context.Context, body CreateIamV2ApiKe
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteIamV2ApiKey(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteIamV2ApiKey(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIamV2ApiKeyRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -113,7 +113,7 @@ func (c *oasClient) DeleteIamV2ApiKey(ctx context.Context, id string, reqEditors
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetIamV2ApiKey(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getIamV2ApiKey(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2ApiKeyRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (c *oasClient) GetIamV2ApiKey(ctx context.Context, id string, reqEditors ..
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateIamV2ApiKeyWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateIamV2ApiKeyWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2ApiKeyRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -135,7 +135,7 @@ func (c *oasClient) UpdateIamV2ApiKeyWithBody(ctx context.Context, id string, co
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateIamV2ApiKey(ctx context.Context, id string, body UpdateIamV2ApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateIamV2ApiKey(ctx context.Context, id string, body UpdateIamV2ApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2ApiKeyRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -800,49 +800,49 @@ type UpdateIamV2ApiKeyResponse struct {
 }
 
 func (c *ClientWithResponses) ListIamV2ApiKeysWithResponse(ctx context.Context, params *ListIamV2ApiKeysParams, reqEditors ...RequestEditorFn) (*ListIamV2ApiKeysResponse, error) {
-	rsp, err := c.ListIamV2ApiKeys(ctx, params, reqEditors...)
+	rsp, err := c.listIamV2ApiKeys(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListIamV2ApiKeysResponse(rsp)
 }
 func (c *ClientWithResponses) CreateIamV2ApiKeyWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2ApiKeyResponse, error) {
-	rsp, err := c.CreateIamV2ApiKeyWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createIamV2ApiKeyWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIamV2ApiKeyResponse(rsp)
 }
 func (c *ClientWithResponses) CreateIamV2ApiKeyWithResponse(ctx context.Context, body CreateIamV2ApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2ApiKeyResponse, error) {
-	rsp, err := c.CreateIamV2ApiKey(ctx, body, reqEditors...)
+	rsp, err := c.createIamV2ApiKey(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIamV2ApiKeyResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteIamV2ApiKeyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2ApiKeyResponse, error) {
-	rsp, err := c.DeleteIamV2ApiKey(ctx, id, reqEditors...)
+	rsp, err := c.deleteIamV2ApiKey(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteIamV2ApiKeyResponse(rsp)
 }
 func (c *ClientWithResponses) GetIamV2ApiKeyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2ApiKeyResponse, error) {
-	rsp, err := c.GetIamV2ApiKey(ctx, id, reqEditors...)
+	rsp, err := c.getIamV2ApiKey(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetIamV2ApiKeyResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateIamV2ApiKeyWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2ApiKeyResponse, error) {
-	rsp, err := c.UpdateIamV2ApiKeyWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateIamV2ApiKeyWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateIamV2ApiKeyResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateIamV2ApiKeyWithResponse(ctx context.Context, id string, body UpdateIamV2ApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2ApiKeyResponse, error) {
-	rsp, err := c.UpdateIamV2ApiKey(ctx, id, body, reqEditors...)
+	rsp, err := c.updateIamV2ApiKey(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

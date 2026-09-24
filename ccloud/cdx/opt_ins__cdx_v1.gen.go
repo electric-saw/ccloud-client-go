@@ -22,7 +22,7 @@ type UpdateCdxV1OptIn200JSONResponseBodyApiVersion string
 type UpdateCdxV1OptIn200JSONResponseBodyKind string
 type UpdateCdxV1OptInJSONRequestBody = CdxV1OptIn
 
-func (c *oasClient) GetCdxV1OptIn(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getCdxV1OptIn(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCdxV1OptInRequest(c.Server)
 	if err != nil {
 		return nil, err
@@ -33,7 +33,7 @@ func (c *oasClient) GetCdxV1OptIn(ctx context.Context, reqEditors ...RequestEdit
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateCdxV1OptInWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateCdxV1OptInWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateCdxV1OptInRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -44,7 +44,7 @@ func (c *oasClient) UpdateCdxV1OptInWithBody(ctx context.Context, contentType st
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateCdxV1OptIn(ctx context.Context, body UpdateCdxV1OptInJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateCdxV1OptIn(ctx context.Context, body UpdateCdxV1OptInJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateCdxV1OptInRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -270,21 +270,21 @@ type UpdateCdxV1OptInResponse struct {
 }
 
 func (c *ClientWithResponses) GetCdxV1OptInWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCdxV1OptInResponse, error) {
-	rsp, err := c.GetCdxV1OptIn(ctx, reqEditors...)
+	rsp, err := c.getCdxV1OptIn(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetCdxV1OptInResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateCdxV1OptInWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCdxV1OptInResponse, error) {
-	rsp, err := c.UpdateCdxV1OptInWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.updateCdxV1OptInWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateCdxV1OptInResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateCdxV1OptInWithResponse(ctx context.Context, body UpdateCdxV1OptInJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCdxV1OptInResponse, error) {
-	rsp, err := c.UpdateCdxV1OptIn(ctx, body, reqEditors...)
+	rsp, err := c.updateCdxV1OptIn(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

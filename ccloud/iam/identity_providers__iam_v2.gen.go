@@ -88,7 +88,7 @@ type UpdateIamV2IdentityProvider200JSONResponseBodyKind string
 type CreateIamV2IdentityProviderJSONRequestBody CreateIamV2IdentityProviderJSONBody
 type UpdateIamV2IdentityProviderJSONRequestBody = IamV2IdentityProvider
 
-func (c *oasClient) ListIamV2IdentityProviders(ctx context.Context, params *ListIamV2IdentityProvidersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listIamV2IdentityProviders(ctx context.Context, params *ListIamV2IdentityProvidersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIamV2IdentityProvidersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -99,7 +99,7 @@ func (c *oasClient) ListIamV2IdentityProviders(ctx context.Context, params *List
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateIamV2IdentityProviderWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createIamV2IdentityProviderWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2IdentityProviderRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -110,7 +110,7 @@ func (c *oasClient) CreateIamV2IdentityProviderWithBody(ctx context.Context, con
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateIamV2IdentityProvider(ctx context.Context, body CreateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createIamV2IdentityProvider(ctx context.Context, body CreateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2IdentityProviderRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -121,7 +121,7 @@ func (c *oasClient) CreateIamV2IdentityProvider(ctx context.Context, body Create
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteIamV2IdentityProvider(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteIamV2IdentityProvider(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIamV2IdentityProviderRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -132,7 +132,7 @@ func (c *oasClient) DeleteIamV2IdentityProvider(ctx context.Context, id string, 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetIamV2IdentityProvider(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getIamV2IdentityProvider(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2IdentityProviderRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -143,7 +143,7 @@ func (c *oasClient) GetIamV2IdentityProvider(ctx context.Context, id string, req
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateIamV2IdentityProviderWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateIamV2IdentityProviderWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2IdentityProviderRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -154,7 +154,7 @@ func (c *oasClient) UpdateIamV2IdentityProviderWithBody(ctx context.Context, id 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateIamV2IdentityProvider(ctx context.Context, id string, body UpdateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateIamV2IdentityProvider(ctx context.Context, id string, body UpdateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2IdentityProviderRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -855,49 +855,49 @@ type UpdateIamV2IdentityProviderResponse struct {
 }
 
 func (c *ClientWithResponses) ListIamV2IdentityProvidersWithResponse(ctx context.Context, params *ListIamV2IdentityProvidersParams, reqEditors ...RequestEditorFn) (*ListIamV2IdentityProvidersResponse, error) {
-	rsp, err := c.ListIamV2IdentityProviders(ctx, params, reqEditors...)
+	rsp, err := c.listIamV2IdentityProviders(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListIamV2IdentityProvidersResponse(rsp)
 }
 func (c *ClientWithResponses) CreateIamV2IdentityProviderWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2IdentityProviderResponse, error) {
-	rsp, err := c.CreateIamV2IdentityProviderWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createIamV2IdentityProviderWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIamV2IdentityProviderResponse(rsp)
 }
 func (c *ClientWithResponses) CreateIamV2IdentityProviderWithResponse(ctx context.Context, body CreateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2IdentityProviderResponse, error) {
-	rsp, err := c.CreateIamV2IdentityProvider(ctx, body, reqEditors...)
+	rsp, err := c.createIamV2IdentityProvider(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIamV2IdentityProviderResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteIamV2IdentityProviderWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2IdentityProviderResponse, error) {
-	rsp, err := c.DeleteIamV2IdentityProvider(ctx, id, reqEditors...)
+	rsp, err := c.deleteIamV2IdentityProvider(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteIamV2IdentityProviderResponse(rsp)
 }
 func (c *ClientWithResponses) GetIamV2IdentityProviderWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2IdentityProviderResponse, error) {
-	rsp, err := c.GetIamV2IdentityProvider(ctx, id, reqEditors...)
+	rsp, err := c.getIamV2IdentityProvider(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetIamV2IdentityProviderResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateIamV2IdentityProviderWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2IdentityProviderResponse, error) {
-	rsp, err := c.UpdateIamV2IdentityProviderWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateIamV2IdentityProviderWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateIamV2IdentityProviderResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateIamV2IdentityProviderWithResponse(ctx context.Context, id string, body UpdateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2IdentityProviderResponse, error) {
-	rsp, err := c.UpdateIamV2IdentityProvider(ctx, id, body, reqEditors...)
+	rsp, err := c.updateIamV2IdentityProvider(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

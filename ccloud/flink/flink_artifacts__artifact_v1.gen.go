@@ -114,7 +114,7 @@ type UpdateArtifactV1FlinkArtifact200JSONResponseBodyKind string
 type CreateArtifactV1FlinkArtifactJSONRequestBody CreateArtifactV1FlinkArtifactJSONBody
 type UpdateArtifactV1FlinkArtifactJSONRequestBody = ArtifactV1FlinkArtifact
 
-func (c *oasClient) ListArtifactV1FlinkArtifacts(ctx context.Context, params *ListArtifactV1FlinkArtifactsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listArtifactV1FlinkArtifacts(ctx context.Context, params *ListArtifactV1FlinkArtifactsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListArtifactV1FlinkArtifactsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -125,7 +125,7 @@ func (c *oasClient) ListArtifactV1FlinkArtifacts(ctx context.Context, params *Li
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateArtifactV1FlinkArtifactWithBody(ctx context.Context, params *CreateArtifactV1FlinkArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createArtifactV1FlinkArtifactWithBody(ctx context.Context, params *CreateArtifactV1FlinkArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateArtifactV1FlinkArtifactRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -136,7 +136,7 @@ func (c *oasClient) CreateArtifactV1FlinkArtifactWithBody(ctx context.Context, p
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateArtifactV1FlinkArtifact(ctx context.Context, params *CreateArtifactV1FlinkArtifactParams, body CreateArtifactV1FlinkArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createArtifactV1FlinkArtifact(ctx context.Context, params *CreateArtifactV1FlinkArtifactParams, body CreateArtifactV1FlinkArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateArtifactV1FlinkArtifactRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err
@@ -147,7 +147,7 @@ func (c *oasClient) CreateArtifactV1FlinkArtifact(ctx context.Context, params *C
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteArtifactV1FlinkArtifact(ctx context.Context, id string, params *DeleteArtifactV1FlinkArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteArtifactV1FlinkArtifact(ctx context.Context, id string, params *DeleteArtifactV1FlinkArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteArtifactV1FlinkArtifactRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -158,7 +158,7 @@ func (c *oasClient) DeleteArtifactV1FlinkArtifact(ctx context.Context, id string
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetArtifactV1FlinkArtifact(ctx context.Context, id string, params *GetArtifactV1FlinkArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getArtifactV1FlinkArtifact(ctx context.Context, id string, params *GetArtifactV1FlinkArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetArtifactV1FlinkArtifactRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -169,7 +169,7 @@ func (c *oasClient) GetArtifactV1FlinkArtifact(ctx context.Context, id string, p
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateArtifactV1FlinkArtifactWithBody(ctx context.Context, id string, params *UpdateArtifactV1FlinkArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateArtifactV1FlinkArtifactWithBody(ctx context.Context, id string, params *UpdateArtifactV1FlinkArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateArtifactV1FlinkArtifactRequestWithBody(c.Server, id, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -180,7 +180,7 @@ func (c *oasClient) UpdateArtifactV1FlinkArtifactWithBody(ctx context.Context, i
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateArtifactV1FlinkArtifact(ctx context.Context, id string, params *UpdateArtifactV1FlinkArtifactParams, body UpdateArtifactV1FlinkArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateArtifactV1FlinkArtifact(ctx context.Context, id string, params *UpdateArtifactV1FlinkArtifactParams, body UpdateArtifactV1FlinkArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateArtifactV1FlinkArtifactRequest(c.Server, id, params, body)
 	if err != nil {
 		return nil, err
@@ -1039,49 +1039,49 @@ type UpdateArtifactV1FlinkArtifactResponse struct {
 }
 
 func (c *ClientWithResponses) ListArtifactV1FlinkArtifactsWithResponse(ctx context.Context, params *ListArtifactV1FlinkArtifactsParams, reqEditors ...RequestEditorFn) (*ListArtifactV1FlinkArtifactsResponse, error) {
-	rsp, err := c.ListArtifactV1FlinkArtifacts(ctx, params, reqEditors...)
+	rsp, err := c.listArtifactV1FlinkArtifacts(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListArtifactV1FlinkArtifactsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateArtifactV1FlinkArtifactWithBodyWithResponse(ctx context.Context, params *CreateArtifactV1FlinkArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateArtifactV1FlinkArtifactResponse, error) {
-	rsp, err := c.CreateArtifactV1FlinkArtifactWithBody(ctx, params, contentType, body, reqEditors...)
+	rsp, err := c.createArtifactV1FlinkArtifactWithBody(ctx, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateArtifactV1FlinkArtifactResponse(rsp)
 }
 func (c *ClientWithResponses) CreateArtifactV1FlinkArtifactWithResponse(ctx context.Context, params *CreateArtifactV1FlinkArtifactParams, body CreateArtifactV1FlinkArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateArtifactV1FlinkArtifactResponse, error) {
-	rsp, err := c.CreateArtifactV1FlinkArtifact(ctx, params, body, reqEditors...)
+	rsp, err := c.createArtifactV1FlinkArtifact(ctx, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateArtifactV1FlinkArtifactResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteArtifactV1FlinkArtifactWithResponse(ctx context.Context, id string, params *DeleteArtifactV1FlinkArtifactParams, reqEditors ...RequestEditorFn) (*DeleteArtifactV1FlinkArtifactResponse, error) {
-	rsp, err := c.DeleteArtifactV1FlinkArtifact(ctx, id, params, reqEditors...)
+	rsp, err := c.deleteArtifactV1FlinkArtifact(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteArtifactV1FlinkArtifactResponse(rsp)
 }
 func (c *ClientWithResponses) GetArtifactV1FlinkArtifactWithResponse(ctx context.Context, id string, params *GetArtifactV1FlinkArtifactParams, reqEditors ...RequestEditorFn) (*GetArtifactV1FlinkArtifactResponse, error) {
-	rsp, err := c.GetArtifactV1FlinkArtifact(ctx, id, params, reqEditors...)
+	rsp, err := c.getArtifactV1FlinkArtifact(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetArtifactV1FlinkArtifactResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateArtifactV1FlinkArtifactWithBodyWithResponse(ctx context.Context, id string, params *UpdateArtifactV1FlinkArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateArtifactV1FlinkArtifactResponse, error) {
-	rsp, err := c.UpdateArtifactV1FlinkArtifactWithBody(ctx, id, params, contentType, body, reqEditors...)
+	rsp, err := c.updateArtifactV1FlinkArtifactWithBody(ctx, id, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateArtifactV1FlinkArtifactResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateArtifactV1FlinkArtifactWithResponse(ctx context.Context, id string, params *UpdateArtifactV1FlinkArtifactParams, body UpdateArtifactV1FlinkArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateArtifactV1FlinkArtifactResponse, error) {
-	rsp, err := c.UpdateArtifactV1FlinkArtifact(ctx, id, params, body, reqEditors...)
+	rsp, err := c.updateArtifactV1FlinkArtifact(ctx, id, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -32,7 +32,7 @@ type CreateOrgV2ScimTokenJSONBody struct {
 }
 type CreateOrgV2ScimTokenJSONRequestBody CreateOrgV2ScimTokenJSONBody
 
-func (c *oasClient) ListOrgV2ScimTokens(ctx context.Context, params *ListOrgV2ScimTokensParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listOrgV2ScimTokens(ctx context.Context, params *ListOrgV2ScimTokensParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListOrgV2ScimTokensRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -43,7 +43,7 @@ func (c *oasClient) ListOrgV2ScimTokens(ctx context.Context, params *ListOrgV2Sc
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateOrgV2ScimTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createOrgV2ScimTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateOrgV2ScimTokenRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -54,7 +54,7 @@ func (c *oasClient) CreateOrgV2ScimTokenWithBody(ctx context.Context, contentTyp
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateOrgV2ScimToken(ctx context.Context, body CreateOrgV2ScimTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createOrgV2ScimToken(ctx context.Context, body CreateOrgV2ScimTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateOrgV2ScimTokenRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -65,7 +65,7 @@ func (c *oasClient) CreateOrgV2ScimToken(ctx context.Context, body CreateOrgV2Sc
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteOrgV2ScimToken(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteOrgV2ScimToken(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteOrgV2ScimTokenRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -388,28 +388,28 @@ type DeleteOrgV2ScimTokenResponse struct {
 }
 
 func (c *ClientWithResponses) ListOrgV2ScimTokensWithResponse(ctx context.Context, params *ListOrgV2ScimTokensParams, reqEditors ...RequestEditorFn) (*ListOrgV2ScimTokensResponse, error) {
-	rsp, err := c.ListOrgV2ScimTokens(ctx, params, reqEditors...)
+	rsp, err := c.listOrgV2ScimTokens(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListOrgV2ScimTokensResponse(rsp)
 }
 func (c *ClientWithResponses) CreateOrgV2ScimTokenWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateOrgV2ScimTokenResponse, error) {
-	rsp, err := c.CreateOrgV2ScimTokenWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createOrgV2ScimTokenWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateOrgV2ScimTokenResponse(rsp)
 }
 func (c *ClientWithResponses) CreateOrgV2ScimTokenWithResponse(ctx context.Context, body CreateOrgV2ScimTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateOrgV2ScimTokenResponse, error) {
-	rsp, err := c.CreateOrgV2ScimToken(ctx, body, reqEditors...)
+	rsp, err := c.createOrgV2ScimToken(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateOrgV2ScimTokenResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteOrgV2ScimTokenWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteOrgV2ScimTokenResponse, error) {
-	rsp, err := c.DeleteOrgV2ScimToken(ctx, id, reqEditors...)
+	rsp, err := c.deleteOrgV2ScimToken(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -1057,7 +1057,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListUsmV1ConnectClusters List of Connect Clusters
 	//
@@ -1066,7 +1066,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all connect clusters.
 	//
 	// Corresponds with GET /usm/v1/connect-clusters (the `ListUsmV1ConnectClusters` operationId).
-	ListUsmV1ConnectClusters(ctx context.Context, params *ListUsmV1ConnectClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listUsmV1ConnectClusters(ctx context.Context, params *ListUsmV1ConnectClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateUsmV1ConnectClusterWithBody Create a Connect Cluster
 	//
@@ -1077,7 +1077,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /usm/v1/connect-clusters (the `CreateUsmV1ConnectCluster` operationId).
-	CreateUsmV1ConnectClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createUsmV1ConnectClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateUsmV1ConnectCluster Create a Connect Cluster
 	//
@@ -1088,7 +1088,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /usm/v1/connect-clusters (the `CreateUsmV1ConnectCluster` operationId).
-	CreateUsmV1ConnectCluster(ctx context.Context, body CreateUsmV1ConnectClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createUsmV1ConnectCluster(ctx context.Context, body CreateUsmV1ConnectClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteUsmV1ConnectCluster Delete a Connect Cluster
 	//
@@ -1097,7 +1097,7 @@ type ClientInterface interface {
 	// Make a request to delete a connect cluster.
 	//
 	// Corresponds with DELETE /usm/v1/connect-clusters/{id} (the `DeleteUsmV1ConnectCluster` operationId).
-	DeleteUsmV1ConnectCluster(ctx context.Context, id string, params *DeleteUsmV1ConnectClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteUsmV1ConnectCluster(ctx context.Context, id string, params *DeleteUsmV1ConnectClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetUsmV1ConnectCluster Read a Connect Cluster
 	//
@@ -1106,7 +1106,7 @@ type ClientInterface interface {
 	// Make a request to read a connect cluster.
 	//
 	// Corresponds with GET /usm/v1/connect-clusters/{id} (the `GetUsmV1ConnectCluster` operationId).
-	GetUsmV1ConnectCluster(ctx context.Context, id string, params *GetUsmV1ConnectClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getUsmV1ConnectCluster(ctx context.Context, id string, params *GetUsmV1ConnectClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListUsmV1KafkaClusters List of Kafka Clusters
 	//
@@ -1115,7 +1115,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all kafka clusters.
 	//
 	// Corresponds with GET /usm/v1/kafka-clusters (the `ListUsmV1KafkaClusters` operationId).
-	ListUsmV1KafkaClusters(ctx context.Context, params *ListUsmV1KafkaClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listUsmV1KafkaClusters(ctx context.Context, params *ListUsmV1KafkaClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateUsmV1KafkaClusterWithBody Create a Kafka Cluster
 	//
@@ -1126,7 +1126,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /usm/v1/kafka-clusters (the `CreateUsmV1KafkaCluster` operationId).
-	CreateUsmV1KafkaClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createUsmV1KafkaClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateUsmV1KafkaCluster Create a Kafka Cluster
 	//
@@ -1137,7 +1137,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /usm/v1/kafka-clusters (the `CreateUsmV1KafkaCluster` operationId).
-	CreateUsmV1KafkaCluster(ctx context.Context, body CreateUsmV1KafkaClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createUsmV1KafkaCluster(ctx context.Context, body CreateUsmV1KafkaClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteUsmV1KafkaCluster Delete a Kafka Cluster
 	//
@@ -1146,7 +1146,7 @@ type ClientInterface interface {
 	// Make a request to delete a kafka cluster.
 	//
 	// Corresponds with DELETE /usm/v1/kafka-clusters/{id} (the `DeleteUsmV1KafkaCluster` operationId).
-	DeleteUsmV1KafkaCluster(ctx context.Context, id string, params *DeleteUsmV1KafkaClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteUsmV1KafkaCluster(ctx context.Context, id string, params *DeleteUsmV1KafkaClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetUsmV1KafkaCluster Read a Kafka Cluster
 	//
@@ -1155,7 +1155,7 @@ type ClientInterface interface {
 	// Make a request to read a kafka cluster.
 	//
 	// Corresponds with GET /usm/v1/kafka-clusters/{id} (the `GetUsmV1KafkaCluster` operationId).
-	GetUsmV1KafkaCluster(ctx context.Context, id string, params *GetUsmV1KafkaClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getUsmV1KafkaCluster(ctx context.Context, id string, params *GetUsmV1KafkaClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -1173,7 +1173,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -1193,120 +1193,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListUsmV1ConnectClustersWithResponse List of Connect Clusters
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all connect clusters.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /usm/v1/connect-clusters (the `ListUsmV1ConnectClusters` operationId).
-	ListUsmV1ConnectClustersWithResponse(ctx context.Context, params *ListUsmV1ConnectClustersParams, reqEditors ...RequestEditorFn) (*ListUsmV1ConnectClustersResponse, error)
-
-	// CreateUsmV1ConnectClusterWithBodyWithResponse Create a Connect Cluster
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a connect cluster.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /usm/v1/connect-clusters (the `CreateUsmV1ConnectCluster` operationId).
-	CreateUsmV1ConnectClusterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateUsmV1ConnectClusterResponse, error)
-
-	// CreateUsmV1ConnectClusterWithResponse Create a Connect Cluster
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a connect cluster.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /usm/v1/connect-clusters (the `CreateUsmV1ConnectCluster` operationId).
-	CreateUsmV1ConnectClusterWithResponse(ctx context.Context, body CreateUsmV1ConnectClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateUsmV1ConnectClusterResponse, error)
-
-	// DeleteUsmV1ConnectClusterWithResponse Delete a Connect Cluster
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a connect cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /usm/v1/connect-clusters/{id} (the `DeleteUsmV1ConnectCluster` operationId).
-	DeleteUsmV1ConnectClusterWithResponse(ctx context.Context, id string, params *DeleteUsmV1ConnectClusterParams, reqEditors ...RequestEditorFn) (*DeleteUsmV1ConnectClusterResponse, error)
-
-	// GetUsmV1ConnectClusterWithResponse Read a Connect Cluster
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a connect cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /usm/v1/connect-clusters/{id} (the `GetUsmV1ConnectCluster` operationId).
-	GetUsmV1ConnectClusterWithResponse(ctx context.Context, id string, params *GetUsmV1ConnectClusterParams, reqEditors ...RequestEditorFn) (*GetUsmV1ConnectClusterResponse, error)
-
-	// ListUsmV1KafkaClustersWithResponse List of Kafka Clusters
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all kafka clusters.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /usm/v1/kafka-clusters (the `ListUsmV1KafkaClusters` operationId).
-	ListUsmV1KafkaClustersWithResponse(ctx context.Context, params *ListUsmV1KafkaClustersParams, reqEditors ...RequestEditorFn) (*ListUsmV1KafkaClustersResponse, error)
-
-	// CreateUsmV1KafkaClusterWithBodyWithResponse Create a Kafka Cluster
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a kafka cluster.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /usm/v1/kafka-clusters (the `CreateUsmV1KafkaCluster` operationId).
-	CreateUsmV1KafkaClusterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateUsmV1KafkaClusterResponse, error)
-
-	// CreateUsmV1KafkaClusterWithResponse Create a Kafka Cluster
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a kafka cluster.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /usm/v1/kafka-clusters (the `CreateUsmV1KafkaCluster` operationId).
-	CreateUsmV1KafkaClusterWithResponse(ctx context.Context, body CreateUsmV1KafkaClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateUsmV1KafkaClusterResponse, error)
-
-	// DeleteUsmV1KafkaClusterWithResponse Delete a Kafka Cluster
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a kafka cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /usm/v1/kafka-clusters/{id} (the `DeleteUsmV1KafkaCluster` operationId).
-	DeleteUsmV1KafkaClusterWithResponse(ctx context.Context, id string, params *DeleteUsmV1KafkaClusterParams, reqEditors ...RequestEditorFn) (*DeleteUsmV1KafkaClusterResponse, error)
-
-	// GetUsmV1KafkaClusterWithResponse Read a Kafka Cluster
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a kafka cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /usm/v1/kafka-clusters/{id} (the `GetUsmV1KafkaCluster` operationId).
-	GetUsmV1KafkaClusterWithResponse(ctx context.Context, id string, params *GetUsmV1KafkaClusterParams, reqEditors ...RequestEditorFn) (*GetUsmV1KafkaClusterResponse, error)
-}
-
 func (r ListUsmV1ConnectClustersResponse) GetJSON200() *struct {
 	// ApiVersion APIVersion defines the schema version of this representation of a resource.
 	ApiVersion ListUsmV1ConnectClusters200JSONResponseBodyApiVersion `json:"api_version"`

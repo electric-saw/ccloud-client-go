@@ -81,7 +81,7 @@ type ListNotificationsV1ResourceSubscriptionsByFilterParams struct {
 type CreateNotificationsV1ResourceSubscriptionJSONRequestBody CreateNotificationsV1ResourceSubscriptionJSONBody
 type UpdateNotificationsV1ResourceSubscriptionJSONRequestBody = NotificationsV1ResourceSubscription
 
-func (c *oasClient) CreateNotificationsV1ResourceSubscriptionWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createNotificationsV1ResourceSubscriptionWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNotificationsV1ResourceSubscriptionRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -92,7 +92,7 @@ func (c *oasClient) CreateNotificationsV1ResourceSubscriptionWithBody(ctx contex
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateNotificationsV1ResourceSubscription(ctx context.Context, body CreateNotificationsV1ResourceSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createNotificationsV1ResourceSubscription(ctx context.Context, body CreateNotificationsV1ResourceSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNotificationsV1ResourceSubscriptionRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -103,7 +103,7 @@ func (c *oasClient) CreateNotificationsV1ResourceSubscription(ctx context.Contex
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteNotificationsV1ResourceSubscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteNotificationsV1ResourceSubscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteNotificationsV1ResourceSubscriptionRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -114,7 +114,7 @@ func (c *oasClient) DeleteNotificationsV1ResourceSubscription(ctx context.Contex
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetNotificationsV1ResourceSubscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getNotificationsV1ResourceSubscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNotificationsV1ResourceSubscriptionRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -125,7 +125,7 @@ func (c *oasClient) GetNotificationsV1ResourceSubscription(ctx context.Context, 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateNotificationsV1ResourceSubscriptionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateNotificationsV1ResourceSubscriptionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNotificationsV1ResourceSubscriptionRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -136,7 +136,7 @@ func (c *oasClient) UpdateNotificationsV1ResourceSubscriptionWithBody(ctx contex
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateNotificationsV1ResourceSubscription(ctx context.Context, id string, body UpdateNotificationsV1ResourceSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateNotificationsV1ResourceSubscription(ctx context.Context, id string, body UpdateNotificationsV1ResourceSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNotificationsV1ResourceSubscriptionRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -147,7 +147,7 @@ func (c *oasClient) UpdateNotificationsV1ResourceSubscription(ctx context.Contex
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListNotificationsV1ResourceSubscriptionsByFilter(ctx context.Context, params *ListNotificationsV1ResourceSubscriptionsByFilterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listNotificationsV1ResourceSubscriptionsByFilter(ctx context.Context, params *ListNotificationsV1ResourceSubscriptionsByFilterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNotificationsV1ResourceSubscriptionsByFilterRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -810,49 +810,49 @@ type ListNotificationsV1ResourceSubscriptionsByFilterResponse struct {
 }
 
 func (c *ClientWithResponses) CreateNotificationsV1ResourceSubscriptionWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNotificationsV1ResourceSubscriptionResponse, error) {
-	rsp, err := c.CreateNotificationsV1ResourceSubscriptionWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createNotificationsV1ResourceSubscriptionWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateNotificationsV1ResourceSubscriptionResponse(rsp)
 }
 func (c *ClientWithResponses) CreateNotificationsV1ResourceSubscriptionWithResponse(ctx context.Context, body CreateNotificationsV1ResourceSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNotificationsV1ResourceSubscriptionResponse, error) {
-	rsp, err := c.CreateNotificationsV1ResourceSubscription(ctx, body, reqEditors...)
+	rsp, err := c.createNotificationsV1ResourceSubscription(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateNotificationsV1ResourceSubscriptionResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteNotificationsV1ResourceSubscriptionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteNotificationsV1ResourceSubscriptionResponse, error) {
-	rsp, err := c.DeleteNotificationsV1ResourceSubscription(ctx, id, reqEditors...)
+	rsp, err := c.deleteNotificationsV1ResourceSubscription(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteNotificationsV1ResourceSubscriptionResponse(rsp)
 }
 func (c *ClientWithResponses) GetNotificationsV1ResourceSubscriptionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetNotificationsV1ResourceSubscriptionResponse, error) {
-	rsp, err := c.GetNotificationsV1ResourceSubscription(ctx, id, reqEditors...)
+	rsp, err := c.getNotificationsV1ResourceSubscription(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetNotificationsV1ResourceSubscriptionResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateNotificationsV1ResourceSubscriptionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1ResourceSubscriptionResponse, error) {
-	rsp, err := c.UpdateNotificationsV1ResourceSubscriptionWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateNotificationsV1ResourceSubscriptionWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateNotificationsV1ResourceSubscriptionResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateNotificationsV1ResourceSubscriptionWithResponse(ctx context.Context, id string, body UpdateNotificationsV1ResourceSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1ResourceSubscriptionResponse, error) {
-	rsp, err := c.UpdateNotificationsV1ResourceSubscription(ctx, id, body, reqEditors...)
+	rsp, err := c.updateNotificationsV1ResourceSubscription(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateNotificationsV1ResourceSubscriptionResponse(rsp)
 }
 func (c *ClientWithResponses) ListNotificationsV1ResourceSubscriptionsByFilterWithResponse(ctx context.Context, params *ListNotificationsV1ResourceSubscriptionsByFilterParams, reqEditors ...RequestEditorFn) (*ListNotificationsV1ResourceSubscriptionsByFilterResponse, error) {
-	rsp, err := c.ListNotificationsV1ResourceSubscriptionsByFilter(ctx, params, reqEditors...)
+	rsp, err := c.listNotificationsV1ResourceSubscriptionsByFilter(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

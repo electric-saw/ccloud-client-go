@@ -1271,7 +1271,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListCclV1CustomCodeLoggings List of Custom Code Loggings
 	//
@@ -1280,7 +1280,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all custom code loggings.
 	//
 	// Corresponds with GET /ccl/v1/custom-code-loggings (the `ListCclV1CustomCodeLoggings` operationId).
-	ListCclV1CustomCodeLoggings(ctx context.Context, params *ListCclV1CustomCodeLoggingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listCclV1CustomCodeLoggings(ctx context.Context, params *ListCclV1CustomCodeLoggingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateCclV1CustomCodeLoggingWithBody Create a Custom Code Logging
 	//
@@ -1291,7 +1291,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /ccl/v1/custom-code-loggings (the `CreateCclV1CustomCodeLogging` operationId).
-	CreateCclV1CustomCodeLoggingWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createCclV1CustomCodeLoggingWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateCclV1CustomCodeLogging Create a Custom Code Logging
 	//
@@ -1302,7 +1302,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /ccl/v1/custom-code-loggings (the `CreateCclV1CustomCodeLogging` operationId).
-	CreateCclV1CustomCodeLogging(ctx context.Context, body CreateCclV1CustomCodeLoggingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createCclV1CustomCodeLogging(ctx context.Context, body CreateCclV1CustomCodeLoggingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteCclV1CustomCodeLogging Delete a Custom Code Logging
 	//
@@ -1311,7 +1311,7 @@ type ClientInterface interface {
 	// Make a request to delete a custom code logging.
 	//
 	// Corresponds with DELETE /ccl/v1/custom-code-loggings/{id} (the `DeleteCclV1CustomCodeLogging` operationId).
-	DeleteCclV1CustomCodeLogging(ctx context.Context, id string, params *DeleteCclV1CustomCodeLoggingParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteCclV1CustomCodeLogging(ctx context.Context, id string, params *DeleteCclV1CustomCodeLoggingParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCclV1CustomCodeLogging Read a Custom Code Logging
 	//
@@ -1320,7 +1320,7 @@ type ClientInterface interface {
 	// Make a request to read a custom code logging.
 	//
 	// Corresponds with GET /ccl/v1/custom-code-loggings/{id} (the `GetCclV1CustomCodeLogging` operationId).
-	GetCclV1CustomCodeLogging(ctx context.Context, id string, params *GetCclV1CustomCodeLoggingParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getCclV1CustomCodeLogging(ctx context.Context, id string, params *GetCclV1CustomCodeLoggingParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateCclV1CustomCodeLoggingWithBody Update a Custom Code Logging
 	//
@@ -1331,7 +1331,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /ccl/v1/custom-code-loggings/{id} (the `UpdateCclV1CustomCodeLogging` operationId).
-	UpdateCclV1CustomCodeLoggingWithBody(ctx context.Context, id string, params *UpdateCclV1CustomCodeLoggingParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateCclV1CustomCodeLoggingWithBody(ctx context.Context, id string, params *UpdateCclV1CustomCodeLoggingParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateCclV1CustomCodeLogging Update a Custom Code Logging
 	//
@@ -1342,7 +1342,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /ccl/v1/custom-code-loggings/{id} (the `UpdateCclV1CustomCodeLogging` operationId).
-	UpdateCclV1CustomCodeLogging(ctx context.Context, id string, params *UpdateCclV1CustomCodeLoggingParams, body UpdateCclV1CustomCodeLoggingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateCclV1CustomCodeLogging(ctx context.Context, id string, params *UpdateCclV1CustomCodeLoggingParams, body UpdateCclV1CustomCodeLoggingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -1360,7 +1360,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -1380,87 +1380,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListCclV1CustomCodeLoggingsWithResponse List of Custom Code Loggings
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Custom Code Logging API EA](https://img.shields.io/badge/-Request%20Access%20To%20Custom%20Code%20Logging%20API%20EA-%23bc8540)](mailto:ccloud-api-access+ccl-v1-early-access@confluent.io?subject=Request%20to%20join%20ccl/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ccl/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Retrieve a sorted, filtered, paginated list of all custom code loggings.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /ccl/v1/custom-code-loggings (the `ListCclV1CustomCodeLoggings` operationId).
-	ListCclV1CustomCodeLoggingsWithResponse(ctx context.Context, params *ListCclV1CustomCodeLoggingsParams, reqEditors ...RequestEditorFn) (*ListCclV1CustomCodeLoggingsResponse, error)
-
-	// CreateCclV1CustomCodeLoggingWithBodyWithResponse Create a Custom Code Logging
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Custom Code Logging API EA](https://img.shields.io/badge/-Request%20Access%20To%20Custom%20Code%20Logging%20API%20EA-%23bc8540)](mailto:ccloud-api-access+ccl-v1-early-access@confluent.io?subject=Request%20to%20join%20ccl/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ccl/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to create a custom code logging.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /ccl/v1/custom-code-loggings (the `CreateCclV1CustomCodeLogging` operationId).
-	CreateCclV1CustomCodeLoggingWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCclV1CustomCodeLoggingResponse, error)
-
-	// CreateCclV1CustomCodeLoggingWithResponse Create a Custom Code Logging
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Custom Code Logging API EA](https://img.shields.io/badge/-Request%20Access%20To%20Custom%20Code%20Logging%20API%20EA-%23bc8540)](mailto:ccloud-api-access+ccl-v1-early-access@confluent.io?subject=Request%20to%20join%20ccl/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ccl/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to create a custom code logging.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /ccl/v1/custom-code-loggings (the `CreateCclV1CustomCodeLogging` operationId).
-	CreateCclV1CustomCodeLoggingWithResponse(ctx context.Context, body CreateCclV1CustomCodeLoggingJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCclV1CustomCodeLoggingResponse, error)
-
-	// DeleteCclV1CustomCodeLoggingWithResponse Delete a Custom Code Logging
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Custom Code Logging API EA](https://img.shields.io/badge/-Request%20Access%20To%20Custom%20Code%20Logging%20API%20EA-%23bc8540)](mailto:ccloud-api-access+ccl-v1-early-access@confluent.io?subject=Request%20to%20join%20ccl/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ccl/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to delete a custom code logging.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /ccl/v1/custom-code-loggings/{id} (the `DeleteCclV1CustomCodeLogging` operationId).
-	DeleteCclV1CustomCodeLoggingWithResponse(ctx context.Context, id string, params *DeleteCclV1CustomCodeLoggingParams, reqEditors ...RequestEditorFn) (*DeleteCclV1CustomCodeLoggingResponse, error)
-
-	// GetCclV1CustomCodeLoggingWithResponse Read a Custom Code Logging
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Custom Code Logging API EA](https://img.shields.io/badge/-Request%20Access%20To%20Custom%20Code%20Logging%20API%20EA-%23bc8540)](mailto:ccloud-api-access+ccl-v1-early-access@confluent.io?subject=Request%20to%20join%20ccl/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ccl/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to read a custom code logging.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /ccl/v1/custom-code-loggings/{id} (the `GetCclV1CustomCodeLogging` operationId).
-	GetCclV1CustomCodeLoggingWithResponse(ctx context.Context, id string, params *GetCclV1CustomCodeLoggingParams, reqEditors ...RequestEditorFn) (*GetCclV1CustomCodeLoggingResponse, error)
-
-	// UpdateCclV1CustomCodeLoggingWithBodyWithResponse Update a Custom Code Logging
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Custom Code Logging API EA](https://img.shields.io/badge/-Request%20Access%20To%20Custom%20Code%20Logging%20API%20EA-%23bc8540)](mailto:ccloud-api-access+ccl-v1-early-access@confluent.io?subject=Request%20to%20join%20ccl/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ccl/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to update a custom code logging.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /ccl/v1/custom-code-loggings/{id} (the `UpdateCclV1CustomCodeLogging` operationId).
-	UpdateCclV1CustomCodeLoggingWithBodyWithResponse(ctx context.Context, id string, params *UpdateCclV1CustomCodeLoggingParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCclV1CustomCodeLoggingResponse, error)
-
-	// UpdateCclV1CustomCodeLoggingWithResponse Update a Custom Code Logging
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Custom Code Logging API EA](https://img.shields.io/badge/-Request%20Access%20To%20Custom%20Code%20Logging%20API%20EA-%23bc8540)](mailto:ccloud-api-access+ccl-v1-early-access@confluent.io?subject=Request%20to%20join%20ccl/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20ccl/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to update a custom code logging.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /ccl/v1/custom-code-loggings/{id} (the `UpdateCclV1CustomCodeLogging` operationId).
-	UpdateCclV1CustomCodeLoggingWithResponse(ctx context.Context, id string, params *UpdateCclV1CustomCodeLoggingParams, body UpdateCclV1CustomCodeLoggingJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCclV1CustomCodeLoggingResponse, error)
-}
-
 func (r ListCclV1CustomCodeLoggingsResponse) GetJSON200() *struct {
 	// ApiVersion APIVersion defines the schema version of this representation of a resource.
 	ApiVersion ListCclV1CustomCodeLoggings200JSONResponseBodyApiVersion `json:"api_version"`

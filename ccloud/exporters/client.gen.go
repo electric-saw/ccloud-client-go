@@ -549,14 +549,14 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListExporters Gets all schema exporters
 	//
 	// Retrieves a list of schema exporters that have been created.
 	//
 	// Corresponds with GET /exporters (the `ListExporters` operationId).
-	ListExporters(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listExporters(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// RegisterExporterWithBody Creates a new schema exporter
 	//
@@ -565,7 +565,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /exporters (the `RegisterExporter` operationId).
-	RegisterExporterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	registerExporterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// RegisterExporter Creates a new schema exporter
 	//
@@ -574,7 +574,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /exporters (the `RegisterExporter` operationId).
-	RegisterExporter(ctx context.Context, body RegisterExporterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	registerExporter(ctx context.Context, body RegisterExporterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// RegisterExporterWithApplicationVndSchemaregistryPlusJSONBody Creates a new schema exporter
 	//
@@ -583,7 +583,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry+json` content type.
 	//
 	// Corresponds with POST /exporters (the `RegisterExporter` operationId).
-	RegisterExporterWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, body RegisterExporterApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	registerExporterWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, body RegisterExporterApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// RegisterExporterWithApplicationVndSchemaregistryV1PlusJSONBody Creates a new schema exporter
 	//
@@ -592,21 +592,21 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type.
 	//
 	// Corresponds with POST /exporters (the `RegisterExporter` operationId).
-	RegisterExporterWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, body RegisterExporterApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	registerExporterWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, body RegisterExporterApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteExporter Delete schema exporter by name
 	//
 	// Deletes the schema exporter.
 	//
 	// Corresponds with DELETE /exporters/{name} (the `DeleteExporter` operationId).
-	DeleteExporter(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteExporter(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetExporterInfoByName Gets schema exporter by name
 	//
 	// Retrieves the information of the schema exporter.
 	//
 	// Corresponds with GET /exporters/{name} (the `GetExporterInfoByName` operationId).
-	GetExporterInfoByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getExporterInfoByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateExporterInfoWithBody Update schema exporter by name
 	//
@@ -615,7 +615,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /exporters/{name} (the `UpdateExporterInfo` operationId).
-	UpdateExporterInfoWithBody(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateExporterInfoWithBody(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateExporterInfo Update schema exporter by name
 	//
@@ -624,7 +624,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /exporters/{name} (the `UpdateExporterInfo` operationId).
-	UpdateExporterInfo(ctx context.Context, name string, body UpdateExporterInfoJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateExporterInfo(ctx context.Context, name string, body UpdateExporterInfoJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateExporterInfoWithApplicationVndSchemaregistryPlusJSONBody Update schema exporter by name
 	//
@@ -633,7 +633,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry+json` content type.
 	//
 	// Corresponds with PUT /exporters/{name} (the `UpdateExporterInfo` operationId).
-	UpdateExporterInfoWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, body UpdateExporterInfoApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateExporterInfoWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, body UpdateExporterInfoApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateExporterInfoWithApplicationVndSchemaregistryV1PlusJSONBody Update schema exporter by name
 	//
@@ -642,14 +642,14 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type.
 	//
 	// Corresponds with PUT /exporters/{name} (the `UpdateExporterInfo` operationId).
-	UpdateExporterInfoWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, body UpdateExporterInfoApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateExporterInfoWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, body UpdateExporterInfoApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetExporterConfigByName Gets schema exporter config by name
 	//
 	// Retrieves the config of the schema exporter.
 	//
 	// Corresponds with GET /exporters/{name}/config (the `GetExporterConfigByName` operationId).
-	GetExporterConfigByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getExporterConfigByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateExporterConfigByNameWithBody Update schema exporter config by name
 	//
@@ -658,7 +658,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /exporters/{name}/config (the `UpdateExporterConfigByName` operationId).
-	UpdateExporterConfigByNameWithBody(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateExporterConfigByNameWithBody(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateExporterConfigByName Update schema exporter config by name
 	//
@@ -667,7 +667,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /exporters/{name}/config (the `UpdateExporterConfigByName` operationId).
-	UpdateExporterConfigByName(ctx context.Context, name string, body UpdateExporterConfigByNameJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateExporterConfigByName(ctx context.Context, name string, body UpdateExporterConfigByNameJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateExporterConfigByNameWithApplicationVndSchemaregistryPlusJSONBody Update schema exporter config by name
 	//
@@ -676,7 +676,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry+json` content type.
 	//
 	// Corresponds with PUT /exporters/{name}/config (the `UpdateExporterConfigByName` operationId).
-	UpdateExporterConfigByNameWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, body UpdateExporterConfigByNameApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateExporterConfigByNameWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, body UpdateExporterConfigByNameApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateExporterConfigByNameWithApplicationVndSchemaregistryV1PlusJSONBody Update schema exporter config by name
 	//
@@ -685,35 +685,35 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type.
 	//
 	// Corresponds with PUT /exporters/{name}/config (the `UpdateExporterConfigByName` operationId).
-	UpdateExporterConfigByNameWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, body UpdateExporterConfigByNameApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateExporterConfigByNameWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, body UpdateExporterConfigByNameApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PauseExporterByName Pause schema exporter by name
 	//
 	// Pauses the state of the schema exporter.
 	//
 	// Corresponds with PUT /exporters/{name}/pause (the `PauseExporterByName` operationId).
-	PauseExporterByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	pauseExporterByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ResetExporterByName Reset schema exporter by name
 	//
 	// Reset the state of the schema exporter.
 	//
 	// Corresponds with PUT /exporters/{name}/reset (the `ResetExporterByName` operationId).
-	ResetExporterByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	resetExporterByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ResumeExporterByName Resume schema exporter by name
 	//
 	// Resume running of the schema exporter.
 	//
 	// Corresponds with PUT /exporters/{name}/resume (the `ResumeExporterByName` operationId).
-	ResumeExporterByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	resumeExporterByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetExporterStatusByName Gets schema exporter status by name
 	//
 	// Retrieves the status of the schema exporter.
 	//
 	// Corresponds with GET /exporters/{name}/status (the `GetExporterStatusByName` operationId).
-	GetExporterStatusByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getExporterStatusByName(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func NewRegisterExporterRequestWithApplicationVndSchemaregistryPlusJSONBody(server string, body RegisterExporterApplicationVndSchemaregistryPlusJSONRequestBody) (*http.Request, error) {
@@ -785,7 +785,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -805,190 +805,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListExportersWithResponse Gets all schema exporters
-	//
-	// Retrieves a list of schema exporters that have been created.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /exporters (the `ListExporters` operationId).
-	ListExportersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ListExportersResponse, error)
-
-	// RegisterExporterWithBodyWithResponse Creates a new schema exporter
-	//
-	// Creates a new schema exporter. All attributes in request body are optional except config.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /exporters (the `RegisterExporter` operationId).
-	RegisterExporterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RegisterExporterResponse, error)
-
-	// RegisterExporterWithResponse Creates a new schema exporter
-	//
-	// Creates a new schema exporter. All attributes in request body are optional except config.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /exporters (the `RegisterExporter` operationId).
-	RegisterExporterWithResponse(ctx context.Context, body RegisterExporterJSONRequestBody, reqEditors ...RequestEditorFn) (*RegisterExporterResponse, error)
-
-	// RegisterExporterWithApplicationVndSchemaregistryPlusJSONBodyWithResponse Creates a new schema exporter
-	//
-	// Creates a new schema exporter. All attributes in request body are optional except config.
-	//
-	// Takes a body of the `application/vnd.schemaregistry+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /exporters (the `RegisterExporter` operationId).
-	RegisterExporterWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, body RegisterExporterApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*RegisterExporterResponse, error)
-
-	// RegisterExporterWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse Creates a new schema exporter
-	//
-	// Creates a new schema exporter. All attributes in request body are optional except config.
-	//
-	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /exporters (the `RegisterExporter` operationId).
-	RegisterExporterWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, body RegisterExporterApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*RegisterExporterResponse, error)
-
-	// DeleteExporterWithResponse Delete schema exporter by name
-	//
-	// Deletes the schema exporter.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /exporters/{name} (the `DeleteExporter` operationId).
-	DeleteExporterWithResponse(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*DeleteExporterResponse, error)
-
-	// GetExporterInfoByNameWithResponse Gets schema exporter by name
-	//
-	// Retrieves the information of the schema exporter.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /exporters/{name} (the `GetExporterInfoByName` operationId).
-	GetExporterInfoByNameWithResponse(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*GetExporterInfoByNameResponse, error)
-
-	// UpdateExporterInfoWithBodyWithResponse Update schema exporter by name
-	//
-	// Updates the information or configurations of the schema exporter. All attributes in request body are optional.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /exporters/{name} (the `UpdateExporterInfo` operationId).
-	UpdateExporterInfoWithBodyWithResponse(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateExporterInfoResponse, error)
-
-	// UpdateExporterInfoWithResponse Update schema exporter by name
-	//
-	// Updates the information or configurations of the schema exporter. All attributes in request body are optional.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /exporters/{name} (the `UpdateExporterInfo` operationId).
-	UpdateExporterInfoWithResponse(ctx context.Context, name string, body UpdateExporterInfoJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateExporterInfoResponse, error)
-
-	// UpdateExporterInfoWithApplicationVndSchemaregistryPlusJSONBodyWithResponse Update schema exporter by name
-	//
-	// Updates the information or configurations of the schema exporter. All attributes in request body are optional.
-	//
-	// Takes a body of the `application/vnd.schemaregistry+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /exporters/{name} (the `UpdateExporterInfo` operationId).
-	UpdateExporterInfoWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, name string, body UpdateExporterInfoApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateExporterInfoResponse, error)
-
-	// UpdateExporterInfoWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse Update schema exporter by name
-	//
-	// Updates the information or configurations of the schema exporter. All attributes in request body are optional.
-	//
-	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /exporters/{name} (the `UpdateExporterInfo` operationId).
-	UpdateExporterInfoWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, name string, body UpdateExporterInfoApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateExporterInfoResponse, error)
-
-	// GetExporterConfigByNameWithResponse Gets schema exporter config by name
-	//
-	// Retrieves the config of the schema exporter.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /exporters/{name}/config (the `GetExporterConfigByName` operationId).
-	GetExporterConfigByNameWithResponse(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*GetExporterConfigByNameResponse, error)
-
-	// UpdateExporterConfigByNameWithBodyWithResponse Update schema exporter config by name
-	//
-	// Updates the configuration of the schema exporter.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /exporters/{name}/config (the `UpdateExporterConfigByName` operationId).
-	UpdateExporterConfigByNameWithBodyWithResponse(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateExporterConfigByNameResponse, error)
-
-	// UpdateExporterConfigByNameWithResponse Update schema exporter config by name
-	//
-	// Updates the configuration of the schema exporter.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /exporters/{name}/config (the `UpdateExporterConfigByName` operationId).
-	UpdateExporterConfigByNameWithResponse(ctx context.Context, name string, body UpdateExporterConfigByNameJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateExporterConfigByNameResponse, error)
-
-	// UpdateExporterConfigByNameWithApplicationVndSchemaregistryPlusJSONBodyWithResponse Update schema exporter config by name
-	//
-	// Updates the configuration of the schema exporter.
-	//
-	// Takes a body of the `application/vnd.schemaregistry+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /exporters/{name}/config (the `UpdateExporterConfigByName` operationId).
-	UpdateExporterConfigByNameWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, name string, body UpdateExporterConfigByNameApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateExporterConfigByNameResponse, error)
-
-	// UpdateExporterConfigByNameWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse Update schema exporter config by name
-	//
-	// Updates the configuration of the schema exporter.
-	//
-	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /exporters/{name}/config (the `UpdateExporterConfigByName` operationId).
-	UpdateExporterConfigByNameWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, name string, body UpdateExporterConfigByNameApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateExporterConfigByNameResponse, error)
-
-	// PauseExporterByNameWithResponse Pause schema exporter by name
-	//
-	// Pauses the state of the schema exporter.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /exporters/{name}/pause (the `PauseExporterByName` operationId).
-	PauseExporterByNameWithResponse(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*PauseExporterByNameResponse, error)
-
-	// ResetExporterByNameWithResponse Reset schema exporter by name
-	//
-	// Reset the state of the schema exporter.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /exporters/{name}/reset (the `ResetExporterByName` operationId).
-	ResetExporterByNameWithResponse(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*ResetExporterByNameResponse, error)
-
-	// ResumeExporterByNameWithResponse Resume schema exporter by name
-	//
-	// Resume running of the schema exporter.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /exporters/{name}/resume (the `ResumeExporterByName` operationId).
-	ResumeExporterByNameWithResponse(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*ResumeExporterByNameResponse, error)
-
-	// GetExporterStatusByNameWithResponse Gets schema exporter status by name
-	//
-	// Retrieves the status of the schema exporter.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /exporters/{name}/status (the `GetExporterStatusByName` operationId).
-	GetExporterStatusByNameWithResponse(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*GetExporterStatusByNameResponse, error)
-}
-
 func (r ListExportersResponse) GetApplicationvndSchemaregistryV1JSON200() *[]string {
 	return r.ApplicationvndSchemaregistryV1JSON200
 }

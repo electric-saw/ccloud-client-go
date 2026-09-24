@@ -24,7 +24,7 @@ type ListSqlv1MaterializedTableVersionsParams struct {
 	PageToken *string `form:"page_token,omitempty" json:"page_token,omitempty"`
 }
 
-func (c *oasClient) ListSqlv1MaterializedTableVersions(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, params *ListSqlv1MaterializedTableVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listSqlv1MaterializedTableVersions(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, params *ListSqlv1MaterializedTableVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSqlv1MaterializedTableVersionsRequest(c.Server, organizationId, environmentId, kafkaClusterId, tableName, params)
 	if err != nil {
 		return nil, err
@@ -35,7 +35,7 @@ func (c *oasClient) ListSqlv1MaterializedTableVersions(ctx context.Context, orga
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetSqlv1MaterializedTableVersion(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, version int32, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getSqlv1MaterializedTableVersion(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, version int32, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSqlv1MaterializedTableVersionRequest(c.Server, organizationId, environmentId, kafkaClusterId, tableName, version)
 	if err != nil {
 		return nil, err
@@ -313,14 +313,14 @@ type GetSqlv1MaterializedTableVersionResponse struct {
 }
 
 func (c *ClientWithResponses) ListSqlv1MaterializedTableVersionsWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, params *ListSqlv1MaterializedTableVersionsParams, reqEditors ...RequestEditorFn) (*ListSqlv1MaterializedTableVersionsResponse, error) {
-	rsp, err := c.ListSqlv1MaterializedTableVersions(ctx, organizationId, environmentId, kafkaClusterId, tableName, params, reqEditors...)
+	rsp, err := c.listSqlv1MaterializedTableVersions(ctx, organizationId, environmentId, kafkaClusterId, tableName, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListSqlv1MaterializedTableVersionsResponse(rsp)
 }
 func (c *ClientWithResponses) GetSqlv1MaterializedTableVersionWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, kafkaClusterId string, tableName string, version int32, reqEditors ...RequestEditorFn) (*GetSqlv1MaterializedTableVersionResponse, error) {
-	rsp, err := c.GetSqlv1MaterializedTableVersion(ctx, organizationId, environmentId, kafkaClusterId, tableName, version, reqEditors...)
+	rsp, err := c.getSqlv1MaterializedTableVersion(ctx, organizationId, environmentId, kafkaClusterId, tableName, version, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

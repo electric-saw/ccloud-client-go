@@ -121,7 +121,7 @@ type UpdateNetworkingV1Gateway200JSONResponseBodyKind string
 type CreateNetworkingV1GatewayJSONRequestBody CreateNetworkingV1GatewayJSONBody
 type UpdateNetworkingV1GatewayJSONRequestBody UpdateNetworkingV1GatewayJSONBody
 
-func (c *oasClient) ListNetworkingV1Gateways(ctx context.Context, params *ListNetworkingV1GatewaysParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listNetworkingV1Gateways(ctx context.Context, params *ListNetworkingV1GatewaysParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNetworkingV1GatewaysRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -132,7 +132,7 @@ func (c *oasClient) ListNetworkingV1Gateways(ctx context.Context, params *ListNe
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateNetworkingV1GatewayWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createNetworkingV1GatewayWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1GatewayRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -143,7 +143,7 @@ func (c *oasClient) CreateNetworkingV1GatewayWithBody(ctx context.Context, conte
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateNetworkingV1Gateway(ctx context.Context, body CreateNetworkingV1GatewayJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createNetworkingV1Gateway(ctx context.Context, body CreateNetworkingV1GatewayJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1GatewayRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -154,7 +154,7 @@ func (c *oasClient) CreateNetworkingV1Gateway(ctx context.Context, body CreateNe
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteNetworkingV1Gateway(ctx context.Context, id string, params *DeleteNetworkingV1GatewayParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteNetworkingV1Gateway(ctx context.Context, id string, params *DeleteNetworkingV1GatewayParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteNetworkingV1GatewayRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -165,7 +165,7 @@ func (c *oasClient) DeleteNetworkingV1Gateway(ctx context.Context, id string, pa
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetNetworkingV1Gateway(ctx context.Context, id string, params *GetNetworkingV1GatewayParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getNetworkingV1Gateway(ctx context.Context, id string, params *GetNetworkingV1GatewayParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNetworkingV1GatewayRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -176,7 +176,7 @@ func (c *oasClient) GetNetworkingV1Gateway(ctx context.Context, id string, param
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateNetworkingV1GatewayWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateNetworkingV1GatewayWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1GatewayRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -187,7 +187,7 @@ func (c *oasClient) UpdateNetworkingV1GatewayWithBody(ctx context.Context, id st
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateNetworkingV1Gateway(ctx context.Context, id string, body UpdateNetworkingV1GatewayJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateNetworkingV1Gateway(ctx context.Context, id string, body UpdateNetworkingV1GatewayJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1GatewayRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -947,49 +947,49 @@ type UpdateNetworkingV1GatewayResponse struct {
 }
 
 func (c *ClientWithResponses) ListNetworkingV1GatewaysWithResponse(ctx context.Context, params *ListNetworkingV1GatewaysParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1GatewaysResponse, error) {
-	rsp, err := c.ListNetworkingV1Gateways(ctx, params, reqEditors...)
+	rsp, err := c.listNetworkingV1Gateways(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListNetworkingV1GatewaysResponse(rsp)
 }
 func (c *ClientWithResponses) CreateNetworkingV1GatewayWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1GatewayResponse, error) {
-	rsp, err := c.CreateNetworkingV1GatewayWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createNetworkingV1GatewayWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateNetworkingV1GatewayResponse(rsp)
 }
 func (c *ClientWithResponses) CreateNetworkingV1GatewayWithResponse(ctx context.Context, body CreateNetworkingV1GatewayJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1GatewayResponse, error) {
-	rsp, err := c.CreateNetworkingV1Gateway(ctx, body, reqEditors...)
+	rsp, err := c.createNetworkingV1Gateway(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateNetworkingV1GatewayResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteNetworkingV1GatewayWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1GatewayParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1GatewayResponse, error) {
-	rsp, err := c.DeleteNetworkingV1Gateway(ctx, id, params, reqEditors...)
+	rsp, err := c.deleteNetworkingV1Gateway(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteNetworkingV1GatewayResponse(rsp)
 }
 func (c *ClientWithResponses) GetNetworkingV1GatewayWithResponse(ctx context.Context, id string, params *GetNetworkingV1GatewayParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1GatewayResponse, error) {
-	rsp, err := c.GetNetworkingV1Gateway(ctx, id, params, reqEditors...)
+	rsp, err := c.getNetworkingV1Gateway(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetNetworkingV1GatewayResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateNetworkingV1GatewayWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1GatewayResponse, error) {
-	rsp, err := c.UpdateNetworkingV1GatewayWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateNetworkingV1GatewayWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateNetworkingV1GatewayResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateNetworkingV1GatewayWithResponse(ctx context.Context, id string, body UpdateNetworkingV1GatewayJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1GatewayResponse, error) {
-	rsp, err := c.UpdateNetworkingV1Gateway(ctx, id, body, reqEditors...)
+	rsp, err := c.updateNetworkingV1Gateway(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

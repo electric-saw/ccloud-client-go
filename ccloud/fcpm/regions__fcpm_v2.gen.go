@@ -29,7 +29,7 @@ type ListFcpmV2RegionsParams struct {
 	PageToken *string `form:"page_token,omitempty" json:"page_token,omitempty"`
 }
 
-func (c *oasClient) ListFcpmV2Regions(ctx context.Context, params *ListFcpmV2RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listFcpmV2Regions(ctx context.Context, params *ListFcpmV2RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListFcpmV2RegionsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -183,7 +183,7 @@ type ListFcpmV2RegionsResponse struct {
 }
 
 func (c *ClientWithResponses) ListFcpmV2RegionsWithResponse(ctx context.Context, params *ListFcpmV2RegionsParams, reqEditors ...RequestEditorFn) (*ListFcpmV2RegionsResponse, error) {
-	rsp, err := c.ListFcpmV2Regions(ctx, params, reqEditors...)
+	rsp, err := c.listFcpmV2Regions(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

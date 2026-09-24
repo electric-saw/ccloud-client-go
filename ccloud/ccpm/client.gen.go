@@ -1320,7 +1320,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListCcpmV1CustomConnectPlugins List of Custom Connect Plugins
 	//
@@ -1331,7 +1331,7 @@ type ClientInterface interface {
 	// If no `cloud` filter is specified, returns custom connect plugins from all clouds.
 	//
 	// Corresponds with GET /ccpm/v1/plugins (the `ListCcpmV1CustomConnectPlugins` operationId).
-	ListCcpmV1CustomConnectPlugins(ctx context.Context, params *ListCcpmV1CustomConnectPluginsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listCcpmV1CustomConnectPlugins(ctx context.Context, params *ListCcpmV1CustomConnectPluginsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateCcpmV1CustomConnectPluginWithBody Create a Custom Connect Plugin
 	//
@@ -1342,7 +1342,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /ccpm/v1/plugins (the `CreateCcpmV1CustomConnectPlugin` operationId).
-	CreateCcpmV1CustomConnectPluginWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createCcpmV1CustomConnectPluginWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateCcpmV1CustomConnectPlugin Create a Custom Connect Plugin
 	//
@@ -1353,7 +1353,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /ccpm/v1/plugins (the `CreateCcpmV1CustomConnectPlugin` operationId).
-	CreateCcpmV1CustomConnectPlugin(ctx context.Context, body CreateCcpmV1CustomConnectPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createCcpmV1CustomConnectPlugin(ctx context.Context, body CreateCcpmV1CustomConnectPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteCcpmV1CustomConnectPlugin Delete a Custom Connect Plugin
 	//
@@ -1362,7 +1362,7 @@ type ClientInterface interface {
 	// Make a request to delete a custom connect plugin.
 	//
 	// Corresponds with DELETE /ccpm/v1/plugins/{id} (the `DeleteCcpmV1CustomConnectPlugin` operationId).
-	DeleteCcpmV1CustomConnectPlugin(ctx context.Context, id string, params *DeleteCcpmV1CustomConnectPluginParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteCcpmV1CustomConnectPlugin(ctx context.Context, id string, params *DeleteCcpmV1CustomConnectPluginParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCcpmV1CustomConnectPlugin Read a Custom Connect Plugin
 	//
@@ -1371,7 +1371,7 @@ type ClientInterface interface {
 	// Make a request to read a custom connect plugin.
 	//
 	// Corresponds with GET /ccpm/v1/plugins/{id} (the `GetCcpmV1CustomConnectPlugin` operationId).
-	GetCcpmV1CustomConnectPlugin(ctx context.Context, id string, params *GetCcpmV1CustomConnectPluginParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getCcpmV1CustomConnectPlugin(ctx context.Context, id string, params *GetCcpmV1CustomConnectPluginParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateCcpmV1CustomConnectPluginWithBody Update a Custom Connect Plugin
 	//
@@ -1382,7 +1382,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /ccpm/v1/plugins/{id} (the `UpdateCcpmV1CustomConnectPlugin` operationId).
-	UpdateCcpmV1CustomConnectPluginWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateCcpmV1CustomConnectPluginWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateCcpmV1CustomConnectPlugin Update a Custom Connect Plugin
 	//
@@ -1393,7 +1393,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /ccpm/v1/plugins/{id} (the `UpdateCcpmV1CustomConnectPlugin` operationId).
-	UpdateCcpmV1CustomConnectPlugin(ctx context.Context, id string, body UpdateCcpmV1CustomConnectPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateCcpmV1CustomConnectPlugin(ctx context.Context, id string, body UpdateCcpmV1CustomConnectPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListCcpmV1CustomConnectPluginVersions List of Custom Connect Plugin Versions
 	//
@@ -1402,7 +1402,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all custom connect plugin versions.
 	//
 	// Corresponds with GET /ccpm/v1/plugins/{plugin_id}/versions (the `ListCcpmV1CustomConnectPluginVersions` operationId).
-	ListCcpmV1CustomConnectPluginVersions(ctx context.Context, pluginId string, params *ListCcpmV1CustomConnectPluginVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listCcpmV1CustomConnectPluginVersions(ctx context.Context, pluginId string, params *ListCcpmV1CustomConnectPluginVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateCcpmV1CustomConnectPluginVersionWithBody Create a Custom Connect Plugin Version
 	//
@@ -1413,7 +1413,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /ccpm/v1/plugins/{plugin_id}/versions (the `CreateCcpmV1CustomConnectPluginVersion` operationId).
-	CreateCcpmV1CustomConnectPluginVersionWithBody(ctx context.Context, pluginId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createCcpmV1CustomConnectPluginVersionWithBody(ctx context.Context, pluginId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateCcpmV1CustomConnectPluginVersion Create a Custom Connect Plugin Version
 	//
@@ -1424,7 +1424,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /ccpm/v1/plugins/{plugin_id}/versions (the `CreateCcpmV1CustomConnectPluginVersion` operationId).
-	CreateCcpmV1CustomConnectPluginVersion(ctx context.Context, pluginId string, body CreateCcpmV1CustomConnectPluginVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createCcpmV1CustomConnectPluginVersion(ctx context.Context, pluginId string, body CreateCcpmV1CustomConnectPluginVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteCcpmV1CustomConnectPluginVersion Delete a Custom Connect Plugin Version
 	//
@@ -1433,7 +1433,7 @@ type ClientInterface interface {
 	// Make a request to delete a custom connect plugin version.
 	//
 	// Corresponds with DELETE /ccpm/v1/plugins/{plugin_id}/versions/{id} (the `DeleteCcpmV1CustomConnectPluginVersion` operationId).
-	DeleteCcpmV1CustomConnectPluginVersion(ctx context.Context, pluginId string, id string, params *DeleteCcpmV1CustomConnectPluginVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteCcpmV1CustomConnectPluginVersion(ctx context.Context, pluginId string, id string, params *DeleteCcpmV1CustomConnectPluginVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCcpmV1CustomConnectPluginVersion Read a Custom Connect Plugin Version
 	//
@@ -1442,7 +1442,7 @@ type ClientInterface interface {
 	// Make a request to read a custom connect plugin version.
 	//
 	// Corresponds with GET /ccpm/v1/plugins/{plugin_id}/versions/{id} (the `GetCcpmV1CustomConnectPluginVersion` operationId).
-	GetCcpmV1CustomConnectPluginVersion(ctx context.Context, pluginId string, id string, params *GetCcpmV1CustomConnectPluginVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getCcpmV1CustomConnectPluginVersion(ctx context.Context, pluginId string, id string, params *GetCcpmV1CustomConnectPluginVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateCcpmV1PresignedUrlWithBody Request a presigned upload URL for a new Custom Connect Plugin.
 	//
@@ -1453,7 +1453,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /ccpm/v1/presigned-upload-url (the `CreateCcpmV1PresignedUrl` operationId).
-	CreateCcpmV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createCcpmV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateCcpmV1PresignedUrl Request a presigned upload URL for a new Custom Connect Plugin.
 	//
@@ -1464,7 +1464,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /ccpm/v1/presigned-upload-url (the `CreateCcpmV1PresignedUrl` operationId).
-	CreateCcpmV1PresignedUrl(ctx context.Context, body CreateCcpmV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createCcpmV1PresignedUrl(ctx context.Context, body CreateCcpmV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -1482,7 +1482,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -1502,166 +1502,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListCcpmV1CustomConnectPluginsWithResponse List of Custom Connect Plugins
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all custom connect plugins.
-	//
-	// If no `cloud` filter is specified, returns custom connect plugins from all clouds.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /ccpm/v1/plugins (the `ListCcpmV1CustomConnectPlugins` operationId).
-	ListCcpmV1CustomConnectPluginsWithResponse(ctx context.Context, params *ListCcpmV1CustomConnectPluginsParams, reqEditors ...RequestEditorFn) (*ListCcpmV1CustomConnectPluginsResponse, error)
-
-	// CreateCcpmV1CustomConnectPluginWithBodyWithResponse Create a Custom Connect Plugin
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a custom connect plugin.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /ccpm/v1/plugins (the `CreateCcpmV1CustomConnectPlugin` operationId).
-	CreateCcpmV1CustomConnectPluginWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCcpmV1CustomConnectPluginResponse, error)
-
-	// CreateCcpmV1CustomConnectPluginWithResponse Create a Custom Connect Plugin
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a custom connect plugin.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /ccpm/v1/plugins (the `CreateCcpmV1CustomConnectPlugin` operationId).
-	CreateCcpmV1CustomConnectPluginWithResponse(ctx context.Context, body CreateCcpmV1CustomConnectPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCcpmV1CustomConnectPluginResponse, error)
-
-	// DeleteCcpmV1CustomConnectPluginWithResponse Delete a Custom Connect Plugin
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a custom connect plugin.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /ccpm/v1/plugins/{id} (the `DeleteCcpmV1CustomConnectPlugin` operationId).
-	DeleteCcpmV1CustomConnectPluginWithResponse(ctx context.Context, id string, params *DeleteCcpmV1CustomConnectPluginParams, reqEditors ...RequestEditorFn) (*DeleteCcpmV1CustomConnectPluginResponse, error)
-
-	// GetCcpmV1CustomConnectPluginWithResponse Read a Custom Connect Plugin
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a custom connect plugin.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /ccpm/v1/plugins/{id} (the `GetCcpmV1CustomConnectPlugin` operationId).
-	GetCcpmV1CustomConnectPluginWithResponse(ctx context.Context, id string, params *GetCcpmV1CustomConnectPluginParams, reqEditors ...RequestEditorFn) (*GetCcpmV1CustomConnectPluginResponse, error)
-
-	// UpdateCcpmV1CustomConnectPluginWithBodyWithResponse Update a Custom Connect Plugin
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a custom connect plugin.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /ccpm/v1/plugins/{id} (the `UpdateCcpmV1CustomConnectPlugin` operationId).
-	UpdateCcpmV1CustomConnectPluginWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCcpmV1CustomConnectPluginResponse, error)
-
-	// UpdateCcpmV1CustomConnectPluginWithResponse Update a Custom Connect Plugin
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a custom connect plugin.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /ccpm/v1/plugins/{id} (the `UpdateCcpmV1CustomConnectPlugin` operationId).
-	UpdateCcpmV1CustomConnectPluginWithResponse(ctx context.Context, id string, body UpdateCcpmV1CustomConnectPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCcpmV1CustomConnectPluginResponse, error)
-
-	// ListCcpmV1CustomConnectPluginVersionsWithResponse List of Custom Connect Plugin Versions
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all custom connect plugin versions.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /ccpm/v1/plugins/{plugin_id}/versions (the `ListCcpmV1CustomConnectPluginVersions` operationId).
-	ListCcpmV1CustomConnectPluginVersionsWithResponse(ctx context.Context, pluginId string, params *ListCcpmV1CustomConnectPluginVersionsParams, reqEditors ...RequestEditorFn) (*ListCcpmV1CustomConnectPluginVersionsResponse, error)
-
-	// CreateCcpmV1CustomConnectPluginVersionWithBodyWithResponse Create a Custom Connect Plugin Version
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a custom connect plugin version.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /ccpm/v1/plugins/{plugin_id}/versions (the `CreateCcpmV1CustomConnectPluginVersion` operationId).
-	CreateCcpmV1CustomConnectPluginVersionWithBodyWithResponse(ctx context.Context, pluginId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCcpmV1CustomConnectPluginVersionResponse, error)
-
-	// CreateCcpmV1CustomConnectPluginVersionWithResponse Create a Custom Connect Plugin Version
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a custom connect plugin version.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /ccpm/v1/plugins/{plugin_id}/versions (the `CreateCcpmV1CustomConnectPluginVersion` operationId).
-	CreateCcpmV1CustomConnectPluginVersionWithResponse(ctx context.Context, pluginId string, body CreateCcpmV1CustomConnectPluginVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCcpmV1CustomConnectPluginVersionResponse, error)
-
-	// DeleteCcpmV1CustomConnectPluginVersionWithResponse Delete a Custom Connect Plugin Version
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a custom connect plugin version.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /ccpm/v1/plugins/{plugin_id}/versions/{id} (the `DeleteCcpmV1CustomConnectPluginVersion` operationId).
-	DeleteCcpmV1CustomConnectPluginVersionWithResponse(ctx context.Context, pluginId string, id string, params *DeleteCcpmV1CustomConnectPluginVersionParams, reqEditors ...RequestEditorFn) (*DeleteCcpmV1CustomConnectPluginVersionResponse, error)
-
-	// GetCcpmV1CustomConnectPluginVersionWithResponse Read a Custom Connect Plugin Version
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a custom connect plugin version.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /ccpm/v1/plugins/{plugin_id}/versions/{id} (the `GetCcpmV1CustomConnectPluginVersion` operationId).
-	GetCcpmV1CustomConnectPluginVersionWithResponse(ctx context.Context, pluginId string, id string, params *GetCcpmV1CustomConnectPluginVersionParams, reqEditors ...RequestEditorFn) (*GetCcpmV1CustomConnectPluginVersionResponse, error)
-
-	// CreateCcpmV1PresignedUrlWithBodyWithResponse Request a presigned upload URL for a new Custom Connect Plugin.
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Request a presigned upload URL to upload a Custom Connect Plugin archive.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /ccpm/v1/presigned-upload-url (the `CreateCcpmV1PresignedUrl` operationId).
-	CreateCcpmV1PresignedUrlWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCcpmV1PresignedUrlResponse, error)
-
-	// CreateCcpmV1PresignedUrlWithResponse Request a presigned upload URL for a new Custom Connect Plugin.
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Request a presigned upload URL to upload a Custom Connect Plugin archive.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /ccpm/v1/presigned-upload-url (the `CreateCcpmV1PresignedUrl` operationId).
-	CreateCcpmV1PresignedUrlWithResponse(ctx context.Context, body CreateCcpmV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCcpmV1PresignedUrlResponse, error)
-}
-
 func (r ListCcpmV1CustomConnectPluginsResponse) GetJSON200() *struct {
 	// ApiVersion APIVersion defines the schema version of this representation of a resource.
 	ApiVersion ListCcpmV1CustomConnectPlugins200JSONResponseBodyApiVersion `json:"api_version"`

@@ -45,7 +45,7 @@ type CreateCcpmV1PresignedUrl201JSONResponseBodyApiVersion string
 type CreateCcpmV1PresignedUrl201JSONResponseBodyKind string
 type CreateCcpmV1PresignedUrlJSONRequestBody CreateCcpmV1PresignedUrlJSONBody
 
-func (c *oasClient) CreateCcpmV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createCcpmV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateCcpmV1PresignedUrlRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func (c *oasClient) CreateCcpmV1PresignedUrlWithBody(ctx context.Context, conten
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateCcpmV1PresignedUrl(ctx context.Context, body CreateCcpmV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createCcpmV1PresignedUrl(ctx context.Context, body CreateCcpmV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateCcpmV1PresignedUrlRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -196,14 +196,14 @@ type CreateCcpmV1PresignedUrlResponse struct {
 }
 
 func (c *ClientWithResponses) CreateCcpmV1PresignedUrlWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCcpmV1PresignedUrlResponse, error) {
-	rsp, err := c.CreateCcpmV1PresignedUrlWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createCcpmV1PresignedUrlWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateCcpmV1PresignedUrlResponse(rsp)
 }
 func (c *ClientWithResponses) CreateCcpmV1PresignedUrlWithResponse(ctx context.Context, body CreateCcpmV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCcpmV1PresignedUrlResponse, error) {
-	rsp, err := c.CreateCcpmV1PresignedUrl(ctx, body, reqEditors...)
+	rsp, err := c.createCcpmV1PresignedUrl(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

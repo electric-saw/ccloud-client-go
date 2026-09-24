@@ -2806,7 +2806,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListCdxV1ConsumerSharedResources List of Consumer Shared Resources
 	//
@@ -2815,7 +2815,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all consumer shared resources.
 	//
 	// Corresponds with GET /cdx/v1/consumer-shared-resources (the `ListCdxV1ConsumerSharedResources` operationId).
-	ListCdxV1ConsumerSharedResources(ctx context.Context, params *ListCdxV1ConsumerSharedResourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listCdxV1ConsumerSharedResources(ctx context.Context, params *ListCdxV1ConsumerSharedResourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCdxV1ConsumerSharedResource Read a Consumer Shared Resource
 	//
@@ -2824,7 +2824,7 @@ type ClientInterface interface {
 	// Make a request to read a consumer shared resource.
 	//
 	// Corresponds with GET /cdx/v1/consumer-shared-resources/{id} (the `GetCdxV1ConsumerSharedResource` operationId).
-	GetCdxV1ConsumerSharedResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getCdxV1ConsumerSharedResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ImageCdxV1ConsumerSharedResource Get image for shared resource
 	//
@@ -2833,7 +2833,7 @@ type ClientInterface interface {
 	// Returns the image file for the shared resource
 	//
 	// Corresponds with GET /cdx/v1/consumer-shared-resources/{id}/images/{file_name} (the `ImageCdxV1ConsumerSharedResource` operationId).
-	ImageCdxV1ConsumerSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	imageCdxV1ConsumerSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// NetworkCdxV1ConsumerSharedResource Get shared resource's network configuration
 	//
@@ -2842,7 +2842,7 @@ type ClientInterface interface {
 	// Returns network information of the shared resource
 	//
 	// Corresponds with GET /cdx/v1/consumer-shared-resources/{id}:network (the `NetworkCdxV1ConsumerSharedResource` operationId).
-	NetworkCdxV1ConsumerSharedResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	networkCdxV1ConsumerSharedResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListCdxV1ConsumerShares List of Consumer Shares
 	//
@@ -2851,7 +2851,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all consumer shares.
 	//
 	// Corresponds with GET /cdx/v1/consumer-shares (the `ListCdxV1ConsumerShares` operationId).
-	ListCdxV1ConsumerShares(ctx context.Context, params *ListCdxV1ConsumerSharesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listCdxV1ConsumerShares(ctx context.Context, params *ListCdxV1ConsumerSharesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteCdxV1ConsumerShare Delete a Consumer Share
 	//
@@ -2860,7 +2860,7 @@ type ClientInterface interface {
 	// Make a request to delete a consumer share.
 	//
 	// Corresponds with DELETE /cdx/v1/consumer-shares/{id} (the `DeleteCdxV1ConsumerShare` operationId).
-	DeleteCdxV1ConsumerShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteCdxV1ConsumerShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCdxV1ConsumerShare Read a Consumer Share
 	//
@@ -2869,7 +2869,7 @@ type ClientInterface interface {
 	// Make a request to read a consumer share.
 	//
 	// Corresponds with GET /cdx/v1/consumer-shares/{id} (the `GetCdxV1ConsumerShare` operationId).
-	GetCdxV1ConsumerShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getCdxV1ConsumerShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCdxV1OptIn Read the organization's stream sharing opt-in settings
 	//
@@ -2878,7 +2878,7 @@ type ClientInterface interface {
 	// Returns the organization's stream sharing opt-in settings.
 	//
 	// Corresponds with GET /cdx/v1/opt-in (the `GetCdxV1OptIn` operationId).
-	GetCdxV1OptIn(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getCdxV1OptIn(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateCdxV1OptInWithBody Set the organization's stream sharing opt-in settings
 	//
@@ -2889,7 +2889,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /cdx/v1/opt-in (the `UpdateCdxV1OptIn` operationId).
-	UpdateCdxV1OptInWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateCdxV1OptInWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateCdxV1OptIn Set the organization's stream sharing opt-in settings
 	//
@@ -2900,7 +2900,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /cdx/v1/opt-in (the `UpdateCdxV1OptIn` operationId).
-	UpdateCdxV1OptIn(ctx context.Context, body UpdateCdxV1OptInJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateCdxV1OptIn(ctx context.Context, body UpdateCdxV1OptInJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListCdxV1ProviderSharedResources List of Provider Shared Resources
 	//
@@ -2909,7 +2909,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all provider shared resources.
 	//
 	// Corresponds with GET /cdx/v1/provider-shared-resources (the `ListCdxV1ProviderSharedResources` operationId).
-	ListCdxV1ProviderSharedResources(ctx context.Context, params *ListCdxV1ProviderSharedResourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listCdxV1ProviderSharedResources(ctx context.Context, params *ListCdxV1ProviderSharedResourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCdxV1ProviderSharedResource Read a Provider Shared Resource
 	//
@@ -2918,7 +2918,7 @@ type ClientInterface interface {
 	// Make a request to read a provider shared resource.
 	//
 	// Corresponds with GET /cdx/v1/provider-shared-resources/{id} (the `GetCdxV1ProviderSharedResource` operationId).
-	GetCdxV1ProviderSharedResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getCdxV1ProviderSharedResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateCdxV1ProviderSharedResourceWithBody Update a Provider Shared Resource
 	//
@@ -2929,7 +2929,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /cdx/v1/provider-shared-resources/{id} (the `UpdateCdxV1ProviderSharedResource` operationId).
-	UpdateCdxV1ProviderSharedResourceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateCdxV1ProviderSharedResourceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateCdxV1ProviderSharedResource Update a Provider Shared Resource
 	//
@@ -2940,7 +2940,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /cdx/v1/provider-shared-resources/{id} (the `UpdateCdxV1ProviderSharedResource` operationId).
-	UpdateCdxV1ProviderSharedResource(ctx context.Context, id string, body UpdateCdxV1ProviderSharedResourceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateCdxV1ProviderSharedResource(ctx context.Context, id string, body UpdateCdxV1ProviderSharedResourceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteImageCdxV1ProviderSharedResource Delete the shared resource's image
 	//
@@ -2949,7 +2949,7 @@ type ClientInterface interface {
 	// Deletes the image file for the shared resource
 	//
 	// Corresponds with DELETE /cdx/v1/provider-shared-resources/{id}/images/{file_name} (the `DeleteImageCdxV1ProviderSharedResource` operationId).
-	DeleteImageCdxV1ProviderSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteImageCdxV1ProviderSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ViewImageCdxV1ProviderSharedResource Get image for shared resource
 	//
@@ -2958,7 +2958,7 @@ type ClientInterface interface {
 	// Returns the image file for the shared resource
 	//
 	// Corresponds with GET /cdx/v1/provider-shared-resources/{id}/images/{file_name} (the `ViewImageCdxV1ProviderSharedResource` operationId).
-	ViewImageCdxV1ProviderSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	viewImageCdxV1ProviderSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UploadImageCdxV1ProviderSharedResourceWithBody Upload image for shared resource
 	//
@@ -2969,7 +2969,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /cdx/v1/provider-shared-resources/{id}/images/{file_name} (the `UploadImageCdxV1ProviderSharedResource` operationId).
-	UploadImageCdxV1ProviderSharedResourceWithBody(ctx context.Context, id string, fileName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	uploadImageCdxV1ProviderSharedResourceWithBody(ctx context.Context, id string, fileName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListCdxV1ProviderShares List of Provider Shares
 	//
@@ -2978,7 +2978,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all provider shares.
 	//
 	// Corresponds with GET /cdx/v1/provider-shares (the `ListCdxV1ProviderShares` operationId).
-	ListCdxV1ProviderShares(ctx context.Context, params *ListCdxV1ProviderSharesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listCdxV1ProviderShares(ctx context.Context, params *ListCdxV1ProviderSharesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateCdxV1ProviderShareWithBody Create a provider share
 	//
@@ -2989,7 +2989,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /cdx/v1/provider-shares (the `CreateCdxV1ProviderShare` operationId).
-	CreateCdxV1ProviderShareWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createCdxV1ProviderShareWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateCdxV1ProviderShare Create a provider share
 	//
@@ -3000,7 +3000,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /cdx/v1/provider-shares (the `CreateCdxV1ProviderShare` operationId).
-	CreateCdxV1ProviderShare(ctx context.Context, body CreateCdxV1ProviderShareJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createCdxV1ProviderShare(ctx context.Context, body CreateCdxV1ProviderShareJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteCdxV1ProviderShare Delete a Provider Share
 	//
@@ -3009,7 +3009,7 @@ type ClientInterface interface {
 	// Make a request to delete a provider share.
 	//
 	// Corresponds with DELETE /cdx/v1/provider-shares/{id} (the `DeleteCdxV1ProviderShare` operationId).
-	DeleteCdxV1ProviderShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteCdxV1ProviderShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCdxV1ProviderShare Read a Provider Share
 	//
@@ -3018,7 +3018,7 @@ type ClientInterface interface {
 	// Make a request to read a provider share.
 	//
 	// Corresponds with GET /cdx/v1/provider-shares/{id} (the `GetCdxV1ProviderShare` operationId).
-	GetCdxV1ProviderShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getCdxV1ProviderShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ResendCdxV1ProviderShare Resend
 	//
@@ -3027,7 +3027,7 @@ type ClientInterface interface {
 	// Resend provider share
 	//
 	// Corresponds with POST /cdx/v1/provider-shares/{id}:resend (the `ResendCdxV1ProviderShare` operationId).
-	ResendCdxV1ProviderShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	resendCdxV1ProviderShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// RedeemCdxV1SharedTokenWithBody Redeem token
 	//
@@ -3038,7 +3038,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /cdx/v1/shared-tokens:redeem (the `RedeemCdxV1SharedToken` operationId).
-	RedeemCdxV1SharedTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	redeemCdxV1SharedTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// RedeemCdxV1SharedToken Redeem token
 	//
@@ -3049,7 +3049,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /cdx/v1/shared-tokens:redeem (the `RedeemCdxV1SharedToken` operationId).
-	RedeemCdxV1SharedToken(ctx context.Context, body RedeemCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	redeemCdxV1SharedToken(ctx context.Context, body RedeemCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ResourcesCdxV1SharedTokenWithBody Validate token to view shared resources
 	//
@@ -3060,7 +3060,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /cdx/v1/shared-tokens:resources (the `ResourcesCdxV1SharedToken` operationId).
-	ResourcesCdxV1SharedTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	resourcesCdxV1SharedTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ResourcesCdxV1SharedToken Validate token to view shared resources
 	//
@@ -3071,10 +3071,10 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /cdx/v1/shared-tokens:resources (the `ResourcesCdxV1SharedToken` operationId).
-	ResourcesCdxV1SharedToken(ctx context.Context, body ResourcesCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	resourcesCdxV1SharedToken(ctx context.Context, body ResourcesCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *oasClient) DeleteImageCdxV1ProviderSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteImageCdxV1ProviderSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteImageCdxV1ProviderSharedResourceRequest(c.Server, id, fileName)
 	if err != nil {
 		return nil, err
@@ -3085,7 +3085,7 @@ func (c *oasClient) DeleteImageCdxV1ProviderSharedResource(ctx context.Context, 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ViewImageCdxV1ProviderSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) viewImageCdxV1ProviderSharedResource(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewViewImageCdxV1ProviderSharedResourceRequest(c.Server, id, fileName)
 	if err != nil {
 		return nil, err
@@ -3096,7 +3096,7 @@ func (c *oasClient) ViewImageCdxV1ProviderSharedResource(ctx context.Context, id
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UploadImageCdxV1ProviderSharedResourceWithBody(ctx context.Context, id string, fileName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) uploadImageCdxV1ProviderSharedResourceWithBody(ctx context.Context, id string, fileName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUploadImageCdxV1ProviderSharedResourceRequestWithBody(c.Server, id, fileName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -3241,7 +3241,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -3261,307 +3261,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListCdxV1ConsumerSharedResourcesWithResponse List of Consumer Shared Resources
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all consumer shared resources.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cdx/v1/consumer-shared-resources (the `ListCdxV1ConsumerSharedResources` operationId).
-	ListCdxV1ConsumerSharedResourcesWithResponse(ctx context.Context, params *ListCdxV1ConsumerSharedResourcesParams, reqEditors ...RequestEditorFn) (*ListCdxV1ConsumerSharedResourcesResponse, error)
-
-	// GetCdxV1ConsumerSharedResourceWithResponse Read a Consumer Shared Resource
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a consumer shared resource.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cdx/v1/consumer-shared-resources/{id} (the `GetCdxV1ConsumerSharedResource` operationId).
-	GetCdxV1ConsumerSharedResourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCdxV1ConsumerSharedResourceResponse, error)
-
-	// ImageCdxV1ConsumerSharedResourceWithResponse Get image for shared resource
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Returns the image file for the shared resource
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cdx/v1/consumer-shared-resources/{id}/images/{file_name} (the `ImageCdxV1ConsumerSharedResource` operationId).
-	ImageCdxV1ConsumerSharedResourceWithResponse(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*ImageCdxV1ConsumerSharedResourceResponse, error)
-
-	// NetworkCdxV1ConsumerSharedResourceWithResponse Get shared resource's network configuration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Returns network information of the shared resource
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cdx/v1/consumer-shared-resources/{id}:network (the `NetworkCdxV1ConsumerSharedResource` operationId).
-	NetworkCdxV1ConsumerSharedResourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*NetworkCdxV1ConsumerSharedResourceResponse, error)
-
-	// ListCdxV1ConsumerSharesWithResponse List of Consumer Shares
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all consumer shares.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cdx/v1/consumer-shares (the `ListCdxV1ConsumerShares` operationId).
-	ListCdxV1ConsumerSharesWithResponse(ctx context.Context, params *ListCdxV1ConsumerSharesParams, reqEditors ...RequestEditorFn) (*ListCdxV1ConsumerSharesResponse, error)
-
-	// DeleteCdxV1ConsumerShareWithResponse Delete a Consumer Share
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a consumer share.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /cdx/v1/consumer-shares/{id} (the `DeleteCdxV1ConsumerShare` operationId).
-	DeleteCdxV1ConsumerShareWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCdxV1ConsumerShareResponse, error)
-
-	// GetCdxV1ConsumerShareWithResponse Read a Consumer Share
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a consumer share.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cdx/v1/consumer-shares/{id} (the `GetCdxV1ConsumerShare` operationId).
-	GetCdxV1ConsumerShareWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCdxV1ConsumerShareResponse, error)
-
-	// GetCdxV1OptInWithResponse Read the organization's stream sharing opt-in settings
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Returns the organization's stream sharing opt-in settings.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cdx/v1/opt-in (the `GetCdxV1OptIn` operationId).
-	GetCdxV1OptInWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCdxV1OptInResponse, error)
-
-	// UpdateCdxV1OptInWithBodyWithResponse Set the organization's stream sharing opt-in settings
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Updates the organization's stream sharing opt-in settings.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /cdx/v1/opt-in (the `UpdateCdxV1OptIn` operationId).
-	UpdateCdxV1OptInWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCdxV1OptInResponse, error)
-
-	// UpdateCdxV1OptInWithResponse Set the organization's stream sharing opt-in settings
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Updates the organization's stream sharing opt-in settings.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /cdx/v1/opt-in (the `UpdateCdxV1OptIn` operationId).
-	UpdateCdxV1OptInWithResponse(ctx context.Context, body UpdateCdxV1OptInJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCdxV1OptInResponse, error)
-
-	// ListCdxV1ProviderSharedResourcesWithResponse List of Provider Shared Resources
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all provider shared resources.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cdx/v1/provider-shared-resources (the `ListCdxV1ProviderSharedResources` operationId).
-	ListCdxV1ProviderSharedResourcesWithResponse(ctx context.Context, params *ListCdxV1ProviderSharedResourcesParams, reqEditors ...RequestEditorFn) (*ListCdxV1ProviderSharedResourcesResponse, error)
-
-	// GetCdxV1ProviderSharedResourceWithResponse Read a Provider Shared Resource
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a provider shared resource.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cdx/v1/provider-shared-resources/{id} (the `GetCdxV1ProviderSharedResource` operationId).
-	GetCdxV1ProviderSharedResourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCdxV1ProviderSharedResourceResponse, error)
-
-	// UpdateCdxV1ProviderSharedResourceWithBodyWithResponse Update a Provider Shared Resource
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a provider shared resource.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /cdx/v1/provider-shared-resources/{id} (the `UpdateCdxV1ProviderSharedResource` operationId).
-	UpdateCdxV1ProviderSharedResourceWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCdxV1ProviderSharedResourceResponse, error)
-
-	// UpdateCdxV1ProviderSharedResourceWithResponse Update a Provider Shared Resource
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a provider shared resource.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /cdx/v1/provider-shared-resources/{id} (the `UpdateCdxV1ProviderSharedResource` operationId).
-	UpdateCdxV1ProviderSharedResourceWithResponse(ctx context.Context, id string, body UpdateCdxV1ProviderSharedResourceJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCdxV1ProviderSharedResourceResponse, error)
-
-	// DeleteImageCdxV1ProviderSharedResourceWithResponse Delete the shared resource's image
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Deletes the image file for the shared resource
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /cdx/v1/provider-shared-resources/{id}/images/{file_name} (the `DeleteImageCdxV1ProviderSharedResource` operationId).
-	DeleteImageCdxV1ProviderSharedResourceWithResponse(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*DeleteImageCdxV1ProviderSharedResourceResponse, error)
-
-	// ViewImageCdxV1ProviderSharedResourceWithResponse Get image for shared resource
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Returns the image file for the shared resource
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cdx/v1/provider-shared-resources/{id}/images/{file_name} (the `ViewImageCdxV1ProviderSharedResource` operationId).
-	ViewImageCdxV1ProviderSharedResourceWithResponse(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*ViewImageCdxV1ProviderSharedResourceResponse, error)
-
-	// UploadImageCdxV1ProviderSharedResourceWithBodyWithResponse Upload image for shared resource
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Upload the image file for the shared resource
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /cdx/v1/provider-shared-resources/{id}/images/{file_name} (the `UploadImageCdxV1ProviderSharedResource` operationId).
-	UploadImageCdxV1ProviderSharedResourceWithBodyWithResponse(ctx context.Context, id string, fileName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UploadImageCdxV1ProviderSharedResourceResponse, error)
-
-	// ListCdxV1ProviderSharesWithResponse List of Provider Shares
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all provider shares.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cdx/v1/provider-shares (the `ListCdxV1ProviderShares` operationId).
-	ListCdxV1ProviderSharesWithResponse(ctx context.Context, params *ListCdxV1ProviderSharesParams, reqEditors ...RequestEditorFn) (*ListCdxV1ProviderSharesResponse, error)
-
-	// CreateCdxV1ProviderShareWithBodyWithResponse Create a provider share
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Creates a share based on delivery method.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /cdx/v1/provider-shares (the `CreateCdxV1ProviderShare` operationId).
-	CreateCdxV1ProviderShareWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCdxV1ProviderShareResponse, error)
-
-	// CreateCdxV1ProviderShareWithResponse Create a provider share
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Creates a share based on delivery method.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /cdx/v1/provider-shares (the `CreateCdxV1ProviderShare` operationId).
-	CreateCdxV1ProviderShareWithResponse(ctx context.Context, body CreateCdxV1ProviderShareJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCdxV1ProviderShareResponse, error)
-
-	// DeleteCdxV1ProviderShareWithResponse Delete a Provider Share
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a provider share.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /cdx/v1/provider-shares/{id} (the `DeleteCdxV1ProviderShare` operationId).
-	DeleteCdxV1ProviderShareWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCdxV1ProviderShareResponse, error)
-
-	// GetCdxV1ProviderShareWithResponse Read a Provider Share
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a provider share.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cdx/v1/provider-shares/{id} (the `GetCdxV1ProviderShare` operationId).
-	GetCdxV1ProviderShareWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCdxV1ProviderShareResponse, error)
-
-	// ResendCdxV1ProviderShareWithResponse Resend
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Resend provider share
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /cdx/v1/provider-shares/{id}:resend (the `ResendCdxV1ProviderShare` operationId).
-	ResendCdxV1ProviderShareWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*ResendCdxV1ProviderShareResponse, error)
-
-	// RedeemCdxV1SharedTokenWithBodyWithResponse Redeem token
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Redeem the shared token for shared topic and cluster access information
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /cdx/v1/shared-tokens:redeem (the `RedeemCdxV1SharedToken` operationId).
-	RedeemCdxV1SharedTokenWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RedeemCdxV1SharedTokenResponse, error)
-
-	// RedeemCdxV1SharedTokenWithResponse Redeem token
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Redeem the shared token for shared topic and cluster access information
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /cdx/v1/shared-tokens:redeem (the `RedeemCdxV1SharedToken` operationId).
-	RedeemCdxV1SharedTokenWithResponse(ctx context.Context, body RedeemCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*RedeemCdxV1SharedTokenResponse, error)
-
-	// ResourcesCdxV1SharedTokenWithBodyWithResponse Validate token to view shared resources
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Validate and decrypt the shared token and view token's shared resources
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /cdx/v1/shared-tokens:resources (the `ResourcesCdxV1SharedToken` operationId).
-	ResourcesCdxV1SharedTokenWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ResourcesCdxV1SharedTokenResponse, error)
-
-	// ResourcesCdxV1SharedTokenWithResponse Validate token to view shared resources
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Validate and decrypt the shared token and view token's shared resources
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /cdx/v1/shared-tokens:resources (the `ResourcesCdxV1SharedToken` operationId).
-	ResourcesCdxV1SharedTokenWithResponse(ctx context.Context, body ResourcesCdxV1SharedTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*ResourcesCdxV1SharedTokenResponse, error)
-}
-
 func (r ListCdxV1ConsumerSharedResourcesResponse) GetJSON200() *CdxV1ConsumerSharedResourceList {
 	return r.JSON200
 }
@@ -4933,21 +4632,21 @@ func (r ResourcesCdxV1SharedTokenResponse) ContentType() string {
 	return ""
 }
 func (c *ClientWithResponses) DeleteImageCdxV1ProviderSharedResourceWithResponse(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*DeleteImageCdxV1ProviderSharedResourceResponse, error) {
-	rsp, err := c.DeleteImageCdxV1ProviderSharedResource(ctx, id, fileName, reqEditors...)
+	rsp, err := c.deleteImageCdxV1ProviderSharedResource(ctx, id, fileName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteImageCdxV1ProviderSharedResourceResponse(rsp)
 }
 func (c *ClientWithResponses) ViewImageCdxV1ProviderSharedResourceWithResponse(ctx context.Context, id string, fileName string, reqEditors ...RequestEditorFn) (*ViewImageCdxV1ProviderSharedResourceResponse, error) {
-	rsp, err := c.ViewImageCdxV1ProviderSharedResource(ctx, id, fileName, reqEditors...)
+	rsp, err := c.viewImageCdxV1ProviderSharedResource(ctx, id, fileName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseViewImageCdxV1ProviderSharedResourceResponse(rsp)
 }
 func (c *ClientWithResponses) UploadImageCdxV1ProviderSharedResourceWithBodyWithResponse(ctx context.Context, id string, fileName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UploadImageCdxV1ProviderSharedResourceResponse, error) {
-	rsp, err := c.UploadImageCdxV1ProviderSharedResourceWithBody(ctx, id, fileName, contentType, body, reqEditors...)
+	rsp, err := c.uploadImageCdxV1ProviderSharedResourceWithBody(ctx, id, fileName, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

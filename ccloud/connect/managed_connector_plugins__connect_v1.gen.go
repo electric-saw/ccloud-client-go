@@ -29,7 +29,7 @@ type ValidateConnectv1ConnectorPlugin200JSONResponseBodyConfigsDefinitionWidth s
 type TranslateConnectv1ConnectorPluginJSONRequestBody TranslateConnectv1ConnectorPluginJSONBody
 type ValidateConnectv1ConnectorPluginJSONRequestBody ValidateConnectv1ConnectorPluginJSONBody
 
-func (c *oasClient) ListConnectv1ConnectorPlugins(ctx context.Context, environmentId string, kafkaClusterId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listConnectv1ConnectorPlugins(ctx context.Context, environmentId string, kafkaClusterId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListConnectv1ConnectorPluginsRequest(c.Server, environmentId, kafkaClusterId)
 	if err != nil {
 		return nil, err
@@ -40,7 +40,7 @@ func (c *oasClient) ListConnectv1ConnectorPlugins(ctx context.Context, environme
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) TranslateConnectv1ConnectorPluginWithBody(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) translateConnectv1ConnectorPluginWithBody(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTranslateConnectv1ConnectorPluginRequestWithBody(c.Server, environmentId, kafkaClusterId, pluginName, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -51,7 +51,7 @@ func (c *oasClient) TranslateConnectv1ConnectorPluginWithBody(ctx context.Contex
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) TranslateConnectv1ConnectorPlugin(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, body TranslateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) translateConnectv1ConnectorPlugin(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, body TranslateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTranslateConnectv1ConnectorPluginRequest(c.Server, environmentId, kafkaClusterId, pluginName, params, body)
 	if err != nil {
 		return nil, err
@@ -62,7 +62,7 @@ func (c *oasClient) TranslateConnectv1ConnectorPlugin(ctx context.Context, envir
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ValidateConnectv1ConnectorPluginWithBody(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) validateConnectv1ConnectorPluginWithBody(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewValidateConnectv1ConnectorPluginRequestWithBody(c.Server, environmentId, kafkaClusterId, pluginName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -73,7 +73,7 @@ func (c *oasClient) ValidateConnectv1ConnectorPluginWithBody(ctx context.Context
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ValidateConnectv1ConnectorPlugin(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, body ValidateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) validateConnectv1ConnectorPlugin(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, body ValidateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewValidateConnectv1ConnectorPluginRequest(c.Server, environmentId, kafkaClusterId, pluginName, body)
 	if err != nil {
 		return nil, err
@@ -435,35 +435,35 @@ type ValidateConnectv1ConnectorPluginResponse struct {
 }
 
 func (c *ClientWithResponses) ListConnectv1ConnectorPluginsWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, reqEditors ...RequestEditorFn) (*ListConnectv1ConnectorPluginsResponse, error) {
-	rsp, err := c.ListConnectv1ConnectorPlugins(ctx, environmentId, kafkaClusterId, reqEditors...)
+	rsp, err := c.listConnectv1ConnectorPlugins(ctx, environmentId, kafkaClusterId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListConnectv1ConnectorPluginsResponse(rsp)
 }
 func (c *ClientWithResponses) TranslateConnectv1ConnectorPluginWithBodyWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TranslateConnectv1ConnectorPluginResponse, error) {
-	rsp, err := c.TranslateConnectv1ConnectorPluginWithBody(ctx, environmentId, kafkaClusterId, pluginName, params, contentType, body, reqEditors...)
+	rsp, err := c.translateConnectv1ConnectorPluginWithBody(ctx, environmentId, kafkaClusterId, pluginName, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseTranslateConnectv1ConnectorPluginResponse(rsp)
 }
 func (c *ClientWithResponses) TranslateConnectv1ConnectorPluginWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, body TranslateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*TranslateConnectv1ConnectorPluginResponse, error) {
-	rsp, err := c.TranslateConnectv1ConnectorPlugin(ctx, environmentId, kafkaClusterId, pluginName, params, body, reqEditors...)
+	rsp, err := c.translateConnectv1ConnectorPlugin(ctx, environmentId, kafkaClusterId, pluginName, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseTranslateConnectv1ConnectorPluginResponse(rsp)
 }
 func (c *ClientWithResponses) ValidateConnectv1ConnectorPluginWithBodyWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ValidateConnectv1ConnectorPluginResponse, error) {
-	rsp, err := c.ValidateConnectv1ConnectorPluginWithBody(ctx, environmentId, kafkaClusterId, pluginName, contentType, body, reqEditors...)
+	rsp, err := c.validateConnectv1ConnectorPluginWithBody(ctx, environmentId, kafkaClusterId, pluginName, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseValidateConnectv1ConnectorPluginResponse(rsp)
 }
 func (c *ClientWithResponses) ValidateConnectv1ConnectorPluginWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, body ValidateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*ValidateConnectv1ConnectorPluginResponse, error) {
-	rsp, err := c.ValidateConnectv1ConnectorPlugin(ctx, environmentId, kafkaClusterId, pluginName, body, reqEditors...)
+	rsp, err := c.validateConnectv1ConnectorPlugin(ctx, environmentId, kafkaClusterId, pluginName, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

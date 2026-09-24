@@ -823,7 +823,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// FindScimV2User Search for Users
 	//
@@ -836,7 +836,7 @@ type ClientInterface interface {
 	// account already exists before provisioning.
 	//
 	// Corresponds with GET /scim/v2/sso/{connection_name}/Users (the `FindScimV2User` operationId).
-	FindScimV2User(ctx context.Context, connectionName string, params *FindScimV2UserParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	findScimV2User(ctx context.Context, connectionName string, params *FindScimV2UserParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateScimV2UserWithBody Create a User
 	//
@@ -847,7 +847,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /scim/v2/sso/{connection_name}/Users (the `CreateScimV2User` operationId).
-	CreateScimV2UserWithBody(ctx context.Context, connectionName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createScimV2UserWithBody(ctx context.Context, connectionName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateScimV2UserWithApplicationScimPlusJSONBody Create a User
 	//
@@ -858,7 +858,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/scim+json` content type.
 	//
 	// Corresponds with POST /scim/v2/sso/{connection_name}/Users (the `CreateScimV2User` operationId).
-	CreateScimV2UserWithApplicationScimPlusJSONBody(ctx context.Context, connectionName string, body CreateScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createScimV2UserWithApplicationScimPlusJSONBody(ctx context.Context, connectionName string, body CreateScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteScimV2User Delete a User
 	//
@@ -871,7 +871,7 @@ type ClientInterface interface {
 	// This action cannot be undone.
 	//
 	// Corresponds with DELETE /scim/v2/sso/{connection_name}/Users/{id} (the `DeleteScimV2User` operationId).
-	DeleteScimV2User(ctx context.Context, connectionName string, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteScimV2User(ctx context.Context, connectionName string, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetScimV2User Read a User
 	//
@@ -880,7 +880,7 @@ type ClientInterface interface {
 	// Make a request to read a user.
 	//
 	// Corresponds with GET /scim/v2/sso/{connection_name}/Users/{id} (the `GetScimV2User` operationId).
-	GetScimV2User(ctx context.Context, connectionName string, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getScimV2User(ctx context.Context, connectionName string, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PatchScimV2UserWithBody Patch a User
 	//
@@ -891,7 +891,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /scim/v2/sso/{connection_name}/Users/{id} (the `PatchScimV2User` operationId).
-	PatchScimV2UserWithBody(ctx context.Context, connectionName string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	patchScimV2UserWithBody(ctx context.Context, connectionName string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PatchScimV2User Patch a User
 	//
@@ -902,7 +902,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /scim/v2/sso/{connection_name}/Users/{id} (the `PatchScimV2User` operationId).
-	PatchScimV2User(ctx context.Context, connectionName string, id string, body PatchScimV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	patchScimV2User(ctx context.Context, connectionName string, id string, body PatchScimV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PatchScimV2UserWithApplicationScimPlusJSONBody Patch a User
 	//
@@ -913,7 +913,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/scim+json` content type.
 	//
 	// Corresponds with PATCH /scim/v2/sso/{connection_name}/Users/{id} (the `PatchScimV2User` operationId).
-	PatchScimV2UserWithApplicationScimPlusJSONBody(ctx context.Context, connectionName string, id string, body PatchScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	patchScimV2UserWithApplicationScimPlusJSONBody(ctx context.Context, connectionName string, id string, body PatchScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateScimV2UserWithBody Update a User
 	//
@@ -924,7 +924,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /scim/v2/sso/{connection_name}/Users/{id} (the `UpdateScimV2User` operationId).
-	UpdateScimV2UserWithBody(ctx context.Context, connectionName string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateScimV2UserWithBody(ctx context.Context, connectionName string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateScimV2UserWithApplicationScimPlusJSONBody Update a User
 	//
@@ -935,7 +935,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/scim+json` content type.
 	//
 	// Corresponds with PUT /scim/v2/sso/{connection_name}/Users/{id} (the `UpdateScimV2User` operationId).
-	UpdateScimV2UserWithApplicationScimPlusJSONBody(ctx context.Context, connectionName string, id string, body UpdateScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateScimV2UserWithApplicationScimPlusJSONBody(ctx context.Context, connectionName string, id string, body UpdateScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func NewCreateScimV2UserRequestWithApplicationScimPlusJSONBody(server string, connectionName string, body CreateScimV2UserApplicationScimPlusJSONRequestBody) (*http.Request, error) {
@@ -980,7 +980,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -1000,128 +1000,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// FindScimV2UserWithResponse Search for Users
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to find a user.
-	//
-	// Search for users in the organization using SCIM filter expressions. This endpoint supports
-	// filtering by user attributes such as userName to locate existing users or verify if a user
-	// account already exists before provisioning.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /scim/v2/sso/{connection_name}/Users (the `FindScimV2User` operationId).
-	FindScimV2UserWithResponse(ctx context.Context, connectionName string, params *FindScimV2UserParams, reqEditors ...RequestEditorFn) (*FindScimV2UserResponse, error)
-
-	// CreateScimV2UserWithBodyWithResponse Create a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a user.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /scim/v2/sso/{connection_name}/Users (the `CreateScimV2User` operationId).
-	CreateScimV2UserWithBodyWithResponse(ctx context.Context, connectionName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScimV2UserResponse, error)
-
-	// CreateScimV2UserWithApplicationScimPlusJSONBodyWithResponse Create a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a user.
-	//
-	// Takes a body of the `application/scim+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /scim/v2/sso/{connection_name}/Users (the `CreateScimV2User` operationId).
-	CreateScimV2UserWithApplicationScimPlusJSONBodyWithResponse(ctx context.Context, connectionName string, body CreateScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScimV2UserResponse, error)
-
-	// DeleteScimV2UserWithResponse Delete a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a user.
-	//
-	// Permanently removes the user from the organization. This operation will also cascade delete
-	// all of the user's associated resources, including API keys and any other user-specific configurations.
-	// This action cannot be undone.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /scim/v2/sso/{connection_name}/Users/{id} (the `DeleteScimV2User` operationId).
-	DeleteScimV2UserWithResponse(ctx context.Context, connectionName string, id string, reqEditors ...RequestEditorFn) (*DeleteScimV2UserResponse, error)
-
-	// GetScimV2UserWithResponse Read a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a user.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /scim/v2/sso/{connection_name}/Users/{id} (the `GetScimV2User` operationId).
-	GetScimV2UserWithResponse(ctx context.Context, connectionName string, id string, reqEditors ...RequestEditorFn) (*GetScimV2UserResponse, error)
-
-	// PatchScimV2UserWithBodyWithResponse Patch a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to patch a user.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /scim/v2/sso/{connection_name}/Users/{id} (the `PatchScimV2User` operationId).
-	PatchScimV2UserWithBodyWithResponse(ctx context.Context, connectionName string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchScimV2UserResponse, error)
-
-	// PatchScimV2UserWithResponse Patch a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to patch a user.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /scim/v2/sso/{connection_name}/Users/{id} (the `PatchScimV2User` operationId).
-	PatchScimV2UserWithResponse(ctx context.Context, connectionName string, id string, body PatchScimV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchScimV2UserResponse, error)
-
-	// PatchScimV2UserWithApplicationScimPlusJSONBodyWithResponse Patch a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to patch a user.
-	//
-	// Takes a body of the `application/scim+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /scim/v2/sso/{connection_name}/Users/{id} (the `PatchScimV2User` operationId).
-	PatchScimV2UserWithApplicationScimPlusJSONBodyWithResponse(ctx context.Context, connectionName string, id string, body PatchScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchScimV2UserResponse, error)
-
-	// UpdateScimV2UserWithBodyWithResponse Update a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a user.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /scim/v2/sso/{connection_name}/Users/{id} (the `UpdateScimV2User` operationId).
-	UpdateScimV2UserWithBodyWithResponse(ctx context.Context, connectionName string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScimV2UserResponse, error)
-
-	// UpdateScimV2UserWithApplicationScimPlusJSONBodyWithResponse Update a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a user.
-	//
-	// Takes a body of the `application/scim+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /scim/v2/sso/{connection_name}/Users/{id} (the `UpdateScimV2User` operationId).
-	UpdateScimV2UserWithApplicationScimPlusJSONBodyWithResponse(ctx context.Context, connectionName string, id string, body UpdateScimV2UserApplicationScimPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScimV2UserResponse, error)
-}
-
 func (r FindScimV2UserResponse) GetApplicationscimJSON200() *struct {
 	// Resources A multi-valued list of complex objects containing the requested resources.
 	Resources *[]ScimV2User `json:"Resources,omitempty"`

@@ -27,23 +27,23 @@ func TestNewHTTPClient_roundTrip(t *testing.T) {
 	}))
 	defer srv.Close()
 
-	c, err := iam.NewClient(srv.URL, iam.WithHTTPClient(NewHTTPClient(authFunc(func(r *http.Request) error {
+	c, err := iam.NewClientWithResponses(srv.URL, iam.WithHTTPClient(NewHTTPClient(authFunc(func(r *http.Request) error {
 		r.SetBasicAuth("key", "secret")
 
 		return nil
 	}))))
 	if err != nil {
-		t.Fatalf("iam.NewClient: %v", err)
+		t.Fatalf("iam.NewClientWithResponses: %v", err)
 	}
 
-	resp, err := c.GetIamV2ApiKey(t.Context(), "k-abc123")
+	resp, err := c.GetIamV2ApiKeyWithResponse(t.Context(), "k-abc123")
 	if err != nil {
-		t.Fatalf("GetIamV2ApiKey: %v", err)
+		t.Fatalf("GetIamV2ApiKeyWithResponse: %v", err)
 	}
-	defer resp.Body.Close()
+	defer resp.HTTPResponse.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		t.Fatalf("status = %d, want 200", resp.StatusCode)
+	if resp.HTTPResponse.StatusCode != http.StatusOK {
+		t.Fatalf("status = %d, want 200", resp.HTTPResponse.StatusCode)
 	}
 	if gotAuth == "" {
 		t.Fatal("Authorization header missing — auth RoundTripper not applied")
@@ -56,7 +56,7 @@ func TestNewHTTPClient_roundTrip(t *testing.T) {
 		Kind string `json:"kind"`
 		ID   string `json:"id"`
 	}
-	if err := json.NewDecoder(resp.Body).Decode(&key); err != nil {
+	if err := json.Unmarshal(resp.Body, &key); err != nil {
 		t.Fatalf("decode: %v", err)
 	}
 	if key.Kind != "ApiKey" || key.ID != "k-abc123" {

@@ -970,7 +970,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListServiceQuotaV1AppliedQuotas List of Applied Quotas
 	//
@@ -981,7 +981,7 @@ type ClientInterface interface {
 	// Shows all quotas for a given scope.
 	//
 	// Corresponds with GET /service-quota/v1/applied-quotas (the `ListServiceQuotaV1AppliedQuotas` operationId).
-	ListServiceQuotaV1AppliedQuotas(ctx context.Context, params *ListServiceQuotaV1AppliedQuotasParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listServiceQuotaV1AppliedQuotas(ctx context.Context, params *ListServiceQuotaV1AppliedQuotasParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetServiceQuotaV1AppliedQuota Read an Applied Quota
 	//
@@ -990,7 +990,7 @@ type ClientInterface interface {
 	// Make a request to read an applied quota.
 	//
 	// Corresponds with GET /service-quota/v1/applied-quotas/{id} (the `GetServiceQuotaV1AppliedQuota` operationId).
-	GetServiceQuotaV1AppliedQuota(ctx context.Context, id string, params *GetServiceQuotaV1AppliedQuotaParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getServiceQuotaV1AppliedQuota(ctx context.Context, id string, params *GetServiceQuotaV1AppliedQuotaParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListServiceQuotaV1Scopes List of Scopes
 	//
@@ -999,7 +999,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all scopes.
 	//
 	// Corresponds with GET /service-quota/v1/scopes (the `ListServiceQuotaV1Scopes` operationId).
-	ListServiceQuotaV1Scopes(ctx context.Context, params *ListServiceQuotaV1ScopesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listServiceQuotaV1Scopes(ctx context.Context, params *ListServiceQuotaV1ScopesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetServiceQuotaV1Scope Read a Scope
 	//
@@ -1008,7 +1008,7 @@ type ClientInterface interface {
 	// Make a request to read a scope.
 	//
 	// Corresponds with GET /service-quota/v1/scopes/{id} (the `GetServiceQuotaV1Scope` operationId).
-	GetServiceQuotaV1Scope(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getServiceQuotaV1Scope(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -1026,7 +1026,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -1046,56 +1046,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListServiceQuotaV1AppliedQuotasWithResponse List of Applied Quotas
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all applied quotas.
-	//
-	// Shows all quotas for a given scope.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /service-quota/v1/applied-quotas (the `ListServiceQuotaV1AppliedQuotas` operationId).
-	ListServiceQuotaV1AppliedQuotasWithResponse(ctx context.Context, params *ListServiceQuotaV1AppliedQuotasParams, reqEditors ...RequestEditorFn) (*ListServiceQuotaV1AppliedQuotasResponse, error)
-
-	// GetServiceQuotaV1AppliedQuotaWithResponse Read an Applied Quota
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read an applied quota.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /service-quota/v1/applied-quotas/{id} (the `GetServiceQuotaV1AppliedQuota` operationId).
-	GetServiceQuotaV1AppliedQuotaWithResponse(ctx context.Context, id string, params *GetServiceQuotaV1AppliedQuotaParams, reqEditors ...RequestEditorFn) (*GetServiceQuotaV1AppliedQuotaResponse, error)
-
-	// ListServiceQuotaV1ScopesWithResponse List of Scopes
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all scopes.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /service-quota/v1/scopes (the `ListServiceQuotaV1Scopes` operationId).
-	ListServiceQuotaV1ScopesWithResponse(ctx context.Context, params *ListServiceQuotaV1ScopesParams, reqEditors ...RequestEditorFn) (*ListServiceQuotaV1ScopesResponse, error)
-
-	// GetServiceQuotaV1ScopeWithResponse Read a Scope
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a scope.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /service-quota/v1/scopes/{id} (the `GetServiceQuotaV1Scope` operationId).
-	GetServiceQuotaV1ScopeWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetServiceQuotaV1ScopeResponse, error)
-}
-
 func (r ListServiceQuotaV1AppliedQuotasResponse) GetJSON200() *struct {
 	// ApiVersion APIVersion defines the schema version of this representation of a resource.
 	ApiVersion ListServiceQuotaV1AppliedQuotas200JSONResponseBodyApiVersion `json:"api_version"`

@@ -15,7 +15,7 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
-func (c *oasClient) GetKafkaCluster(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaCluster(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaClusterRequest(c.Server, clusterId)
 	if err != nil {
 		return nil, err
@@ -75,7 +75,7 @@ type GetKafkaClusterResponse struct {
 }
 
 func (c *ClientWithResponses) GetKafkaClusterWithResponse(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*GetKafkaClusterResponse, error) {
-	rsp, err := c.GetKafkaCluster(ctx, clusterId, reqEditors...)
+	rsp, err := c.getKafkaCluster(ctx, clusterId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

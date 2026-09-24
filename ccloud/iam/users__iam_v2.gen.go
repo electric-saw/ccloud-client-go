@@ -31,7 +31,7 @@ type UpdateIamV2User200JSONResponseBodyApiVersion string
 type UpdateIamV2User200JSONResponseBodyKind string
 type UpdateIamV2UserJSONRequestBody = IamV2User
 
-func (c *oasClient) ListIamV2Users(ctx context.Context, params *ListIamV2UsersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listIamV2Users(ctx context.Context, params *ListIamV2UsersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIamV2UsersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -42,7 +42,7 @@ func (c *oasClient) ListIamV2Users(ctx context.Context, params *ListIamV2UsersPa
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteIamV2User(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteIamV2User(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIamV2UserRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -53,7 +53,7 @@ func (c *oasClient) DeleteIamV2User(ctx context.Context, id string, reqEditors .
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetIamV2User(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getIamV2User(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2UserRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -64,7 +64,7 @@ func (c *oasClient) GetIamV2User(ctx context.Context, id string, reqEditors ...R
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateIamV2UserWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateIamV2UserWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2UserRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -75,7 +75,7 @@ func (c *oasClient) UpdateIamV2UserWithBody(ctx context.Context, id string, cont
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateIamV2User(ctx context.Context, id string, body UpdateIamV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateIamV2User(ctx context.Context, id string, body UpdateIamV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2UserRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -569,35 +569,35 @@ type UpdateIamV2UserResponse struct {
 }
 
 func (c *ClientWithResponses) ListIamV2UsersWithResponse(ctx context.Context, params *ListIamV2UsersParams, reqEditors ...RequestEditorFn) (*ListIamV2UsersResponse, error) {
-	rsp, err := c.ListIamV2Users(ctx, params, reqEditors...)
+	rsp, err := c.listIamV2Users(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListIamV2UsersResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteIamV2UserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2UserResponse, error) {
-	rsp, err := c.DeleteIamV2User(ctx, id, reqEditors...)
+	rsp, err := c.deleteIamV2User(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteIamV2UserResponse(rsp)
 }
 func (c *ClientWithResponses) GetIamV2UserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2UserResponse, error) {
-	rsp, err := c.GetIamV2User(ctx, id, reqEditors...)
+	rsp, err := c.getIamV2User(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetIamV2UserResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateIamV2UserWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2UserResponse, error) {
-	rsp, err := c.UpdateIamV2UserWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateIamV2UserWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateIamV2UserResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateIamV2UserWithResponse(ctx context.Context, id string, body UpdateIamV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2UserResponse, error) {
-	rsp, err := c.UpdateIamV2User(ctx, id, body, reqEditors...)
+	rsp, err := c.updateIamV2User(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -26,7 +26,7 @@ type ListTableflowV1RegionsParams struct {
 	PageToken *string `form:"page_token,omitempty" json:"page_token,omitempty"`
 }
 
-func (c *oasClient) ListTableflowV1Regions(ctx context.Context, params *ListTableflowV1RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listTableflowV1Regions(ctx context.Context, params *ListTableflowV1RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListTableflowV1RegionsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -168,7 +168,7 @@ type ListTableflowV1RegionsResponse struct {
 }
 
 func (c *ClientWithResponses) ListTableflowV1RegionsWithResponse(ctx context.Context, params *ListTableflowV1RegionsParams, reqEditors ...RequestEditorFn) (*ListTableflowV1RegionsResponse, error) {
-	rsp, err := c.ListTableflowV1Regions(ctx, params, reqEditors...)
+	rsp, err := c.listTableflowV1Regions(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

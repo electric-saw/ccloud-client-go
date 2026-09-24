@@ -28,7 +28,7 @@ type SignupJSONRequestBody = PartnerSignupRequest
 type ActivateSignupJSONRequestBody = ActivatePartnerSignupRequest
 type SignupPartnerV2LinkJSONRequestBody = PartnerLinkRequest
 
-func (c *oasClient) SignupWithBody(ctx context.Context, params *SignupParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) signupWithBody(ctx context.Context, params *SignupParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSignupRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -39,7 +39,7 @@ func (c *oasClient) SignupWithBody(ctx context.Context, params *SignupParams, co
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) Signup(ctx context.Context, params *SignupParams, body SignupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) signup(ctx context.Context, params *SignupParams, body SignupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSignupRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err
@@ -50,7 +50,7 @@ func (c *oasClient) Signup(ctx context.Context, params *SignupParams, body Signu
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ActivateSignupWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) activateSignupWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewActivateSignupRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -61,7 +61,7 @@ func (c *oasClient) ActivateSignupWithBody(ctx context.Context, contentType stri
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ActivateSignup(ctx context.Context, body ActivateSignupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) activateSignup(ctx context.Context, body ActivateSignupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewActivateSignupRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -72,7 +72,7 @@ func (c *oasClient) ActivateSignup(ctx context.Context, body ActivateSignupJSONR
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) SignupPartnerV2LinkWithBody(ctx context.Context, params *SignupPartnerV2LinkParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) signupPartnerV2LinkWithBody(ctx context.Context, params *SignupPartnerV2LinkParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSignupPartnerV2LinkRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -83,7 +83,7 @@ func (c *oasClient) SignupPartnerV2LinkWithBody(ctx context.Context, params *Sig
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) SignupPartnerV2Link(ctx context.Context, params *SignupPartnerV2LinkParams, body SignupPartnerV2LinkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) signupPartnerV2Link(ctx context.Context, params *SignupPartnerV2LinkParams, body SignupPartnerV2LinkJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSignupPartnerV2LinkRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err
@@ -415,42 +415,42 @@ type SignupPartnerV2LinkResponse struct {
 }
 
 func (c *ClientWithResponses) SignupWithBodyWithResponse(ctx context.Context, params *SignupParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SignupResponse, error) {
-	rsp, err := c.SignupWithBody(ctx, params, contentType, body, reqEditors...)
+	rsp, err := c.signupWithBody(ctx, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseSignupResponse(rsp)
 }
 func (c *ClientWithResponses) SignupWithResponse(ctx context.Context, params *SignupParams, body SignupJSONRequestBody, reqEditors ...RequestEditorFn) (*SignupResponse, error) {
-	rsp, err := c.Signup(ctx, params, body, reqEditors...)
+	rsp, err := c.signup(ctx, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseSignupResponse(rsp)
 }
 func (c *ClientWithResponses) ActivateSignupWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ActivateSignupResponse, error) {
-	rsp, err := c.ActivateSignupWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.activateSignupWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseActivateSignupResponse(rsp)
 }
 func (c *ClientWithResponses) ActivateSignupWithResponse(ctx context.Context, body ActivateSignupJSONRequestBody, reqEditors ...RequestEditorFn) (*ActivateSignupResponse, error) {
-	rsp, err := c.ActivateSignup(ctx, body, reqEditors...)
+	rsp, err := c.activateSignup(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseActivateSignupResponse(rsp)
 }
 func (c *ClientWithResponses) SignupPartnerV2LinkWithBodyWithResponse(ctx context.Context, params *SignupPartnerV2LinkParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SignupPartnerV2LinkResponse, error) {
-	rsp, err := c.SignupPartnerV2LinkWithBody(ctx, params, contentType, body, reqEditors...)
+	rsp, err := c.signupPartnerV2LinkWithBody(ctx, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseSignupPartnerV2LinkResponse(rsp)
 }
 func (c *ClientWithResponses) SignupPartnerV2LinkWithResponse(ctx context.Context, params *SignupPartnerV2LinkParams, body SignupPartnerV2LinkJSONRequestBody, reqEditors ...RequestEditorFn) (*SignupPartnerV2LinkResponse, error) {
-	rsp, err := c.SignupPartnerV2Link(ctx, params, body, reqEditors...)
+	rsp, err := c.signupPartnerV2Link(ctx, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -81,7 +81,7 @@ type GetVersionsParams struct {
 	Limit *int32 `form:"limit,omitempty" json:"limit,omitempty"`
 }
 
-func (c *oasClient) GetSchemas(ctx context.Context, params *GetSchemasParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getSchemas(ctx context.Context, params *GetSchemasParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSchemasRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -92,7 +92,7 @@ func (c *oasClient) GetSchemas(ctx context.Context, params *GetSchemasParams, re
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetSchema(ctx context.Context, id int32, params *GetSchemaParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getSchema(ctx context.Context, id int32, params *GetSchemaParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSchemaRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -103,7 +103,7 @@ func (c *oasClient) GetSchema(ctx context.Context, id int32, params *GetSchemaPa
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetSchemaOnly(ctx context.Context, id int32, params *GetSchemaOnlyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getSchemaOnly(ctx context.Context, id int32, params *GetSchemaOnlyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSchemaOnlyRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -114,7 +114,7 @@ func (c *oasClient) GetSchemaOnly(ctx context.Context, id int32, params *GetSche
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetSubjects(ctx context.Context, id int32, params *GetSubjectsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getSubjects(ctx context.Context, id int32, params *GetSubjectsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSubjectsRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -125,7 +125,7 @@ func (c *oasClient) GetSubjects(ctx context.Context, id int32, params *GetSubjec
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetVersions(ctx context.Context, id int32, params *GetVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getVersions(ctx context.Context, id int32, params *GetVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetVersionsRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -136,7 +136,7 @@ func (c *oasClient) GetVersions(ctx context.Context, id int32, params *GetVersio
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetSchemaTypes(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getSchemaTypes(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSchemaTypesRequest(c.Server)
 	if err != nil {
 		return nil, err
@@ -853,42 +853,42 @@ type GetSchemaTypesResponse struct {
 }
 
 func (c *ClientWithResponses) GetSchemasWithResponse(ctx context.Context, params *GetSchemasParams, reqEditors ...RequestEditorFn) (*GetSchemasResponse, error) {
-	rsp, err := c.GetSchemas(ctx, params, reqEditors...)
+	rsp, err := c.getSchemas(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetSchemasResponse(rsp)
 }
 func (c *ClientWithResponses) GetSchemaWithResponse(ctx context.Context, id int32, params *GetSchemaParams, reqEditors ...RequestEditorFn) (*GetSchemaResponse, error) {
-	rsp, err := c.GetSchema(ctx, id, params, reqEditors...)
+	rsp, err := c.getSchema(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetSchemaResponse(rsp)
 }
 func (c *ClientWithResponses) GetSchemaOnlyWithResponse(ctx context.Context, id int32, params *GetSchemaOnlyParams, reqEditors ...RequestEditorFn) (*GetSchemaOnlyResponse, error) {
-	rsp, err := c.GetSchemaOnly(ctx, id, params, reqEditors...)
+	rsp, err := c.getSchemaOnly(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetSchemaOnlyResponse(rsp)
 }
 func (c *ClientWithResponses) GetSubjectsWithResponse(ctx context.Context, id int32, params *GetSubjectsParams, reqEditors ...RequestEditorFn) (*GetSubjectsResponse, error) {
-	rsp, err := c.GetSubjects(ctx, id, params, reqEditors...)
+	rsp, err := c.getSubjects(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetSubjectsResponse(rsp)
 }
 func (c *ClientWithResponses) GetVersionsWithResponse(ctx context.Context, id int32, params *GetVersionsParams, reqEditors ...RequestEditorFn) (*GetVersionsResponse, error) {
-	rsp, err := c.GetVersions(ctx, id, params, reqEditors...)
+	rsp, err := c.getVersions(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetVersionsResponse(rsp)
 }
 func (c *ClientWithResponses) GetSchemaTypesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetSchemaTypesResponse, error) {
-	rsp, err := c.GetSchemaTypes(ctx, reqEditors...)
+	rsp, err := c.getSchemaTypes(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -2550,7 +2550,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListNotificationsV1Integrations Retrieve a list of integrations. Optionally filter by resource and resource type.
 	//
@@ -2559,7 +2559,7 @@ type ClientInterface interface {
 	// Make a request to list_by_resource_type an integration.
 	//
 	// Corresponds with GET /notifications/v1/integrations (the `ListNotificationsV1Integrations` operationId).
-	ListNotificationsV1Integrations(ctx context.Context, params *ListNotificationsV1IntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNotificationsV1Integrations(ctx context.Context, params *ListNotificationsV1IntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNotificationsV1IntegrationWithBody Create an Integration
 	//
@@ -2570,7 +2570,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /notifications/v1/integrations (the `CreateNotificationsV1Integration` operationId).
-	CreateNotificationsV1IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNotificationsV1IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNotificationsV1Integration Create an Integration
 	//
@@ -2581,7 +2581,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /notifications/v1/integrations (the `CreateNotificationsV1Integration` operationId).
-	CreateNotificationsV1Integration(ctx context.Context, body CreateNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNotificationsV1Integration(ctx context.Context, body CreateNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNotificationsV1Integration Delete an Integration
 	//
@@ -2590,7 +2590,7 @@ type ClientInterface interface {
 	// Make a request to delete an integration.
 	//
 	// Corresponds with DELETE /notifications/v1/integrations/{id} (the `DeleteNotificationsV1Integration` operationId).
-	DeleteNotificationsV1Integration(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNotificationsV1Integration(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNotificationsV1Integration Read an Integration
 	//
@@ -2599,7 +2599,7 @@ type ClientInterface interface {
 	// Make a request to read an integration.
 	//
 	// Corresponds with GET /notifications/v1/integrations/{id} (the `GetNotificationsV1Integration` operationId).
-	GetNotificationsV1Integration(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNotificationsV1Integration(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNotificationsV1IntegrationWithBody Update an Integration
 	//
@@ -2610,7 +2610,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /notifications/v1/integrations/{id} (the `UpdateNotificationsV1Integration` operationId).
-	UpdateNotificationsV1IntegrationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNotificationsV1IntegrationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNotificationsV1Integration Update an Integration
 	//
@@ -2621,7 +2621,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /notifications/v1/integrations/{id} (the `UpdateNotificationsV1Integration` operationId).
-	UpdateNotificationsV1Integration(ctx context.Context, id string, body UpdateNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNotificationsV1Integration(ctx context.Context, id string, body UpdateNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// TestNotificationsV1IntegrationWithBody Test a Webhook, Slack or Microsoft Teams integration
 	//
@@ -2633,7 +2633,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /notifications/v1/integrations:test (the `TestNotificationsV1Integration` operationId).
-	TestNotificationsV1IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	testNotificationsV1IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// TestNotificationsV1Integration Test a Webhook, Slack or Microsoft Teams integration
 	//
@@ -2645,7 +2645,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /notifications/v1/integrations:test (the `TestNotificationsV1Integration` operationId).
-	TestNotificationsV1Integration(ctx context.Context, body TestNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	testNotificationsV1Integration(ctx context.Context, body TestNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNotificationsV1NotificationTypes Retrieve a list of all notification types for the resource type.
 	//
@@ -2654,7 +2654,7 @@ type ClientInterface interface {
 	// Make a request to list_by_resource_type a notification type.
 	//
 	// Corresponds with GET /notifications/v1/notification-types (the `ListNotificationsV1NotificationTypes` operationId).
-	ListNotificationsV1NotificationTypes(ctx context.Context, params *ListNotificationsV1NotificationTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNotificationsV1NotificationTypes(ctx context.Context, params *ListNotificationsV1NotificationTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNotificationsV1NotificationType Read a Notification Type
 	//
@@ -2663,7 +2663,7 @@ type ClientInterface interface {
 	// Make a request to read a notification type.
 	//
 	// Corresponds with GET /notifications/v1/notification-types/{id} (the `GetNotificationsV1NotificationType` operationId).
-	GetNotificationsV1NotificationType(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNotificationsV1NotificationType(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNotificationsV1ResourcePreferenceWithBody Create a Resource Preference
 	//
@@ -2674,7 +2674,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /notifications/v1/resource-preferences (the `CreateNotificationsV1ResourcePreference` operationId).
-	CreateNotificationsV1ResourcePreferenceWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNotificationsV1ResourcePreferenceWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNotificationsV1ResourcePreference Create a Resource Preference
 	//
@@ -2685,7 +2685,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /notifications/v1/resource-preferences (the `CreateNotificationsV1ResourcePreference` operationId).
-	CreateNotificationsV1ResourcePreference(ctx context.Context, body CreateNotificationsV1ResourcePreferenceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNotificationsV1ResourcePreference(ctx context.Context, body CreateNotificationsV1ResourcePreferenceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNotificationsV1ResourcePreference Delete a Resource Preference
 	//
@@ -2694,7 +2694,7 @@ type ClientInterface interface {
 	// Make a request to delete a resource preference.
 	//
 	// Corresponds with DELETE /notifications/v1/resource-preferences/{id} (the `DeleteNotificationsV1ResourcePreference` operationId).
-	DeleteNotificationsV1ResourcePreference(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNotificationsV1ResourcePreference(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNotificationsV1ResourcePreference Read a Resource Preference
 	//
@@ -2703,7 +2703,7 @@ type ClientInterface interface {
 	// Make a request to read a resource preference.
 	//
 	// Corresponds with GET /notifications/v1/resource-preferences/{id} (the `GetNotificationsV1ResourcePreference` operationId).
-	GetNotificationsV1ResourcePreference(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNotificationsV1ResourcePreference(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNotificationsV1ResourcePreferenceWithBody Update a Resource Preference
 	//
@@ -2714,7 +2714,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /notifications/v1/resource-preferences/{id} (the `UpdateNotificationsV1ResourcePreference` operationId).
-	UpdateNotificationsV1ResourcePreferenceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNotificationsV1ResourcePreferenceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNotificationsV1ResourcePreference Update a Resource Preference
 	//
@@ -2725,7 +2725,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /notifications/v1/resource-preferences/{id} (the `UpdateNotificationsV1ResourcePreference` operationId).
-	UpdateNotificationsV1ResourcePreference(ctx context.Context, id string, body UpdateNotificationsV1ResourcePreferenceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNotificationsV1ResourcePreference(ctx context.Context, id string, body UpdateNotificationsV1ResourcePreferenceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNotificationsV1ResourcePreferenceByFilter Lookup a resource preference by filter (returns one)
 	//
@@ -2734,7 +2734,7 @@ type ClientInterface interface {
 	// Make a request to read_by_filter a resource preference.
 	//
 	// Corresponds with GET /notifications/v1/resource-preferences:lookup (the `GetNotificationsV1ResourcePreferenceByFilter` operationId).
-	GetNotificationsV1ResourcePreferenceByFilter(ctx context.Context, params *GetNotificationsV1ResourcePreferenceByFilterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNotificationsV1ResourcePreferenceByFilter(ctx context.Context, params *GetNotificationsV1ResourcePreferenceByFilterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNotificationsV1ResourceSubscriptionWithBody Create a Resource Subscription
 	//
@@ -2745,7 +2745,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /notifications/v1/resource-subscriptions (the `CreateNotificationsV1ResourceSubscription` operationId).
-	CreateNotificationsV1ResourceSubscriptionWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNotificationsV1ResourceSubscriptionWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNotificationsV1ResourceSubscription Create a Resource Subscription
 	//
@@ -2756,7 +2756,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /notifications/v1/resource-subscriptions (the `CreateNotificationsV1ResourceSubscription` operationId).
-	CreateNotificationsV1ResourceSubscription(ctx context.Context, body CreateNotificationsV1ResourceSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNotificationsV1ResourceSubscription(ctx context.Context, body CreateNotificationsV1ResourceSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNotificationsV1ResourceSubscription Delete a Resource Subscription
 	//
@@ -2765,7 +2765,7 @@ type ClientInterface interface {
 	// Make a request to delete a resource subscription.
 	//
 	// Corresponds with DELETE /notifications/v1/resource-subscriptions/{id} (the `DeleteNotificationsV1ResourceSubscription` operationId).
-	DeleteNotificationsV1ResourceSubscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNotificationsV1ResourceSubscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNotificationsV1ResourceSubscription Read a Resource Subscription
 	//
@@ -2774,7 +2774,7 @@ type ClientInterface interface {
 	// Make a request to read a resource subscription.
 	//
 	// Corresponds with GET /notifications/v1/resource-subscriptions/{id} (the `GetNotificationsV1ResourceSubscription` operationId).
-	GetNotificationsV1ResourceSubscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNotificationsV1ResourceSubscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNotificationsV1ResourceSubscriptionWithBody Update a Resource Subscription
 	//
@@ -2785,7 +2785,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /notifications/v1/resource-subscriptions/{id} (the `UpdateNotificationsV1ResourceSubscription` operationId).
-	UpdateNotificationsV1ResourceSubscriptionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNotificationsV1ResourceSubscriptionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNotificationsV1ResourceSubscription Update a Resource Subscription
 	//
@@ -2796,7 +2796,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /notifications/v1/resource-subscriptions/{id} (the `UpdateNotificationsV1ResourceSubscription` operationId).
-	UpdateNotificationsV1ResourceSubscription(ctx context.Context, id string, body UpdateNotificationsV1ResourceSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNotificationsV1ResourceSubscription(ctx context.Context, id string, body UpdateNotificationsV1ResourceSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNotificationsV1ResourceSubscriptionsByFilter Lookup a list of resource subscription by filter
 	//
@@ -2805,7 +2805,7 @@ type ClientInterface interface {
 	// Make a request to list_by_filter a resource subscription.
 	//
 	// Corresponds with GET /notifications/v1/resource-subscriptions:lookup (the `ListNotificationsV1ResourceSubscriptionsByFilter` operationId).
-	ListNotificationsV1ResourceSubscriptionsByFilter(ctx context.Context, params *ListNotificationsV1ResourceSubscriptionsByFilterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNotificationsV1ResourceSubscriptionsByFilter(ctx context.Context, params *ListNotificationsV1ResourceSubscriptionsByFilterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNotificationsV1Subscriptions List of Subscriptions
 	//
@@ -2814,7 +2814,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all subscriptions.
 	//
 	// Corresponds with GET /notifications/v1/subscriptions (the `ListNotificationsV1Subscriptions` operationId).
-	ListNotificationsV1Subscriptions(ctx context.Context, params *ListNotificationsV1SubscriptionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNotificationsV1Subscriptions(ctx context.Context, params *ListNotificationsV1SubscriptionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNotificationsV1SubscriptionWithBody Create a Subscription
 	//
@@ -2825,7 +2825,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /notifications/v1/subscriptions (the `CreateNotificationsV1Subscription` operationId).
-	CreateNotificationsV1SubscriptionWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNotificationsV1SubscriptionWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateNotificationsV1Subscription Create a Subscription
 	//
@@ -2836,7 +2836,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /notifications/v1/subscriptions (the `CreateNotificationsV1Subscription` operationId).
-	CreateNotificationsV1Subscription(ctx context.Context, body CreateNotificationsV1SubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createNotificationsV1Subscription(ctx context.Context, body CreateNotificationsV1SubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteNotificationsV1Subscription Delete a Subscription
 	//
@@ -2845,7 +2845,7 @@ type ClientInterface interface {
 	// Make a request to delete a subscription.
 	//
 	// Corresponds with DELETE /notifications/v1/subscriptions/{id} (the `DeleteNotificationsV1Subscription` operationId).
-	DeleteNotificationsV1Subscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteNotificationsV1Subscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNotificationsV1Subscription Read a Subscription
 	//
@@ -2854,7 +2854,7 @@ type ClientInterface interface {
 	// Make a request to read a subscription.
 	//
 	// Corresponds with GET /notifications/v1/subscriptions/{id} (the `GetNotificationsV1Subscription` operationId).
-	GetNotificationsV1Subscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNotificationsV1Subscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNotificationsV1SubscriptionWithBody Update a Subscription
 	//
@@ -2865,7 +2865,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /notifications/v1/subscriptions/{id} (the `UpdateNotificationsV1Subscription` operationId).
-	UpdateNotificationsV1SubscriptionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNotificationsV1SubscriptionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNotificationsV1Subscription Update a Subscription
 	//
@@ -2876,7 +2876,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /notifications/v1/subscriptions/{id} (the `UpdateNotificationsV1Subscription` operationId).
-	UpdateNotificationsV1Subscription(ctx context.Context, id string, body UpdateNotificationsV1SubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNotificationsV1Subscription(ctx context.Context, id string, body UpdateNotificationsV1SubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListNotificationsV1UserNotifications List of User Notifications
 	//
@@ -2885,7 +2885,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all user notifications.
 	//
 	// Corresponds with GET /notifications/v1/user-notifications (the `ListNotificationsV1UserNotifications` operationId).
-	ListNotificationsV1UserNotifications(ctx context.Context, params *ListNotificationsV1UserNotificationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listNotificationsV1UserNotifications(ctx context.Context, params *ListNotificationsV1UserNotificationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNotificationsV1UserNotification Read a User Notification
 	//
@@ -2894,7 +2894,7 @@ type ClientInterface interface {
 	// Make a request to read a user notification.
 	//
 	// Corresponds with GET /notifications/v1/user-notifications/{id} (the `GetNotificationsV1UserNotification` operationId).
-	GetNotificationsV1UserNotification(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNotificationsV1UserNotification(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNotificationsV1UserNotificationWithBody Update a User Notification
 	//
@@ -2905,7 +2905,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /notifications/v1/user-notifications/{id} (the `UpdateNotificationsV1UserNotification` operationId).
-	UpdateNotificationsV1UserNotificationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNotificationsV1UserNotificationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateNotificationsV1UserNotification Update a User Notification
 	//
@@ -2916,7 +2916,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /notifications/v1/user-notifications/{id} (the `UpdateNotificationsV1UserNotification` operationId).
-	UpdateNotificationsV1UserNotification(ctx context.Context, id string, body UpdateNotificationsV1UserNotificationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateNotificationsV1UserNotification(ctx context.Context, id string, body UpdateNotificationsV1UserNotificationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// MarkAllNotificationsV1UserNotificationsWithBody Mark multiple notifications read or unread
 	//
@@ -2930,7 +2930,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /notifications/v1/user-notifications:mark-all (the `MarkAllNotificationsV1UserNotifications` operationId).
-	MarkAllNotificationsV1UserNotificationsWithBody(ctx context.Context, params *MarkAllNotificationsV1UserNotificationsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	markAllNotificationsV1UserNotificationsWithBody(ctx context.Context, params *MarkAllNotificationsV1UserNotificationsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// MarkAllNotificationsV1UserNotifications Mark multiple notifications read or unread
 	//
@@ -2944,7 +2944,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /notifications/v1/user-notifications:mark-all (the `MarkAllNotificationsV1UserNotifications` operationId).
-	MarkAllNotificationsV1UserNotifications(ctx context.Context, params *MarkAllNotificationsV1UserNotificationsParams, body MarkAllNotificationsV1UserNotificationsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	markAllNotificationsV1UserNotifications(ctx context.Context, params *MarkAllNotificationsV1UserNotificationsParams, body MarkAllNotificationsV1UserNotificationsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetNotificationsV1UserNotificationsSummary Get notification summary
 	//
@@ -2954,7 +2954,7 @@ type ClientInterface interface {
 	// a breakdown by severity.
 	//
 	// Corresponds with GET /notifications/v1/user-notifications:summary (the `GetNotificationsV1UserNotificationsSummary` operationId).
-	GetNotificationsV1UserNotificationsSummary(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getNotificationsV1UserNotificationsSummary(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -2972,7 +2972,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -2992,448 +2992,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListNotificationsV1IntegrationsWithResponse Retrieve a list of integrations. Optionally filter by resource and resource type.
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to list_by_resource_type an integration.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /notifications/v1/integrations (the `ListNotificationsV1Integrations` operationId).
-	ListNotificationsV1IntegrationsWithResponse(ctx context.Context, params *ListNotificationsV1IntegrationsParams, reqEditors ...RequestEditorFn) (*ListNotificationsV1IntegrationsResponse, error)
-
-	// CreateNotificationsV1IntegrationWithBodyWithResponse Create an Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an integration.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /notifications/v1/integrations (the `CreateNotificationsV1Integration` operationId).
-	CreateNotificationsV1IntegrationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNotificationsV1IntegrationResponse, error)
-
-	// CreateNotificationsV1IntegrationWithResponse Create an Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an integration.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /notifications/v1/integrations (the `CreateNotificationsV1Integration` operationId).
-	CreateNotificationsV1IntegrationWithResponse(ctx context.Context, body CreateNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNotificationsV1IntegrationResponse, error)
-
-	// DeleteNotificationsV1IntegrationWithResponse Delete an Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete an integration.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /notifications/v1/integrations/{id} (the `DeleteNotificationsV1Integration` operationId).
-	DeleteNotificationsV1IntegrationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteNotificationsV1IntegrationResponse, error)
-
-	// GetNotificationsV1IntegrationWithResponse Read an Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read an integration.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /notifications/v1/integrations/{id} (the `GetNotificationsV1Integration` operationId).
-	GetNotificationsV1IntegrationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetNotificationsV1IntegrationResponse, error)
-
-	// UpdateNotificationsV1IntegrationWithBodyWithResponse Update an Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an integration.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /notifications/v1/integrations/{id} (the `UpdateNotificationsV1Integration` operationId).
-	UpdateNotificationsV1IntegrationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1IntegrationResponse, error)
-
-	// UpdateNotificationsV1IntegrationWithResponse Update an Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an integration.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /notifications/v1/integrations/{id} (the `UpdateNotificationsV1Integration` operationId).
-	UpdateNotificationsV1IntegrationWithResponse(ctx context.Context, id string, body UpdateNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1IntegrationResponse, error)
-
-	// TestNotificationsV1IntegrationWithBodyWithResponse Test a Webhook, Slack or Microsoft Teams integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Sends a test notification to validate the integration. This is supported only for Webhook, Slack
-	// and MsTeams targets
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /notifications/v1/integrations:test (the `TestNotificationsV1Integration` operationId).
-	TestNotificationsV1IntegrationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TestNotificationsV1IntegrationResponse, error)
-
-	// TestNotificationsV1IntegrationWithResponse Test a Webhook, Slack or Microsoft Teams integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Sends a test notification to validate the integration. This is supported only for Webhook, Slack
-	// and MsTeams targets
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /notifications/v1/integrations:test (the `TestNotificationsV1Integration` operationId).
-	TestNotificationsV1IntegrationWithResponse(ctx context.Context, body TestNotificationsV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*TestNotificationsV1IntegrationResponse, error)
-
-	// ListNotificationsV1NotificationTypesWithResponse Retrieve a list of all notification types for the resource type.
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to list_by_resource_type a notification type.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /notifications/v1/notification-types (the `ListNotificationsV1NotificationTypes` operationId).
-	ListNotificationsV1NotificationTypesWithResponse(ctx context.Context, params *ListNotificationsV1NotificationTypesParams, reqEditors ...RequestEditorFn) (*ListNotificationsV1NotificationTypesResponse, error)
-
-	// GetNotificationsV1NotificationTypeWithResponse Read a Notification Type
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a notification type.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /notifications/v1/notification-types/{id} (the `GetNotificationsV1NotificationType` operationId).
-	GetNotificationsV1NotificationTypeWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetNotificationsV1NotificationTypeResponse, error)
-
-	// CreateNotificationsV1ResourcePreferenceWithBodyWithResponse Create a Resource Preference
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a resource preference.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /notifications/v1/resource-preferences (the `CreateNotificationsV1ResourcePreference` operationId).
-	CreateNotificationsV1ResourcePreferenceWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNotificationsV1ResourcePreferenceResponse, error)
-
-	// CreateNotificationsV1ResourcePreferenceWithResponse Create a Resource Preference
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a resource preference.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /notifications/v1/resource-preferences (the `CreateNotificationsV1ResourcePreference` operationId).
-	CreateNotificationsV1ResourcePreferenceWithResponse(ctx context.Context, body CreateNotificationsV1ResourcePreferenceJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNotificationsV1ResourcePreferenceResponse, error)
-
-	// DeleteNotificationsV1ResourcePreferenceWithResponse Delete a Resource Preference
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a resource preference.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /notifications/v1/resource-preferences/{id} (the `DeleteNotificationsV1ResourcePreference` operationId).
-	DeleteNotificationsV1ResourcePreferenceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteNotificationsV1ResourcePreferenceResponse, error)
-
-	// GetNotificationsV1ResourcePreferenceWithResponse Read a Resource Preference
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a resource preference.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /notifications/v1/resource-preferences/{id} (the `GetNotificationsV1ResourcePreference` operationId).
-	GetNotificationsV1ResourcePreferenceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetNotificationsV1ResourcePreferenceResponse, error)
-
-	// UpdateNotificationsV1ResourcePreferenceWithBodyWithResponse Update a Resource Preference
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a resource preference.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /notifications/v1/resource-preferences/{id} (the `UpdateNotificationsV1ResourcePreference` operationId).
-	UpdateNotificationsV1ResourcePreferenceWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1ResourcePreferenceResponse, error)
-
-	// UpdateNotificationsV1ResourcePreferenceWithResponse Update a Resource Preference
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a resource preference.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /notifications/v1/resource-preferences/{id} (the `UpdateNotificationsV1ResourcePreference` operationId).
-	UpdateNotificationsV1ResourcePreferenceWithResponse(ctx context.Context, id string, body UpdateNotificationsV1ResourcePreferenceJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1ResourcePreferenceResponse, error)
-
-	// GetNotificationsV1ResourcePreferenceByFilterWithResponse Lookup a resource preference by filter (returns one)
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read_by_filter a resource preference.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /notifications/v1/resource-preferences:lookup (the `GetNotificationsV1ResourcePreferenceByFilter` operationId).
-	GetNotificationsV1ResourcePreferenceByFilterWithResponse(ctx context.Context, params *GetNotificationsV1ResourcePreferenceByFilterParams, reqEditors ...RequestEditorFn) (*GetNotificationsV1ResourcePreferenceByFilterResponse, error)
-
-	// CreateNotificationsV1ResourceSubscriptionWithBodyWithResponse Create a Resource Subscription
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a resource subscription.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /notifications/v1/resource-subscriptions (the `CreateNotificationsV1ResourceSubscription` operationId).
-	CreateNotificationsV1ResourceSubscriptionWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNotificationsV1ResourceSubscriptionResponse, error)
-
-	// CreateNotificationsV1ResourceSubscriptionWithResponse Create a Resource Subscription
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a resource subscription.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /notifications/v1/resource-subscriptions (the `CreateNotificationsV1ResourceSubscription` operationId).
-	CreateNotificationsV1ResourceSubscriptionWithResponse(ctx context.Context, body CreateNotificationsV1ResourceSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNotificationsV1ResourceSubscriptionResponse, error)
-
-	// DeleteNotificationsV1ResourceSubscriptionWithResponse Delete a Resource Subscription
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a resource subscription.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /notifications/v1/resource-subscriptions/{id} (the `DeleteNotificationsV1ResourceSubscription` operationId).
-	DeleteNotificationsV1ResourceSubscriptionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteNotificationsV1ResourceSubscriptionResponse, error)
-
-	// GetNotificationsV1ResourceSubscriptionWithResponse Read a Resource Subscription
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a resource subscription.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /notifications/v1/resource-subscriptions/{id} (the `GetNotificationsV1ResourceSubscription` operationId).
-	GetNotificationsV1ResourceSubscriptionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetNotificationsV1ResourceSubscriptionResponse, error)
-
-	// UpdateNotificationsV1ResourceSubscriptionWithBodyWithResponse Update a Resource Subscription
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a resource subscription.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /notifications/v1/resource-subscriptions/{id} (the `UpdateNotificationsV1ResourceSubscription` operationId).
-	UpdateNotificationsV1ResourceSubscriptionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1ResourceSubscriptionResponse, error)
-
-	// UpdateNotificationsV1ResourceSubscriptionWithResponse Update a Resource Subscription
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a resource subscription.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /notifications/v1/resource-subscriptions/{id} (the `UpdateNotificationsV1ResourceSubscription` operationId).
-	UpdateNotificationsV1ResourceSubscriptionWithResponse(ctx context.Context, id string, body UpdateNotificationsV1ResourceSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1ResourceSubscriptionResponse, error)
-
-	// ListNotificationsV1ResourceSubscriptionsByFilterWithResponse Lookup a list of resource subscription by filter
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to list_by_filter a resource subscription.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /notifications/v1/resource-subscriptions:lookup (the `ListNotificationsV1ResourceSubscriptionsByFilter` operationId).
-	ListNotificationsV1ResourceSubscriptionsByFilterWithResponse(ctx context.Context, params *ListNotificationsV1ResourceSubscriptionsByFilterParams, reqEditors ...RequestEditorFn) (*ListNotificationsV1ResourceSubscriptionsByFilterResponse, error)
-
-	// ListNotificationsV1SubscriptionsWithResponse List of Subscriptions
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all subscriptions.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /notifications/v1/subscriptions (the `ListNotificationsV1Subscriptions` operationId).
-	ListNotificationsV1SubscriptionsWithResponse(ctx context.Context, params *ListNotificationsV1SubscriptionsParams, reqEditors ...RequestEditorFn) (*ListNotificationsV1SubscriptionsResponse, error)
-
-	// CreateNotificationsV1SubscriptionWithBodyWithResponse Create a Subscription
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a subscription.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /notifications/v1/subscriptions (the `CreateNotificationsV1Subscription` operationId).
-	CreateNotificationsV1SubscriptionWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNotificationsV1SubscriptionResponse, error)
-
-	// CreateNotificationsV1SubscriptionWithResponse Create a Subscription
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a subscription.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /notifications/v1/subscriptions (the `CreateNotificationsV1Subscription` operationId).
-	CreateNotificationsV1SubscriptionWithResponse(ctx context.Context, body CreateNotificationsV1SubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNotificationsV1SubscriptionResponse, error)
-
-	// DeleteNotificationsV1SubscriptionWithResponse Delete a Subscription
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a subscription.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /notifications/v1/subscriptions/{id} (the `DeleteNotificationsV1Subscription` operationId).
-	DeleteNotificationsV1SubscriptionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteNotificationsV1SubscriptionResponse, error)
-
-	// GetNotificationsV1SubscriptionWithResponse Read a Subscription
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a subscription.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /notifications/v1/subscriptions/{id} (the `GetNotificationsV1Subscription` operationId).
-	GetNotificationsV1SubscriptionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetNotificationsV1SubscriptionResponse, error)
-
-	// UpdateNotificationsV1SubscriptionWithBodyWithResponse Update a Subscription
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a subscription.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /notifications/v1/subscriptions/{id} (the `UpdateNotificationsV1Subscription` operationId).
-	UpdateNotificationsV1SubscriptionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1SubscriptionResponse, error)
-
-	// UpdateNotificationsV1SubscriptionWithResponse Update a Subscription
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a subscription.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /notifications/v1/subscriptions/{id} (the `UpdateNotificationsV1Subscription` operationId).
-	UpdateNotificationsV1SubscriptionWithResponse(ctx context.Context, id string, body UpdateNotificationsV1SubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1SubscriptionResponse, error)
-
-	// ListNotificationsV1UserNotificationsWithResponse List of User Notifications
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To User Notifications API v1](https://img.shields.io/badge/-Request%20Access%20To%20User%20Notifications%20API%20v1-%23bc8540)](mailto:ccloud-api-access+notifications-v1-early-access@confluent.io?subject=Request%20to%20join%20notifications/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20notifications/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Retrieve a sorted, filtered, paginated list of all user notifications.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /notifications/v1/user-notifications (the `ListNotificationsV1UserNotifications` operationId).
-	ListNotificationsV1UserNotificationsWithResponse(ctx context.Context, params *ListNotificationsV1UserNotificationsParams, reqEditors ...RequestEditorFn) (*ListNotificationsV1UserNotificationsResponse, error)
-
-	// GetNotificationsV1UserNotificationWithResponse Read a User Notification
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To User Notifications API v1](https://img.shields.io/badge/-Request%20Access%20To%20User%20Notifications%20API%20v1-%23bc8540)](mailto:ccloud-api-access+notifications-v1-early-access@confluent.io?subject=Request%20to%20join%20notifications/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20notifications/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to read a user notification.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /notifications/v1/user-notifications/{id} (the `GetNotificationsV1UserNotification` operationId).
-	GetNotificationsV1UserNotificationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetNotificationsV1UserNotificationResponse, error)
-
-	// UpdateNotificationsV1UserNotificationWithBodyWithResponse Update a User Notification
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To User Notifications API v1](https://img.shields.io/badge/-Request%20Access%20To%20User%20Notifications%20API%20v1-%23bc8540)](mailto:ccloud-api-access+notifications-v1-early-access@confluent.io?subject=Request%20to%20join%20notifications/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20notifications/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to update a user notification.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /notifications/v1/user-notifications/{id} (the `UpdateNotificationsV1UserNotification` operationId).
-	UpdateNotificationsV1UserNotificationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1UserNotificationResponse, error)
-
-	// UpdateNotificationsV1UserNotificationWithResponse Update a User Notification
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To User Notifications API v1](https://img.shields.io/badge/-Request%20Access%20To%20User%20Notifications%20API%20v1-%23bc8540)](mailto:ccloud-api-access+notifications-v1-early-access@confluent.io?subject=Request%20to%20join%20notifications/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20notifications/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to update a user notification.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /notifications/v1/user-notifications/{id} (the `UpdateNotificationsV1UserNotification` operationId).
-	UpdateNotificationsV1UserNotificationWithResponse(ctx context.Context, id string, body UpdateNotificationsV1UserNotificationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1UserNotificationResponse, error)
-
-	// MarkAllNotificationsV1UserNotificationsWithBodyWithResponse Mark multiple notifications read or unread
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To User Notifications API v1](https://img.shields.io/badge/-Request%20Access%20To%20User%20Notifications%20API%20v1-%23bc8540)](mailto:ccloud-api-access+notifications-v1-early-access@confluent.io?subject=Request%20to%20join%20notifications/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20notifications/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Sets the read state on every notification matching the supplied filter
-	// query parameters. Accepts the same filter parameters as the list
-	// endpoint (except `include`, which is a list-only partial-response
-	// selector). The request body sets the target read state to apply.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /notifications/v1/user-notifications:mark-all (the `MarkAllNotificationsV1UserNotifications` operationId).
-	MarkAllNotificationsV1UserNotificationsWithBodyWithResponse(ctx context.Context, params *MarkAllNotificationsV1UserNotificationsParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*MarkAllNotificationsV1UserNotificationsResponse, error)
-
-	// MarkAllNotificationsV1UserNotificationsWithResponse Mark multiple notifications read or unread
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To User Notifications API v1](https://img.shields.io/badge/-Request%20Access%20To%20User%20Notifications%20API%20v1-%23bc8540)](mailto:ccloud-api-access+notifications-v1-early-access@confluent.io?subject=Request%20to%20join%20notifications/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20notifications/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Sets the read state on every notification matching the supplied filter
-	// query parameters. Accepts the same filter parameters as the list
-	// endpoint (except `include`, which is a list-only partial-response
-	// selector). The request body sets the target read state to apply.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /notifications/v1/user-notifications:mark-all (the `MarkAllNotificationsV1UserNotifications` operationId).
-	MarkAllNotificationsV1UserNotificationsWithResponse(ctx context.Context, params *MarkAllNotificationsV1UserNotificationsParams, body MarkAllNotificationsV1UserNotificationsJSONRequestBody, reqEditors ...RequestEditorFn) (*MarkAllNotificationsV1UserNotificationsResponse, error)
-
-	// GetNotificationsV1UserNotificationsSummaryWithResponse Get notification summary
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To User Notifications API v1](https://img.shields.io/badge/-Request%20Access%20To%20User%20Notifications%20API%20v1-%23bc8540)](mailto:ccloud-api-access+notifications-v1-early-access@confluent.io?subject=Request%20to%20join%20notifications/v1%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20notifications/v1%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Returns the authenticated user's total unread notification count along with
-	// a breakdown by severity.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /notifications/v1/user-notifications:summary (the `GetNotificationsV1UserNotificationsSummary` operationId).
-	GetNotificationsV1UserNotificationsSummaryWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetNotificationsV1UserNotificationsSummaryResponse, error)
-}
-
 func (r ListNotificationsV1IntegrationsResponse) GetJSON200() *NotificationsV1IntegrationList {
 	return r.JSON200
 }

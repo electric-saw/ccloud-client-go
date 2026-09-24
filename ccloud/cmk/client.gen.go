@@ -1246,7 +1246,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListCmkV2Clusters List of Clusters
 	//
@@ -1255,7 +1255,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all clusters.
 	//
 	// Corresponds with GET /cmk/v2/clusters (the `ListCmkV2Clusters` operationId).
-	ListCmkV2Clusters(ctx context.Context, params *ListCmkV2ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listCmkV2Clusters(ctx context.Context, params *ListCmkV2ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateCmkV2ClusterWithBody Create a Cluster
 	//
@@ -1266,7 +1266,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /cmk/v2/clusters (the `CreateCmkV2Cluster` operationId).
-	CreateCmkV2ClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createCmkV2ClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateCmkV2Cluster Create a Cluster
 	//
@@ -1277,7 +1277,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /cmk/v2/clusters (the `CreateCmkV2Cluster` operationId).
-	CreateCmkV2Cluster(ctx context.Context, body CreateCmkV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createCmkV2Cluster(ctx context.Context, body CreateCmkV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteCmkV2Cluster Delete a Cluster
 	//
@@ -1286,7 +1286,7 @@ type ClientInterface interface {
 	// Make a request to delete a cluster.
 	//
 	// Corresponds with DELETE /cmk/v2/clusters/{id} (the `DeleteCmkV2Cluster` operationId).
-	DeleteCmkV2Cluster(ctx context.Context, id string, params *DeleteCmkV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteCmkV2Cluster(ctx context.Context, id string, params *DeleteCmkV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetCmkV2Cluster Read a Cluster
 	//
@@ -1295,7 +1295,7 @@ type ClientInterface interface {
 	// Make a request to read a cluster.
 	//
 	// Corresponds with GET /cmk/v2/clusters/{id} (the `GetCmkV2Cluster` operationId).
-	GetCmkV2Cluster(ctx context.Context, id string, params *GetCmkV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getCmkV2Cluster(ctx context.Context, id string, params *GetCmkV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateCmkV2ClusterWithBody Update a Cluster
 	//
@@ -1306,7 +1306,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /cmk/v2/clusters/{id} (the `UpdateCmkV2Cluster` operationId).
-	UpdateCmkV2ClusterWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateCmkV2ClusterWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateCmkV2Cluster Update a Cluster
 	//
@@ -1317,7 +1317,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /cmk/v2/clusters/{id} (the `UpdateCmkV2Cluster` operationId).
-	UpdateCmkV2Cluster(ctx context.Context, id string, body UpdateCmkV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateCmkV2Cluster(ctx context.Context, id string, body UpdateCmkV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -1335,7 +1335,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -1355,87 +1355,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListCmkV2ClustersWithResponse List of Clusters
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all clusters.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cmk/v2/clusters (the `ListCmkV2Clusters` operationId).
-	ListCmkV2ClustersWithResponse(ctx context.Context, params *ListCmkV2ClustersParams, reqEditors ...RequestEditorFn) (*ListCmkV2ClustersResponse, error)
-
-	// CreateCmkV2ClusterWithBodyWithResponse Create a Cluster
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a cluster.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /cmk/v2/clusters (the `CreateCmkV2Cluster` operationId).
-	CreateCmkV2ClusterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCmkV2ClusterResponse, error)
-
-	// CreateCmkV2ClusterWithResponse Create a Cluster
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a cluster.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /cmk/v2/clusters (the `CreateCmkV2Cluster` operationId).
-	CreateCmkV2ClusterWithResponse(ctx context.Context, body CreateCmkV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCmkV2ClusterResponse, error)
-
-	// DeleteCmkV2ClusterWithResponse Delete a Cluster
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /cmk/v2/clusters/{id} (the `DeleteCmkV2Cluster` operationId).
-	DeleteCmkV2ClusterWithResponse(ctx context.Context, id string, params *DeleteCmkV2ClusterParams, reqEditors ...RequestEditorFn) (*DeleteCmkV2ClusterResponse, error)
-
-	// GetCmkV2ClusterWithResponse Read a Cluster
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /cmk/v2/clusters/{id} (the `GetCmkV2Cluster` operationId).
-	GetCmkV2ClusterWithResponse(ctx context.Context, id string, params *GetCmkV2ClusterParams, reqEditors ...RequestEditorFn) (*GetCmkV2ClusterResponse, error)
-
-	// UpdateCmkV2ClusterWithBodyWithResponse Update a Cluster
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a cluster.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /cmk/v2/clusters/{id} (the `UpdateCmkV2Cluster` operationId).
-	UpdateCmkV2ClusterWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCmkV2ClusterResponse, error)
-
-	// UpdateCmkV2ClusterWithResponse Update a Cluster
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a cluster.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /cmk/v2/clusters/{id} (the `UpdateCmkV2Cluster` operationId).
-	UpdateCmkV2ClusterWithResponse(ctx context.Context, id string, body UpdateCmkV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCmkV2ClusterResponse, error)
-}
-
 func (r ListCmkV2ClustersResponse) GetJSON200() *struct {
 	// ApiVersion APIVersion defines the schema version of this representation of a resource.
 	ApiVersion ListCmkV2Clusters200JSONResponseBodyApiVersion `json:"api_version"`

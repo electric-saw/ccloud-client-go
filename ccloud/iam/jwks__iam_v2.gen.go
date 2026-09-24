@@ -20,7 +20,7 @@ type RefreshIamV2JsonWebKeySet200JSONResponseBodyApiVersion string
 type RefreshIamV2JsonWebKeySet200JSONResponseBodyKind string
 type RefreshIamV2JsonWebKeySetJSONRequestBody = IamV2Jwks
 
-func (c *oasClient) RefreshIamV2JsonWebKeySetWithBody(ctx context.Context, providerId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) refreshIamV2JsonWebKeySetWithBody(ctx context.Context, providerId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRefreshIamV2JsonWebKeySetRequestWithBody(c.Server, providerId, contentType, body)
 	if err != nil {
 		return nil, err
@@ -31,7 +31,7 @@ func (c *oasClient) RefreshIamV2JsonWebKeySetWithBody(ctx context.Context, provi
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) RefreshIamV2JsonWebKeySet(ctx context.Context, providerId string, body RefreshIamV2JsonWebKeySetJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) refreshIamV2JsonWebKeySet(ctx context.Context, providerId string, body RefreshIamV2JsonWebKeySetJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRefreshIamV2JsonWebKeySetRequest(c.Server, providerId, body)
 	if err != nil {
 		return nil, err
@@ -172,14 +172,14 @@ type RefreshIamV2JsonWebKeySetResponse struct {
 }
 
 func (c *ClientWithResponses) RefreshIamV2JsonWebKeySetWithBodyWithResponse(ctx context.Context, providerId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RefreshIamV2JsonWebKeySetResponse, error) {
-	rsp, err := c.RefreshIamV2JsonWebKeySetWithBody(ctx, providerId, contentType, body, reqEditors...)
+	rsp, err := c.refreshIamV2JsonWebKeySetWithBody(ctx, providerId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseRefreshIamV2JsonWebKeySetResponse(rsp)
 }
 func (c *ClientWithResponses) RefreshIamV2JsonWebKeySetWithResponse(ctx context.Context, providerId string, body RefreshIamV2JsonWebKeySetJSONRequestBody, reqEditors ...RequestEditorFn) (*RefreshIamV2JsonWebKeySetResponse, error) {
-	rsp, err := c.RefreshIamV2JsonWebKeySet(ctx, providerId, body, reqEditors...)
+	rsp, err := c.refreshIamV2JsonWebKeySet(ctx, providerId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

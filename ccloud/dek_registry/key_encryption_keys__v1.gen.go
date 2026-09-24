@@ -43,7 +43,7 @@ type PutKekJSONRequestBody = UpdateKekRequest
 type PutKekApplicationVndSchemaregistryPlusJSONRequestBody = UpdateKekRequest
 type PutKekApplicationVndSchemaregistryV1PlusJSONRequestBody = UpdateKekRequest
 
-func (c *oasClient) GetKekNames(ctx context.Context, params *GetKekNamesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKekNames(ctx context.Context, params *GetKekNamesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKekNamesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -54,7 +54,7 @@ func (c *oasClient) GetKekNames(ctx context.Context, params *GetKekNamesParams, 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateKekWithBody(ctx context.Context, params *CreateKekParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createKekWithBody(ctx context.Context, params *CreateKekParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKekRequestWithBody(c.Server, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -65,7 +65,7 @@ func (c *oasClient) CreateKekWithBody(ctx context.Context, params *CreateKekPara
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateKek(ctx context.Context, params *CreateKekParams, body CreateKekJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createKek(ctx context.Context, params *CreateKekParams, body CreateKekJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKekRequest(c.Server, params, body)
 	if err != nil {
 		return nil, err
@@ -76,7 +76,7 @@ func (c *oasClient) CreateKek(ctx context.Context, params *CreateKekParams, body
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateKekWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, params *CreateKekParams, body CreateKekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createKekWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, params *CreateKekParams, body CreateKekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKekRequestWithApplicationVndSchemaregistryPlusJSONBody(c.Server, params, body)
 	if err != nil {
 		return nil, err
@@ -87,7 +87,7 @@ func (c *oasClient) CreateKekWithApplicationVndSchemaregistryPlusJSONBody(ctx co
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateKekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, params *CreateKekParams, body CreateKekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createKekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, params *CreateKekParams, body CreateKekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateKekRequestWithApplicationVndSchemaregistryV1PlusJSONBody(c.Server, params, body)
 	if err != nil {
 		return nil, err
@@ -98,7 +98,7 @@ func (c *oasClient) CreateKekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteKek(ctx context.Context, name string, params *DeleteKekParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteKek(ctx context.Context, name string, params *DeleteKekParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteKekRequest(c.Server, name, params)
 	if err != nil {
 		return nil, err
@@ -109,7 +109,7 @@ func (c *oasClient) DeleteKek(ctx context.Context, name string, params *DeleteKe
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKek(ctx context.Context, name string, params *GetKekParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKek(ctx context.Context, name string, params *GetKekParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKekRequest(c.Server, name, params)
 	if err != nil {
 		return nil, err
@@ -120,7 +120,7 @@ func (c *oasClient) GetKek(ctx context.Context, name string, params *GetKekParam
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) PutKekWithBody(ctx context.Context, name string, params *PutKekParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) putKekWithBody(ctx context.Context, name string, params *PutKekParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPutKekRequestWithBody(c.Server, name, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -131,7 +131,7 @@ func (c *oasClient) PutKekWithBody(ctx context.Context, name string, params *Put
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) PutKek(ctx context.Context, name string, params *PutKekParams, body PutKekJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) putKek(ctx context.Context, name string, params *PutKekParams, body PutKekJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPutKekRequest(c.Server, name, params, body)
 	if err != nil {
 		return nil, err
@@ -142,7 +142,7 @@ func (c *oasClient) PutKek(ctx context.Context, name string, params *PutKekParam
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) PutKekWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, params *PutKekParams, body PutKekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) putKekWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, params *PutKekParams, body PutKekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPutKekRequestWithApplicationVndSchemaregistryPlusJSONBody(c.Server, name, params, body)
 	if err != nil {
 		return nil, err
@@ -153,7 +153,7 @@ func (c *oasClient) PutKekWithApplicationVndSchemaregistryPlusJSONBody(ctx conte
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) PutKekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, params *PutKekParams, body PutKekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) putKekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, params *PutKekParams, body PutKekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPutKekRequestWithApplicationVndSchemaregistryV1PlusJSONBody(c.Server, name, params, body)
 	if err != nil {
 		return nil, err
@@ -164,7 +164,7 @@ func (c *oasClient) PutKekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx con
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) TestKek(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) testKek(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTestKekRequest(c.Server, name)
 	if err != nil {
 		return nil, err
@@ -175,7 +175,7 @@ func (c *oasClient) TestKek(ctx context.Context, name string, reqEditors ...Requ
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UndeleteKek(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) undeleteKek(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUndeleteKekRequest(c.Server, name)
 	if err != nil {
 		return nil, err
@@ -614,91 +614,91 @@ type UndeleteKekResponse struct {
 }
 
 func (c *ClientWithResponses) GetKekNamesWithResponse(ctx context.Context, params *GetKekNamesParams, reqEditors ...RequestEditorFn) (*GetKekNamesResponse, error) {
-	rsp, err := c.GetKekNames(ctx, params, reqEditors...)
+	rsp, err := c.getKekNames(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKekNamesResponse(rsp)
 }
 func (c *ClientWithResponses) CreateKekWithBodyWithResponse(ctx context.Context, params *CreateKekParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateKekResponse, error) {
-	rsp, err := c.CreateKekWithBody(ctx, params, contentType, body, reqEditors...)
+	rsp, err := c.createKekWithBody(ctx, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateKekResponse(rsp)
 }
 func (c *ClientWithResponses) CreateKekWithResponse(ctx context.Context, params *CreateKekParams, body CreateKekJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKekResponse, error) {
-	rsp, err := c.CreateKek(ctx, params, body, reqEditors...)
+	rsp, err := c.createKek(ctx, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateKekResponse(rsp)
 }
 func (c *ClientWithResponses) CreateKekWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, params *CreateKekParams, body CreateKekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKekResponse, error) {
-	rsp, err := c.CreateKekWithApplicationVndSchemaregistryPlusJSONBody(ctx, params, body, reqEditors...)
+	rsp, err := c.createKekWithApplicationVndSchemaregistryPlusJSONBody(ctx, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateKekResponse(rsp)
 }
 func (c *ClientWithResponses) CreateKekWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, params *CreateKekParams, body CreateKekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKekResponse, error) {
-	rsp, err := c.CreateKekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx, params, body, reqEditors...)
+	rsp, err := c.createKekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateKekResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteKekWithResponse(ctx context.Context, name string, params *DeleteKekParams, reqEditors ...RequestEditorFn) (*DeleteKekResponse, error) {
-	rsp, err := c.DeleteKek(ctx, name, params, reqEditors...)
+	rsp, err := c.deleteKek(ctx, name, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteKekResponse(rsp)
 }
 func (c *ClientWithResponses) GetKekWithResponse(ctx context.Context, name string, params *GetKekParams, reqEditors ...RequestEditorFn) (*GetKekResponse, error) {
-	rsp, err := c.GetKek(ctx, name, params, reqEditors...)
+	rsp, err := c.getKek(ctx, name, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKekResponse(rsp)
 }
 func (c *ClientWithResponses) PutKekWithBodyWithResponse(ctx context.Context, name string, params *PutKekParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PutKekResponse, error) {
-	rsp, err := c.PutKekWithBody(ctx, name, params, contentType, body, reqEditors...)
+	rsp, err := c.putKekWithBody(ctx, name, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParsePutKekResponse(rsp)
 }
 func (c *ClientWithResponses) PutKekWithResponse(ctx context.Context, name string, params *PutKekParams, body PutKekJSONRequestBody, reqEditors ...RequestEditorFn) (*PutKekResponse, error) {
-	rsp, err := c.PutKek(ctx, name, params, body, reqEditors...)
+	rsp, err := c.putKek(ctx, name, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParsePutKekResponse(rsp)
 }
 func (c *ClientWithResponses) PutKekWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, name string, params *PutKekParams, body PutKekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*PutKekResponse, error) {
-	rsp, err := c.PutKekWithApplicationVndSchemaregistryPlusJSONBody(ctx, name, params, body, reqEditors...)
+	rsp, err := c.putKekWithApplicationVndSchemaregistryPlusJSONBody(ctx, name, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParsePutKekResponse(rsp)
 }
 func (c *ClientWithResponses) PutKekWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, name string, params *PutKekParams, body PutKekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*PutKekResponse, error) {
-	rsp, err := c.PutKekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx, name, params, body, reqEditors...)
+	rsp, err := c.putKekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx, name, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParsePutKekResponse(rsp)
 }
 func (c *ClientWithResponses) TestKekWithResponse(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*TestKekResponse, error) {
-	rsp, err := c.TestKek(ctx, name, reqEditors...)
+	rsp, err := c.testKek(ctx, name, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseTestKekResponse(rsp)
 }
 func (c *ClientWithResponses) UndeleteKekWithResponse(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*UndeleteKekResponse, error) {
-	rsp, err := c.UndeleteKek(ctx, name, reqEditors...)
+	rsp, err := c.undeleteKek(ctx, name, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

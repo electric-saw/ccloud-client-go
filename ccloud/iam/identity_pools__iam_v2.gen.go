@@ -82,7 +82,7 @@ type UpdateIamV2IdentityPool200JSONResponseBodyKind string
 type CreateIamV2IdentityPoolJSONRequestBody CreateIamV2IdentityPoolJSONBody
 type UpdateIamV2IdentityPoolJSONRequestBody = IamV2IdentityPool
 
-func (c *oasClient) ListIamV2IdentityPools(ctx context.Context, providerId string, params *ListIamV2IdentityPoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listIamV2IdentityPools(ctx context.Context, providerId string, params *ListIamV2IdentityPoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIamV2IdentityPoolsRequest(c.Server, providerId, params)
 	if err != nil {
 		return nil, err
@@ -93,7 +93,7 @@ func (c *oasClient) ListIamV2IdentityPools(ctx context.Context, providerId strin
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateIamV2IdentityPoolWithBody(ctx context.Context, providerId string, params *CreateIamV2IdentityPoolParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createIamV2IdentityPoolWithBody(ctx context.Context, providerId string, params *CreateIamV2IdentityPoolParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2IdentityPoolRequestWithBody(c.Server, providerId, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -104,7 +104,7 @@ func (c *oasClient) CreateIamV2IdentityPoolWithBody(ctx context.Context, provide
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateIamV2IdentityPool(ctx context.Context, providerId string, params *CreateIamV2IdentityPoolParams, body CreateIamV2IdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createIamV2IdentityPool(ctx context.Context, providerId string, params *CreateIamV2IdentityPoolParams, body CreateIamV2IdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2IdentityPoolRequest(c.Server, providerId, params, body)
 	if err != nil {
 		return nil, err
@@ -115,7 +115,7 @@ func (c *oasClient) CreateIamV2IdentityPool(ctx context.Context, providerId stri
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteIamV2IdentityPool(ctx context.Context, providerId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteIamV2IdentityPool(ctx context.Context, providerId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIamV2IdentityPoolRequest(c.Server, providerId, id)
 	if err != nil {
 		return nil, err
@@ -126,7 +126,7 @@ func (c *oasClient) DeleteIamV2IdentityPool(ctx context.Context, providerId stri
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetIamV2IdentityPool(ctx context.Context, providerId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getIamV2IdentityPool(ctx context.Context, providerId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2IdentityPoolRequest(c.Server, providerId, id)
 	if err != nil {
 		return nil, err
@@ -137,7 +137,7 @@ func (c *oasClient) GetIamV2IdentityPool(ctx context.Context, providerId string,
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateIamV2IdentityPoolWithBody(ctx context.Context, providerId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateIamV2IdentityPoolWithBody(ctx context.Context, providerId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2IdentityPoolRequestWithBody(c.Server, providerId, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -148,7 +148,7 @@ func (c *oasClient) UpdateIamV2IdentityPoolWithBody(ctx context.Context, provide
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateIamV2IdentityPool(ctx context.Context, providerId string, id string, body UpdateIamV2IdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateIamV2IdentityPool(ctx context.Context, providerId string, id string, body UpdateIamV2IdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2IdentityPoolRequest(c.Server, providerId, id, body)
 	if err != nil {
 		return nil, err
@@ -881,49 +881,49 @@ type UpdateIamV2IdentityPoolResponse struct {
 }
 
 func (c *ClientWithResponses) ListIamV2IdentityPoolsWithResponse(ctx context.Context, providerId string, params *ListIamV2IdentityPoolsParams, reqEditors ...RequestEditorFn) (*ListIamV2IdentityPoolsResponse, error) {
-	rsp, err := c.ListIamV2IdentityPools(ctx, providerId, params, reqEditors...)
+	rsp, err := c.listIamV2IdentityPools(ctx, providerId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListIamV2IdentityPoolsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateIamV2IdentityPoolWithBodyWithResponse(ctx context.Context, providerId string, params *CreateIamV2IdentityPoolParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2IdentityPoolResponse, error) {
-	rsp, err := c.CreateIamV2IdentityPoolWithBody(ctx, providerId, params, contentType, body, reqEditors...)
+	rsp, err := c.createIamV2IdentityPoolWithBody(ctx, providerId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIamV2IdentityPoolResponse(rsp)
 }
 func (c *ClientWithResponses) CreateIamV2IdentityPoolWithResponse(ctx context.Context, providerId string, params *CreateIamV2IdentityPoolParams, body CreateIamV2IdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2IdentityPoolResponse, error) {
-	rsp, err := c.CreateIamV2IdentityPool(ctx, providerId, params, body, reqEditors...)
+	rsp, err := c.createIamV2IdentityPool(ctx, providerId, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIamV2IdentityPoolResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteIamV2IdentityPoolWithResponse(ctx context.Context, providerId string, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2IdentityPoolResponse, error) {
-	rsp, err := c.DeleteIamV2IdentityPool(ctx, providerId, id, reqEditors...)
+	rsp, err := c.deleteIamV2IdentityPool(ctx, providerId, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteIamV2IdentityPoolResponse(rsp)
 }
 func (c *ClientWithResponses) GetIamV2IdentityPoolWithResponse(ctx context.Context, providerId string, id string, reqEditors ...RequestEditorFn) (*GetIamV2IdentityPoolResponse, error) {
-	rsp, err := c.GetIamV2IdentityPool(ctx, providerId, id, reqEditors...)
+	rsp, err := c.getIamV2IdentityPool(ctx, providerId, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetIamV2IdentityPoolResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateIamV2IdentityPoolWithBodyWithResponse(ctx context.Context, providerId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2IdentityPoolResponse, error) {
-	rsp, err := c.UpdateIamV2IdentityPoolWithBody(ctx, providerId, id, contentType, body, reqEditors...)
+	rsp, err := c.updateIamV2IdentityPoolWithBody(ctx, providerId, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateIamV2IdentityPoolResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateIamV2IdentityPoolWithResponse(ctx context.Context, providerId string, id string, body UpdateIamV2IdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2IdentityPoolResponse, error) {
-	rsp, err := c.UpdateIamV2IdentityPool(ctx, providerId, id, body, reqEditors...)
+	rsp, err := c.updateIamV2IdentityPool(ctx, providerId, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

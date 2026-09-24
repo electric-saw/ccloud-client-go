@@ -562,21 +562,21 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// GetClusterConfig Get cluster config
 	//
 	// Retrieves cluster config information.
 	//
 	// Corresponds with GET /clusterconfig (the `GetClusterConfig` operationId).
-	GetClusterConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getClusterConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteTopLevelConfig Delete global compatibility level
 	//
 	// Deletes the global compatibility level config and reverts to the default.
 	//
 	// Corresponds with DELETE /config (the `DeleteTopLevelConfig` operationId).
-	DeleteTopLevelConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteTopLevelConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetTopLevelConfig Get global compatibility level
 	//
@@ -584,7 +584,7 @@ type ClientInterface interface {
 	// normalization, default metadata, and rule set.
 	//
 	// Corresponds with GET /config (the `GetTopLevelConfig` operationId).
-	GetTopLevelConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getTopLevelConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTopLevelConfigWithBody Update global compatibility level
 	//
@@ -595,7 +595,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /config (the `UpdateTopLevelConfig` operationId).
-	UpdateTopLevelConfigWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTopLevelConfigWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTopLevelConfig Update global compatibility level
 	//
@@ -606,7 +606,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /config (the `UpdateTopLevelConfig` operationId).
-	UpdateTopLevelConfig(ctx context.Context, body UpdateTopLevelConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTopLevelConfig(ctx context.Context, body UpdateTopLevelConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTopLevelConfigWithApplicationVndSchemaregistryPlusJSONBody Update global compatibility level
 	//
@@ -617,7 +617,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry+json` content type.
 	//
 	// Corresponds with PUT /config (the `UpdateTopLevelConfig` operationId).
-	UpdateTopLevelConfigWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, body UpdateTopLevelConfigApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTopLevelConfigWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, body UpdateTopLevelConfigApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateTopLevelConfigWithApplicationVndSchemaregistryV1PlusJSONBody Update global compatibility level
 	//
@@ -628,14 +628,14 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type.
 	//
 	// Corresponds with PUT /config (the `UpdateTopLevelConfig` operationId).
-	UpdateTopLevelConfigWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, body UpdateTopLevelConfigApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateTopLevelConfigWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, body UpdateTopLevelConfigApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteSubjectConfig Delete subject compatibility level
 	//
 	// Deletes the specified subject-level compatibility level config and reverts to the global default.
 	//
 	// Corresponds with DELETE /config/{subject} (the `DeleteSubjectConfig` operationId).
-	DeleteSubjectConfig(ctx context.Context, subject string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteSubjectConfig(ctx context.Context, subject string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSubjectLevelConfig Get subject compatibility level
 	//
@@ -643,7 +643,7 @@ type ClientInterface interface {
 	// default metadata, and rule set for a subject.
 	//
 	// Corresponds with GET /config/{subject} (the `GetSubjectLevelConfig` operationId).
-	GetSubjectLevelConfig(ctx context.Context, subject string, params *GetSubjectLevelConfigParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSubjectLevelConfig(ctx context.Context, subject string, params *GetSubjectLevelConfigParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateSubjectLevelConfigWithBody Update subject compatibility level
 	//
@@ -654,7 +654,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /config/{subject} (the `UpdateSubjectLevelConfig` operationId).
-	UpdateSubjectLevelConfigWithBody(ctx context.Context, subject string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateSubjectLevelConfigWithBody(ctx context.Context, subject string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateSubjectLevelConfig Update subject compatibility level
 	//
@@ -665,7 +665,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /config/{subject} (the `UpdateSubjectLevelConfig` operationId).
-	UpdateSubjectLevelConfig(ctx context.Context, subject string, body UpdateSubjectLevelConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateSubjectLevelConfig(ctx context.Context, subject string, body UpdateSubjectLevelConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateSubjectLevelConfigWithApplicationVndSchemaregistryPlusJSONBody Update subject compatibility level
 	//
@@ -676,7 +676,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry+json` content type.
 	//
 	// Corresponds with PUT /config/{subject} (the `UpdateSubjectLevelConfig` operationId).
-	UpdateSubjectLevelConfigWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, body UpdateSubjectLevelConfigApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateSubjectLevelConfigWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, body UpdateSubjectLevelConfigApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateSubjectLevelConfigWithApplicationVndSchemaregistryV1PlusJSONBody Update subject compatibility level
 	//
@@ -687,7 +687,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type.
 	//
 	// Corresponds with PUT /config/{subject} (the `UpdateSubjectLevelConfig` operationId).
-	UpdateSubjectLevelConfigWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, body UpdateSubjectLevelConfigApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateSubjectLevelConfigWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, body UpdateSubjectLevelConfigApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func NewUpdateTopLevelConfigRequestWithApplicationVndSchemaregistryPlusJSONBody(server string, body UpdateTopLevelConfigApplicationVndSchemaregistryPlusJSONRequestBody) (*http.Request, error) {
@@ -741,7 +741,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -761,145 +761,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// GetClusterConfigWithResponse Get cluster config
-	//
-	// Retrieves cluster config information.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /clusterconfig (the `GetClusterConfig` operationId).
-	GetClusterConfigWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetClusterConfigResponse, error)
-
-	// DeleteTopLevelConfigWithResponse Delete global compatibility level
-	//
-	// Deletes the global compatibility level config and reverts to the default.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /config (the `DeleteTopLevelConfig` operationId).
-	DeleteTopLevelConfigWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*DeleteTopLevelConfigResponse, error)
-
-	// GetTopLevelConfigWithResponse Get global compatibility level
-	//
-	// Retrieves the global compatibility level, compatibility group,
-	// normalization, default metadata, and rule set.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /config (the `GetTopLevelConfig` operationId).
-	GetTopLevelConfigWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetTopLevelConfigResponse, error)
-
-	// UpdateTopLevelConfigWithBodyWithResponse Update global compatibility level
-	//
-	// Updates the global compatibility level, compatibility group,
-	// schema normalization, default metadata, and rule set. On success, echoes the
-	// original request back to the client.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /config (the `UpdateTopLevelConfig` operationId).
-	UpdateTopLevelConfigWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateTopLevelConfigResponse, error)
-
-	// UpdateTopLevelConfigWithResponse Update global compatibility level
-	//
-	// Updates the global compatibility level, compatibility group,
-	// schema normalization, default metadata, and rule set. On success, echoes the
-	// original request back to the client.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /config (the `UpdateTopLevelConfig` operationId).
-	UpdateTopLevelConfigWithResponse(ctx context.Context, body UpdateTopLevelConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateTopLevelConfigResponse, error)
-
-	// UpdateTopLevelConfigWithApplicationVndSchemaregistryPlusJSONBodyWithResponse Update global compatibility level
-	//
-	// Updates the global compatibility level, compatibility group,
-	// schema normalization, default metadata, and rule set. On success, echoes the
-	// original request back to the client.
-	//
-	// Takes a body of the `application/vnd.schemaregistry+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /config (the `UpdateTopLevelConfig` operationId).
-	UpdateTopLevelConfigWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, body UpdateTopLevelConfigApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateTopLevelConfigResponse, error)
-
-	// UpdateTopLevelConfigWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse Update global compatibility level
-	//
-	// Updates the global compatibility level, compatibility group,
-	// schema normalization, default metadata, and rule set. On success, echoes the
-	// original request back to the client.
-	//
-	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /config (the `UpdateTopLevelConfig` operationId).
-	UpdateTopLevelConfigWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, body UpdateTopLevelConfigApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateTopLevelConfigResponse, error)
-
-	// DeleteSubjectConfigWithResponse Delete subject compatibility level
-	//
-	// Deletes the specified subject-level compatibility level config and reverts to the global default.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /config/{subject} (the `DeleteSubjectConfig` operationId).
-	DeleteSubjectConfigWithResponse(ctx context.Context, subject string, reqEditors ...RequestEditorFn) (*DeleteSubjectConfigResponse, error)
-
-	// GetSubjectLevelConfigWithResponse Get subject compatibility level
-	//
-	// Retrieves compatibility level, compatibility group, normalization,
-	// default metadata, and rule set for a subject.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /config/{subject} (the `GetSubjectLevelConfig` operationId).
-	GetSubjectLevelConfigWithResponse(ctx context.Context, subject string, params *GetSubjectLevelConfigParams, reqEditors ...RequestEditorFn) (*GetSubjectLevelConfigResponse, error)
-
-	// UpdateSubjectLevelConfigWithBodyWithResponse Update subject compatibility level
-	//
-	// Update compatibility level, compatibility group, normalization,
-	// default metadata, and rule set for the specified subject. On success,
-	// echoes the original request back to the client.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /config/{subject} (the `UpdateSubjectLevelConfig` operationId).
-	UpdateSubjectLevelConfigWithBodyWithResponse(ctx context.Context, subject string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSubjectLevelConfigResponse, error)
-
-	// UpdateSubjectLevelConfigWithResponse Update subject compatibility level
-	//
-	// Update compatibility level, compatibility group, normalization,
-	// default metadata, and rule set for the specified subject. On success,
-	// echoes the original request back to the client.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /config/{subject} (the `UpdateSubjectLevelConfig` operationId).
-	UpdateSubjectLevelConfigWithResponse(ctx context.Context, subject string, body UpdateSubjectLevelConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSubjectLevelConfigResponse, error)
-
-	// UpdateSubjectLevelConfigWithApplicationVndSchemaregistryPlusJSONBodyWithResponse Update subject compatibility level
-	//
-	// Update compatibility level, compatibility group, normalization,
-	// default metadata, and rule set for the specified subject. On success,
-	// echoes the original request back to the client.
-	//
-	// Takes a body of the `application/vnd.schemaregistry+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /config/{subject} (the `UpdateSubjectLevelConfig` operationId).
-	UpdateSubjectLevelConfigWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, subject string, body UpdateSubjectLevelConfigApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSubjectLevelConfigResponse, error)
-
-	// UpdateSubjectLevelConfigWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse Update subject compatibility level
-	//
-	// Update compatibility level, compatibility group, normalization,
-	// default metadata, and rule set for the specified subject. On success,
-	// echoes the original request back to the client.
-	//
-	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /config/{subject} (the `UpdateSubjectLevelConfig` operationId).
-	UpdateSubjectLevelConfigWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, subject string, body UpdateSubjectLevelConfigApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSubjectLevelConfigResponse, error)
-}
-
 func (r GetClusterConfigResponse) GetApplicationjsonQs05200() *ClusterConfig {
 	return r.ApplicationjsonQs05200
 }

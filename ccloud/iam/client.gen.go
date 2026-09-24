@@ -4357,7 +4357,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListIamV2ApiKeys List of API Keys
 	//
@@ -4370,7 +4370,7 @@ type ClientInterface interface {
 	// organization. You will only see the keys that are accessible to the account making the API request.
 	//
 	// Corresponds with GET /iam/v2/api-keys (the `ListIamV2ApiKeys` operationId).
-	ListIamV2ApiKeys(ctx context.Context, params *ListIamV2ApiKeysParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listIamV2ApiKeys(ctx context.Context, params *ListIamV2ApiKeysParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2ApiKeyWithBody Create an API Key
 	//
@@ -4381,7 +4381,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /iam/v2/api-keys (the `CreateIamV2ApiKey` operationId).
-	CreateIamV2ApiKeyWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2ApiKeyWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2ApiKey Create an API Key
 	//
@@ -4392,7 +4392,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /iam/v2/api-keys (the `CreateIamV2ApiKey` operationId).
-	CreateIamV2ApiKey(ctx context.Context, body CreateIamV2ApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2ApiKey(ctx context.Context, body CreateIamV2ApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIamV2ApiKey Delete an API Key
 	//
@@ -4401,7 +4401,7 @@ type ClientInterface interface {
 	// Make a request to delete an API key.
 	//
 	// Corresponds with DELETE /iam/v2/api-keys/{id} (the `DeleteIamV2ApiKey` operationId).
-	DeleteIamV2ApiKey(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteIamV2ApiKey(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIamV2ApiKey Read an API Key
 	//
@@ -4410,7 +4410,7 @@ type ClientInterface interface {
 	// Make a request to read an API key.
 	//
 	// Corresponds with GET /iam/v2/api-keys/{id} (the `GetIamV2ApiKey` operationId).
-	GetIamV2ApiKey(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getIamV2ApiKey(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2ApiKeyWithBody Update an API Key
 	//
@@ -4421,7 +4421,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /iam/v2/api-keys/{id} (the `UpdateIamV2ApiKey` operationId).
-	UpdateIamV2ApiKeyWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2ApiKeyWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2ApiKey Update an API Key
 	//
@@ -4432,7 +4432,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /iam/v2/api-keys/{id} (the `UpdateIamV2ApiKey` operationId).
-	UpdateIamV2ApiKey(ctx context.Context, id string, body UpdateIamV2ApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2ApiKey(ctx context.Context, id string, body UpdateIamV2ApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListIamV2CertificateAuthorities List of Certificate Authorities
 	//
@@ -4441,7 +4441,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all certificate authorities.
 	//
 	// Corresponds with GET /iam/v2/certificate-authorities (the `ListIamV2CertificateAuthorities` operationId).
-	ListIamV2CertificateAuthorities(ctx context.Context, params *ListIamV2CertificateAuthoritiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listIamV2CertificateAuthorities(ctx context.Context, params *ListIamV2CertificateAuthoritiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2CertificateAuthorityWithBody Create a Certificate Authority
 	//
@@ -4452,7 +4452,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /iam/v2/certificate-authorities (the `CreateIamV2CertificateAuthority` operationId).
-	CreateIamV2CertificateAuthorityWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2CertificateAuthorityWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2CertificateAuthority Create a Certificate Authority
 	//
@@ -4463,7 +4463,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /iam/v2/certificate-authorities (the `CreateIamV2CertificateAuthority` operationId).
-	CreateIamV2CertificateAuthority(ctx context.Context, body CreateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2CertificateAuthority(ctx context.Context, body CreateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListIamV2CertificateIdentityPools List of Certificate Identity Pools
 	//
@@ -4472,7 +4472,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all certificate identity pools.
 	//
 	// Corresponds with GET /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools (the `ListIamV2CertificateIdentityPools` operationId).
-	ListIamV2CertificateIdentityPools(ctx context.Context, certificateAuthorityId string, params *ListIamV2CertificateIdentityPoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listIamV2CertificateIdentityPools(ctx context.Context, certificateAuthorityId string, params *ListIamV2CertificateIdentityPoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2CertificateIdentityPoolWithBody Create a Certificate Identity Pool
 	//
@@ -4483,7 +4483,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools (the `CreateIamV2CertificateIdentityPool` operationId).
-	CreateIamV2CertificateIdentityPoolWithBody(ctx context.Context, certificateAuthorityId string, params *CreateIamV2CertificateIdentityPoolParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2CertificateIdentityPoolWithBody(ctx context.Context, certificateAuthorityId string, params *CreateIamV2CertificateIdentityPoolParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2CertificateIdentityPool Create a Certificate Identity Pool
 	//
@@ -4494,7 +4494,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools (the `CreateIamV2CertificateIdentityPool` operationId).
-	CreateIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, params *CreateIamV2CertificateIdentityPoolParams, body CreateIamV2CertificateIdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, params *CreateIamV2CertificateIdentityPoolParams, body CreateIamV2CertificateIdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIamV2CertificateIdentityPool Delete a Certificate Identity Pool
 	//
@@ -4503,7 +4503,7 @@ type ClientInterface interface {
 	// Make a request to delete a certificate identity pool.
 	//
 	// Corresponds with DELETE /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id} (the `DeleteIamV2CertificateIdentityPool` operationId).
-	DeleteIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIamV2CertificateIdentityPool Read a Certificate Identity Pool
 	//
@@ -4512,7 +4512,7 @@ type ClientInterface interface {
 	// Make a request to read a certificate identity pool.
 	//
 	// Corresponds with GET /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id} (the `GetIamV2CertificateIdentityPool` operationId).
-	GetIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2CertificateIdentityPoolWithBody Update a Certificate Identity Pool
 	//
@@ -4523,7 +4523,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id} (the `UpdateIamV2CertificateIdentityPool` operationId).
-	UpdateIamV2CertificateIdentityPoolWithBody(ctx context.Context, certificateAuthorityId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2CertificateIdentityPoolWithBody(ctx context.Context, certificateAuthorityId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2CertificateIdentityPool Update a Certificate Identity Pool
 	//
@@ -4534,7 +4534,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id} (the `UpdateIamV2CertificateIdentityPool` operationId).
-	UpdateIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, id string, body UpdateIamV2CertificateIdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2CertificateIdentityPool(ctx context.Context, certificateAuthorityId string, id string, body UpdateIamV2CertificateIdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIamV2CertificateAuthority Delete a Certificate Authority
 	//
@@ -4543,7 +4543,7 @@ type ClientInterface interface {
 	// Make a request to delete a certificate authority.
 	//
 	// Corresponds with DELETE /iam/v2/certificate-authorities/{id} (the `DeleteIamV2CertificateAuthority` operationId).
-	DeleteIamV2CertificateAuthority(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteIamV2CertificateAuthority(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIamV2CertificateAuthority Read a Certificate Authority
 	//
@@ -4552,7 +4552,7 @@ type ClientInterface interface {
 	// Make a request to read a certificate authority.
 	//
 	// Corresponds with GET /iam/v2/certificate-authorities/{id} (the `GetIamV2CertificateAuthority` operationId).
-	GetIamV2CertificateAuthority(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getIamV2CertificateAuthority(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2CertificateAuthorityWithBody Update a Certificate Authority
 	//
@@ -4563,7 +4563,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /iam/v2/certificate-authorities/{id} (the `UpdateIamV2CertificateAuthority` operationId).
-	UpdateIamV2CertificateAuthorityWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2CertificateAuthorityWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2CertificateAuthority Update a Certificate Authority
 	//
@@ -4574,7 +4574,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /iam/v2/certificate-authorities/{id} (the `UpdateIamV2CertificateAuthority` operationId).
-	UpdateIamV2CertificateAuthority(ctx context.Context, id string, body UpdateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2CertificateAuthority(ctx context.Context, id string, body UpdateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListIamV2IdentityProviders List of Identity Providers
 	//
@@ -4583,7 +4583,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all identity providers.
 	//
 	// Corresponds with GET /iam/v2/identity-providers (the `ListIamV2IdentityProviders` operationId).
-	ListIamV2IdentityProviders(ctx context.Context, params *ListIamV2IdentityProvidersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listIamV2IdentityProviders(ctx context.Context, params *ListIamV2IdentityProvidersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2IdentityProviderWithBody Create an Identity Provider
 	//
@@ -4594,7 +4594,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /iam/v2/identity-providers (the `CreateIamV2IdentityProvider` operationId).
-	CreateIamV2IdentityProviderWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2IdentityProviderWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2IdentityProvider Create an Identity Provider
 	//
@@ -4605,7 +4605,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /iam/v2/identity-providers (the `CreateIamV2IdentityProvider` operationId).
-	CreateIamV2IdentityProvider(ctx context.Context, body CreateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2IdentityProvider(ctx context.Context, body CreateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIamV2IdentityProvider Delete an Identity Provider
 	//
@@ -4614,7 +4614,7 @@ type ClientInterface interface {
 	// Make a request to delete an identity provider.
 	//
 	// Corresponds with DELETE /iam/v2/identity-providers/{id} (the `DeleteIamV2IdentityProvider` operationId).
-	DeleteIamV2IdentityProvider(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteIamV2IdentityProvider(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIamV2IdentityProvider Read an Identity Provider
 	//
@@ -4623,7 +4623,7 @@ type ClientInterface interface {
 	// Make a request to read an identity provider.
 	//
 	// Corresponds with GET /iam/v2/identity-providers/{id} (the `GetIamV2IdentityProvider` operationId).
-	GetIamV2IdentityProvider(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getIamV2IdentityProvider(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2IdentityProviderWithBody Update an Identity Provider
 	//
@@ -4634,7 +4634,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /iam/v2/identity-providers/{id} (the `UpdateIamV2IdentityProvider` operationId).
-	UpdateIamV2IdentityProviderWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2IdentityProviderWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2IdentityProvider Update an Identity Provider
 	//
@@ -4645,7 +4645,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /iam/v2/identity-providers/{id} (the `UpdateIamV2IdentityProvider` operationId).
-	UpdateIamV2IdentityProvider(ctx context.Context, id string, body UpdateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2IdentityProvider(ctx context.Context, id string, body UpdateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListIamV2IdentityPools List of Identity Pools
 	//
@@ -4654,7 +4654,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all identity pools.
 	//
 	// Corresponds with GET /iam/v2/identity-providers/{provider_id}/identity-pools (the `ListIamV2IdentityPools` operationId).
-	ListIamV2IdentityPools(ctx context.Context, providerId string, params *ListIamV2IdentityPoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listIamV2IdentityPools(ctx context.Context, providerId string, params *ListIamV2IdentityPoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2IdentityPoolWithBody Create an Identity Pool
 	//
@@ -4665,7 +4665,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /iam/v2/identity-providers/{provider_id}/identity-pools (the `CreateIamV2IdentityPool` operationId).
-	CreateIamV2IdentityPoolWithBody(ctx context.Context, providerId string, params *CreateIamV2IdentityPoolParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2IdentityPoolWithBody(ctx context.Context, providerId string, params *CreateIamV2IdentityPoolParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2IdentityPool Create an Identity Pool
 	//
@@ -4676,7 +4676,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /iam/v2/identity-providers/{provider_id}/identity-pools (the `CreateIamV2IdentityPool` operationId).
-	CreateIamV2IdentityPool(ctx context.Context, providerId string, params *CreateIamV2IdentityPoolParams, body CreateIamV2IdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2IdentityPool(ctx context.Context, providerId string, params *CreateIamV2IdentityPoolParams, body CreateIamV2IdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIamV2IdentityPool Delete an Identity Pool
 	//
@@ -4685,7 +4685,7 @@ type ClientInterface interface {
 	// Make a request to delete an identity pool.
 	//
 	// Corresponds with DELETE /iam/v2/identity-providers/{provider_id}/identity-pools/{id} (the `DeleteIamV2IdentityPool` operationId).
-	DeleteIamV2IdentityPool(ctx context.Context, providerId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteIamV2IdentityPool(ctx context.Context, providerId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIamV2IdentityPool Read an Identity Pool
 	//
@@ -4694,7 +4694,7 @@ type ClientInterface interface {
 	// Make a request to read an identity pool.
 	//
 	// Corresponds with GET /iam/v2/identity-providers/{provider_id}/identity-pools/{id} (the `GetIamV2IdentityPool` operationId).
-	GetIamV2IdentityPool(ctx context.Context, providerId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getIamV2IdentityPool(ctx context.Context, providerId string, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2IdentityPoolWithBody Update an Identity Pool
 	//
@@ -4705,7 +4705,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /iam/v2/identity-providers/{provider_id}/identity-pools/{id} (the `UpdateIamV2IdentityPool` operationId).
-	UpdateIamV2IdentityPoolWithBody(ctx context.Context, providerId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2IdentityPoolWithBody(ctx context.Context, providerId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2IdentityPool Update an Identity Pool
 	//
@@ -4716,7 +4716,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /iam/v2/identity-providers/{provider_id}/identity-pools/{id} (the `UpdateIamV2IdentityPool` operationId).
-	UpdateIamV2IdentityPool(ctx context.Context, providerId string, id string, body UpdateIamV2IdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2IdentityPool(ctx context.Context, providerId string, id string, body UpdateIamV2IdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// RefreshIamV2JsonWebKeySetWithBody Refresh a provider's JWKS
 	//
@@ -4727,7 +4727,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /iam/v2/identity-providers/{provider_id}/jwks (the `RefreshIamV2JsonWebKeySet` operationId).
-	RefreshIamV2JsonWebKeySetWithBody(ctx context.Context, providerId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	refreshIamV2JsonWebKeySetWithBody(ctx context.Context, providerId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// RefreshIamV2JsonWebKeySet Refresh a provider's JWKS
 	//
@@ -4738,7 +4738,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /iam/v2/identity-providers/{provider_id}/jwks (the `RefreshIamV2JsonWebKeySet` operationId).
-	RefreshIamV2JsonWebKeySet(ctx context.Context, providerId string, body RefreshIamV2JsonWebKeySetJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	refreshIamV2JsonWebKeySet(ctx context.Context, providerId string, body RefreshIamV2JsonWebKeySetJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListIamV2Invitations List of Invitations
 	//
@@ -4747,7 +4747,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all invitations.
 	//
 	// Corresponds with GET /iam/v2/invitations (the `ListIamV2Invitations` operationId).
-	ListIamV2Invitations(ctx context.Context, params *ListIamV2InvitationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listIamV2Invitations(ctx context.Context, params *ListIamV2InvitationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2InvitationWithBody Create an Invitation
 	//
@@ -4763,7 +4763,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /iam/v2/invitations (the `CreateIamV2Invitation` operationId).
-	CreateIamV2InvitationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2InvitationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2Invitation Create an Invitation
 	//
@@ -4779,7 +4779,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /iam/v2/invitations (the `CreateIamV2Invitation` operationId).
-	CreateIamV2Invitation(ctx context.Context, body CreateIamV2InvitationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2Invitation(ctx context.Context, body CreateIamV2InvitationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIamV2Invitation Delete an Invitation
 	//
@@ -4790,7 +4790,7 @@ type ClientInterface interface {
 	// Delete will deactivate the user if the user didn't accept the invitation yet.
 	//
 	// Corresponds with DELETE /iam/v2/invitations/{id} (the `DeleteIamV2Invitation` operationId).
-	DeleteIamV2Invitation(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteIamV2Invitation(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIamV2Invitation Read an Invitation
 	//
@@ -4799,7 +4799,7 @@ type ClientInterface interface {
 	// Make a request to read an invitation.
 	//
 	// Corresponds with GET /iam/v2/invitations/{id} (the `GetIamV2Invitation` operationId).
-	GetIamV2Invitation(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getIamV2Invitation(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIamV2IpFilterSummary Read an IP Filter Summary
 	//
@@ -4808,7 +4808,7 @@ type ClientInterface interface {
 	// Make a request to read an IP filter summary.
 	//
 	// Corresponds with GET /iam/v2/ip-filter-summary (the `GetIamV2IpFilterSummary` operationId).
-	GetIamV2IpFilterSummary(ctx context.Context, params *GetIamV2IpFilterSummaryParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getIamV2IpFilterSummary(ctx context.Context, params *GetIamV2IpFilterSummaryParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListIamV2IpFilters List of IP Filters
 	//
@@ -4817,7 +4817,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all IP filters.
 	//
 	// Corresponds with GET /iam/v2/ip-filters (the `ListIamV2IpFilters` operationId).
-	ListIamV2IpFilters(ctx context.Context, params *ListIamV2IpFiltersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listIamV2IpFilters(ctx context.Context, params *ListIamV2IpFiltersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2IpFilterWithBody Create an IP Filter
 	//
@@ -4828,7 +4828,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /iam/v2/ip-filters (the `CreateIamV2IpFilter` operationId).
-	CreateIamV2IpFilterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2IpFilterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2IpFilter Create an IP Filter
 	//
@@ -4839,7 +4839,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /iam/v2/ip-filters (the `CreateIamV2IpFilter` operationId).
-	CreateIamV2IpFilter(ctx context.Context, body CreateIamV2IpFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2IpFilter(ctx context.Context, body CreateIamV2IpFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIamV2IpFilter Delete an IP Filter
 	//
@@ -4848,7 +4848,7 @@ type ClientInterface interface {
 	// Make a request to delete an IP filter.
 	//
 	// Corresponds with DELETE /iam/v2/ip-filters/{id} (the `DeleteIamV2IpFilter` operationId).
-	DeleteIamV2IpFilter(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteIamV2IpFilter(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIamV2IpFilter Read an IP Filter
 	//
@@ -4857,7 +4857,7 @@ type ClientInterface interface {
 	// Make a request to read an IP filter.
 	//
 	// Corresponds with GET /iam/v2/ip-filters/{id} (the `GetIamV2IpFilter` operationId).
-	GetIamV2IpFilter(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getIamV2IpFilter(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2IpFilterWithBody Update an IP Filter
 	//
@@ -4868,7 +4868,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /iam/v2/ip-filters/{id} (the `UpdateIamV2IpFilter` operationId).
-	UpdateIamV2IpFilterWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2IpFilterWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2IpFilter Update an IP Filter
 	//
@@ -4879,7 +4879,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /iam/v2/ip-filters/{id} (the `UpdateIamV2IpFilter` operationId).
-	UpdateIamV2IpFilter(ctx context.Context, id string, body UpdateIamV2IpFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2IpFilter(ctx context.Context, id string, body UpdateIamV2IpFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListIamV2IpGroups List of IP Groups
 	//
@@ -4888,7 +4888,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all IP groups.
 	//
 	// Corresponds with GET /iam/v2/ip-groups (the `ListIamV2IpGroups` operationId).
-	ListIamV2IpGroups(ctx context.Context, params *ListIamV2IpGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listIamV2IpGroups(ctx context.Context, params *ListIamV2IpGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2IpGroupWithBody Create an IP Group
 	//
@@ -4899,7 +4899,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /iam/v2/ip-groups (the `CreateIamV2IpGroup` operationId).
-	CreateIamV2IpGroupWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2IpGroupWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2IpGroup Create an IP Group
 	//
@@ -4910,7 +4910,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /iam/v2/ip-groups (the `CreateIamV2IpGroup` operationId).
-	CreateIamV2IpGroup(ctx context.Context, body CreateIamV2IpGroupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2IpGroup(ctx context.Context, body CreateIamV2IpGroupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIamV2IpGroup Delete an IP Group
 	//
@@ -4919,7 +4919,7 @@ type ClientInterface interface {
 	// Make a request to delete an IP group.
 	//
 	// Corresponds with DELETE /iam/v2/ip-groups/{id} (the `DeleteIamV2IpGroup` operationId).
-	DeleteIamV2IpGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteIamV2IpGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIamV2IpGroup Read an IP Group
 	//
@@ -4928,7 +4928,7 @@ type ClientInterface interface {
 	// Make a request to read an IP group.
 	//
 	// Corresponds with GET /iam/v2/ip-groups/{id} (the `GetIamV2IpGroup` operationId).
-	GetIamV2IpGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getIamV2IpGroup(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2IpGroupWithBody Update an IP Group
 	//
@@ -4939,7 +4939,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /iam/v2/ip-groups/{id} (the `UpdateIamV2IpGroup` operationId).
-	UpdateIamV2IpGroupWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2IpGroupWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2IpGroup Update an IP Group
 	//
@@ -4950,7 +4950,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /iam/v2/ip-groups/{id} (the `UpdateIamV2IpGroup` operationId).
-	UpdateIamV2IpGroup(ctx context.Context, id string, body UpdateIamV2IpGroupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2IpGroup(ctx context.Context, id string, body UpdateIamV2IpGroupJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListIamV2RoleBindings List of Role Bindings
 	//
@@ -4959,7 +4959,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all role bindings.
 	//
 	// Corresponds with GET /iam/v2/role-bindings (the `ListIamV2RoleBindings` operationId).
-	ListIamV2RoleBindings(ctx context.Context, params *ListIamV2RoleBindingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listIamV2RoleBindings(ctx context.Context, params *ListIamV2RoleBindingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2RoleBindingWithBody Create a Role Binding
 	//
@@ -4970,7 +4970,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /iam/v2/role-bindings (the `CreateIamV2RoleBinding` operationId).
-	CreateIamV2RoleBindingWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2RoleBindingWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2RoleBinding Create a Role Binding
 	//
@@ -4981,7 +4981,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /iam/v2/role-bindings (the `CreateIamV2RoleBinding` operationId).
-	CreateIamV2RoleBinding(ctx context.Context, body CreateIamV2RoleBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2RoleBinding(ctx context.Context, body CreateIamV2RoleBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIamV2RoleBinding Delete a Role Binding
 	//
@@ -4990,7 +4990,7 @@ type ClientInterface interface {
 	// Make a request to delete a role binding.
 	//
 	// Corresponds with DELETE /iam/v2/role-bindings/{id} (the `DeleteIamV2RoleBinding` operationId).
-	DeleteIamV2RoleBinding(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteIamV2RoleBinding(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIamV2RoleBinding Read a Role Binding
 	//
@@ -4999,7 +4999,7 @@ type ClientInterface interface {
 	// Make a request to read a role binding.
 	//
 	// Corresponds with GET /iam/v2/role-bindings/{id} (the `GetIamV2RoleBinding` operationId).
-	GetIamV2RoleBinding(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getIamV2RoleBinding(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListIamV2ServiceAccounts List of Service Accounts
 	//
@@ -5008,7 +5008,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all service accounts.
 	//
 	// Corresponds with GET /iam/v2/service-accounts (the `ListIamV2ServiceAccounts` operationId).
-	ListIamV2ServiceAccounts(ctx context.Context, params *ListIamV2ServiceAccountsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listIamV2ServiceAccounts(ctx context.Context, params *ListIamV2ServiceAccountsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2ServiceAccountWithBody Create a Service Account
 	//
@@ -5019,7 +5019,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /iam/v2/service-accounts (the `CreateIamV2ServiceAccount` operationId).
-	CreateIamV2ServiceAccountWithBody(ctx context.Context, params *CreateIamV2ServiceAccountParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2ServiceAccountWithBody(ctx context.Context, params *CreateIamV2ServiceAccountParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2ServiceAccount Create a Service Account
 	//
@@ -5030,7 +5030,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /iam/v2/service-accounts (the `CreateIamV2ServiceAccount` operationId).
-	CreateIamV2ServiceAccount(ctx context.Context, params *CreateIamV2ServiceAccountParams, body CreateIamV2ServiceAccountJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2ServiceAccount(ctx context.Context, params *CreateIamV2ServiceAccountParams, body CreateIamV2ServiceAccountJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIamV2ServiceAccount Delete a Service Account
 	//
@@ -5042,7 +5042,7 @@ type ClientInterface interface {
 	// including its cloud and cluster API keys.
 	//
 	// Corresponds with DELETE /iam/v2/service-accounts/{id} (the `DeleteIamV2ServiceAccount` operationId).
-	DeleteIamV2ServiceAccount(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteIamV2ServiceAccount(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIamV2ServiceAccount Read a Service Account
 	//
@@ -5051,7 +5051,7 @@ type ClientInterface interface {
 	// Make a request to read a service account.
 	//
 	// Corresponds with GET /iam/v2/service-accounts/{id} (the `GetIamV2ServiceAccount` operationId).
-	GetIamV2ServiceAccount(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getIamV2ServiceAccount(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2ServiceAccountWithBody Update a Service Account
 	//
@@ -5062,7 +5062,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /iam/v2/service-accounts/{id} (the `UpdateIamV2ServiceAccount` operationId).
-	UpdateIamV2ServiceAccountWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2ServiceAccountWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2ServiceAccount Update a Service Account
 	//
@@ -5073,7 +5073,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /iam/v2/service-accounts/{id} (the `UpdateIamV2ServiceAccount` operationId).
-	UpdateIamV2ServiceAccount(ctx context.Context, id string, body UpdateIamV2ServiceAccountJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2ServiceAccount(ctx context.Context, id string, body UpdateIamV2ServiceAccountJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListIamV2SsoGroupMappings List of Group Mappings
 	//
@@ -5082,7 +5082,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all group mappings.
 	//
 	// Corresponds with GET /iam/v2/sso/group-mappings (the `ListIamV2SsoGroupMappings` operationId).
-	ListIamV2SsoGroupMappings(ctx context.Context, params *ListIamV2SsoGroupMappingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listIamV2SsoGroupMappings(ctx context.Context, params *ListIamV2SsoGroupMappingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2SsoGroupMappingWithBody Create a Group Mapping
 	//
@@ -5093,7 +5093,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /iam/v2/sso/group-mappings (the `CreateIamV2SsoGroupMapping` operationId).
-	CreateIamV2SsoGroupMappingWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2SsoGroupMappingWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateIamV2SsoGroupMapping Create a Group Mapping
 	//
@@ -5104,7 +5104,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /iam/v2/sso/group-mappings (the `CreateIamV2SsoGroupMapping` operationId).
-	CreateIamV2SsoGroupMapping(ctx context.Context, body CreateIamV2SsoGroupMappingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createIamV2SsoGroupMapping(ctx context.Context, body CreateIamV2SsoGroupMappingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIamV2SsoGroupMapping Delete a Group Mapping
 	//
@@ -5113,7 +5113,7 @@ type ClientInterface interface {
 	// Make a request to delete a group mapping.
 	//
 	// Corresponds with DELETE /iam/v2/sso/group-mappings/{id} (the `DeleteIamV2SsoGroupMapping` operationId).
-	DeleteIamV2SsoGroupMapping(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteIamV2SsoGroupMapping(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIamV2SsoGroupMapping Read a Group Mapping
 	//
@@ -5122,7 +5122,7 @@ type ClientInterface interface {
 	// Make a request to read a group mapping.
 	//
 	// Corresponds with GET /iam/v2/sso/group-mappings/{id} (the `GetIamV2SsoGroupMapping` operationId).
-	GetIamV2SsoGroupMapping(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getIamV2SsoGroupMapping(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2SsoGroupMappingWithBody Update a Group Mapping
 	//
@@ -5133,7 +5133,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /iam/v2/sso/group-mappings/{id} (the `UpdateIamV2SsoGroupMapping` operationId).
-	UpdateIamV2SsoGroupMappingWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2SsoGroupMappingWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2SsoGroupMapping Update a Group Mapping
 	//
@@ -5144,7 +5144,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /iam/v2/sso/group-mappings/{id} (the `UpdateIamV2SsoGroupMapping` operationId).
-	UpdateIamV2SsoGroupMapping(ctx context.Context, id string, body UpdateIamV2SsoGroupMappingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2SsoGroupMapping(ctx context.Context, id string, body UpdateIamV2SsoGroupMappingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListIamV2Users List of Users
 	//
@@ -5153,7 +5153,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all users.
 	//
 	// Corresponds with GET /iam/v2/users (the `ListIamV2Users` operationId).
-	ListIamV2Users(ctx context.Context, params *ListIamV2UsersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listIamV2Users(ctx context.Context, params *ListIamV2UsersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteIamV2User Delete a User
 	//
@@ -5165,7 +5165,7 @@ type ClientInterface interface {
 	// including its cloud and cluster API keys.
 	//
 	// Corresponds with DELETE /iam/v2/users/{id} (the `DeleteIamV2User` operationId).
-	DeleteIamV2User(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteIamV2User(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetIamV2User Read a User
 	//
@@ -5174,7 +5174,7 @@ type ClientInterface interface {
 	// Make a request to read a user.
 	//
 	// Corresponds with GET /iam/v2/users/{id} (the `GetIamV2User` operationId).
-	GetIamV2User(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getIamV2User(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2UserWithBody Update a User
 	//
@@ -5185,7 +5185,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /iam/v2/users/{id} (the `UpdateIamV2User` operationId).
-	UpdateIamV2UserWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2UserWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateIamV2User Update a User
 	//
@@ -5196,7 +5196,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /iam/v2/users/{id} (the `UpdateIamV2User` operationId).
-	UpdateIamV2User(ctx context.Context, id string, body UpdateIamV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateIamV2User(ctx context.Context, id string, body UpdateIamV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateAuthTypeIamV2UserWithBody Update Auth Type of a User
 	//
@@ -5207,7 +5207,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /iam/v2/users/{id}/auth (the `UpdateAuthTypeIamV2User` operationId).
-	UpdateAuthTypeIamV2UserWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateAuthTypeIamV2UserWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateAuthTypeIamV2User Update Auth Type of a User
 	//
@@ -5218,10 +5218,10 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /iam/v2/users/{id}/auth (the `UpdateAuthTypeIamV2User` operationId).
-	UpdateAuthTypeIamV2User(ctx context.Context, id string, body UpdateAuthTypeIamV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateAuthTypeIamV2User(ctx context.Context, id string, body UpdateAuthTypeIamV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *oasClient) UpdateAuthTypeIamV2UserWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateAuthTypeIamV2UserWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateAuthTypeIamV2UserRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -5232,7 +5232,7 @@ func (c *oasClient) UpdateAuthTypeIamV2UserWithBody(ctx context.Context, id stri
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateAuthTypeIamV2User(ctx context.Context, id string, body UpdateAuthTypeIamV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateAuthTypeIamV2User(ctx context.Context, id string, body UpdateAuthTypeIamV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateAuthTypeIamV2UserRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -5301,7 +5301,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -5321,945 +5321,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListIamV2ApiKeysWithResponse List of API Keys
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all API keys.
-	//
-	// This can show all keys for a single owner (across resources - Kafka clusters), or all keys for a single
-	// resource (across owners). If no `owner` or `resource` filters are specified, returns all API Keys in the
-	// organization. You will only see the keys that are accessible to the account making the API request.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/api-keys (the `ListIamV2ApiKeys` operationId).
-	ListIamV2ApiKeysWithResponse(ctx context.Context, params *ListIamV2ApiKeysParams, reqEditors ...RequestEditorFn) (*ListIamV2ApiKeysResponse, error)
-
-	// CreateIamV2ApiKeyWithBodyWithResponse Create an API Key
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an API key.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/api-keys (the `CreateIamV2ApiKey` operationId).
-	CreateIamV2ApiKeyWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2ApiKeyResponse, error)
-
-	// CreateIamV2ApiKeyWithResponse Create an API Key
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an API key.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/api-keys (the `CreateIamV2ApiKey` operationId).
-	CreateIamV2ApiKeyWithResponse(ctx context.Context, body CreateIamV2ApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2ApiKeyResponse, error)
-
-	// DeleteIamV2ApiKeyWithResponse Delete an API Key
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete an API key.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /iam/v2/api-keys/{id} (the `DeleteIamV2ApiKey` operationId).
-	DeleteIamV2ApiKeyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2ApiKeyResponse, error)
-
-	// GetIamV2ApiKeyWithResponse Read an API Key
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read an API key.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/api-keys/{id} (the `GetIamV2ApiKey` operationId).
-	GetIamV2ApiKeyWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2ApiKeyResponse, error)
-
-	// UpdateIamV2ApiKeyWithBodyWithResponse Update an API Key
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an API key.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/api-keys/{id} (the `UpdateIamV2ApiKey` operationId).
-	UpdateIamV2ApiKeyWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2ApiKeyResponse, error)
-
-	// UpdateIamV2ApiKeyWithResponse Update an API Key
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an API key.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/api-keys/{id} (the `UpdateIamV2ApiKey` operationId).
-	UpdateIamV2ApiKeyWithResponse(ctx context.Context, id string, body UpdateIamV2ApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2ApiKeyResponse, error)
-
-	// ListIamV2CertificateAuthoritiesWithResponse List of Certificate Authorities
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all certificate authorities.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/certificate-authorities (the `ListIamV2CertificateAuthorities` operationId).
-	ListIamV2CertificateAuthoritiesWithResponse(ctx context.Context, params *ListIamV2CertificateAuthoritiesParams, reqEditors ...RequestEditorFn) (*ListIamV2CertificateAuthoritiesResponse, error)
-
-	// CreateIamV2CertificateAuthorityWithBodyWithResponse Create a Certificate Authority
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a certificate authority.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/certificate-authorities (the `CreateIamV2CertificateAuthority` operationId).
-	CreateIamV2CertificateAuthorityWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2CertificateAuthorityResponse, error)
-
-	// CreateIamV2CertificateAuthorityWithResponse Create a Certificate Authority
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a certificate authority.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/certificate-authorities (the `CreateIamV2CertificateAuthority` operationId).
-	CreateIamV2CertificateAuthorityWithResponse(ctx context.Context, body CreateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2CertificateAuthorityResponse, error)
-
-	// ListIamV2CertificateIdentityPoolsWithResponse List of Certificate Identity Pools
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all certificate identity pools.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools (the `ListIamV2CertificateIdentityPools` operationId).
-	ListIamV2CertificateIdentityPoolsWithResponse(ctx context.Context, certificateAuthorityId string, params *ListIamV2CertificateIdentityPoolsParams, reqEditors ...RequestEditorFn) (*ListIamV2CertificateIdentityPoolsResponse, error)
-
-	// CreateIamV2CertificateIdentityPoolWithBodyWithResponse Create a Certificate Identity Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a certificate identity pool.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools (the `CreateIamV2CertificateIdentityPool` operationId).
-	CreateIamV2CertificateIdentityPoolWithBodyWithResponse(ctx context.Context, certificateAuthorityId string, params *CreateIamV2CertificateIdentityPoolParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2CertificateIdentityPoolResponse, error)
-
-	// CreateIamV2CertificateIdentityPoolWithResponse Create a Certificate Identity Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a certificate identity pool.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools (the `CreateIamV2CertificateIdentityPool` operationId).
-	CreateIamV2CertificateIdentityPoolWithResponse(ctx context.Context, certificateAuthorityId string, params *CreateIamV2CertificateIdentityPoolParams, body CreateIamV2CertificateIdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2CertificateIdentityPoolResponse, error)
-
-	// DeleteIamV2CertificateIdentityPoolWithResponse Delete a Certificate Identity Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a certificate identity pool.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id} (the `DeleteIamV2CertificateIdentityPool` operationId).
-	DeleteIamV2CertificateIdentityPoolWithResponse(ctx context.Context, certificateAuthorityId string, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2CertificateIdentityPoolResponse, error)
-
-	// GetIamV2CertificateIdentityPoolWithResponse Read a Certificate Identity Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a certificate identity pool.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id} (the `GetIamV2CertificateIdentityPool` operationId).
-	GetIamV2CertificateIdentityPoolWithResponse(ctx context.Context, certificateAuthorityId string, id string, reqEditors ...RequestEditorFn) (*GetIamV2CertificateIdentityPoolResponse, error)
-
-	// UpdateIamV2CertificateIdentityPoolWithBodyWithResponse Update a Certificate Identity Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a certificate identity pool.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id} (the `UpdateIamV2CertificateIdentityPool` operationId).
-	UpdateIamV2CertificateIdentityPoolWithBodyWithResponse(ctx context.Context, certificateAuthorityId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2CertificateIdentityPoolResponse, error)
-
-	// UpdateIamV2CertificateIdentityPoolWithResponse Update a Certificate Identity Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a certificate identity pool.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /iam/v2/certificate-authorities/{certificate_authority_id}/identity-pools/{id} (the `UpdateIamV2CertificateIdentityPool` operationId).
-	UpdateIamV2CertificateIdentityPoolWithResponse(ctx context.Context, certificateAuthorityId string, id string, body UpdateIamV2CertificateIdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2CertificateIdentityPoolResponse, error)
-
-	// DeleteIamV2CertificateAuthorityWithResponse Delete a Certificate Authority
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a certificate authority.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /iam/v2/certificate-authorities/{id} (the `DeleteIamV2CertificateAuthority` operationId).
-	DeleteIamV2CertificateAuthorityWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2CertificateAuthorityResponse, error)
-
-	// GetIamV2CertificateAuthorityWithResponse Read a Certificate Authority
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a certificate authority.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/certificate-authorities/{id} (the `GetIamV2CertificateAuthority` operationId).
-	GetIamV2CertificateAuthorityWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2CertificateAuthorityResponse, error)
-
-	// UpdateIamV2CertificateAuthorityWithBodyWithResponse Update a Certificate Authority
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a certificate authority.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /iam/v2/certificate-authorities/{id} (the `UpdateIamV2CertificateAuthority` operationId).
-	UpdateIamV2CertificateAuthorityWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2CertificateAuthorityResponse, error)
-
-	// UpdateIamV2CertificateAuthorityWithResponse Update a Certificate Authority
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a certificate authority.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /iam/v2/certificate-authorities/{id} (the `UpdateIamV2CertificateAuthority` operationId).
-	UpdateIamV2CertificateAuthorityWithResponse(ctx context.Context, id string, body UpdateIamV2CertificateAuthorityJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2CertificateAuthorityResponse, error)
-
-	// ListIamV2IdentityProvidersWithResponse List of Identity Providers
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all identity providers.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/identity-providers (the `ListIamV2IdentityProviders` operationId).
-	ListIamV2IdentityProvidersWithResponse(ctx context.Context, params *ListIamV2IdentityProvidersParams, reqEditors ...RequestEditorFn) (*ListIamV2IdentityProvidersResponse, error)
-
-	// CreateIamV2IdentityProviderWithBodyWithResponse Create an Identity Provider
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an identity provider.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/identity-providers (the `CreateIamV2IdentityProvider` operationId).
-	CreateIamV2IdentityProviderWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2IdentityProviderResponse, error)
-
-	// CreateIamV2IdentityProviderWithResponse Create an Identity Provider
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an identity provider.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/identity-providers (the `CreateIamV2IdentityProvider` operationId).
-	CreateIamV2IdentityProviderWithResponse(ctx context.Context, body CreateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2IdentityProviderResponse, error)
-
-	// DeleteIamV2IdentityProviderWithResponse Delete an Identity Provider
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete an identity provider.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /iam/v2/identity-providers/{id} (the `DeleteIamV2IdentityProvider` operationId).
-	DeleteIamV2IdentityProviderWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2IdentityProviderResponse, error)
-
-	// GetIamV2IdentityProviderWithResponse Read an Identity Provider
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read an identity provider.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/identity-providers/{id} (the `GetIamV2IdentityProvider` operationId).
-	GetIamV2IdentityProviderWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2IdentityProviderResponse, error)
-
-	// UpdateIamV2IdentityProviderWithBodyWithResponse Update an Identity Provider
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an identity provider.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/identity-providers/{id} (the `UpdateIamV2IdentityProvider` operationId).
-	UpdateIamV2IdentityProviderWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2IdentityProviderResponse, error)
-
-	// UpdateIamV2IdentityProviderWithResponse Update an Identity Provider
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an identity provider.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/identity-providers/{id} (the `UpdateIamV2IdentityProvider` operationId).
-	UpdateIamV2IdentityProviderWithResponse(ctx context.Context, id string, body UpdateIamV2IdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2IdentityProviderResponse, error)
-
-	// ListIamV2IdentityPoolsWithResponse List of Identity Pools
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all identity pools.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/identity-providers/{provider_id}/identity-pools (the `ListIamV2IdentityPools` operationId).
-	ListIamV2IdentityPoolsWithResponse(ctx context.Context, providerId string, params *ListIamV2IdentityPoolsParams, reqEditors ...RequestEditorFn) (*ListIamV2IdentityPoolsResponse, error)
-
-	// CreateIamV2IdentityPoolWithBodyWithResponse Create an Identity Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an identity pool.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/identity-providers/{provider_id}/identity-pools (the `CreateIamV2IdentityPool` operationId).
-	CreateIamV2IdentityPoolWithBodyWithResponse(ctx context.Context, providerId string, params *CreateIamV2IdentityPoolParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2IdentityPoolResponse, error)
-
-	// CreateIamV2IdentityPoolWithResponse Create an Identity Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an identity pool.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/identity-providers/{provider_id}/identity-pools (the `CreateIamV2IdentityPool` operationId).
-	CreateIamV2IdentityPoolWithResponse(ctx context.Context, providerId string, params *CreateIamV2IdentityPoolParams, body CreateIamV2IdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2IdentityPoolResponse, error)
-
-	// DeleteIamV2IdentityPoolWithResponse Delete an Identity Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete an identity pool.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /iam/v2/identity-providers/{provider_id}/identity-pools/{id} (the `DeleteIamV2IdentityPool` operationId).
-	DeleteIamV2IdentityPoolWithResponse(ctx context.Context, providerId string, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2IdentityPoolResponse, error)
-
-	// GetIamV2IdentityPoolWithResponse Read an Identity Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read an identity pool.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/identity-providers/{provider_id}/identity-pools/{id} (the `GetIamV2IdentityPool` operationId).
-	GetIamV2IdentityPoolWithResponse(ctx context.Context, providerId string, id string, reqEditors ...RequestEditorFn) (*GetIamV2IdentityPoolResponse, error)
-
-	// UpdateIamV2IdentityPoolWithBodyWithResponse Update an Identity Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an identity pool.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/identity-providers/{provider_id}/identity-pools/{id} (the `UpdateIamV2IdentityPool` operationId).
-	UpdateIamV2IdentityPoolWithBodyWithResponse(ctx context.Context, providerId string, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2IdentityPoolResponse, error)
-
-	// UpdateIamV2IdentityPoolWithResponse Update an Identity Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an identity pool.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/identity-providers/{provider_id}/identity-pools/{id} (the `UpdateIamV2IdentityPool` operationId).
-	UpdateIamV2IdentityPoolWithResponse(ctx context.Context, providerId string, id string, body UpdateIamV2IdentityPoolJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2IdentityPoolResponse, error)
-
-	// RefreshIamV2JsonWebKeySetWithBodyWithResponse Refresh a provider's JWKS
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to refresh the provider's JWKS
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/identity-providers/{provider_id}/jwks (the `RefreshIamV2JsonWebKeySet` operationId).
-	RefreshIamV2JsonWebKeySetWithBodyWithResponse(ctx context.Context, providerId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RefreshIamV2JsonWebKeySetResponse, error)
-
-	// RefreshIamV2JsonWebKeySetWithResponse Refresh a provider's JWKS
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to refresh the provider's JWKS
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/identity-providers/{provider_id}/jwks (the `RefreshIamV2JsonWebKeySet` operationId).
-	RefreshIamV2JsonWebKeySetWithResponse(ctx context.Context, providerId string, body RefreshIamV2JsonWebKeySetJSONRequestBody, reqEditors ...RequestEditorFn) (*RefreshIamV2JsonWebKeySetResponse, error)
-
-	// ListIamV2InvitationsWithResponse List of Invitations
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all invitations.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/invitations (the `ListIamV2Invitations` operationId).
-	ListIamV2InvitationsWithResponse(ctx context.Context, params *ListIamV2InvitationsParams, reqEditors ...RequestEditorFn) (*ListIamV2InvitationsResponse, error)
-
-	// CreateIamV2InvitationWithBodyWithResponse Create an Invitation
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an invitation.
-	//
-	// The newly invited user will not have any permissions. Give the user permission by assigning them to one or
-	// more roles by creating
-	// [role bindings](https://docs.confluent.io/cloud/current/api.html#tag/Role-Bindings-(iamv2))
-	// for the created `user`.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/invitations (the `CreateIamV2Invitation` operationId).
-	CreateIamV2InvitationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2InvitationResponse, error)
-
-	// CreateIamV2InvitationWithResponse Create an Invitation
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an invitation.
-	//
-	// The newly invited user will not have any permissions. Give the user permission by assigning them to one or
-	// more roles by creating
-	// [role bindings](https://docs.confluent.io/cloud/current/api.html#tag/Role-Bindings-(iamv2))
-	// for the created `user`.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/invitations (the `CreateIamV2Invitation` operationId).
-	CreateIamV2InvitationWithResponse(ctx context.Context, body CreateIamV2InvitationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2InvitationResponse, error)
-
-	// DeleteIamV2InvitationWithResponse Delete an Invitation
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete an invitation.
-	//
-	// Delete will deactivate the user if the user didn't accept the invitation yet.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /iam/v2/invitations/{id} (the `DeleteIamV2Invitation` operationId).
-	DeleteIamV2InvitationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2InvitationResponse, error)
-
-	// GetIamV2InvitationWithResponse Read an Invitation
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read an invitation.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/invitations/{id} (the `GetIamV2Invitation` operationId).
-	GetIamV2InvitationWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2InvitationResponse, error)
-
-	// GetIamV2IpFilterSummaryWithResponse Read an IP Filter Summary
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read an IP filter summary.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/ip-filter-summary (the `GetIamV2IpFilterSummary` operationId).
-	GetIamV2IpFilterSummaryWithResponse(ctx context.Context, params *GetIamV2IpFilterSummaryParams, reqEditors ...RequestEditorFn) (*GetIamV2IpFilterSummaryResponse, error)
-
-	// ListIamV2IpFiltersWithResponse List of IP Filters
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all IP filters.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/ip-filters (the `ListIamV2IpFilters` operationId).
-	ListIamV2IpFiltersWithResponse(ctx context.Context, params *ListIamV2IpFiltersParams, reqEditors ...RequestEditorFn) (*ListIamV2IpFiltersResponse, error)
-
-	// CreateIamV2IpFilterWithBodyWithResponse Create an IP Filter
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an IP filter.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/ip-filters (the `CreateIamV2IpFilter` operationId).
-	CreateIamV2IpFilterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2IpFilterResponse, error)
-
-	// CreateIamV2IpFilterWithResponse Create an IP Filter
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an IP filter.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/ip-filters (the `CreateIamV2IpFilter` operationId).
-	CreateIamV2IpFilterWithResponse(ctx context.Context, body CreateIamV2IpFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2IpFilterResponse, error)
-
-	// DeleteIamV2IpFilterWithResponse Delete an IP Filter
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete an IP filter.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /iam/v2/ip-filters/{id} (the `DeleteIamV2IpFilter` operationId).
-	DeleteIamV2IpFilterWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2IpFilterResponse, error)
-
-	// GetIamV2IpFilterWithResponse Read an IP Filter
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read an IP filter.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/ip-filters/{id} (the `GetIamV2IpFilter` operationId).
-	GetIamV2IpFilterWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2IpFilterResponse, error)
-
-	// UpdateIamV2IpFilterWithBodyWithResponse Update an IP Filter
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an IP filter.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/ip-filters/{id} (the `UpdateIamV2IpFilter` operationId).
-	UpdateIamV2IpFilterWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2IpFilterResponse, error)
-
-	// UpdateIamV2IpFilterWithResponse Update an IP Filter
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an IP filter.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/ip-filters/{id} (the `UpdateIamV2IpFilter` operationId).
-	UpdateIamV2IpFilterWithResponse(ctx context.Context, id string, body UpdateIamV2IpFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2IpFilterResponse, error)
-
-	// ListIamV2IpGroupsWithResponse List of IP Groups
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all IP groups.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/ip-groups (the `ListIamV2IpGroups` operationId).
-	ListIamV2IpGroupsWithResponse(ctx context.Context, params *ListIamV2IpGroupsParams, reqEditors ...RequestEditorFn) (*ListIamV2IpGroupsResponse, error)
-
-	// CreateIamV2IpGroupWithBodyWithResponse Create an IP Group
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an IP group.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/ip-groups (the `CreateIamV2IpGroup` operationId).
-	CreateIamV2IpGroupWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2IpGroupResponse, error)
-
-	// CreateIamV2IpGroupWithResponse Create an IP Group
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an IP group.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/ip-groups (the `CreateIamV2IpGroup` operationId).
-	CreateIamV2IpGroupWithResponse(ctx context.Context, body CreateIamV2IpGroupJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2IpGroupResponse, error)
-
-	// DeleteIamV2IpGroupWithResponse Delete an IP Group
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete an IP group.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /iam/v2/ip-groups/{id} (the `DeleteIamV2IpGroup` operationId).
-	DeleteIamV2IpGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2IpGroupResponse, error)
-
-	// GetIamV2IpGroupWithResponse Read an IP Group
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read an IP group.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/ip-groups/{id} (the `GetIamV2IpGroup` operationId).
-	GetIamV2IpGroupWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2IpGroupResponse, error)
-
-	// UpdateIamV2IpGroupWithBodyWithResponse Update an IP Group
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an IP group.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/ip-groups/{id} (the `UpdateIamV2IpGroup` operationId).
-	UpdateIamV2IpGroupWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2IpGroupResponse, error)
-
-	// UpdateIamV2IpGroupWithResponse Update an IP Group
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an IP group.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/ip-groups/{id} (the `UpdateIamV2IpGroup` operationId).
-	UpdateIamV2IpGroupWithResponse(ctx context.Context, id string, body UpdateIamV2IpGroupJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2IpGroupResponse, error)
-
-	// ListIamV2RoleBindingsWithResponse List of Role Bindings
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all role bindings.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/role-bindings (the `ListIamV2RoleBindings` operationId).
-	ListIamV2RoleBindingsWithResponse(ctx context.Context, params *ListIamV2RoleBindingsParams, reqEditors ...RequestEditorFn) (*ListIamV2RoleBindingsResponse, error)
-
-	// CreateIamV2RoleBindingWithBodyWithResponse Create a Role Binding
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a role binding.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/role-bindings (the `CreateIamV2RoleBinding` operationId).
-	CreateIamV2RoleBindingWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2RoleBindingResponse, error)
-
-	// CreateIamV2RoleBindingWithResponse Create a Role Binding
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a role binding.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/role-bindings (the `CreateIamV2RoleBinding` operationId).
-	CreateIamV2RoleBindingWithResponse(ctx context.Context, body CreateIamV2RoleBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2RoleBindingResponse, error)
-
-	// DeleteIamV2RoleBindingWithResponse Delete a Role Binding
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a role binding.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /iam/v2/role-bindings/{id} (the `DeleteIamV2RoleBinding` operationId).
-	DeleteIamV2RoleBindingWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2RoleBindingResponse, error)
-
-	// GetIamV2RoleBindingWithResponse Read a Role Binding
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a role binding.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/role-bindings/{id} (the `GetIamV2RoleBinding` operationId).
-	GetIamV2RoleBindingWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2RoleBindingResponse, error)
-
-	// ListIamV2ServiceAccountsWithResponse List of Service Accounts
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all service accounts.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/service-accounts (the `ListIamV2ServiceAccounts` operationId).
-	ListIamV2ServiceAccountsWithResponse(ctx context.Context, params *ListIamV2ServiceAccountsParams, reqEditors ...RequestEditorFn) (*ListIamV2ServiceAccountsResponse, error)
-
-	// CreateIamV2ServiceAccountWithBodyWithResponse Create a Service Account
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a service account.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/service-accounts (the `CreateIamV2ServiceAccount` operationId).
-	CreateIamV2ServiceAccountWithBodyWithResponse(ctx context.Context, params *CreateIamV2ServiceAccountParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2ServiceAccountResponse, error)
-
-	// CreateIamV2ServiceAccountWithResponse Create a Service Account
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a service account.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/service-accounts (the `CreateIamV2ServiceAccount` operationId).
-	CreateIamV2ServiceAccountWithResponse(ctx context.Context, params *CreateIamV2ServiceAccountParams, body CreateIamV2ServiceAccountJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2ServiceAccountResponse, error)
-
-	// DeleteIamV2ServiceAccountWithResponse Delete a Service Account
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a service account.
-	//
-	// If successful, this request will also recursively delete all of the service account's associated resources,
-	// including its cloud and cluster API keys.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /iam/v2/service-accounts/{id} (the `DeleteIamV2ServiceAccount` operationId).
-	DeleteIamV2ServiceAccountWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2ServiceAccountResponse, error)
-
-	// GetIamV2ServiceAccountWithResponse Read a Service Account
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a service account.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/service-accounts/{id} (the `GetIamV2ServiceAccount` operationId).
-	GetIamV2ServiceAccountWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2ServiceAccountResponse, error)
-
-	// UpdateIamV2ServiceAccountWithBodyWithResponse Update a Service Account
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a service account.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/service-accounts/{id} (the `UpdateIamV2ServiceAccount` operationId).
-	UpdateIamV2ServiceAccountWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2ServiceAccountResponse, error)
-
-	// UpdateIamV2ServiceAccountWithResponse Update a Service Account
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a service account.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/service-accounts/{id} (the `UpdateIamV2ServiceAccount` operationId).
-	UpdateIamV2ServiceAccountWithResponse(ctx context.Context, id string, body UpdateIamV2ServiceAccountJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2ServiceAccountResponse, error)
-
-	// ListIamV2SsoGroupMappingsWithResponse List of Group Mappings
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all group mappings.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/sso/group-mappings (the `ListIamV2SsoGroupMappings` operationId).
-	ListIamV2SsoGroupMappingsWithResponse(ctx context.Context, params *ListIamV2SsoGroupMappingsParams, reqEditors ...RequestEditorFn) (*ListIamV2SsoGroupMappingsResponse, error)
-
-	// CreateIamV2SsoGroupMappingWithBodyWithResponse Create a Group Mapping
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a group mapping.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/sso/group-mappings (the `CreateIamV2SsoGroupMapping` operationId).
-	CreateIamV2SsoGroupMappingWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2SsoGroupMappingResponse, error)
-
-	// CreateIamV2SsoGroupMappingWithResponse Create a Group Mapping
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a group mapping.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /iam/v2/sso/group-mappings (the `CreateIamV2SsoGroupMapping` operationId).
-	CreateIamV2SsoGroupMappingWithResponse(ctx context.Context, body CreateIamV2SsoGroupMappingJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2SsoGroupMappingResponse, error)
-
-	// DeleteIamV2SsoGroupMappingWithResponse Delete a Group Mapping
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a group mapping.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /iam/v2/sso/group-mappings/{id} (the `DeleteIamV2SsoGroupMapping` operationId).
-	DeleteIamV2SsoGroupMappingWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2SsoGroupMappingResponse, error)
-
-	// GetIamV2SsoGroupMappingWithResponse Read a Group Mapping
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a group mapping.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/sso/group-mappings/{id} (the `GetIamV2SsoGroupMapping` operationId).
-	GetIamV2SsoGroupMappingWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2SsoGroupMappingResponse, error)
-
-	// UpdateIamV2SsoGroupMappingWithBodyWithResponse Update a Group Mapping
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a group mapping.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/sso/group-mappings/{id} (the `UpdateIamV2SsoGroupMapping` operationId).
-	UpdateIamV2SsoGroupMappingWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2SsoGroupMappingResponse, error)
-
-	// UpdateIamV2SsoGroupMappingWithResponse Update a Group Mapping
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a group mapping.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/sso/group-mappings/{id} (the `UpdateIamV2SsoGroupMapping` operationId).
-	UpdateIamV2SsoGroupMappingWithResponse(ctx context.Context, id string, body UpdateIamV2SsoGroupMappingJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2SsoGroupMappingResponse, error)
-
-	// ListIamV2UsersWithResponse List of Users
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all users.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/users (the `ListIamV2Users` operationId).
-	ListIamV2UsersWithResponse(ctx context.Context, params *ListIamV2UsersParams, reqEditors ...RequestEditorFn) (*ListIamV2UsersResponse, error)
-
-	// DeleteIamV2UserWithResponse Delete a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a user.
-	//
-	// If successful, this request will also recursively delete all of the user's associated resources,
-	// including its cloud and cluster API keys.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /iam/v2/users/{id} (the `DeleteIamV2User` operationId).
-	DeleteIamV2UserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2UserResponse, error)
-
-	// GetIamV2UserWithResponse Read a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a user.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /iam/v2/users/{id} (the `GetIamV2User` operationId).
-	GetIamV2UserWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2UserResponse, error)
-
-	// UpdateIamV2UserWithBodyWithResponse Update a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a user.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/users/{id} (the `UpdateIamV2User` operationId).
-	UpdateIamV2UserWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2UserResponse, error)
-
-	// UpdateIamV2UserWithResponse Update a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a user.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/users/{id} (the `UpdateIamV2User` operationId).
-	UpdateIamV2UserWithResponse(ctx context.Context, id string, body UpdateIamV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2UserResponse, error)
-
-	// UpdateAuthTypeIamV2UserWithBodyWithResponse Update Auth Type of a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Update the auth type of a user
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/users/{id}/auth (the `UpdateAuthTypeIamV2User` operationId).
-	UpdateAuthTypeIamV2UserWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAuthTypeIamV2UserResponse, error)
-
-	// UpdateAuthTypeIamV2UserWithResponse Update Auth Type of a User
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Update the auth type of a user
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /iam/v2/users/{id}/auth (the `UpdateAuthTypeIamV2User` operationId).
-	UpdateAuthTypeIamV2UserWithResponse(ctx context.Context, id string, body UpdateAuthTypeIamV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAuthTypeIamV2UserResponse, error)
-}
-
 func (r ListIamV2ApiKeysResponse) GetJSON200() *struct {
 	// ApiVersion APIVersion defines the schema version of this representation of a resource.
 	ApiVersion ListIamV2ApiKeys200JSONResponseBodyApiVersion `json:"api_version"`
@@ -10196,14 +9257,14 @@ func (r UpdateAuthTypeIamV2UserResponse) ContentType() string {
 	return ""
 }
 func (c *ClientWithResponses) UpdateAuthTypeIamV2UserWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateAuthTypeIamV2UserResponse, error) {
-	rsp, err := c.UpdateAuthTypeIamV2UserWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateAuthTypeIamV2UserWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateAuthTypeIamV2UserResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateAuthTypeIamV2UserWithResponse(ctx context.Context, id string, body UpdateAuthTypeIamV2UserJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateAuthTypeIamV2UserResponse, error) {
-	rsp, err := c.UpdateAuthTypeIamV2User(ctx, id, body, reqEditors...)
+	rsp, err := c.updateAuthTypeIamV2User(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

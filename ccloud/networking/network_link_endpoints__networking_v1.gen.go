@@ -120,7 +120,7 @@ type UpdateNetworkingV1NetworkLinkEndpoint200JSONResponseBodyKind string
 type CreateNetworkingV1NetworkLinkEndpointJSONRequestBody CreateNetworkingV1NetworkLinkEndpointJSONBody
 type UpdateNetworkingV1NetworkLinkEndpointJSONRequestBody UpdateNetworkingV1NetworkLinkEndpointJSONBody
 
-func (c *oasClient) ListNetworkingV1NetworkLinkEndpoints(ctx context.Context, params *ListNetworkingV1NetworkLinkEndpointsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listNetworkingV1NetworkLinkEndpoints(ctx context.Context, params *ListNetworkingV1NetworkLinkEndpointsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNetworkingV1NetworkLinkEndpointsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -131,7 +131,7 @@ func (c *oasClient) ListNetworkingV1NetworkLinkEndpoints(ctx context.Context, pa
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateNetworkingV1NetworkLinkEndpointWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createNetworkingV1NetworkLinkEndpointWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1NetworkLinkEndpointRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -142,7 +142,7 @@ func (c *oasClient) CreateNetworkingV1NetworkLinkEndpointWithBody(ctx context.Co
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateNetworkingV1NetworkLinkEndpoint(ctx context.Context, body CreateNetworkingV1NetworkLinkEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createNetworkingV1NetworkLinkEndpoint(ctx context.Context, body CreateNetworkingV1NetworkLinkEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1NetworkLinkEndpointRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -153,7 +153,7 @@ func (c *oasClient) CreateNetworkingV1NetworkLinkEndpoint(ctx context.Context, b
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteNetworkingV1NetworkLinkEndpoint(ctx context.Context, id string, params *DeleteNetworkingV1NetworkLinkEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteNetworkingV1NetworkLinkEndpoint(ctx context.Context, id string, params *DeleteNetworkingV1NetworkLinkEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteNetworkingV1NetworkLinkEndpointRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -164,7 +164,7 @@ func (c *oasClient) DeleteNetworkingV1NetworkLinkEndpoint(ctx context.Context, i
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetNetworkingV1NetworkLinkEndpoint(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getNetworkingV1NetworkLinkEndpoint(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkEndpointParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNetworkingV1NetworkLinkEndpointRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -175,7 +175,7 @@ func (c *oasClient) GetNetworkingV1NetworkLinkEndpoint(ctx context.Context, id s
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateNetworkingV1NetworkLinkEndpointWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateNetworkingV1NetworkLinkEndpointWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1NetworkLinkEndpointRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -186,7 +186,7 @@ func (c *oasClient) UpdateNetworkingV1NetworkLinkEndpointWithBody(ctx context.Co
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateNetworkingV1NetworkLinkEndpoint(ctx context.Context, id string, body UpdateNetworkingV1NetworkLinkEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateNetworkingV1NetworkLinkEndpoint(ctx context.Context, id string, body UpdateNetworkingV1NetworkLinkEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1NetworkLinkEndpointRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -942,49 +942,49 @@ type UpdateNetworkingV1NetworkLinkEndpointResponse struct {
 }
 
 func (c *ClientWithResponses) ListNetworkingV1NetworkLinkEndpointsWithResponse(ctx context.Context, params *ListNetworkingV1NetworkLinkEndpointsParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1NetworkLinkEndpointsResponse, error) {
-	rsp, err := c.ListNetworkingV1NetworkLinkEndpoints(ctx, params, reqEditors...)
+	rsp, err := c.listNetworkingV1NetworkLinkEndpoints(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListNetworkingV1NetworkLinkEndpointsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateNetworkingV1NetworkLinkEndpointWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1NetworkLinkEndpointResponse, error) {
-	rsp, err := c.CreateNetworkingV1NetworkLinkEndpointWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createNetworkingV1NetworkLinkEndpointWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateNetworkingV1NetworkLinkEndpointResponse(rsp)
 }
 func (c *ClientWithResponses) CreateNetworkingV1NetworkLinkEndpointWithResponse(ctx context.Context, body CreateNetworkingV1NetworkLinkEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1NetworkLinkEndpointResponse, error) {
-	rsp, err := c.CreateNetworkingV1NetworkLinkEndpoint(ctx, body, reqEditors...)
+	rsp, err := c.createNetworkingV1NetworkLinkEndpoint(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateNetworkingV1NetworkLinkEndpointResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteNetworkingV1NetworkLinkEndpointWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1NetworkLinkEndpointParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1NetworkLinkEndpointResponse, error) {
-	rsp, err := c.DeleteNetworkingV1NetworkLinkEndpoint(ctx, id, params, reqEditors...)
+	rsp, err := c.deleteNetworkingV1NetworkLinkEndpoint(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteNetworkingV1NetworkLinkEndpointResponse(rsp)
 }
 func (c *ClientWithResponses) GetNetworkingV1NetworkLinkEndpointWithResponse(ctx context.Context, id string, params *GetNetworkingV1NetworkLinkEndpointParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1NetworkLinkEndpointResponse, error) {
-	rsp, err := c.GetNetworkingV1NetworkLinkEndpoint(ctx, id, params, reqEditors...)
+	rsp, err := c.getNetworkingV1NetworkLinkEndpoint(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetNetworkingV1NetworkLinkEndpointResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateNetworkingV1NetworkLinkEndpointWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1NetworkLinkEndpointResponse, error) {
-	rsp, err := c.UpdateNetworkingV1NetworkLinkEndpointWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateNetworkingV1NetworkLinkEndpointWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateNetworkingV1NetworkLinkEndpointResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateNetworkingV1NetworkLinkEndpointWithResponse(ctx context.Context, id string, body UpdateNetworkingV1NetworkLinkEndpointJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1NetworkLinkEndpointResponse, error) {
-	rsp, err := c.UpdateNetworkingV1NetworkLinkEndpoint(ctx, id, body, reqEditors...)
+	rsp, err := c.updateNetworkingV1NetworkLinkEndpoint(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

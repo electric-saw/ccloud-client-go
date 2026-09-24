@@ -113,7 +113,7 @@ type UpdateTableflowV1TableflowTopic200JSONResponseBodyKind string
 type CreateTableflowV1TableflowTopicJSONRequestBody CreateTableflowV1TableflowTopicJSONBody
 type UpdateTableflowV1TableflowTopicJSONRequestBody UpdateTableflowV1TableflowTopicJSONBody
 
-func (c *oasClient) ListTableflowV1TableflowTopics(ctx context.Context, params *ListTableflowV1TableflowTopicsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listTableflowV1TableflowTopics(ctx context.Context, params *ListTableflowV1TableflowTopicsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListTableflowV1TableflowTopicsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (c *oasClient) ListTableflowV1TableflowTopics(ctx context.Context, params *
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateTableflowV1TableflowTopicWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createTableflowV1TableflowTopicWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateTableflowV1TableflowTopicRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -135,7 +135,7 @@ func (c *oasClient) CreateTableflowV1TableflowTopicWithBody(ctx context.Context,
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateTableflowV1TableflowTopic(ctx context.Context, body CreateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createTableflowV1TableflowTopic(ctx context.Context, body CreateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateTableflowV1TableflowTopicRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -146,7 +146,7 @@ func (c *oasClient) CreateTableflowV1TableflowTopic(ctx context.Context, body Cr
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteTableflowV1TableflowTopic(ctx context.Context, displayName string, params *DeleteTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteTableflowV1TableflowTopic(ctx context.Context, displayName string, params *DeleteTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteTableflowV1TableflowTopicRequest(c.Server, displayName, params)
 	if err != nil {
 		return nil, err
@@ -157,7 +157,7 @@ func (c *oasClient) DeleteTableflowV1TableflowTopic(ctx context.Context, display
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetTableflowV1TableflowTopic(ctx context.Context, displayName string, params *GetTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getTableflowV1TableflowTopic(ctx context.Context, displayName string, params *GetTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetTableflowV1TableflowTopicRequest(c.Server, displayName, params)
 	if err != nil {
 		return nil, err
@@ -168,7 +168,7 @@ func (c *oasClient) GetTableflowV1TableflowTopic(ctx context.Context, displayNam
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateTableflowV1TableflowTopicWithBody(ctx context.Context, displayName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateTableflowV1TableflowTopicWithBody(ctx context.Context, displayName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTableflowV1TableflowTopicRequestWithBody(c.Server, displayName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -179,7 +179,7 @@ func (c *oasClient) UpdateTableflowV1TableflowTopicWithBody(ctx context.Context,
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateTableflowV1TableflowTopic(ctx context.Context, displayName string, body UpdateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateTableflowV1TableflowTopic(ctx context.Context, displayName string, body UpdateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTableflowV1TableflowTopicRequest(c.Server, displayName, body)
 	if err != nil {
 		return nil, err
@@ -896,49 +896,49 @@ type UpdateTableflowV1TableflowTopicResponse struct {
 }
 
 func (c *ClientWithResponses) ListTableflowV1TableflowTopicsWithResponse(ctx context.Context, params *ListTableflowV1TableflowTopicsParams, reqEditors ...RequestEditorFn) (*ListTableflowV1TableflowTopicsResponse, error) {
-	rsp, err := c.ListTableflowV1TableflowTopics(ctx, params, reqEditors...)
+	rsp, err := c.listTableflowV1TableflowTopics(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListTableflowV1TableflowTopicsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateTableflowV1TableflowTopicWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateTableflowV1TableflowTopicResponse, error) {
-	rsp, err := c.CreateTableflowV1TableflowTopicWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createTableflowV1TableflowTopicWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateTableflowV1TableflowTopicResponse(rsp)
 }
 func (c *ClientWithResponses) CreateTableflowV1TableflowTopicWithResponse(ctx context.Context, body CreateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateTableflowV1TableflowTopicResponse, error) {
-	rsp, err := c.CreateTableflowV1TableflowTopic(ctx, body, reqEditors...)
+	rsp, err := c.createTableflowV1TableflowTopic(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateTableflowV1TableflowTopicResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteTableflowV1TableflowTopicWithResponse(ctx context.Context, displayName string, params *DeleteTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*DeleteTableflowV1TableflowTopicResponse, error) {
-	rsp, err := c.DeleteTableflowV1TableflowTopic(ctx, displayName, params, reqEditors...)
+	rsp, err := c.deleteTableflowV1TableflowTopic(ctx, displayName, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteTableflowV1TableflowTopicResponse(rsp)
 }
 func (c *ClientWithResponses) GetTableflowV1TableflowTopicWithResponse(ctx context.Context, displayName string, params *GetTableflowV1TableflowTopicParams, reqEditors ...RequestEditorFn) (*GetTableflowV1TableflowTopicResponse, error) {
-	rsp, err := c.GetTableflowV1TableflowTopic(ctx, displayName, params, reqEditors...)
+	rsp, err := c.getTableflowV1TableflowTopic(ctx, displayName, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetTableflowV1TableflowTopicResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateTableflowV1TableflowTopicWithBodyWithResponse(ctx context.Context, displayName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateTableflowV1TableflowTopicResponse, error) {
-	rsp, err := c.UpdateTableflowV1TableflowTopicWithBody(ctx, displayName, contentType, body, reqEditors...)
+	rsp, err := c.updateTableflowV1TableflowTopicWithBody(ctx, displayName, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateTableflowV1TableflowTopicResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateTableflowV1TableflowTopicWithResponse(ctx context.Context, displayName string, body UpdateTableflowV1TableflowTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateTableflowV1TableflowTopicResponse, error) {
-	rsp, err := c.UpdateTableflowV1TableflowTopic(ctx, displayName, body, reqEditors...)
+	rsp, err := c.updateTableflowV1TableflowTopic(ctx, displayName, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

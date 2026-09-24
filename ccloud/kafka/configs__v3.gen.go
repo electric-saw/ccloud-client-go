@@ -27,7 +27,7 @@ type UpdateKafkaGroupConfigBatchJSONRequestBody = AlterConfigBatchRequestData
 type UpdateKafkaTopicConfigJSONRequestBody = UpdateConfigRequestData
 type UpdateKafkaTopicConfigBatchJSONRequestBody = AlterConfigBatchRequestData
 
-func (c *oasClient) ListKafkaClusterConfigs(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaClusterConfigs(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaClusterConfigsRequest(c.Server, clusterId)
 	if err != nil {
 		return nil, err
@@ -38,7 +38,7 @@ func (c *oasClient) ListKafkaClusterConfigs(ctx context.Context, clusterId Clust
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteKafkaClusterConfig(ctx context.Context, clusterId ClusterId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteKafkaClusterConfig(ctx context.Context, clusterId ClusterId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteKafkaClusterConfigRequest(c.Server, clusterId, name)
 	if err != nil {
 		return nil, err
@@ -49,7 +49,7 @@ func (c *oasClient) DeleteKafkaClusterConfig(ctx context.Context, clusterId Clus
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaClusterConfig(ctx context.Context, clusterId ClusterId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaClusterConfig(ctx context.Context, clusterId ClusterId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaClusterConfigRequest(c.Server, clusterId, name)
 	if err != nil {
 		return nil, err
@@ -60,7 +60,7 @@ func (c *oasClient) GetKafkaClusterConfig(ctx context.Context, clusterId Cluster
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaClusterConfigWithBody(ctx context.Context, clusterId ClusterId, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaClusterConfigWithBody(ctx context.Context, clusterId ClusterId, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaClusterConfigRequestWithBody(c.Server, clusterId, name, contentType, body)
 	if err != nil {
 		return nil, err
@@ -71,7 +71,7 @@ func (c *oasClient) UpdateKafkaClusterConfigWithBody(ctx context.Context, cluste
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaClusterConfig(ctx context.Context, clusterId ClusterId, name ConfigName, body UpdateKafkaClusterConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaClusterConfig(ctx context.Context, clusterId ClusterId, name ConfigName, body UpdateKafkaClusterConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaClusterConfigRequest(c.Server, clusterId, name, body)
 	if err != nil {
 		return nil, err
@@ -82,7 +82,7 @@ func (c *oasClient) UpdateKafkaClusterConfig(ctx context.Context, clusterId Clus
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaClusterConfigsWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaClusterConfigsWithBody(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaClusterConfigsRequestWithBody(c.Server, clusterId, contentType, body)
 	if err != nil {
 		return nil, err
@@ -93,7 +93,7 @@ func (c *oasClient) UpdateKafkaClusterConfigsWithBody(ctx context.Context, clust
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaClusterConfigs(ctx context.Context, clusterId ClusterId, body UpdateKafkaClusterConfigsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaClusterConfigs(ctx context.Context, clusterId ClusterId, body UpdateKafkaClusterConfigsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaClusterConfigsRequest(c.Server, clusterId, body)
 	if err != nil {
 		return nil, err
@@ -104,7 +104,7 @@ func (c *oasClient) UpdateKafkaClusterConfigs(ctx context.Context, clusterId Clu
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListKafkaGroupConfigs(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaGroupConfigs(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaGroupConfigsRequest(c.Server, clusterId, groupId)
 	if err != nil {
 		return nil, err
@@ -115,7 +115,7 @@ func (c *oasClient) ListKafkaGroupConfigs(ctx context.Context, clusterId Cluster
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteKafkaGroupConfig(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteKafkaGroupConfig(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteKafkaGroupConfigRequest(c.Server, clusterId, groupId, name)
 	if err != nil {
 		return nil, err
@@ -126,7 +126,7 @@ func (c *oasClient) DeleteKafkaGroupConfig(ctx context.Context, clusterId Cluste
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaGroupConfig(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaGroupConfig(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaGroupConfigRequest(c.Server, clusterId, groupId, name)
 	if err != nil {
 		return nil, err
@@ -137,7 +137,7 @@ func (c *oasClient) GetKafkaGroupConfig(ctx context.Context, clusterId ClusterId
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaGroupConfigWithBody(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaGroupConfigWithBody(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaGroupConfigRequestWithBody(c.Server, clusterId, groupId, name, contentType, body)
 	if err != nil {
 		return nil, err
@@ -148,7 +148,7 @@ func (c *oasClient) UpdateKafkaGroupConfigWithBody(ctx context.Context, clusterI
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaGroupConfig(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, body UpdateKafkaGroupConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaGroupConfig(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, body UpdateKafkaGroupConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaGroupConfigRequest(c.Server, clusterId, groupId, name, body)
 	if err != nil {
 		return nil, err
@@ -159,7 +159,7 @@ func (c *oasClient) UpdateKafkaGroupConfig(ctx context.Context, clusterId Cluste
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaGroupConfigBatchWithBody(ctx context.Context, clusterId ClusterId, groupId GroupId, params *UpdateKafkaGroupConfigBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaGroupConfigBatchWithBody(ctx context.Context, clusterId ClusterId, groupId GroupId, params *UpdateKafkaGroupConfigBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaGroupConfigBatchRequestWithBody(c.Server, clusterId, groupId, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -170,7 +170,7 @@ func (c *oasClient) UpdateKafkaGroupConfigBatchWithBody(ctx context.Context, clu
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaGroupConfigBatch(ctx context.Context, clusterId ClusterId, groupId GroupId, params *UpdateKafkaGroupConfigBatchParams, body UpdateKafkaGroupConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaGroupConfigBatch(ctx context.Context, clusterId ClusterId, groupId GroupId, params *UpdateKafkaGroupConfigBatchParams, body UpdateKafkaGroupConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaGroupConfigBatchRequest(c.Server, clusterId, groupId, params, body)
 	if err != nil {
 		return nil, err
@@ -181,7 +181,7 @@ func (c *oasClient) UpdateKafkaGroupConfigBatch(ctx context.Context, clusterId C
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListKafkaAllTopicConfigs(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaAllTopicConfigs(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaAllTopicConfigsRequest(c.Server, clusterId)
 	if err != nil {
 		return nil, err
@@ -192,7 +192,7 @@ func (c *oasClient) ListKafkaAllTopicConfigs(ctx context.Context, clusterId Clus
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListKafkaTopicConfigs(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaTopicConfigs(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaTopicConfigsRequest(c.Server, clusterId, topicName)
 	if err != nil {
 		return nil, err
@@ -203,7 +203,7 @@ func (c *oasClient) ListKafkaTopicConfigs(ctx context.Context, clusterId Cluster
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteKafkaTopicConfig(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteKafkaTopicConfig(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteKafkaTopicConfigRequest(c.Server, clusterId, topicName, name)
 	if err != nil {
 		return nil, err
@@ -214,7 +214,7 @@ func (c *oasClient) DeleteKafkaTopicConfig(ctx context.Context, clusterId Cluste
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaTopicConfig(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaTopicConfig(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaTopicConfigRequest(c.Server, clusterId, topicName, name)
 	if err != nil {
 		return nil, err
@@ -225,7 +225,7 @@ func (c *oasClient) GetKafkaTopicConfig(ctx context.Context, clusterId ClusterId
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaTopicConfigWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaTopicConfigWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaTopicConfigRequestWithBody(c.Server, clusterId, topicName, name, contentType, body)
 	if err != nil {
 		return nil, err
@@ -236,7 +236,7 @@ func (c *oasClient) UpdateKafkaTopicConfigWithBody(ctx context.Context, clusterI
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaTopicConfig(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, body UpdateKafkaTopicConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaTopicConfig(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, body UpdateKafkaTopicConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaTopicConfigRequest(c.Server, clusterId, topicName, name, body)
 	if err != nil {
 		return nil, err
@@ -247,7 +247,7 @@ func (c *oasClient) UpdateKafkaTopicConfig(ctx context.Context, clusterId Cluste
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaTopicConfigBatchWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaTopicConfigBatchWithBody(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaTopicConfigBatchRequestWithBody(c.Server, clusterId, topicName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -258,7 +258,7 @@ func (c *oasClient) UpdateKafkaTopicConfigBatchWithBody(ctx context.Context, clu
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateKafkaTopicConfigBatch(ctx context.Context, clusterId ClusterId, topicName TopicName, body UpdateKafkaTopicConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateKafkaTopicConfigBatch(ctx context.Context, clusterId ClusterId, topicName TopicName, body UpdateKafkaTopicConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateKafkaTopicConfigBatchRequest(c.Server, clusterId, topicName, body)
 	if err != nil {
 		return nil, err
@@ -269,7 +269,7 @@ func (c *oasClient) UpdateKafkaTopicConfigBatch(ctx context.Context, clusterId C
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListKafkaDefaultTopicConfigs(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaDefaultTopicConfigs(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaDefaultTopicConfigsRequest(c.Server, clusterId, topicName)
 	if err != nil {
 		return nil, err
@@ -1290,161 +1290,161 @@ type ListKafkaDefaultTopicConfigsResponse struct {
 }
 
 func (c *ClientWithResponses) ListKafkaClusterConfigsWithResponse(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*ListKafkaClusterConfigsResponse, error) {
-	rsp, err := c.ListKafkaClusterConfigs(ctx, clusterId, reqEditors...)
+	rsp, err := c.listKafkaClusterConfigs(ctx, clusterId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaClusterConfigsResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteKafkaClusterConfigWithResponse(ctx context.Context, clusterId ClusterId, name ConfigName, reqEditors ...RequestEditorFn) (*DeleteKafkaClusterConfigResponse, error) {
-	rsp, err := c.DeleteKafkaClusterConfig(ctx, clusterId, name, reqEditors...)
+	rsp, err := c.deleteKafkaClusterConfig(ctx, clusterId, name, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteKafkaClusterConfigResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaClusterConfigWithResponse(ctx context.Context, clusterId ClusterId, name ConfigName, reqEditors ...RequestEditorFn) (*GetKafkaClusterConfigResponse, error) {
-	rsp, err := c.GetKafkaClusterConfig(ctx, clusterId, name, reqEditors...)
+	rsp, err := c.getKafkaClusterConfig(ctx, clusterId, name, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKafkaClusterConfigResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaClusterConfigWithBodyWithResponse(ctx context.Context, clusterId ClusterId, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaClusterConfigResponse, error) {
-	rsp, err := c.UpdateKafkaClusterConfigWithBody(ctx, clusterId, name, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaClusterConfigWithBody(ctx, clusterId, name, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaClusterConfigResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaClusterConfigWithResponse(ctx context.Context, clusterId ClusterId, name ConfigName, body UpdateKafkaClusterConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaClusterConfigResponse, error) {
-	rsp, err := c.UpdateKafkaClusterConfig(ctx, clusterId, name, body, reqEditors...)
+	rsp, err := c.updateKafkaClusterConfig(ctx, clusterId, name, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaClusterConfigResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaClusterConfigsWithBodyWithResponse(ctx context.Context, clusterId ClusterId, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaClusterConfigsResponse, error) {
-	rsp, err := c.UpdateKafkaClusterConfigsWithBody(ctx, clusterId, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaClusterConfigsWithBody(ctx, clusterId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaClusterConfigsResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaClusterConfigsWithResponse(ctx context.Context, clusterId ClusterId, body UpdateKafkaClusterConfigsJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaClusterConfigsResponse, error) {
-	rsp, err := c.UpdateKafkaClusterConfigs(ctx, clusterId, body, reqEditors...)
+	rsp, err := c.updateKafkaClusterConfigs(ctx, clusterId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaClusterConfigsResponse(rsp)
 }
 func (c *ClientWithResponses) ListKafkaGroupConfigsWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, reqEditors ...RequestEditorFn) (*ListKafkaGroupConfigsResponse, error) {
-	rsp, err := c.ListKafkaGroupConfigs(ctx, clusterId, groupId, reqEditors...)
+	rsp, err := c.listKafkaGroupConfigs(ctx, clusterId, groupId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaGroupConfigsResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteKafkaGroupConfigWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, reqEditors ...RequestEditorFn) (*DeleteKafkaGroupConfigResponse, error) {
-	rsp, err := c.DeleteKafkaGroupConfig(ctx, clusterId, groupId, name, reqEditors...)
+	rsp, err := c.deleteKafkaGroupConfig(ctx, clusterId, groupId, name, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteKafkaGroupConfigResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaGroupConfigWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, reqEditors ...RequestEditorFn) (*GetKafkaGroupConfigResponse, error) {
-	rsp, err := c.GetKafkaGroupConfig(ctx, clusterId, groupId, name, reqEditors...)
+	rsp, err := c.getKafkaGroupConfig(ctx, clusterId, groupId, name, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKafkaGroupConfigResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaGroupConfigWithBodyWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaGroupConfigResponse, error) {
-	rsp, err := c.UpdateKafkaGroupConfigWithBody(ctx, clusterId, groupId, name, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaGroupConfigWithBody(ctx, clusterId, groupId, name, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaGroupConfigResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaGroupConfigWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, name ConfigName, body UpdateKafkaGroupConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaGroupConfigResponse, error) {
-	rsp, err := c.UpdateKafkaGroupConfig(ctx, clusterId, groupId, name, body, reqEditors...)
+	rsp, err := c.updateKafkaGroupConfig(ctx, clusterId, groupId, name, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaGroupConfigResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaGroupConfigBatchWithBodyWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, params *UpdateKafkaGroupConfigBatchParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaGroupConfigBatchResponse, error) {
-	rsp, err := c.UpdateKafkaGroupConfigBatchWithBody(ctx, clusterId, groupId, params, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaGroupConfigBatchWithBody(ctx, clusterId, groupId, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaGroupConfigBatchResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaGroupConfigBatchWithResponse(ctx context.Context, clusterId ClusterId, groupId GroupId, params *UpdateKafkaGroupConfigBatchParams, body UpdateKafkaGroupConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaGroupConfigBatchResponse, error) {
-	rsp, err := c.UpdateKafkaGroupConfigBatch(ctx, clusterId, groupId, params, body, reqEditors...)
+	rsp, err := c.updateKafkaGroupConfigBatch(ctx, clusterId, groupId, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaGroupConfigBatchResponse(rsp)
 }
 func (c *ClientWithResponses) ListKafkaAllTopicConfigsWithResponse(ctx context.Context, clusterId ClusterId, reqEditors ...RequestEditorFn) (*ListKafkaAllTopicConfigsResponse, error) {
-	rsp, err := c.ListKafkaAllTopicConfigs(ctx, clusterId, reqEditors...)
+	rsp, err := c.listKafkaAllTopicConfigs(ctx, clusterId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaAllTopicConfigsResponse(rsp)
 }
 func (c *ClientWithResponses) ListKafkaTopicConfigsWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*ListKafkaTopicConfigsResponse, error) {
-	rsp, err := c.ListKafkaTopicConfigs(ctx, clusterId, topicName, reqEditors...)
+	rsp, err := c.listKafkaTopicConfigs(ctx, clusterId, topicName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaTopicConfigsResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteKafkaTopicConfigWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, reqEditors ...RequestEditorFn) (*DeleteKafkaTopicConfigResponse, error) {
-	rsp, err := c.DeleteKafkaTopicConfig(ctx, clusterId, topicName, name, reqEditors...)
+	rsp, err := c.deleteKafkaTopicConfig(ctx, clusterId, topicName, name, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteKafkaTopicConfigResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaTopicConfigWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, reqEditors ...RequestEditorFn) (*GetKafkaTopicConfigResponse, error) {
-	rsp, err := c.GetKafkaTopicConfig(ctx, clusterId, topicName, name, reqEditors...)
+	rsp, err := c.getKafkaTopicConfig(ctx, clusterId, topicName, name, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetKafkaTopicConfigResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaTopicConfigWithBodyWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaTopicConfigResponse, error) {
-	rsp, err := c.UpdateKafkaTopicConfigWithBody(ctx, clusterId, topicName, name, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaTopicConfigWithBody(ctx, clusterId, topicName, name, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaTopicConfigResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaTopicConfigWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, name ConfigName, body UpdateKafkaTopicConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaTopicConfigResponse, error) {
-	rsp, err := c.UpdateKafkaTopicConfig(ctx, clusterId, topicName, name, body, reqEditors...)
+	rsp, err := c.updateKafkaTopicConfig(ctx, clusterId, topicName, name, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaTopicConfigResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaTopicConfigBatchWithBodyWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateKafkaTopicConfigBatchResponse, error) {
-	rsp, err := c.UpdateKafkaTopicConfigBatchWithBody(ctx, clusterId, topicName, contentType, body, reqEditors...)
+	rsp, err := c.updateKafkaTopicConfigBatchWithBody(ctx, clusterId, topicName, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaTopicConfigBatchResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateKafkaTopicConfigBatchWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, body UpdateKafkaTopicConfigBatchJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateKafkaTopicConfigBatchResponse, error) {
-	rsp, err := c.UpdateKafkaTopicConfigBatch(ctx, clusterId, topicName, body, reqEditors...)
+	rsp, err := c.updateKafkaTopicConfigBatch(ctx, clusterId, topicName, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateKafkaTopicConfigBatchResponse(rsp)
 }
 func (c *ClientWithResponses) ListKafkaDefaultTopicConfigsWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*ListKafkaDefaultTopicConfigsResponse, error) {
-	rsp, err := c.ListKafkaDefaultTopicConfigs(ctx, clusterId, topicName, reqEditors...)
+	rsp, err := c.listKafkaDefaultTopicConfigs(ctx, clusterId, topicName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

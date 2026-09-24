@@ -791,7 +791,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// GetFcpmV2OrgComputePoolConfig Read an Org Compute Pool Config
 	//
@@ -800,7 +800,7 @@ type ClientInterface interface {
 	// Make a request to read an org compute pool config.
 	//
 	// Corresponds with GET /fcpm/v2/compute-pool-config (the `GetFcpmV2OrgComputePoolConfig` operationId).
-	GetFcpmV2OrgComputePoolConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getFcpmV2OrgComputePoolConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateFcpmV2OrgComputePoolConfigWithBody Update an Org Compute Pool Config
 	//
@@ -811,7 +811,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /fcpm/v2/compute-pool-config (the `UpdateFcpmV2OrgComputePoolConfig` operationId).
-	UpdateFcpmV2OrgComputePoolConfigWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateFcpmV2OrgComputePoolConfigWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateFcpmV2OrgComputePoolConfig Update an Org Compute Pool Config
 	//
@@ -822,7 +822,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /fcpm/v2/compute-pool-config (the `UpdateFcpmV2OrgComputePoolConfig` operationId).
-	UpdateFcpmV2OrgComputePoolConfig(ctx context.Context, body UpdateFcpmV2OrgComputePoolConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateFcpmV2OrgComputePoolConfig(ctx context.Context, body UpdateFcpmV2OrgComputePoolConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListFcpmV2Regions List of Regions
 	//
@@ -831,7 +831,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all regions.
 	//
 	// Corresponds with GET /fcpm/v2/regions (the `ListFcpmV2Regions` operationId).
-	ListFcpmV2Regions(ctx context.Context, params *ListFcpmV2RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listFcpmV2Regions(ctx context.Context, params *ListFcpmV2RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -849,7 +849,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -869,54 +869,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// GetFcpmV2OrgComputePoolConfigWithResponse Read an Org Compute Pool Config
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read an org compute pool config.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /fcpm/v2/compute-pool-config (the `GetFcpmV2OrgComputePoolConfig` operationId).
-	GetFcpmV2OrgComputePoolConfigWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetFcpmV2OrgComputePoolConfigResponse, error)
-
-	// UpdateFcpmV2OrgComputePoolConfigWithBodyWithResponse Update an Org Compute Pool Config
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an org compute pool config.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /fcpm/v2/compute-pool-config (the `UpdateFcpmV2OrgComputePoolConfig` operationId).
-	UpdateFcpmV2OrgComputePoolConfigWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFcpmV2OrgComputePoolConfigResponse, error)
-
-	// UpdateFcpmV2OrgComputePoolConfigWithResponse Update an Org Compute Pool Config
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update an org compute pool config.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /fcpm/v2/compute-pool-config (the `UpdateFcpmV2OrgComputePoolConfig` operationId).
-	UpdateFcpmV2OrgComputePoolConfigWithResponse(ctx context.Context, body UpdateFcpmV2OrgComputePoolConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFcpmV2OrgComputePoolConfigResponse, error)
-
-	// ListFcpmV2RegionsWithResponse List of Regions
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all regions.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /fcpm/v2/regions (the `ListFcpmV2Regions` operationId).
-	ListFcpmV2RegionsWithResponse(ctx context.Context, params *ListFcpmV2RegionsParams, reqEditors ...RequestEditorFn) (*ListFcpmV2RegionsResponse, error)
-}
-
 func (r GetFcpmV2OrgComputePoolConfigResponse) GetJSON200() *struct {
 	// ApiVersion APIVersion defines the schema version of this representation of a resource.
 	ApiVersion GetFcpmV2OrgComputePoolConfig200JSONResponseBodyApiVersion `json:"api_version"`

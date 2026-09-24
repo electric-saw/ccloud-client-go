@@ -631,7 +631,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ExecuteQueryV1alpha1StatementWithBody Execute SQL Statement
 	//
@@ -640,7 +640,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /query/v1alpha1 (the `ExecuteQueryV1alpha1Statement` operationId).
-	ExecuteQueryV1alpha1StatementWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	executeQueryV1alpha1StatementWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ExecuteQueryV1alpha1Statement Execute SQL Statement
 	//
@@ -649,14 +649,14 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /query/v1alpha1 (the `ExecuteQueryV1alpha1Statement` operationId).
-	ExecuteQueryV1alpha1Statement(ctx context.Context, body ExecuteQueryV1alpha1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	executeQueryV1alpha1Statement(ctx context.Context, body ExecuteQueryV1alpha1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetQueryV1alpha1JobStatus Query Async Job Status
 	//
 	// Returns status updates containing the explicit operational lifecycle states of an active background query.
 	//
 	// Corresponds with GET /query/v1alpha1/jobs/{statement_id}/status (the `GetQueryV1alpha1JobStatus` operationId).
-	GetQueryV1alpha1JobStatus(ctx context.Context, statementId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getQueryV1alpha1JobStatus(ctx context.Context, statementId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -674,7 +674,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -694,37 +694,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ExecuteQueryV1alpha1StatementWithBodyWithResponse Execute SQL Statement
-	//
-	// Executes an arbitrary SQL query against the engine. If the query resolves in under 30 seconds and returns less than 25 MiB, the response will be an inline HTTP 200 OK.  Otherwise, a 202 Accepted response redirects the client to retrieve  results from a separate streamed data location. Rows are returned as JSON strings by default; set `options.result_format` to `ARROW_STREAM` to receive a base64-encoded Arrow IPC stream with native column types instead.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /query/v1alpha1 (the `ExecuteQueryV1alpha1Statement` operationId).
-	ExecuteQueryV1alpha1StatementWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ExecuteQueryV1alpha1StatementResponse, error)
-
-	// ExecuteQueryV1alpha1StatementWithResponse Execute SQL Statement
-	//
-	// Executes an arbitrary SQL query against the engine. If the query resolves in under 30 seconds and returns less than 25 MiB, the response will be an inline HTTP 200 OK.  Otherwise, a 202 Accepted response redirects the client to retrieve  results from a separate streamed data location. Rows are returned as JSON strings by default; set `options.result_format` to `ARROW_STREAM` to receive a base64-encoded Arrow IPC stream with native column types instead.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /query/v1alpha1 (the `ExecuteQueryV1alpha1Statement` operationId).
-	ExecuteQueryV1alpha1StatementWithResponse(ctx context.Context, body ExecuteQueryV1alpha1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*ExecuteQueryV1alpha1StatementResponse, error)
-
-	// GetQueryV1alpha1JobStatusWithResponse Query Async Job Status
-	//
-	// Returns status updates containing the explicit operational lifecycle states of an active background query.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /query/v1alpha1/jobs/{statement_id}/status (the `GetQueryV1alpha1JobStatus` operationId).
-	GetQueryV1alpha1JobStatusWithResponse(ctx context.Context, statementId string, reqEditors ...RequestEditorFn) (*GetQueryV1alpha1JobStatusResponse, error)
-}
-
 func (r ExecuteQueryV1alpha1StatementResponse) GetJSON200() *QueryV1alpha1QueryResponseInline {
 	return r.JSON200
 }

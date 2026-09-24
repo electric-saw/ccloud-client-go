@@ -103,7 +103,7 @@ type UpdateCcpmV1CustomConnectPlugin200JSONResponseBodyKind string
 type CreateCcpmV1CustomConnectPluginJSONRequestBody CreateCcpmV1CustomConnectPluginJSONBody
 type UpdateCcpmV1CustomConnectPluginJSONRequestBody UpdateCcpmV1CustomConnectPluginJSONBody
 
-func (c *oasClient) ListCcpmV1CustomConnectPlugins(ctx context.Context, params *ListCcpmV1CustomConnectPluginsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listCcpmV1CustomConnectPlugins(ctx context.Context, params *ListCcpmV1CustomConnectPluginsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListCcpmV1CustomConnectPluginsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -114,7 +114,7 @@ func (c *oasClient) ListCcpmV1CustomConnectPlugins(ctx context.Context, params *
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateCcpmV1CustomConnectPluginWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createCcpmV1CustomConnectPluginWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateCcpmV1CustomConnectPluginRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -125,7 +125,7 @@ func (c *oasClient) CreateCcpmV1CustomConnectPluginWithBody(ctx context.Context,
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateCcpmV1CustomConnectPlugin(ctx context.Context, body CreateCcpmV1CustomConnectPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createCcpmV1CustomConnectPlugin(ctx context.Context, body CreateCcpmV1CustomConnectPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateCcpmV1CustomConnectPluginRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -136,7 +136,7 @@ func (c *oasClient) CreateCcpmV1CustomConnectPlugin(ctx context.Context, body Cr
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteCcpmV1CustomConnectPlugin(ctx context.Context, id string, params *DeleteCcpmV1CustomConnectPluginParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteCcpmV1CustomConnectPlugin(ctx context.Context, id string, params *DeleteCcpmV1CustomConnectPluginParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteCcpmV1CustomConnectPluginRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -147,7 +147,7 @@ func (c *oasClient) DeleteCcpmV1CustomConnectPlugin(ctx context.Context, id stri
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetCcpmV1CustomConnectPlugin(ctx context.Context, id string, params *GetCcpmV1CustomConnectPluginParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getCcpmV1CustomConnectPlugin(ctx context.Context, id string, params *GetCcpmV1CustomConnectPluginParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCcpmV1CustomConnectPluginRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -158,7 +158,7 @@ func (c *oasClient) GetCcpmV1CustomConnectPlugin(ctx context.Context, id string,
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateCcpmV1CustomConnectPluginWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateCcpmV1CustomConnectPluginWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateCcpmV1CustomConnectPluginRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -169,7 +169,7 @@ func (c *oasClient) UpdateCcpmV1CustomConnectPluginWithBody(ctx context.Context,
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateCcpmV1CustomConnectPlugin(ctx context.Context, id string, body UpdateCcpmV1CustomConnectPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateCcpmV1CustomConnectPlugin(ctx context.Context, id string, body UpdateCcpmV1CustomConnectPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateCcpmV1CustomConnectPluginRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -858,49 +858,49 @@ type UpdateCcpmV1CustomConnectPluginResponse struct {
 }
 
 func (c *ClientWithResponses) ListCcpmV1CustomConnectPluginsWithResponse(ctx context.Context, params *ListCcpmV1CustomConnectPluginsParams, reqEditors ...RequestEditorFn) (*ListCcpmV1CustomConnectPluginsResponse, error) {
-	rsp, err := c.ListCcpmV1CustomConnectPlugins(ctx, params, reqEditors...)
+	rsp, err := c.listCcpmV1CustomConnectPlugins(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListCcpmV1CustomConnectPluginsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateCcpmV1CustomConnectPluginWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCcpmV1CustomConnectPluginResponse, error) {
-	rsp, err := c.CreateCcpmV1CustomConnectPluginWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createCcpmV1CustomConnectPluginWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateCcpmV1CustomConnectPluginResponse(rsp)
 }
 func (c *ClientWithResponses) CreateCcpmV1CustomConnectPluginWithResponse(ctx context.Context, body CreateCcpmV1CustomConnectPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCcpmV1CustomConnectPluginResponse, error) {
-	rsp, err := c.CreateCcpmV1CustomConnectPlugin(ctx, body, reqEditors...)
+	rsp, err := c.createCcpmV1CustomConnectPlugin(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateCcpmV1CustomConnectPluginResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteCcpmV1CustomConnectPluginWithResponse(ctx context.Context, id string, params *DeleteCcpmV1CustomConnectPluginParams, reqEditors ...RequestEditorFn) (*DeleteCcpmV1CustomConnectPluginResponse, error) {
-	rsp, err := c.DeleteCcpmV1CustomConnectPlugin(ctx, id, params, reqEditors...)
+	rsp, err := c.deleteCcpmV1CustomConnectPlugin(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteCcpmV1CustomConnectPluginResponse(rsp)
 }
 func (c *ClientWithResponses) GetCcpmV1CustomConnectPluginWithResponse(ctx context.Context, id string, params *GetCcpmV1CustomConnectPluginParams, reqEditors ...RequestEditorFn) (*GetCcpmV1CustomConnectPluginResponse, error) {
-	rsp, err := c.GetCcpmV1CustomConnectPlugin(ctx, id, params, reqEditors...)
+	rsp, err := c.getCcpmV1CustomConnectPlugin(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetCcpmV1CustomConnectPluginResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateCcpmV1CustomConnectPluginWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCcpmV1CustomConnectPluginResponse, error) {
-	rsp, err := c.UpdateCcpmV1CustomConnectPluginWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateCcpmV1CustomConnectPluginWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateCcpmV1CustomConnectPluginResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateCcpmV1CustomConnectPluginWithResponse(ctx context.Context, id string, body UpdateCcpmV1CustomConnectPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCcpmV1CustomConnectPluginResponse, error) {
-	rsp, err := c.UpdateCcpmV1CustomConnectPlugin(ctx, id, body, reqEditors...)
+	rsp, err := c.updateCcpmV1CustomConnectPlugin(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

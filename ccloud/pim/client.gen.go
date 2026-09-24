@@ -2589,7 +2589,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListPimV1Integrations List of Integrations
 	//
@@ -2600,7 +2600,7 @@ type ClientInterface interface {
 	// If no `provider` filter is specified, returns provider integrations from all clouds.
 	//
 	// Corresponds with GET /pim/v1/integrations (the `ListPimV1Integrations` operationId).
-	ListPimV1Integrations(ctx context.Context, params *ListPimV1IntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listPimV1Integrations(ctx context.Context, params *ListPimV1IntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreatePimV1IntegrationWithBody Create an Integration
 	//
@@ -2611,7 +2611,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /pim/v1/integrations (the `CreatePimV1Integration` operationId).
-	CreatePimV1IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createPimV1IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreatePimV1Integration Create an Integration
 	//
@@ -2622,7 +2622,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /pim/v1/integrations (the `CreatePimV1Integration` operationId).
-	CreatePimV1Integration(ctx context.Context, body CreatePimV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createPimV1Integration(ctx context.Context, body CreatePimV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeletePimV1Integration Delete an Integration
 	//
@@ -2633,7 +2633,7 @@ type ClientInterface interface {
 	// This request fails if existing workloads are using this CSP integration.
 	//
 	// Corresponds with DELETE /pim/v1/integrations/{id} (the `DeletePimV1Integration` operationId).
-	DeletePimV1Integration(ctx context.Context, id string, params *DeletePimV1IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deletePimV1Integration(ctx context.Context, id string, params *DeletePimV1IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetPimV1Integration Read an Integration
 	//
@@ -2642,7 +2642,7 @@ type ClientInterface interface {
 	// Make a request to read an integration.
 	//
 	// Corresponds with GET /pim/v1/integrations/{id} (the `GetPimV1Integration` operationId).
-	GetPimV1Integration(ctx context.Context, id string, params *GetPimV1IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getPimV1Integration(ctx context.Context, id string, params *GetPimV1IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListPimV2Integrations List of Integrations
 	//
@@ -2653,7 +2653,7 @@ type ClientInterface interface {
 	// If no `provider` filter is specified, returns provider integrations from all clouds.
 	//
 	// Corresponds with GET /pim/v2/integrations (the `ListPimV2Integrations` operationId).
-	ListPimV2Integrations(ctx context.Context, params *ListPimV2IntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listPimV2Integrations(ctx context.Context, params *ListPimV2IntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreatePimV2IntegrationWithBody Create an Integration
 	//
@@ -2664,7 +2664,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /pim/v2/integrations (the `CreatePimV2Integration` operationId).
-	CreatePimV2IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createPimV2IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreatePimV2Integration Create an Integration
 	//
@@ -2675,7 +2675,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /pim/v2/integrations (the `CreatePimV2Integration` operationId).
-	CreatePimV2Integration(ctx context.Context, body CreatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createPimV2Integration(ctx context.Context, body CreatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeletePimV2Integration Delete an Integration
 	//
@@ -2686,7 +2686,7 @@ type ClientInterface interface {
 	// This request fails if existing workloads are using this CSP integration.
 	//
 	// Corresponds with DELETE /pim/v2/integrations/{id} (the `DeletePimV2Integration` operationId).
-	DeletePimV2Integration(ctx context.Context, id string, params *DeletePimV2IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deletePimV2Integration(ctx context.Context, id string, params *DeletePimV2IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetPimV2Integration Read an Integration
 	//
@@ -2695,7 +2695,7 @@ type ClientInterface interface {
 	// Make a request to read an integration.
 	//
 	// Corresponds with GET /pim/v2/integrations/{id} (the `GetPimV2Integration` operationId).
-	GetPimV2Integration(ctx context.Context, id string, params *GetPimV2IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getPimV2Integration(ctx context.Context, id string, params *GetPimV2IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdatePimV2IntegrationWithBody Update an Integration
 	//
@@ -2708,7 +2708,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /pim/v2/integrations/{id} (the `UpdatePimV2Integration` operationId).
-	UpdatePimV2IntegrationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updatePimV2IntegrationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdatePimV2Integration Update an Integration
 	//
@@ -2721,7 +2721,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /pim/v2/integrations/{id} (the `UpdatePimV2Integration` operationId).
-	UpdatePimV2Integration(ctx context.Context, id string, body UpdatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updatePimV2Integration(ctx context.Context, id string, body UpdatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ValidatePimV2IntegrationWithBody Validate an Integration
 	//
@@ -2732,7 +2732,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /pim/v2/integrations:validate (the `ValidatePimV2Integration` operationId).
-	ValidatePimV2IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	validatePimV2IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ValidatePimV2Integration Validate an Integration
 	//
@@ -2743,7 +2743,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /pim/v2/integrations:validate (the `ValidatePimV2Integration` operationId).
-	ValidatePimV2Integration(ctx context.Context, body ValidatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	validatePimV2Integration(ctx context.Context, body ValidatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -2761,7 +2761,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -2781,176 +2781,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListPimV1IntegrationsWithResponse List of Integrations
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all integrations.
-	//
-	// If no `provider` filter is specified, returns provider integrations from all clouds.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /pim/v1/integrations (the `ListPimV1Integrations` operationId).
-	ListPimV1IntegrationsWithResponse(ctx context.Context, params *ListPimV1IntegrationsParams, reqEditors ...RequestEditorFn) (*ListPimV1IntegrationsResponse, error)
-
-	// CreatePimV1IntegrationWithBodyWithResponse Create an Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an integration.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /pim/v1/integrations (the `CreatePimV1Integration` operationId).
-	CreatePimV1IntegrationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatePimV1IntegrationResponse, error)
-
-	// CreatePimV1IntegrationWithResponse Create an Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create an integration.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /pim/v1/integrations (the `CreatePimV1Integration` operationId).
-	CreatePimV1IntegrationWithResponse(ctx context.Context, body CreatePimV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreatePimV1IntegrationResponse, error)
-
-	// DeletePimV1IntegrationWithResponse Delete an Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete an integration.
-	//
-	// This request fails if existing workloads are using this CSP integration.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /pim/v1/integrations/{id} (the `DeletePimV1Integration` operationId).
-	DeletePimV1IntegrationWithResponse(ctx context.Context, id string, params *DeletePimV1IntegrationParams, reqEditors ...RequestEditorFn) (*DeletePimV1IntegrationResponse, error)
-
-	// GetPimV1IntegrationWithResponse Read an Integration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read an integration.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /pim/v1/integrations/{id} (the `GetPimV1Integration` operationId).
-	GetPimV1IntegrationWithResponse(ctx context.Context, id string, params *GetPimV1IntegrationParams, reqEditors ...RequestEditorFn) (*GetPimV1IntegrationResponse, error)
-
-	// ListPimV2IntegrationsWithResponse List of Integrations
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v2-early-access@confluent.io?subject=Request%20to%20join%20pim/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Retrieve a sorted, filtered, paginated list of all integrations.
-	//
-	// If no `provider` filter is specified, returns provider integrations from all clouds.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /pim/v2/integrations (the `ListPimV2Integrations` operationId).
-	ListPimV2IntegrationsWithResponse(ctx context.Context, params *ListPimV2IntegrationsParams, reqEditors ...RequestEditorFn) (*ListPimV2IntegrationsResponse, error)
-
-	// CreatePimV2IntegrationWithBodyWithResponse Create an Integration
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v2-early-access@confluent.io?subject=Request%20to%20join%20pim/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to create an integration.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /pim/v2/integrations (the `CreatePimV2Integration` operationId).
-	CreatePimV2IntegrationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatePimV2IntegrationResponse, error)
-
-	// CreatePimV2IntegrationWithResponse Create an Integration
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v2-early-access@confluent.io?subject=Request%20to%20join%20pim/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to create an integration.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /pim/v2/integrations (the `CreatePimV2Integration` operationId).
-	CreatePimV2IntegrationWithResponse(ctx context.Context, body CreatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreatePimV2IntegrationResponse, error)
-
-	// DeletePimV2IntegrationWithResponse Delete an Integration
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v2-early-access@confluent.io?subject=Request%20to%20join%20pim/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to delete an integration.
-	//
-	// This request fails if existing workloads are using this CSP integration.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /pim/v2/integrations/{id} (the `DeletePimV2Integration` operationId).
-	DeletePimV2IntegrationWithResponse(ctx context.Context, id string, params *DeletePimV2IntegrationParams, reqEditors ...RequestEditorFn) (*DeletePimV2IntegrationResponse, error)
-
-	// GetPimV2IntegrationWithResponse Read an Integration
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v2-early-access@confluent.io?subject=Request%20to%20join%20pim/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to read an integration.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /pim/v2/integrations/{id} (the `GetPimV2Integration` operationId).
-	GetPimV2IntegrationWithResponse(ctx context.Context, id string, params *GetPimV2IntegrationParams, reqEditors ...RequestEditorFn) (*GetPimV2IntegrationResponse, error)
-
-	// UpdatePimV2IntegrationWithBodyWithResponse Update an Integration
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v2-early-access@confluent.io?subject=Request%20to%20join%20pim/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to update an integration.
-	//
-	// This request only works for integrations with `DRAFT` status.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /pim/v2/integrations/{id} (the `UpdatePimV2Integration` operationId).
-	UpdatePimV2IntegrationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdatePimV2IntegrationResponse, error)
-
-	// UpdatePimV2IntegrationWithResponse Update an Integration
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v2-early-access@confluent.io?subject=Request%20to%20join%20pim/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Make a request to update an integration.
-	//
-	// This request only works for integrations with `DRAFT` status.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /pim/v2/integrations/{id} (the `UpdatePimV2Integration` operationId).
-	UpdatePimV2IntegrationWithResponse(ctx context.Context, id string, body UpdatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdatePimV2IntegrationResponse, error)
-
-	// ValidatePimV2IntegrationWithBodyWithResponse Validate an Integration
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v2-early-access@confluent.io?subject=Request%20to%20join%20pim/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Validate the provider integration configuration.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /pim/v2/integrations:validate (the `ValidatePimV2Integration` operationId).
-	ValidatePimV2IntegrationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ValidatePimV2IntegrationResponse, error)
-
-	// ValidatePimV2IntegrationWithResponse Validate an Integration
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy) [![Request Access To Provider Integration](https://img.shields.io/badge/-Request%20Access%20To%20Provider%20Integration-%23bc8540)](mailto:ccloud-api-access+pim-v2-early-access@confluent.io?subject=Request%20to%20join%20pim/v2%20API%20Early%20Access&body=I%E2%80%99d%20like%20to%20join%20the%20Confluent%20Cloud%20API%20Early%20Access%20for%20pim/v2%20to%20provide%20early%20feedback%21%20My%20Cloud%20Organization%20ID%20is%20%3Cretrieve%20from%20https%3A//confluent.cloud/settings/billing/payment%3E.)
-	//
-	// Validate the provider integration configuration.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /pim/v2/integrations:validate (the `ValidatePimV2Integration` operationId).
-	ValidatePimV2IntegrationWithResponse(ctx context.Context, body ValidatePimV2IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*ValidatePimV2IntegrationResponse, error)
-}
-
 func (r ListPimV1IntegrationsResponse) GetJSON200() *struct {
 	// ApiVersion APIVersion defines the schema version of this representation of a resource.
 	ApiVersion ListPimV1Integrations200JSONResponseBodyApiVersion `json:"api_version"`

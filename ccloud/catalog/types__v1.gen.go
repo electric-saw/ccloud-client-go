@@ -33,7 +33,7 @@ type UpdateBusinessMetadataDefsJSONRequestBody = UpdateBusinessMetadataDefsJSONB
 type CreateTagDefsJSONRequestBody = CreateTagDefsJSONBody
 type UpdateTagDefsJSONRequestBody = UpdateTagDefsJSONBody
 
-func (c *oasClient) GetAllBusinessMetadataDefs(ctx context.Context, params *GetAllBusinessMetadataDefsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getAllBusinessMetadataDefs(ctx context.Context, params *GetAllBusinessMetadataDefsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetAllBusinessMetadataDefsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -44,7 +44,7 @@ func (c *oasClient) GetAllBusinessMetadataDefs(ctx context.Context, params *GetA
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateBusinessMetadataDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createBusinessMetadataDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateBusinessMetadataDefsRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -55,7 +55,7 @@ func (c *oasClient) CreateBusinessMetadataDefsWithBody(ctx context.Context, cont
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateBusinessMetadataDefs(ctx context.Context, body CreateBusinessMetadataDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createBusinessMetadataDefs(ctx context.Context, body CreateBusinessMetadataDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateBusinessMetadataDefsRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ func (c *oasClient) CreateBusinessMetadataDefs(ctx context.Context, body CreateB
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateBusinessMetadataDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateBusinessMetadataDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateBusinessMetadataDefsRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -77,7 +77,7 @@ func (c *oasClient) UpdateBusinessMetadataDefsWithBody(ctx context.Context, cont
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateBusinessMetadataDefs(ctx context.Context, body UpdateBusinessMetadataDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateBusinessMetadataDefs(ctx context.Context, body UpdateBusinessMetadataDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateBusinessMetadataDefsRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -88,7 +88,7 @@ func (c *oasClient) UpdateBusinessMetadataDefs(ctx context.Context, body UpdateB
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteBusinessMetadataDef(ctx context.Context, bmName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteBusinessMetadataDef(ctx context.Context, bmName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteBusinessMetadataDefRequest(c.Server, bmName)
 	if err != nil {
 		return nil, err
@@ -99,7 +99,7 @@ func (c *oasClient) DeleteBusinessMetadataDef(ctx context.Context, bmName string
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetBusinessMetadataDefByName(ctx context.Context, bmName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getBusinessMetadataDefByName(ctx context.Context, bmName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetBusinessMetadataDefByNameRequest(c.Server, bmName)
 	if err != nil {
 		return nil, err
@@ -110,7 +110,7 @@ func (c *oasClient) GetBusinessMetadataDefByName(ctx context.Context, bmName str
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetAllTagDefs(ctx context.Context, params *GetAllTagDefsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getAllTagDefs(ctx context.Context, params *GetAllTagDefsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetAllTagDefsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -121,7 +121,7 @@ func (c *oasClient) GetAllTagDefs(ctx context.Context, params *GetAllTagDefsPara
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateTagDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createTagDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateTagDefsRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -132,7 +132,7 @@ func (c *oasClient) CreateTagDefsWithBody(ctx context.Context, contentType strin
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateTagDefs(ctx context.Context, body CreateTagDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createTagDefs(ctx context.Context, body CreateTagDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateTagDefsRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -143,7 +143,7 @@ func (c *oasClient) CreateTagDefs(ctx context.Context, body CreateTagDefsJSONReq
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateTagDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateTagDefsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTagDefsRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -154,7 +154,7 @@ func (c *oasClient) UpdateTagDefsWithBody(ctx context.Context, contentType strin
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateTagDefs(ctx context.Context, body UpdateTagDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateTagDefs(ctx context.Context, body UpdateTagDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTagDefsRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -165,7 +165,7 @@ func (c *oasClient) UpdateTagDefs(ctx context.Context, body UpdateTagDefsJSONReq
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteTagDef(ctx context.Context, tagName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteTagDef(ctx context.Context, tagName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteTagDefRequest(c.Server, tagName)
 	if err != nil {
 		return nil, err
@@ -176,7 +176,7 @@ func (c *oasClient) DeleteTagDef(ctx context.Context, tagName string, reqEditors
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetTagDefByName(ctx context.Context, tagName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getTagDefByName(ctx context.Context, tagName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetTagDefByNameRequest(c.Server, tagName)
 	if err != nil {
 		return nil, err
@@ -622,98 +622,98 @@ type GetTagDefByNameResponse struct {
 }
 
 func (c *ClientWithResponses) GetAllBusinessMetadataDefsWithResponse(ctx context.Context, params *GetAllBusinessMetadataDefsParams, reqEditors ...RequestEditorFn) (*GetAllBusinessMetadataDefsResponse, error) {
-	rsp, err := c.GetAllBusinessMetadataDefs(ctx, params, reqEditors...)
+	rsp, err := c.getAllBusinessMetadataDefs(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetAllBusinessMetadataDefsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateBusinessMetadataDefsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateBusinessMetadataDefsResponse, error) {
-	rsp, err := c.CreateBusinessMetadataDefsWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createBusinessMetadataDefsWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateBusinessMetadataDefsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateBusinessMetadataDefsWithResponse(ctx context.Context, body CreateBusinessMetadataDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateBusinessMetadataDefsResponse, error) {
-	rsp, err := c.CreateBusinessMetadataDefs(ctx, body, reqEditors...)
+	rsp, err := c.createBusinessMetadataDefs(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateBusinessMetadataDefsResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateBusinessMetadataDefsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateBusinessMetadataDefsResponse, error) {
-	rsp, err := c.UpdateBusinessMetadataDefsWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.updateBusinessMetadataDefsWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateBusinessMetadataDefsResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateBusinessMetadataDefsWithResponse(ctx context.Context, body UpdateBusinessMetadataDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateBusinessMetadataDefsResponse, error) {
-	rsp, err := c.UpdateBusinessMetadataDefs(ctx, body, reqEditors...)
+	rsp, err := c.updateBusinessMetadataDefs(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateBusinessMetadataDefsResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteBusinessMetadataDefWithResponse(ctx context.Context, bmName string, reqEditors ...RequestEditorFn) (*DeleteBusinessMetadataDefResponse, error) {
-	rsp, err := c.DeleteBusinessMetadataDef(ctx, bmName, reqEditors...)
+	rsp, err := c.deleteBusinessMetadataDef(ctx, bmName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteBusinessMetadataDefResponse(rsp)
 }
 func (c *ClientWithResponses) GetBusinessMetadataDefByNameWithResponse(ctx context.Context, bmName string, reqEditors ...RequestEditorFn) (*GetBusinessMetadataDefByNameResponse, error) {
-	rsp, err := c.GetBusinessMetadataDefByName(ctx, bmName, reqEditors...)
+	rsp, err := c.getBusinessMetadataDefByName(ctx, bmName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetBusinessMetadataDefByNameResponse(rsp)
 }
 func (c *ClientWithResponses) GetAllTagDefsWithResponse(ctx context.Context, params *GetAllTagDefsParams, reqEditors ...RequestEditorFn) (*GetAllTagDefsResponse, error) {
-	rsp, err := c.GetAllTagDefs(ctx, params, reqEditors...)
+	rsp, err := c.getAllTagDefs(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetAllTagDefsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateTagDefsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateTagDefsResponse, error) {
-	rsp, err := c.CreateTagDefsWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createTagDefsWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateTagDefsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateTagDefsWithResponse(ctx context.Context, body CreateTagDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateTagDefsResponse, error) {
-	rsp, err := c.CreateTagDefs(ctx, body, reqEditors...)
+	rsp, err := c.createTagDefs(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateTagDefsResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateTagDefsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateTagDefsResponse, error) {
-	rsp, err := c.UpdateTagDefsWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.updateTagDefsWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateTagDefsResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateTagDefsWithResponse(ctx context.Context, body UpdateTagDefsJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateTagDefsResponse, error) {
-	rsp, err := c.UpdateTagDefs(ctx, body, reqEditors...)
+	rsp, err := c.updateTagDefs(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateTagDefsResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteTagDefWithResponse(ctx context.Context, tagName string, reqEditors ...RequestEditorFn) (*DeleteTagDefResponse, error) {
-	rsp, err := c.DeleteTagDef(ctx, tagName, reqEditors...)
+	rsp, err := c.deleteTagDef(ctx, tagName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteTagDefResponse(rsp)
 }
 func (c *ClientWithResponses) GetTagDefByNameWithResponse(ctx context.Context, tagName string, reqEditors ...RequestEditorFn) (*GetTagDefByNameResponse, error) {
-	rsp, err := c.GetTagDefByName(ctx, tagName, reqEditors...)
+	rsp, err := c.getTagDefByName(ctx, tagName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

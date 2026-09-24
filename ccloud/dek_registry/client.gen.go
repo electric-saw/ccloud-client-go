@@ -731,156 +731,156 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// GetKekNames Get a list of kek names
 	//
 	// Corresponds with GET /dek-registry/v1/keks (the `GetKekNames` operationId).
-	GetKekNames(ctx context.Context, params *GetKekNamesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKekNames(ctx context.Context, params *GetKekNamesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKekWithBody Create a kek
 	//
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /dek-registry/v1/keks (the `CreateKek` operationId).
-	CreateKekWithBody(ctx context.Context, params *CreateKekParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKekWithBody(ctx context.Context, params *CreateKekParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKek Create a kek
 	//
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /dek-registry/v1/keks (the `CreateKek` operationId).
-	CreateKek(ctx context.Context, params *CreateKekParams, body CreateKekJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKek(ctx context.Context, params *CreateKekParams, body CreateKekJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKekWithApplicationVndSchemaregistryPlusJSONBody Create a kek
 	//
 	// Takes a body of the `application/vnd.schemaregistry+json` content type.
 	//
 	// Corresponds with POST /dek-registry/v1/keks (the `CreateKek` operationId).
-	CreateKekWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, params *CreateKekParams, body CreateKekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKekWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, params *CreateKekParams, body CreateKekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateKekWithApplicationVndSchemaregistryV1PlusJSONBody Create a kek
 	//
 	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type.
 	//
 	// Corresponds with POST /dek-registry/v1/keks (the `CreateKek` operationId).
-	CreateKekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, params *CreateKekParams, body CreateKekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createKekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, params *CreateKekParams, body CreateKekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteKek Delete a kek
 	//
 	// Corresponds with DELETE /dek-registry/v1/keks/{name} (the `DeleteKek` operationId).
-	DeleteKek(ctx context.Context, name string, params *DeleteKekParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteKek(ctx context.Context, name string, params *DeleteKekParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetKek Get a kek by name
 	//
 	// Corresponds with GET /dek-registry/v1/keks/{name} (the `GetKek` operationId).
-	GetKek(ctx context.Context, name string, params *GetKekParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getKek(ctx context.Context, name string, params *GetKekParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PutKekWithBody Alters a kek
 	//
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /dek-registry/v1/keks/{name} (the `PutKek` operationId).
-	PutKekWithBody(ctx context.Context, name string, params *PutKekParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	putKekWithBody(ctx context.Context, name string, params *PutKekParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PutKek Alters a kek
 	//
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /dek-registry/v1/keks/{name} (the `PutKek` operationId).
-	PutKek(ctx context.Context, name string, params *PutKekParams, body PutKekJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	putKek(ctx context.Context, name string, params *PutKekParams, body PutKekJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PutKekWithApplicationVndSchemaregistryPlusJSONBody Alters a kek
 	//
 	// Takes a body of the `application/vnd.schemaregistry+json` content type.
 	//
 	// Corresponds with PUT /dek-registry/v1/keks/{name} (the `PutKek` operationId).
-	PutKekWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, params *PutKekParams, body PutKekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	putKekWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, params *PutKekParams, body PutKekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PutKekWithApplicationVndSchemaregistryV1PlusJSONBody Alters a kek
 	//
 	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type.
 	//
 	// Corresponds with PUT /dek-registry/v1/keks/{name} (the `PutKek` operationId).
-	PutKekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, params *PutKekParams, body PutKekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	putKekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, params *PutKekParams, body PutKekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetDekSubjects Get a list of dek subjects
 	//
 	// Corresponds with GET /dek-registry/v1/keks/{name}/deks (the `GetDekSubjects` operationId).
-	GetDekSubjects(ctx context.Context, name string, params *GetDekSubjectsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getDekSubjects(ctx context.Context, name string, params *GetDekSubjectsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateDekWithBody Create a dek
 	//
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /dek-registry/v1/keks/{name}/deks (the `CreateDek` operationId).
-	CreateDekWithBody(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createDekWithBody(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateDek Create a dek
 	//
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /dek-registry/v1/keks/{name}/deks (the `CreateDek` operationId).
-	CreateDek(ctx context.Context, name string, body CreateDekJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createDek(ctx context.Context, name string, body CreateDekJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateDekWithApplicationVndSchemaregistryPlusJSONBody Create a dek
 	//
 	// Takes a body of the `application/vnd.schemaregistry+json` content type.
 	//
 	// Corresponds with POST /dek-registry/v1/keks/{name}/deks (the `CreateDek` operationId).
-	CreateDekWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, body CreateDekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createDekWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, name string, body CreateDekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateDekWithApplicationVndSchemaregistryV1PlusJSONBody Create a dek
 	//
 	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type.
 	//
 	// Corresponds with POST /dek-registry/v1/keks/{name}/deks (the `CreateDek` operationId).
-	CreateDekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, body CreateDekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createDekWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, name string, body CreateDekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteDekVersions Delete all versions of a dek
 	//
 	// Corresponds with DELETE /dek-registry/v1/keks/{name}/deks/{subject} (the `DeleteDekVersions` operationId).
-	DeleteDekVersions(ctx context.Context, name string, subject string, params *DeleteDekVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteDekVersions(ctx context.Context, name string, subject string, params *DeleteDekVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetDek Get a dek by subject
 	//
 	// Corresponds with GET /dek-registry/v1/keks/{name}/deks/{subject} (the `GetDek` operationId).
-	GetDek(ctx context.Context, name string, subject string, params *GetDekParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getDek(ctx context.Context, name string, subject string, params *GetDekParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UndeleteDekVersions Undelete all versions of a dek
 	//
 	// Corresponds with POST /dek-registry/v1/keks/{name}/deks/{subject}/undelete (the `UndeleteDekVersions` operationId).
-	UndeleteDekVersions(ctx context.Context, name string, subject string, params *UndeleteDekVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	undeleteDekVersions(ctx context.Context, name string, subject string, params *UndeleteDekVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetDekVersions List versions of dek
 	//
 	// Corresponds with GET /dek-registry/v1/keks/{name}/deks/{subject}/versions (the `GetDekVersions` operationId).
-	GetDekVersions(ctx context.Context, name string, subject string, params *GetDekVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getDekVersions(ctx context.Context, name string, subject string, params *GetDekVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteDekVersion Delete a dek version
 	//
 	// Corresponds with DELETE /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version} (the `DeleteDekVersion` operationId).
-	DeleteDekVersion(ctx context.Context, name string, subject string, version string, params *DeleteDekVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteDekVersion(ctx context.Context, name string, subject string, version string, params *DeleteDekVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetDekByVersion Get a dek by subject and version
 	//
 	// Corresponds with GET /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version} (the `GetDekByVersion` operationId).
-	GetDekByVersion(ctx context.Context, name string, subject string, version string, params *GetDekByVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getDekByVersion(ctx context.Context, name string, subject string, version string, params *GetDekByVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UndeleteDekVersion Undelete a dek version
 	//
 	// Corresponds with POST /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version}/undelete (the `UndeleteDekVersion` operationId).
-	UndeleteDekVersion(ctx context.Context, name string, subject string, version string, params *UndeleteDekVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	undeleteDekVersion(ctx context.Context, name string, subject string, version string, params *UndeleteDekVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// TestKek Test a kek
 	//
 	// Corresponds with POST /dek-registry/v1/keks/{name}/test (the `TestKek` operationId).
-	TestKek(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	testKek(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UndeleteKek Undelete a kek
 	//
 	// Corresponds with POST /dek-registry/v1/keks/{name}/undelete (the `UndeleteKek` operationId).
-	UndeleteKek(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	undeleteKek(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func NewCreateKekRequestWithApplicationVndSchemaregistryPlusJSONBody(server string, params *CreateKekParams, body CreateKekApplicationVndSchemaregistryPlusJSONRequestBody) (*http.Request, error) {
@@ -952,7 +952,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -972,185 +972,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// GetKekNamesWithResponse Get a list of kek names
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /dek-registry/v1/keks (the `GetKekNames` operationId).
-	GetKekNamesWithResponse(ctx context.Context, params *GetKekNamesParams, reqEditors ...RequestEditorFn) (*GetKekNamesResponse, error)
-
-	// CreateKekWithBodyWithResponse Create a kek
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /dek-registry/v1/keks (the `CreateKek` operationId).
-	CreateKekWithBodyWithResponse(ctx context.Context, params *CreateKekParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateKekResponse, error)
-
-	// CreateKekWithResponse Create a kek
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /dek-registry/v1/keks (the `CreateKek` operationId).
-	CreateKekWithResponse(ctx context.Context, params *CreateKekParams, body CreateKekJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKekResponse, error)
-
-	// CreateKekWithApplicationVndSchemaregistryPlusJSONBodyWithResponse Create a kek
-	//
-	// Takes a body of the `application/vnd.schemaregistry+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /dek-registry/v1/keks (the `CreateKek` operationId).
-	CreateKekWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, params *CreateKekParams, body CreateKekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKekResponse, error)
-
-	// CreateKekWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse Create a kek
-	//
-	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /dek-registry/v1/keks (the `CreateKek` operationId).
-	CreateKekWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, params *CreateKekParams, body CreateKekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateKekResponse, error)
-
-	// DeleteKekWithResponse Delete a kek
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /dek-registry/v1/keks/{name} (the `DeleteKek` operationId).
-	DeleteKekWithResponse(ctx context.Context, name string, params *DeleteKekParams, reqEditors ...RequestEditorFn) (*DeleteKekResponse, error)
-
-	// GetKekWithResponse Get a kek by name
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /dek-registry/v1/keks/{name} (the `GetKek` operationId).
-	GetKekWithResponse(ctx context.Context, name string, params *GetKekParams, reqEditors ...RequestEditorFn) (*GetKekResponse, error)
-
-	// PutKekWithBodyWithResponse Alters a kek
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /dek-registry/v1/keks/{name} (the `PutKek` operationId).
-	PutKekWithBodyWithResponse(ctx context.Context, name string, params *PutKekParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PutKekResponse, error)
-
-	// PutKekWithResponse Alters a kek
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /dek-registry/v1/keks/{name} (the `PutKek` operationId).
-	PutKekWithResponse(ctx context.Context, name string, params *PutKekParams, body PutKekJSONRequestBody, reqEditors ...RequestEditorFn) (*PutKekResponse, error)
-
-	// PutKekWithApplicationVndSchemaregistryPlusJSONBodyWithResponse Alters a kek
-	//
-	// Takes a body of the `application/vnd.schemaregistry+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /dek-registry/v1/keks/{name} (the `PutKek` operationId).
-	PutKekWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, name string, params *PutKekParams, body PutKekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*PutKekResponse, error)
-
-	// PutKekWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse Alters a kek
-	//
-	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /dek-registry/v1/keks/{name} (the `PutKek` operationId).
-	PutKekWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, name string, params *PutKekParams, body PutKekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*PutKekResponse, error)
-
-	// GetDekSubjectsWithResponse Get a list of dek subjects
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /dek-registry/v1/keks/{name}/deks (the `GetDekSubjects` operationId).
-	GetDekSubjectsWithResponse(ctx context.Context, name string, params *GetDekSubjectsParams, reqEditors ...RequestEditorFn) (*GetDekSubjectsResponse, error)
-
-	// CreateDekWithBodyWithResponse Create a dek
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /dek-registry/v1/keks/{name}/deks (the `CreateDek` operationId).
-	CreateDekWithBodyWithResponse(ctx context.Context, name string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateDekResponse, error)
-
-	// CreateDekWithResponse Create a dek
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /dek-registry/v1/keks/{name}/deks (the `CreateDek` operationId).
-	CreateDekWithResponse(ctx context.Context, name string, body CreateDekJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateDekResponse, error)
-
-	// CreateDekWithApplicationVndSchemaregistryPlusJSONBodyWithResponse Create a dek
-	//
-	// Takes a body of the `application/vnd.schemaregistry+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /dek-registry/v1/keks/{name}/deks (the `CreateDek` operationId).
-	CreateDekWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, name string, body CreateDekApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateDekResponse, error)
-
-	// CreateDekWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse Create a dek
-	//
-	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /dek-registry/v1/keks/{name}/deks (the `CreateDek` operationId).
-	CreateDekWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, name string, body CreateDekApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateDekResponse, error)
-
-	// DeleteDekVersionsWithResponse Delete all versions of a dek
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /dek-registry/v1/keks/{name}/deks/{subject} (the `DeleteDekVersions` operationId).
-	DeleteDekVersionsWithResponse(ctx context.Context, name string, subject string, params *DeleteDekVersionsParams, reqEditors ...RequestEditorFn) (*DeleteDekVersionsResponse, error)
-
-	// GetDekWithResponse Get a dek by subject
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /dek-registry/v1/keks/{name}/deks/{subject} (the `GetDek` operationId).
-	GetDekWithResponse(ctx context.Context, name string, subject string, params *GetDekParams, reqEditors ...RequestEditorFn) (*GetDekResponse, error)
-
-	// UndeleteDekVersionsWithResponse Undelete all versions of a dek
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /dek-registry/v1/keks/{name}/deks/{subject}/undelete (the `UndeleteDekVersions` operationId).
-	UndeleteDekVersionsWithResponse(ctx context.Context, name string, subject string, params *UndeleteDekVersionsParams, reqEditors ...RequestEditorFn) (*UndeleteDekVersionsResponse, error)
-
-	// GetDekVersionsWithResponse List versions of dek
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /dek-registry/v1/keks/{name}/deks/{subject}/versions (the `GetDekVersions` operationId).
-	GetDekVersionsWithResponse(ctx context.Context, name string, subject string, params *GetDekVersionsParams, reqEditors ...RequestEditorFn) (*GetDekVersionsResponse, error)
-
-	// DeleteDekVersionWithResponse Delete a dek version
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version} (the `DeleteDekVersion` operationId).
-	DeleteDekVersionWithResponse(ctx context.Context, name string, subject string, version string, params *DeleteDekVersionParams, reqEditors ...RequestEditorFn) (*DeleteDekVersionResponse, error)
-
-	// GetDekByVersionWithResponse Get a dek by subject and version
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version} (the `GetDekByVersion` operationId).
-	GetDekByVersionWithResponse(ctx context.Context, name string, subject string, version string, params *GetDekByVersionParams, reqEditors ...RequestEditorFn) (*GetDekByVersionResponse, error)
-
-	// UndeleteDekVersionWithResponse Undelete a dek version
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version}/undelete (the `UndeleteDekVersion` operationId).
-	UndeleteDekVersionWithResponse(ctx context.Context, name string, subject string, version string, params *UndeleteDekVersionParams, reqEditors ...RequestEditorFn) (*UndeleteDekVersionResponse, error)
-
-	// TestKekWithResponse Test a kek
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /dek-registry/v1/keks/{name}/test (the `TestKek` operationId).
-	TestKekWithResponse(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*TestKekResponse, error)
-
-	// UndeleteKekWithResponse Undelete a kek
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /dek-registry/v1/keks/{name}/undelete (the `UndeleteKek` operationId).
-	UndeleteKekWithResponse(ctx context.Context, name string, reqEditors ...RequestEditorFn) (*UndeleteKekResponse, error)
-}
-
 func (r GetKekNamesResponse) GetApplicationjsonQs05200() *[]string {
 	return r.ApplicationjsonQs05200
 }

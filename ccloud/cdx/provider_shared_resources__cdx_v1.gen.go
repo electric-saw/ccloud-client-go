@@ -42,7 +42,7 @@ type UpdateCdxV1ProviderSharedResource200JSONResponseBodyApiVersion string
 type UpdateCdxV1ProviderSharedResource200JSONResponseBodyKind string
 type UpdateCdxV1ProviderSharedResourceJSONRequestBody = CdxV1ProviderSharedResource
 
-func (c *oasClient) ListCdxV1ProviderSharedResources(ctx context.Context, params *ListCdxV1ProviderSharedResourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listCdxV1ProviderSharedResources(ctx context.Context, params *ListCdxV1ProviderSharedResourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListCdxV1ProviderSharedResourcesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -53,7 +53,7 @@ func (c *oasClient) ListCdxV1ProviderSharedResources(ctx context.Context, params
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetCdxV1ProviderSharedResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getCdxV1ProviderSharedResource(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCdxV1ProviderSharedResourceRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -64,7 +64,7 @@ func (c *oasClient) GetCdxV1ProviderSharedResource(ctx context.Context, id strin
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateCdxV1ProviderSharedResourceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateCdxV1ProviderSharedResourceWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateCdxV1ProviderSharedResourceRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -75,7 +75,7 @@ func (c *oasClient) UpdateCdxV1ProviderSharedResourceWithBody(ctx context.Contex
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateCdxV1ProviderSharedResource(ctx context.Context, id string, body UpdateCdxV1ProviderSharedResourceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateCdxV1ProviderSharedResource(ctx context.Context, id string, body UpdateCdxV1ProviderSharedResourceJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateCdxV1ProviderSharedResourceRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -613,28 +613,28 @@ type UpdateCdxV1ProviderSharedResourceResponse struct {
 }
 
 func (c *ClientWithResponses) ListCdxV1ProviderSharedResourcesWithResponse(ctx context.Context, params *ListCdxV1ProviderSharedResourcesParams, reqEditors ...RequestEditorFn) (*ListCdxV1ProviderSharedResourcesResponse, error) {
-	rsp, err := c.ListCdxV1ProviderSharedResources(ctx, params, reqEditors...)
+	rsp, err := c.listCdxV1ProviderSharedResources(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListCdxV1ProviderSharedResourcesResponse(rsp)
 }
 func (c *ClientWithResponses) GetCdxV1ProviderSharedResourceWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCdxV1ProviderSharedResourceResponse, error) {
-	rsp, err := c.GetCdxV1ProviderSharedResource(ctx, id, reqEditors...)
+	rsp, err := c.getCdxV1ProviderSharedResource(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetCdxV1ProviderSharedResourceResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateCdxV1ProviderSharedResourceWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCdxV1ProviderSharedResourceResponse, error) {
-	rsp, err := c.UpdateCdxV1ProviderSharedResourceWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateCdxV1ProviderSharedResourceWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateCdxV1ProviderSharedResourceResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateCdxV1ProviderSharedResourceWithResponse(ctx context.Context, id string, body UpdateCdxV1ProviderSharedResourceJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCdxV1ProviderSharedResourceResponse, error) {
-	rsp, err := c.UpdateCdxV1ProviderSharedResource(ctx, id, body, reqEditors...)
+	rsp, err := c.updateCdxV1ProviderSharedResource(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

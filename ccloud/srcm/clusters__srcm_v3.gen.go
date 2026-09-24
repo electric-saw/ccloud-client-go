@@ -35,7 +35,7 @@ type GetSrcmV3ClusterParams struct {
 type GetSrcmV3Cluster200JSONResponseBodyApiVersion string
 type GetSrcmV3Cluster200JSONResponseBodyKind string
 
-func (c *oasClient) ListSrcmV3Clusters(ctx context.Context, params *ListSrcmV3ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listSrcmV3Clusters(ctx context.Context, params *ListSrcmV3ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSrcmV3ClustersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (c *oasClient) ListSrcmV3Clusters(ctx context.Context, params *ListSrcmV3Cl
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetSrcmV3Cluster(ctx context.Context, id string, params *GetSrcmV3ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getSrcmV3Cluster(ctx context.Context, id string, params *GetSrcmV3ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSrcmV3ClusterRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -345,14 +345,14 @@ type GetSrcmV3ClusterResponse struct {
 }
 
 func (c *ClientWithResponses) ListSrcmV3ClustersWithResponse(ctx context.Context, params *ListSrcmV3ClustersParams, reqEditors ...RequestEditorFn) (*ListSrcmV3ClustersResponse, error) {
-	rsp, err := c.ListSrcmV3Clusters(ctx, params, reqEditors...)
+	rsp, err := c.listSrcmV3Clusters(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListSrcmV3ClustersResponse(rsp)
 }
 func (c *ClientWithResponses) GetSrcmV3ClusterWithResponse(ctx context.Context, id string, params *GetSrcmV3ClusterParams, reqEditors ...RequestEditorFn) (*GetSrcmV3ClusterResponse, error) {
-	rsp, err := c.GetSrcmV3Cluster(ctx, id, params, reqEditors...)
+	rsp, err := c.getSrcmV3Cluster(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

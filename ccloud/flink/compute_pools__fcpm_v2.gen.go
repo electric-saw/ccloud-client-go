@@ -113,7 +113,7 @@ type UpdateFcpmV2ComputePool200JSONResponseBodyKind string
 type CreateFcpmV2ComputePoolJSONRequestBody CreateFcpmV2ComputePoolJSONBody
 type UpdateFcpmV2ComputePoolJSONRequestBody UpdateFcpmV2ComputePoolJSONBody
 
-func (c *oasClient) ListFcpmV2ComputePools(ctx context.Context, params *ListFcpmV2ComputePoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listFcpmV2ComputePools(ctx context.Context, params *ListFcpmV2ComputePoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListFcpmV2ComputePoolsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (c *oasClient) ListFcpmV2ComputePools(ctx context.Context, params *ListFcpm
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateFcpmV2ComputePoolWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createFcpmV2ComputePoolWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateFcpmV2ComputePoolRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -135,7 +135,7 @@ func (c *oasClient) CreateFcpmV2ComputePoolWithBody(ctx context.Context, content
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateFcpmV2ComputePool(ctx context.Context, body CreateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createFcpmV2ComputePool(ctx context.Context, body CreateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateFcpmV2ComputePoolRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -146,7 +146,7 @@ func (c *oasClient) CreateFcpmV2ComputePool(ctx context.Context, body CreateFcpm
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteFcpmV2ComputePool(ctx context.Context, id string, params *DeleteFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteFcpmV2ComputePool(ctx context.Context, id string, params *DeleteFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteFcpmV2ComputePoolRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -157,7 +157,7 @@ func (c *oasClient) DeleteFcpmV2ComputePool(ctx context.Context, id string, para
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetFcpmV2ComputePool(ctx context.Context, id string, params *GetFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getFcpmV2ComputePool(ctx context.Context, id string, params *GetFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetFcpmV2ComputePoolRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -168,7 +168,7 @@ func (c *oasClient) GetFcpmV2ComputePool(ctx context.Context, id string, params 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateFcpmV2ComputePoolWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateFcpmV2ComputePoolWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateFcpmV2ComputePoolRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -179,7 +179,7 @@ func (c *oasClient) UpdateFcpmV2ComputePoolWithBody(ctx context.Context, id stri
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateFcpmV2ComputePool(ctx context.Context, id string, body UpdateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateFcpmV2ComputePool(ctx context.Context, id string, body UpdateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateFcpmV2ComputePoolRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -893,49 +893,49 @@ type UpdateFcpmV2ComputePoolResponse struct {
 }
 
 func (c *ClientWithResponses) ListFcpmV2ComputePoolsWithResponse(ctx context.Context, params *ListFcpmV2ComputePoolsParams, reqEditors ...RequestEditorFn) (*ListFcpmV2ComputePoolsResponse, error) {
-	rsp, err := c.ListFcpmV2ComputePools(ctx, params, reqEditors...)
+	rsp, err := c.listFcpmV2ComputePools(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListFcpmV2ComputePoolsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateFcpmV2ComputePoolWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFcpmV2ComputePoolResponse, error) {
-	rsp, err := c.CreateFcpmV2ComputePoolWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createFcpmV2ComputePoolWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateFcpmV2ComputePoolResponse(rsp)
 }
 func (c *ClientWithResponses) CreateFcpmV2ComputePoolWithResponse(ctx context.Context, body CreateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFcpmV2ComputePoolResponse, error) {
-	rsp, err := c.CreateFcpmV2ComputePool(ctx, body, reqEditors...)
+	rsp, err := c.createFcpmV2ComputePool(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateFcpmV2ComputePoolResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteFcpmV2ComputePoolWithResponse(ctx context.Context, id string, params *DeleteFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*DeleteFcpmV2ComputePoolResponse, error) {
-	rsp, err := c.DeleteFcpmV2ComputePool(ctx, id, params, reqEditors...)
+	rsp, err := c.deleteFcpmV2ComputePool(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteFcpmV2ComputePoolResponse(rsp)
 }
 func (c *ClientWithResponses) GetFcpmV2ComputePoolWithResponse(ctx context.Context, id string, params *GetFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*GetFcpmV2ComputePoolResponse, error) {
-	rsp, err := c.GetFcpmV2ComputePool(ctx, id, params, reqEditors...)
+	rsp, err := c.getFcpmV2ComputePool(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetFcpmV2ComputePoolResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateFcpmV2ComputePoolWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFcpmV2ComputePoolResponse, error) {
-	rsp, err := c.UpdateFcpmV2ComputePoolWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateFcpmV2ComputePoolWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateFcpmV2ComputePoolResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateFcpmV2ComputePoolWithResponse(ctx context.Context, id string, body UpdateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFcpmV2ComputePoolResponse, error) {
-	rsp, err := c.UpdateFcpmV2ComputePool(ctx, id, body, reqEditors...)
+	rsp, err := c.updateFcpmV2ComputePool(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

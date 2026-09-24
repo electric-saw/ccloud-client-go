@@ -2141,7 +2141,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListArtifactV1FlinkArtifacts List of Flink Artifacts
 	//
@@ -2150,7 +2150,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all flink artifacts.
 	//
 	// Corresponds with GET /artifact/v1/flink-artifacts (the `ListArtifactV1FlinkArtifacts` operationId).
-	ListArtifactV1FlinkArtifacts(ctx context.Context, params *ListArtifactV1FlinkArtifactsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listArtifactV1FlinkArtifacts(ctx context.Context, params *ListArtifactV1FlinkArtifactsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateArtifactV1FlinkArtifactWithBody Create a new Flink Artifact.
 	//
@@ -2161,7 +2161,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /artifact/v1/flink-artifacts (the `CreateArtifactV1FlinkArtifact` operationId).
-	CreateArtifactV1FlinkArtifactWithBody(ctx context.Context, params *CreateArtifactV1FlinkArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createArtifactV1FlinkArtifactWithBody(ctx context.Context, params *CreateArtifactV1FlinkArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateArtifactV1FlinkArtifact Create a new Flink Artifact.
 	//
@@ -2172,7 +2172,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /artifact/v1/flink-artifacts (the `CreateArtifactV1FlinkArtifact` operationId).
-	CreateArtifactV1FlinkArtifact(ctx context.Context, params *CreateArtifactV1FlinkArtifactParams, body CreateArtifactV1FlinkArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createArtifactV1FlinkArtifact(ctx context.Context, params *CreateArtifactV1FlinkArtifactParams, body CreateArtifactV1FlinkArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteArtifactV1FlinkArtifact Delete a Flink Artifact
 	//
@@ -2181,7 +2181,7 @@ type ClientInterface interface {
 	// Make a request to delete a flink artifact.
 	//
 	// Corresponds with DELETE /artifact/v1/flink-artifacts/{id} (the `DeleteArtifactV1FlinkArtifact` operationId).
-	DeleteArtifactV1FlinkArtifact(ctx context.Context, id string, params *DeleteArtifactV1FlinkArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteArtifactV1FlinkArtifact(ctx context.Context, id string, params *DeleteArtifactV1FlinkArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetArtifactV1FlinkArtifact Read a Flink Artifact
 	//
@@ -2190,7 +2190,7 @@ type ClientInterface interface {
 	// Make a request to read a flink artifact.
 	//
 	// Corresponds with GET /artifact/v1/flink-artifacts/{id} (the `GetArtifactV1FlinkArtifact` operationId).
-	GetArtifactV1FlinkArtifact(ctx context.Context, id string, params *GetArtifactV1FlinkArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getArtifactV1FlinkArtifact(ctx context.Context, id string, params *GetArtifactV1FlinkArtifactParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateArtifactV1FlinkArtifactWithBody Update a Flink Artifact
 	//
@@ -2201,7 +2201,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /artifact/v1/flink-artifacts/{id} (the `UpdateArtifactV1FlinkArtifact` operationId).
-	UpdateArtifactV1FlinkArtifactWithBody(ctx context.Context, id string, params *UpdateArtifactV1FlinkArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateArtifactV1FlinkArtifactWithBody(ctx context.Context, id string, params *UpdateArtifactV1FlinkArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateArtifactV1FlinkArtifact Update a Flink Artifact
 	//
@@ -2212,7 +2212,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /artifact/v1/flink-artifacts/{id} (the `UpdateArtifactV1FlinkArtifact` operationId).
-	UpdateArtifactV1FlinkArtifact(ctx context.Context, id string, params *UpdateArtifactV1FlinkArtifactParams, body UpdateArtifactV1FlinkArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateArtifactV1FlinkArtifact(ctx context.Context, id string, params *UpdateArtifactV1FlinkArtifactParams, body UpdateArtifactV1FlinkArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PresignedUploadUrlArtifactV1PresignedUrlWithBody Request a presigned upload URL for a new Flink Artifact.
 	//
@@ -2223,7 +2223,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /artifact/v1/presigned-upload-url (the `PresignedUploadUrlArtifactV1PresignedUrl` operationId).
-	PresignedUploadUrlArtifactV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	presignedUploadUrlArtifactV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PresignedUploadUrlArtifactV1PresignedUrl Request a presigned upload URL for a new Flink Artifact.
 	//
@@ -2234,7 +2234,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /artifact/v1/presigned-upload-url (the `PresignedUploadUrlArtifactV1PresignedUrl` operationId).
-	PresignedUploadUrlArtifactV1PresignedUrl(ctx context.Context, body PresignedUploadUrlArtifactV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	presignedUploadUrlArtifactV1PresignedUrl(ctx context.Context, body PresignedUploadUrlArtifactV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListFcpmV2ComputePools List of Compute Pools
 	//
@@ -2243,7 +2243,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all compute pools.
 	//
 	// Corresponds with GET /fcpm/v2/compute-pools (the `ListFcpmV2ComputePools` operationId).
-	ListFcpmV2ComputePools(ctx context.Context, params *ListFcpmV2ComputePoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listFcpmV2ComputePools(ctx context.Context, params *ListFcpmV2ComputePoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateFcpmV2ComputePoolWithBody Create a Compute Pool
 	//
@@ -2254,7 +2254,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /fcpm/v2/compute-pools (the `CreateFcpmV2ComputePool` operationId).
-	CreateFcpmV2ComputePoolWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createFcpmV2ComputePoolWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateFcpmV2ComputePool Create a Compute Pool
 	//
@@ -2265,7 +2265,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /fcpm/v2/compute-pools (the `CreateFcpmV2ComputePool` operationId).
-	CreateFcpmV2ComputePool(ctx context.Context, body CreateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createFcpmV2ComputePool(ctx context.Context, body CreateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteFcpmV2ComputePool Delete a Compute Pool
 	//
@@ -2274,7 +2274,7 @@ type ClientInterface interface {
 	// Make a request to delete a compute pool.
 	//
 	// Corresponds with DELETE /fcpm/v2/compute-pools/{id} (the `DeleteFcpmV2ComputePool` operationId).
-	DeleteFcpmV2ComputePool(ctx context.Context, id string, params *DeleteFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteFcpmV2ComputePool(ctx context.Context, id string, params *DeleteFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetFcpmV2ComputePool Read a Compute Pool
 	//
@@ -2283,7 +2283,7 @@ type ClientInterface interface {
 	// Make a request to read a compute pool.
 	//
 	// Corresponds with GET /fcpm/v2/compute-pools/{id} (the `GetFcpmV2ComputePool` operationId).
-	GetFcpmV2ComputePool(ctx context.Context, id string, params *GetFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getFcpmV2ComputePool(ctx context.Context, id string, params *GetFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateFcpmV2ComputePoolWithBody Update a Compute Pool
 	//
@@ -2294,7 +2294,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /fcpm/v2/compute-pools/{id} (the `UpdateFcpmV2ComputePool` operationId).
-	UpdateFcpmV2ComputePoolWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateFcpmV2ComputePoolWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateFcpmV2ComputePool Update a Compute Pool
 	//
@@ -2305,7 +2305,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /fcpm/v2/compute-pools/{id} (the `UpdateFcpmV2ComputePool` operationId).
-	UpdateFcpmV2ComputePool(ctx context.Context, id string, body UpdateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateFcpmV2ComputePool(ctx context.Context, id string, body UpdateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListSqlv1Statements List of Statements
 	//
@@ -2314,7 +2314,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all statements.
 	//
 	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements (the `ListSqlv1Statements` operationId).
-	ListSqlv1Statements(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1StatementsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listSqlv1Statements(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1StatementsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateSqlv1StatementWithBody Create a Statement
 	//
@@ -2325,7 +2325,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements (the `CreateSqlv1Statement` operationId).
-	CreateSqlv1StatementWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createSqlv1StatementWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateSqlv1Statement Create a Statement
 	//
@@ -2336,7 +2336,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements (the `CreateSqlv1Statement` operationId).
-	CreateSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, body CreateSqlv1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, body CreateSqlv1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteSqlv1Statement Delete a Statement
 	//
@@ -2345,7 +2345,7 @@ type ClientInterface interface {
 	// Make a request to delete a statement.
 	//
 	// Corresponds with DELETE /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} (the `DeleteSqlv1Statement` operationId).
-	DeleteSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSqlv1Statement Read a Statement
 	//
@@ -2354,7 +2354,7 @@ type ClientInterface interface {
 	// Make a request to read a statement.
 	//
 	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} (the `GetSqlv1Statement` operationId).
-	GetSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PatchSqlv1StatementWithBody Patch a Statement
 	//
@@ -2365,7 +2365,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} (the `PatchSqlv1Statement` operationId).
-	PatchSqlv1StatementWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	patchSqlv1StatementWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PatchSqlv1StatementWithApplicationJSONPatchPlusJSONBody Patch a Statement
 	//
@@ -2376,7 +2376,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json-patch+json` content type.
 	//
 	// Corresponds with PATCH /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} (the `PatchSqlv1Statement` operationId).
-	PatchSqlv1StatementWithApplicationJSONPatchPlusJSONBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, body PatchSqlv1StatementApplicationJSONPatchPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	patchSqlv1StatementWithApplicationJSONPatchPlusJSONBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, body PatchSqlv1StatementApplicationJSONPatchPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateSqlv1StatementWithBody Update a Statement
 	//
@@ -2389,7 +2389,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} (the `UpdateSqlv1Statement` operationId).
-	UpdateSqlv1StatementWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateSqlv1StatementWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateSqlv1Statement Update a Statement
 	//
@@ -2402,10 +2402,10 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} (the `UpdateSqlv1Statement` operationId).
-	UpdateSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, body UpdateSqlv1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, body UpdateSqlv1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *oasClient) PresignedUploadUrlArtifactV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) presignedUploadUrlArtifactV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPresignedUploadUrlArtifactV1PresignedUrlRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -2416,7 +2416,7 @@ func (c *oasClient) PresignedUploadUrlArtifactV1PresignedUrlWithBody(ctx context
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) PresignedUploadUrlArtifactV1PresignedUrl(ctx context.Context, body PresignedUploadUrlArtifactV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) presignedUploadUrlArtifactV1PresignedUrl(ctx context.Context, body PresignedUploadUrlArtifactV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPresignedUploadUrlArtifactV1PresignedUrlRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -2487,7 +2487,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -2507,289 +2507,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListArtifactV1FlinkArtifactsWithResponse List of Flink Artifacts
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all flink artifacts.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /artifact/v1/flink-artifacts (the `ListArtifactV1FlinkArtifacts` operationId).
-	ListArtifactV1FlinkArtifactsWithResponse(ctx context.Context, params *ListArtifactV1FlinkArtifactsParams, reqEditors ...RequestEditorFn) (*ListArtifactV1FlinkArtifactsResponse, error)
-
-	// CreateArtifactV1FlinkArtifactWithBodyWithResponse Create a new Flink Artifact.
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a flink artifact.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /artifact/v1/flink-artifacts (the `CreateArtifactV1FlinkArtifact` operationId).
-	CreateArtifactV1FlinkArtifactWithBodyWithResponse(ctx context.Context, params *CreateArtifactV1FlinkArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateArtifactV1FlinkArtifactResponse, error)
-
-	// CreateArtifactV1FlinkArtifactWithResponse Create a new Flink Artifact.
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a flink artifact.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /artifact/v1/flink-artifacts (the `CreateArtifactV1FlinkArtifact` operationId).
-	CreateArtifactV1FlinkArtifactWithResponse(ctx context.Context, params *CreateArtifactV1FlinkArtifactParams, body CreateArtifactV1FlinkArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateArtifactV1FlinkArtifactResponse, error)
-
-	// DeleteArtifactV1FlinkArtifactWithResponse Delete a Flink Artifact
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a flink artifact.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /artifact/v1/flink-artifacts/{id} (the `DeleteArtifactV1FlinkArtifact` operationId).
-	DeleteArtifactV1FlinkArtifactWithResponse(ctx context.Context, id string, params *DeleteArtifactV1FlinkArtifactParams, reqEditors ...RequestEditorFn) (*DeleteArtifactV1FlinkArtifactResponse, error)
-
-	// GetArtifactV1FlinkArtifactWithResponse Read a Flink Artifact
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a flink artifact.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /artifact/v1/flink-artifacts/{id} (the `GetArtifactV1FlinkArtifact` operationId).
-	GetArtifactV1FlinkArtifactWithResponse(ctx context.Context, id string, params *GetArtifactV1FlinkArtifactParams, reqEditors ...RequestEditorFn) (*GetArtifactV1FlinkArtifactResponse, error)
-
-	// UpdateArtifactV1FlinkArtifactWithBodyWithResponse Update a Flink Artifact
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a flink artifact.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /artifact/v1/flink-artifacts/{id} (the `UpdateArtifactV1FlinkArtifact` operationId).
-	UpdateArtifactV1FlinkArtifactWithBodyWithResponse(ctx context.Context, id string, params *UpdateArtifactV1FlinkArtifactParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateArtifactV1FlinkArtifactResponse, error)
-
-	// UpdateArtifactV1FlinkArtifactWithResponse Update a Flink Artifact
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a flink artifact.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /artifact/v1/flink-artifacts/{id} (the `UpdateArtifactV1FlinkArtifact` operationId).
-	UpdateArtifactV1FlinkArtifactWithResponse(ctx context.Context, id string, params *UpdateArtifactV1FlinkArtifactParams, body UpdateArtifactV1FlinkArtifactJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateArtifactV1FlinkArtifactResponse, error)
-
-	// PresignedUploadUrlArtifactV1PresignedUrlWithBodyWithResponse Request a presigned upload URL for a new Flink Artifact.
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Request a presigned upload URL to upload a Flink Artifact archive.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /artifact/v1/presigned-upload-url (the `PresignedUploadUrlArtifactV1PresignedUrl` operationId).
-	PresignedUploadUrlArtifactV1PresignedUrlWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PresignedUploadUrlArtifactV1PresignedUrlResponse, error)
-
-	// PresignedUploadUrlArtifactV1PresignedUrlWithResponse Request a presigned upload URL for a new Flink Artifact.
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Request a presigned upload URL to upload a Flink Artifact archive.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /artifact/v1/presigned-upload-url (the `PresignedUploadUrlArtifactV1PresignedUrl` operationId).
-	PresignedUploadUrlArtifactV1PresignedUrlWithResponse(ctx context.Context, body PresignedUploadUrlArtifactV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*PresignedUploadUrlArtifactV1PresignedUrlResponse, error)
-
-	// ListFcpmV2ComputePoolsWithResponse List of Compute Pools
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all compute pools.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /fcpm/v2/compute-pools (the `ListFcpmV2ComputePools` operationId).
-	ListFcpmV2ComputePoolsWithResponse(ctx context.Context, params *ListFcpmV2ComputePoolsParams, reqEditors ...RequestEditorFn) (*ListFcpmV2ComputePoolsResponse, error)
-
-	// CreateFcpmV2ComputePoolWithBodyWithResponse Create a Compute Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a compute pool.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /fcpm/v2/compute-pools (the `CreateFcpmV2ComputePool` operationId).
-	CreateFcpmV2ComputePoolWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateFcpmV2ComputePoolResponse, error)
-
-	// CreateFcpmV2ComputePoolWithResponse Create a Compute Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a compute pool.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /fcpm/v2/compute-pools (the `CreateFcpmV2ComputePool` operationId).
-	CreateFcpmV2ComputePoolWithResponse(ctx context.Context, body CreateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateFcpmV2ComputePoolResponse, error)
-
-	// DeleteFcpmV2ComputePoolWithResponse Delete a Compute Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a compute pool.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /fcpm/v2/compute-pools/{id} (the `DeleteFcpmV2ComputePool` operationId).
-	DeleteFcpmV2ComputePoolWithResponse(ctx context.Context, id string, params *DeleteFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*DeleteFcpmV2ComputePoolResponse, error)
-
-	// GetFcpmV2ComputePoolWithResponse Read a Compute Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a compute pool.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /fcpm/v2/compute-pools/{id} (the `GetFcpmV2ComputePool` operationId).
-	GetFcpmV2ComputePoolWithResponse(ctx context.Context, id string, params *GetFcpmV2ComputePoolParams, reqEditors ...RequestEditorFn) (*GetFcpmV2ComputePoolResponse, error)
-
-	// UpdateFcpmV2ComputePoolWithBodyWithResponse Update a Compute Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a compute pool.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /fcpm/v2/compute-pools/{id} (the `UpdateFcpmV2ComputePool` operationId).
-	UpdateFcpmV2ComputePoolWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFcpmV2ComputePoolResponse, error)
-
-	// UpdateFcpmV2ComputePoolWithResponse Update a Compute Pool
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a compute pool.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /fcpm/v2/compute-pools/{id} (the `UpdateFcpmV2ComputePool` operationId).
-	UpdateFcpmV2ComputePoolWithResponse(ctx context.Context, id string, body UpdateFcpmV2ComputePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFcpmV2ComputePoolResponse, error)
-
-	// ListSqlv1StatementsWithResponse List of Statements
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all statements.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements (the `ListSqlv1Statements` operationId).
-	ListSqlv1StatementsWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1StatementsParams, reqEditors ...RequestEditorFn) (*ListSqlv1StatementsResponse, error)
-
-	// CreateSqlv1StatementWithBodyWithResponse Create a Statement
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a statement.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements (the `CreateSqlv1Statement` operationId).
-	CreateSqlv1StatementWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSqlv1StatementResponse, error)
-
-	// CreateSqlv1StatementWithResponse Create a Statement
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a statement.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements (the `CreateSqlv1Statement` operationId).
-	CreateSqlv1StatementWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, body CreateSqlv1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateSqlv1StatementResponse, error)
-
-	// DeleteSqlv1StatementWithResponse Delete a Statement
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a statement.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} (the `DeleteSqlv1Statement` operationId).
-	DeleteSqlv1StatementWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*DeleteSqlv1StatementResponse, error)
-
-	// GetSqlv1StatementWithResponse Read a Statement
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a statement.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} (the `GetSqlv1Statement` operationId).
-	GetSqlv1StatementWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*GetSqlv1StatementResponse, error)
-
-	// PatchSqlv1StatementWithBodyWithResponse Patch a Statement
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to patch a statement.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} (the `PatchSqlv1Statement` operationId).
-	PatchSqlv1StatementWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchSqlv1StatementResponse, error)
-
-	// PatchSqlv1StatementWithApplicationJSONPatchPlusJSONBodyWithResponse Patch a Statement
-	//
-	// [![Early Access](https://img.shields.io/badge/Lifecycle%20Stage-Early%20Access-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to patch a statement.
-	//
-	// Takes a body of the `application/json-patch+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} (the `PatchSqlv1Statement` operationId).
-	PatchSqlv1StatementWithApplicationJSONPatchPlusJSONBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, body PatchSqlv1StatementApplicationJSONPatchPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchSqlv1StatementResponse, error)
-
-	// UpdateSqlv1StatementWithBodyWithResponse Update a Statement
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a statement.
-	// The request will fail with a 409 Conflict error if the Statement has changed since it was fetched.
-	// In this case, do a GET, reapply the modifications, and try the update again.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} (the `UpdateSqlv1Statement` operationId).
-	UpdateSqlv1StatementWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSqlv1StatementResponse, error)
-
-	// UpdateSqlv1StatementWithResponse Update a Statement
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a statement.
-	// The request will fail with a 409 Conflict error if the Statement has changed since it was fetched.
-	// In this case, do a GET, reapply the modifications, and try the update again.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /sql/v1/organizations/{organization_id}/environments/{environment_id}/statements/{statement_name} (the `UpdateSqlv1Statement` operationId).
-	UpdateSqlv1StatementWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, body UpdateSqlv1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSqlv1StatementResponse, error)
-}
-
 func (r ListArtifactV1FlinkArtifactsResponse) GetJSON200() *ArtifactV1FlinkArtifactList {
 	return r.JSON200
 }
@@ -3944,14 +3661,14 @@ func (r UpdateSqlv1StatementResponse) ContentType() string {
 	return ""
 }
 func (c *ClientWithResponses) PresignedUploadUrlArtifactV1PresignedUrlWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PresignedUploadUrlArtifactV1PresignedUrlResponse, error) {
-	rsp, err := c.PresignedUploadUrlArtifactV1PresignedUrlWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.presignedUploadUrlArtifactV1PresignedUrlWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParsePresignedUploadUrlArtifactV1PresignedUrlResponse(rsp)
 }
 func (c *ClientWithResponses) PresignedUploadUrlArtifactV1PresignedUrlWithResponse(ctx context.Context, body PresignedUploadUrlArtifactV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*PresignedUploadUrlArtifactV1PresignedUrlResponse, error) {
-	rsp, err := c.PresignedUploadUrlArtifactV1PresignedUrl(ctx, body, reqEditors...)
+	rsp, err := c.presignedUploadUrlArtifactV1PresignedUrl(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -107,7 +107,7 @@ type CreateSqlv1StatementJSONRequestBody CreateSqlv1StatementJSONBody
 type PatchSqlv1StatementApplicationJSONPatchPlusJSONRequestBody = PatchRequest
 type UpdateSqlv1StatementJSONRequestBody UpdateSqlv1StatementJSONBody
 
-func (c *oasClient) ListSqlv1Statements(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1StatementsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listSqlv1Statements(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1StatementsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSqlv1StatementsRequest(c.Server, organizationId, environmentId, params)
 	if err != nil {
 		return nil, err
@@ -118,7 +118,7 @@ func (c *oasClient) ListSqlv1Statements(ctx context.Context, organizationId open
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateSqlv1StatementWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createSqlv1StatementWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateSqlv1StatementRequestWithBody(c.Server, organizationId, environmentId, contentType, body)
 	if err != nil {
 		return nil, err
@@ -129,7 +129,7 @@ func (c *oasClient) CreateSqlv1StatementWithBody(ctx context.Context, organizati
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, body CreateSqlv1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, body CreateSqlv1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateSqlv1StatementRequest(c.Server, organizationId, environmentId, body)
 	if err != nil {
 		return nil, err
@@ -140,7 +140,7 @@ func (c *oasClient) CreateSqlv1Statement(ctx context.Context, organizationId ope
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteSqlv1StatementRequest(c.Server, organizationId, environmentId, statementName)
 	if err != nil {
 		return nil, err
@@ -151,7 +151,7 @@ func (c *oasClient) DeleteSqlv1Statement(ctx context.Context, organizationId ope
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSqlv1StatementRequest(c.Server, organizationId, environmentId, statementName)
 	if err != nil {
 		return nil, err
@@ -162,7 +162,7 @@ func (c *oasClient) GetSqlv1Statement(ctx context.Context, organizationId openap
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) PatchSqlv1StatementWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) patchSqlv1StatementWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPatchSqlv1StatementRequestWithBody(c.Server, organizationId, environmentId, statementName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -173,7 +173,7 @@ func (c *oasClient) PatchSqlv1StatementWithBody(ctx context.Context, organizatio
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) PatchSqlv1StatementWithApplicationJSONPatchPlusJSONBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, body PatchSqlv1StatementApplicationJSONPatchPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) patchSqlv1StatementWithApplicationJSONPatchPlusJSONBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, body PatchSqlv1StatementApplicationJSONPatchPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPatchSqlv1StatementRequestWithApplicationJSONPatchPlusJSONBody(c.Server, organizationId, environmentId, statementName, body)
 	if err != nil {
 		return nil, err
@@ -184,7 +184,7 @@ func (c *oasClient) PatchSqlv1StatementWithApplicationJSONPatchPlusJSONBody(ctx 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateSqlv1StatementWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateSqlv1StatementWithBody(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSqlv1StatementRequestWithBody(c.Server, organizationId, environmentId, statementName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -195,7 +195,7 @@ func (c *oasClient) UpdateSqlv1StatementWithBody(ctx context.Context, organizati
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, body UpdateSqlv1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateSqlv1Statement(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, body UpdateSqlv1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateSqlv1StatementRequest(c.Server, organizationId, environmentId, statementName, body)
 	if err != nil {
 		return nil, err
@@ -1014,63 +1014,63 @@ type UpdateSqlv1StatementResponse struct {
 }
 
 func (c *ClientWithResponses) ListSqlv1StatementsWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, params *ListSqlv1StatementsParams, reqEditors ...RequestEditorFn) (*ListSqlv1StatementsResponse, error) {
-	rsp, err := c.ListSqlv1Statements(ctx, organizationId, environmentId, params, reqEditors...)
+	rsp, err := c.listSqlv1Statements(ctx, organizationId, environmentId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListSqlv1StatementsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateSqlv1StatementWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSqlv1StatementResponse, error) {
-	rsp, err := c.CreateSqlv1StatementWithBody(ctx, organizationId, environmentId, contentType, body, reqEditors...)
+	rsp, err := c.createSqlv1StatementWithBody(ctx, organizationId, environmentId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateSqlv1StatementResponse(rsp)
 }
 func (c *ClientWithResponses) CreateSqlv1StatementWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, body CreateSqlv1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateSqlv1StatementResponse, error) {
-	rsp, err := c.CreateSqlv1Statement(ctx, organizationId, environmentId, body, reqEditors...)
+	rsp, err := c.createSqlv1Statement(ctx, organizationId, environmentId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateSqlv1StatementResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteSqlv1StatementWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*DeleteSqlv1StatementResponse, error) {
-	rsp, err := c.DeleteSqlv1Statement(ctx, organizationId, environmentId, statementName, reqEditors...)
+	rsp, err := c.deleteSqlv1Statement(ctx, organizationId, environmentId, statementName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteSqlv1StatementResponse(rsp)
 }
 func (c *ClientWithResponses) GetSqlv1StatementWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, reqEditors ...RequestEditorFn) (*GetSqlv1StatementResponse, error) {
-	rsp, err := c.GetSqlv1Statement(ctx, organizationId, environmentId, statementName, reqEditors...)
+	rsp, err := c.getSqlv1Statement(ctx, organizationId, environmentId, statementName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetSqlv1StatementResponse(rsp)
 }
 func (c *ClientWithResponses) PatchSqlv1StatementWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchSqlv1StatementResponse, error) {
-	rsp, err := c.PatchSqlv1StatementWithBody(ctx, organizationId, environmentId, statementName, contentType, body, reqEditors...)
+	rsp, err := c.patchSqlv1StatementWithBody(ctx, organizationId, environmentId, statementName, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParsePatchSqlv1StatementResponse(rsp)
 }
 func (c *ClientWithResponses) PatchSqlv1StatementWithApplicationJSONPatchPlusJSONBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, body PatchSqlv1StatementApplicationJSONPatchPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchSqlv1StatementResponse, error) {
-	rsp, err := c.PatchSqlv1StatementWithApplicationJSONPatchPlusJSONBody(ctx, organizationId, environmentId, statementName, body, reqEditors...)
+	rsp, err := c.patchSqlv1StatementWithApplicationJSONPatchPlusJSONBody(ctx, organizationId, environmentId, statementName, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParsePatchSqlv1StatementResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateSqlv1StatementWithBodyWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSqlv1StatementResponse, error) {
-	rsp, err := c.UpdateSqlv1StatementWithBody(ctx, organizationId, environmentId, statementName, contentType, body, reqEditors...)
+	rsp, err := c.updateSqlv1StatementWithBody(ctx, organizationId, environmentId, statementName, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateSqlv1StatementResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateSqlv1StatementWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, statementName string, body UpdateSqlv1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSqlv1StatementResponse, error) {
-	rsp, err := c.UpdateSqlv1Statement(ctx, organizationId, environmentId, statementName, body, reqEditors...)
+	rsp, err := c.updateSqlv1Statement(ctx, organizationId, environmentId, statementName, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

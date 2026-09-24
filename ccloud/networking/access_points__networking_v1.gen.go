@@ -116,7 +116,7 @@ type UpdateNetworkingV1AccessPoint200JSONResponseBodyKind string
 type CreateNetworkingV1AccessPointJSONRequestBody CreateNetworkingV1AccessPointJSONBody
 type UpdateNetworkingV1AccessPointJSONRequestBody UpdateNetworkingV1AccessPointJSONBody
 
-func (c *oasClient) ListNetworkingV1AccessPoints(ctx context.Context, params *ListNetworkingV1AccessPointsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listNetworkingV1AccessPoints(ctx context.Context, params *ListNetworkingV1AccessPointsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNetworkingV1AccessPointsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -127,7 +127,7 @@ func (c *oasClient) ListNetworkingV1AccessPoints(ctx context.Context, params *Li
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateNetworkingV1AccessPointWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createNetworkingV1AccessPointWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1AccessPointRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -138,7 +138,7 @@ func (c *oasClient) CreateNetworkingV1AccessPointWithBody(ctx context.Context, c
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateNetworkingV1AccessPoint(ctx context.Context, body CreateNetworkingV1AccessPointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createNetworkingV1AccessPoint(ctx context.Context, body CreateNetworkingV1AccessPointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNetworkingV1AccessPointRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -149,7 +149,7 @@ func (c *oasClient) CreateNetworkingV1AccessPoint(ctx context.Context, body Crea
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteNetworkingV1AccessPoint(ctx context.Context, id string, params *DeleteNetworkingV1AccessPointParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteNetworkingV1AccessPoint(ctx context.Context, id string, params *DeleteNetworkingV1AccessPointParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteNetworkingV1AccessPointRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -160,7 +160,7 @@ func (c *oasClient) DeleteNetworkingV1AccessPoint(ctx context.Context, id string
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetNetworkingV1AccessPoint(ctx context.Context, id string, params *GetNetworkingV1AccessPointParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getNetworkingV1AccessPoint(ctx context.Context, id string, params *GetNetworkingV1AccessPointParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNetworkingV1AccessPointRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -171,7 +171,7 @@ func (c *oasClient) GetNetworkingV1AccessPoint(ctx context.Context, id string, p
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateNetworkingV1AccessPointWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateNetworkingV1AccessPointWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1AccessPointRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -182,7 +182,7 @@ func (c *oasClient) UpdateNetworkingV1AccessPointWithBody(ctx context.Context, i
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateNetworkingV1AccessPoint(ctx context.Context, id string, body UpdateNetworkingV1AccessPointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateNetworkingV1AccessPoint(ctx context.Context, id string, body UpdateNetworkingV1AccessPointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNetworkingV1AccessPointRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -908,49 +908,49 @@ type UpdateNetworkingV1AccessPointResponse struct {
 }
 
 func (c *ClientWithResponses) ListNetworkingV1AccessPointsWithResponse(ctx context.Context, params *ListNetworkingV1AccessPointsParams, reqEditors ...RequestEditorFn) (*ListNetworkingV1AccessPointsResponse, error) {
-	rsp, err := c.ListNetworkingV1AccessPoints(ctx, params, reqEditors...)
+	rsp, err := c.listNetworkingV1AccessPoints(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListNetworkingV1AccessPointsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateNetworkingV1AccessPointWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNetworkingV1AccessPointResponse, error) {
-	rsp, err := c.CreateNetworkingV1AccessPointWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createNetworkingV1AccessPointWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateNetworkingV1AccessPointResponse(rsp)
 }
 func (c *ClientWithResponses) CreateNetworkingV1AccessPointWithResponse(ctx context.Context, body CreateNetworkingV1AccessPointJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNetworkingV1AccessPointResponse, error) {
-	rsp, err := c.CreateNetworkingV1AccessPoint(ctx, body, reqEditors...)
+	rsp, err := c.createNetworkingV1AccessPoint(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateNetworkingV1AccessPointResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteNetworkingV1AccessPointWithResponse(ctx context.Context, id string, params *DeleteNetworkingV1AccessPointParams, reqEditors ...RequestEditorFn) (*DeleteNetworkingV1AccessPointResponse, error) {
-	rsp, err := c.DeleteNetworkingV1AccessPoint(ctx, id, params, reqEditors...)
+	rsp, err := c.deleteNetworkingV1AccessPoint(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteNetworkingV1AccessPointResponse(rsp)
 }
 func (c *ClientWithResponses) GetNetworkingV1AccessPointWithResponse(ctx context.Context, id string, params *GetNetworkingV1AccessPointParams, reqEditors ...RequestEditorFn) (*GetNetworkingV1AccessPointResponse, error) {
-	rsp, err := c.GetNetworkingV1AccessPoint(ctx, id, params, reqEditors...)
+	rsp, err := c.getNetworkingV1AccessPoint(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetNetworkingV1AccessPointResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateNetworkingV1AccessPointWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1AccessPointResponse, error) {
-	rsp, err := c.UpdateNetworkingV1AccessPointWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateNetworkingV1AccessPointWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateNetworkingV1AccessPointResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateNetworkingV1AccessPointWithResponse(ctx context.Context, id string, body UpdateNetworkingV1AccessPointJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNetworkingV1AccessPointResponse, error) {
-	rsp, err := c.UpdateNetworkingV1AccessPoint(ctx, id, body, reqEditors...)
+	rsp, err := c.updateNetworkingV1AccessPoint(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -111,7 +111,7 @@ type UpdateCmkV2Cluster200JSONResponseBodyKind string
 type CreateCmkV2ClusterJSONRequestBody CreateCmkV2ClusterJSONBody
 type UpdateCmkV2ClusterJSONRequestBody UpdateCmkV2ClusterJSONBody
 
-func (c *oasClient) ListCmkV2Clusters(ctx context.Context, params *ListCmkV2ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listCmkV2Clusters(ctx context.Context, params *ListCmkV2ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListCmkV2ClustersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -122,7 +122,7 @@ func (c *oasClient) ListCmkV2Clusters(ctx context.Context, params *ListCmkV2Clus
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateCmkV2ClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createCmkV2ClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateCmkV2ClusterRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -133,7 +133,7 @@ func (c *oasClient) CreateCmkV2ClusterWithBody(ctx context.Context, contentType 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateCmkV2Cluster(ctx context.Context, body CreateCmkV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createCmkV2Cluster(ctx context.Context, body CreateCmkV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateCmkV2ClusterRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -144,7 +144,7 @@ func (c *oasClient) CreateCmkV2Cluster(ctx context.Context, body CreateCmkV2Clus
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteCmkV2Cluster(ctx context.Context, id string, params *DeleteCmkV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteCmkV2Cluster(ctx context.Context, id string, params *DeleteCmkV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteCmkV2ClusterRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -155,7 +155,7 @@ func (c *oasClient) DeleteCmkV2Cluster(ctx context.Context, id string, params *D
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetCmkV2Cluster(ctx context.Context, id string, params *GetCmkV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getCmkV2Cluster(ctx context.Context, id string, params *GetCmkV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCmkV2ClusterRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -166,7 +166,7 @@ func (c *oasClient) GetCmkV2Cluster(ctx context.Context, id string, params *GetC
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateCmkV2ClusterWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateCmkV2ClusterWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateCmkV2ClusterRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -177,7 +177,7 @@ func (c *oasClient) UpdateCmkV2ClusterWithBody(ctx context.Context, id string, c
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateCmkV2Cluster(ctx context.Context, id string, body UpdateCmkV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateCmkV2Cluster(ctx context.Context, id string, body UpdateCmkV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateCmkV2ClusterRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -905,49 +905,49 @@ type UpdateCmkV2ClusterResponse struct {
 }
 
 func (c *ClientWithResponses) ListCmkV2ClustersWithResponse(ctx context.Context, params *ListCmkV2ClustersParams, reqEditors ...RequestEditorFn) (*ListCmkV2ClustersResponse, error) {
-	rsp, err := c.ListCmkV2Clusters(ctx, params, reqEditors...)
+	rsp, err := c.listCmkV2Clusters(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListCmkV2ClustersResponse(rsp)
 }
 func (c *ClientWithResponses) CreateCmkV2ClusterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCmkV2ClusterResponse, error) {
-	rsp, err := c.CreateCmkV2ClusterWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createCmkV2ClusterWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateCmkV2ClusterResponse(rsp)
 }
 func (c *ClientWithResponses) CreateCmkV2ClusterWithResponse(ctx context.Context, body CreateCmkV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCmkV2ClusterResponse, error) {
-	rsp, err := c.CreateCmkV2Cluster(ctx, body, reqEditors...)
+	rsp, err := c.createCmkV2Cluster(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateCmkV2ClusterResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteCmkV2ClusterWithResponse(ctx context.Context, id string, params *DeleteCmkV2ClusterParams, reqEditors ...RequestEditorFn) (*DeleteCmkV2ClusterResponse, error) {
-	rsp, err := c.DeleteCmkV2Cluster(ctx, id, params, reqEditors...)
+	rsp, err := c.deleteCmkV2Cluster(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteCmkV2ClusterResponse(rsp)
 }
 func (c *ClientWithResponses) GetCmkV2ClusterWithResponse(ctx context.Context, id string, params *GetCmkV2ClusterParams, reqEditors ...RequestEditorFn) (*GetCmkV2ClusterResponse, error) {
-	rsp, err := c.GetCmkV2Cluster(ctx, id, params, reqEditors...)
+	rsp, err := c.getCmkV2Cluster(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetCmkV2ClusterResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateCmkV2ClusterWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCmkV2ClusterResponse, error) {
-	rsp, err := c.UpdateCmkV2ClusterWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateCmkV2ClusterWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateCmkV2ClusterResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateCmkV2ClusterWithResponse(ctx context.Context, id string, body UpdateCmkV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCmkV2ClusterResponse, error) {
-	rsp, err := c.UpdateCmkV2Cluster(ctx, id, body, reqEditors...)
+	rsp, err := c.updateCmkV2Cluster(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -649,49 +649,49 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// GetSchemas List schemas
 	//
 	// Get the schemas matching the specified parameters.
 	//
 	// Corresponds with GET /schemas (the `GetSchemas` operationId).
-	GetSchemas(ctx context.Context, params *GetSchemasParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSchemas(ctx context.Context, params *GetSchemasParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSchema Get schema string by ID
 	//
 	// Retrieves the schema string identified by the input ID.
 	//
 	// Corresponds with GET /schemas/ids/{id} (the `GetSchema` operationId).
-	GetSchema(ctx context.Context, id int32, params *GetSchemaParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSchema(ctx context.Context, id int32, params *GetSchemaParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSchemaOnly Get schema by ID
 	//
 	// Retrieves the schema identified by the input ID.
 	//
 	// Corresponds with GET /schemas/ids/{id}/schema (the `GetSchemaOnly` operationId).
-	GetSchemaOnly(ctx context.Context, id int32, params *GetSchemaOnlyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSchemaOnly(ctx context.Context, id int32, params *GetSchemaOnlyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSubjects List subjects associated to schema ID
 	//
 	// Retrieves all the subjects associated with a particular schema ID.
 	//
 	// Corresponds with GET /schemas/ids/{id}/subjects (the `GetSubjects` operationId).
-	GetSubjects(ctx context.Context, id int32, params *GetSubjectsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSubjects(ctx context.Context, id int32, params *GetSubjectsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetVersions List subject-versions associated to schema ID
 	//
 	// Get all the subject-version pairs associated with the input ID.
 	//
 	// Corresponds with GET /schemas/ids/{id}/versions (the `GetVersions` operationId).
-	GetVersions(ctx context.Context, id int32, params *GetVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getVersions(ctx context.Context, id int32, params *GetVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSchemaTypes List supported schema types
 	//
 	// Retrieve the schema types supported by this registry.
 	//
 	// Corresponds with GET /schemas/types (the `GetSchemaTypes` operationId).
-	GetSchemaTypes(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSchemaTypes(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -709,7 +709,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -729,64 +729,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// GetSchemasWithResponse List schemas
-	//
-	// Get the schemas matching the specified parameters.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /schemas (the `GetSchemas` operationId).
-	GetSchemasWithResponse(ctx context.Context, params *GetSchemasParams, reqEditors ...RequestEditorFn) (*GetSchemasResponse, error)
-
-	// GetSchemaWithResponse Get schema string by ID
-	//
-	// Retrieves the schema string identified by the input ID.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /schemas/ids/{id} (the `GetSchema` operationId).
-	GetSchemaWithResponse(ctx context.Context, id int32, params *GetSchemaParams, reqEditors ...RequestEditorFn) (*GetSchemaResponse, error)
-
-	// GetSchemaOnlyWithResponse Get schema by ID
-	//
-	// Retrieves the schema identified by the input ID.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /schemas/ids/{id}/schema (the `GetSchemaOnly` operationId).
-	GetSchemaOnlyWithResponse(ctx context.Context, id int32, params *GetSchemaOnlyParams, reqEditors ...RequestEditorFn) (*GetSchemaOnlyResponse, error)
-
-	// GetSubjectsWithResponse List subjects associated to schema ID
-	//
-	// Retrieves all the subjects associated with a particular schema ID.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /schemas/ids/{id}/subjects (the `GetSubjects` operationId).
-	GetSubjectsWithResponse(ctx context.Context, id int32, params *GetSubjectsParams, reqEditors ...RequestEditorFn) (*GetSubjectsResponse, error)
-
-	// GetVersionsWithResponse List subject-versions associated to schema ID
-	//
-	// Get all the subject-version pairs associated with the input ID.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /schemas/ids/{id}/versions (the `GetVersions` operationId).
-	GetVersionsWithResponse(ctx context.Context, id int32, params *GetVersionsParams, reqEditors ...RequestEditorFn) (*GetVersionsResponse, error)
-
-	// GetSchemaTypesWithResponse List supported schema types
-	//
-	// Retrieve the schema types supported by this registry.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /schemas/types (the `GetSchemaTypes` operationId).
-	GetSchemaTypesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetSchemaTypesResponse, error)
-}
-
 func (r GetSchemasResponse) GetApplicationjsonQs05200() *[]Schema {
 	return r.ApplicationjsonQs05200
 }

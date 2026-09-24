@@ -72,7 +72,7 @@ type UpdateIamV2SsoGroupMapping200JSONResponseBodyKind string
 type CreateIamV2SsoGroupMappingJSONRequestBody CreateIamV2SsoGroupMappingJSONBody
 type UpdateIamV2SsoGroupMappingJSONRequestBody = IamV2SsoGroupMapping
 
-func (c *oasClient) ListIamV2SsoGroupMappings(ctx context.Context, params *ListIamV2SsoGroupMappingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listIamV2SsoGroupMappings(ctx context.Context, params *ListIamV2SsoGroupMappingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIamV2SsoGroupMappingsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -83,7 +83,7 @@ func (c *oasClient) ListIamV2SsoGroupMappings(ctx context.Context, params *ListI
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateIamV2SsoGroupMappingWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createIamV2SsoGroupMappingWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2SsoGroupMappingRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -94,7 +94,7 @@ func (c *oasClient) CreateIamV2SsoGroupMappingWithBody(ctx context.Context, cont
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateIamV2SsoGroupMapping(ctx context.Context, body CreateIamV2SsoGroupMappingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createIamV2SsoGroupMapping(ctx context.Context, body CreateIamV2SsoGroupMappingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2SsoGroupMappingRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -105,7 +105,7 @@ func (c *oasClient) CreateIamV2SsoGroupMapping(ctx context.Context, body CreateI
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteIamV2SsoGroupMapping(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteIamV2SsoGroupMapping(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIamV2SsoGroupMappingRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -116,7 +116,7 @@ func (c *oasClient) DeleteIamV2SsoGroupMapping(ctx context.Context, id string, r
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetIamV2SsoGroupMapping(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getIamV2SsoGroupMapping(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2SsoGroupMappingRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -127,7 +127,7 @@ func (c *oasClient) GetIamV2SsoGroupMapping(ctx context.Context, id string, reqE
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateIamV2SsoGroupMappingWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateIamV2SsoGroupMappingWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2SsoGroupMappingRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -138,7 +138,7 @@ func (c *oasClient) UpdateIamV2SsoGroupMappingWithBody(ctx context.Context, id s
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateIamV2SsoGroupMapping(ctx context.Context, id string, body UpdateIamV2SsoGroupMappingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateIamV2SsoGroupMapping(ctx context.Context, id string, body UpdateIamV2SsoGroupMappingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2SsoGroupMappingRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -791,49 +791,49 @@ type UpdateIamV2SsoGroupMappingResponse struct {
 }
 
 func (c *ClientWithResponses) ListIamV2SsoGroupMappingsWithResponse(ctx context.Context, params *ListIamV2SsoGroupMappingsParams, reqEditors ...RequestEditorFn) (*ListIamV2SsoGroupMappingsResponse, error) {
-	rsp, err := c.ListIamV2SsoGroupMappings(ctx, params, reqEditors...)
+	rsp, err := c.listIamV2SsoGroupMappings(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListIamV2SsoGroupMappingsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateIamV2SsoGroupMappingWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2SsoGroupMappingResponse, error) {
-	rsp, err := c.CreateIamV2SsoGroupMappingWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createIamV2SsoGroupMappingWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIamV2SsoGroupMappingResponse(rsp)
 }
 func (c *ClientWithResponses) CreateIamV2SsoGroupMappingWithResponse(ctx context.Context, body CreateIamV2SsoGroupMappingJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2SsoGroupMappingResponse, error) {
-	rsp, err := c.CreateIamV2SsoGroupMapping(ctx, body, reqEditors...)
+	rsp, err := c.createIamV2SsoGroupMapping(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIamV2SsoGroupMappingResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteIamV2SsoGroupMappingWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2SsoGroupMappingResponse, error) {
-	rsp, err := c.DeleteIamV2SsoGroupMapping(ctx, id, reqEditors...)
+	rsp, err := c.deleteIamV2SsoGroupMapping(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteIamV2SsoGroupMappingResponse(rsp)
 }
 func (c *ClientWithResponses) GetIamV2SsoGroupMappingWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2SsoGroupMappingResponse, error) {
-	rsp, err := c.GetIamV2SsoGroupMapping(ctx, id, reqEditors...)
+	rsp, err := c.getIamV2SsoGroupMapping(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetIamV2SsoGroupMappingResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateIamV2SsoGroupMappingWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2SsoGroupMappingResponse, error) {
-	rsp, err := c.UpdateIamV2SsoGroupMappingWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateIamV2SsoGroupMappingWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateIamV2SsoGroupMappingResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateIamV2SsoGroupMappingWithResponse(ctx context.Context, id string, body UpdateIamV2SsoGroupMappingJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2SsoGroupMappingResponse, error) {
-	rsp, err := c.UpdateIamV2SsoGroupMapping(ctx, id, body, reqEditors...)
+	rsp, err := c.updateIamV2SsoGroupMapping(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

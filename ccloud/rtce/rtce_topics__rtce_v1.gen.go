@@ -116,7 +116,7 @@ type UpdateRtceV1RtceTopic200JSONResponseBodyKind string
 type CreateRtceV1RtceTopicJSONRequestBody CreateRtceV1RtceTopicJSONBody
 type UpdateRtceV1RtceTopicJSONRequestBody UpdateRtceV1RtceTopicJSONBody
 
-func (c *oasClient) ListRtceV1RtceTopics(ctx context.Context, params *ListRtceV1RtceTopicsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listRtceV1RtceTopics(ctx context.Context, params *ListRtceV1RtceTopicsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListRtceV1RtceTopicsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -127,7 +127,7 @@ func (c *oasClient) ListRtceV1RtceTopics(ctx context.Context, params *ListRtceV1
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateRtceV1RtceTopicWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createRtceV1RtceTopicWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateRtceV1RtceTopicRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -138,7 +138,7 @@ func (c *oasClient) CreateRtceV1RtceTopicWithBody(ctx context.Context, contentTy
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateRtceV1RtceTopic(ctx context.Context, body CreateRtceV1RtceTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createRtceV1RtceTopic(ctx context.Context, body CreateRtceV1RtceTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateRtceV1RtceTopicRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -149,7 +149,7 @@ func (c *oasClient) CreateRtceV1RtceTopic(ctx context.Context, body CreateRtceV1
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteRtceV1RtceTopic(ctx context.Context, topicName string, params *DeleteRtceV1RtceTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteRtceV1RtceTopic(ctx context.Context, topicName string, params *DeleteRtceV1RtceTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteRtceV1RtceTopicRequest(c.Server, topicName, params)
 	if err != nil {
 		return nil, err
@@ -160,7 +160,7 @@ func (c *oasClient) DeleteRtceV1RtceTopic(ctx context.Context, topicName string,
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetRtceV1RtceTopic(ctx context.Context, topicName string, params *GetRtceV1RtceTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getRtceV1RtceTopic(ctx context.Context, topicName string, params *GetRtceV1RtceTopicParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetRtceV1RtceTopicRequest(c.Server, topicName, params)
 	if err != nil {
 		return nil, err
@@ -171,7 +171,7 @@ func (c *oasClient) GetRtceV1RtceTopic(ctx context.Context, topicName string, pa
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateRtceV1RtceTopicWithBody(ctx context.Context, topicName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateRtceV1RtceTopicWithBody(ctx context.Context, topicName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateRtceV1RtceTopicRequestWithBody(c.Server, topicName, contentType, body)
 	if err != nil {
 		return nil, err
@@ -182,7 +182,7 @@ func (c *oasClient) UpdateRtceV1RtceTopicWithBody(ctx context.Context, topicName
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateRtceV1RtceTopic(ctx context.Context, topicName string, body UpdateRtceV1RtceTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateRtceV1RtceTopic(ctx context.Context, topicName string, body UpdateRtceV1RtceTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateRtceV1RtceTopicRequest(c.Server, topicName, body)
 	if err != nil {
 		return nil, err
@@ -911,49 +911,49 @@ type UpdateRtceV1RtceTopicResponse struct {
 }
 
 func (c *ClientWithResponses) ListRtceV1RtceTopicsWithResponse(ctx context.Context, params *ListRtceV1RtceTopicsParams, reqEditors ...RequestEditorFn) (*ListRtceV1RtceTopicsResponse, error) {
-	rsp, err := c.ListRtceV1RtceTopics(ctx, params, reqEditors...)
+	rsp, err := c.listRtceV1RtceTopics(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListRtceV1RtceTopicsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateRtceV1RtceTopicWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRtceV1RtceTopicResponse, error) {
-	rsp, err := c.CreateRtceV1RtceTopicWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createRtceV1RtceTopicWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateRtceV1RtceTopicResponse(rsp)
 }
 func (c *ClientWithResponses) CreateRtceV1RtceTopicWithResponse(ctx context.Context, body CreateRtceV1RtceTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRtceV1RtceTopicResponse, error) {
-	rsp, err := c.CreateRtceV1RtceTopic(ctx, body, reqEditors...)
+	rsp, err := c.createRtceV1RtceTopic(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateRtceV1RtceTopicResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteRtceV1RtceTopicWithResponse(ctx context.Context, topicName string, params *DeleteRtceV1RtceTopicParams, reqEditors ...RequestEditorFn) (*DeleteRtceV1RtceTopicResponse, error) {
-	rsp, err := c.DeleteRtceV1RtceTopic(ctx, topicName, params, reqEditors...)
+	rsp, err := c.deleteRtceV1RtceTopic(ctx, topicName, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteRtceV1RtceTopicResponse(rsp)
 }
 func (c *ClientWithResponses) GetRtceV1RtceTopicWithResponse(ctx context.Context, topicName string, params *GetRtceV1RtceTopicParams, reqEditors ...RequestEditorFn) (*GetRtceV1RtceTopicResponse, error) {
-	rsp, err := c.GetRtceV1RtceTopic(ctx, topicName, params, reqEditors...)
+	rsp, err := c.getRtceV1RtceTopic(ctx, topicName, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetRtceV1RtceTopicResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateRtceV1RtceTopicWithBodyWithResponse(ctx context.Context, topicName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRtceV1RtceTopicResponse, error) {
-	rsp, err := c.UpdateRtceV1RtceTopicWithBody(ctx, topicName, contentType, body, reqEditors...)
+	rsp, err := c.updateRtceV1RtceTopicWithBody(ctx, topicName, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateRtceV1RtceTopicResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateRtceV1RtceTopicWithResponse(ctx context.Context, topicName string, body UpdateRtceV1RtceTopicJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRtceV1RtceTopicResponse, error) {
-	rsp, err := c.UpdateRtceV1RtceTopic(ctx, topicName, body, reqEditors...)
+	rsp, err := c.updateRtceV1RtceTopic(ctx, topicName, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

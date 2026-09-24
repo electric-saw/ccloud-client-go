@@ -86,7 +86,7 @@ type UpdateTableflowV1CatalogIntegration200JSONResponseBodyKind string
 type CreateTableflowV1CatalogIntegrationJSONRequestBody CreateTableflowV1CatalogIntegrationJSONBody
 type UpdateTableflowV1CatalogIntegrationJSONRequestBody = TableflowV1CatalogIntegrationUpdateRequest
 
-func (c *oasClient) ListTableflowV1CatalogIntegrations(ctx context.Context, params *ListTableflowV1CatalogIntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listTableflowV1CatalogIntegrations(ctx context.Context, params *ListTableflowV1CatalogIntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListTableflowV1CatalogIntegrationsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -97,7 +97,7 @@ func (c *oasClient) ListTableflowV1CatalogIntegrations(ctx context.Context, para
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateTableflowV1CatalogIntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createTableflowV1CatalogIntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateTableflowV1CatalogIntegrationRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -108,7 +108,7 @@ func (c *oasClient) CreateTableflowV1CatalogIntegrationWithBody(ctx context.Cont
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateTableflowV1CatalogIntegration(ctx context.Context, body CreateTableflowV1CatalogIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createTableflowV1CatalogIntegration(ctx context.Context, body CreateTableflowV1CatalogIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateTableflowV1CatalogIntegrationRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -119,7 +119,7 @@ func (c *oasClient) CreateTableflowV1CatalogIntegration(ctx context.Context, bod
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteTableflowV1CatalogIntegration(ctx context.Context, id string, params *DeleteTableflowV1CatalogIntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteTableflowV1CatalogIntegration(ctx context.Context, id string, params *DeleteTableflowV1CatalogIntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteTableflowV1CatalogIntegrationRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -130,7 +130,7 @@ func (c *oasClient) DeleteTableflowV1CatalogIntegration(ctx context.Context, id 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetTableflowV1CatalogIntegration(ctx context.Context, id string, params *GetTableflowV1CatalogIntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getTableflowV1CatalogIntegration(ctx context.Context, id string, params *GetTableflowV1CatalogIntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetTableflowV1CatalogIntegrationRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -141,7 +141,7 @@ func (c *oasClient) GetTableflowV1CatalogIntegration(ctx context.Context, id str
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateTableflowV1CatalogIntegrationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateTableflowV1CatalogIntegrationWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTableflowV1CatalogIntegrationRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -152,7 +152,7 @@ func (c *oasClient) UpdateTableflowV1CatalogIntegrationWithBody(ctx context.Cont
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateTableflowV1CatalogIntegration(ctx context.Context, id string, body UpdateTableflowV1CatalogIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateTableflowV1CatalogIntegration(ctx context.Context, id string, body UpdateTableflowV1CatalogIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateTableflowV1CatalogIntegrationRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -866,49 +866,49 @@ type UpdateTableflowV1CatalogIntegrationResponse struct {
 }
 
 func (c *ClientWithResponses) ListTableflowV1CatalogIntegrationsWithResponse(ctx context.Context, params *ListTableflowV1CatalogIntegrationsParams, reqEditors ...RequestEditorFn) (*ListTableflowV1CatalogIntegrationsResponse, error) {
-	rsp, err := c.ListTableflowV1CatalogIntegrations(ctx, params, reqEditors...)
+	rsp, err := c.listTableflowV1CatalogIntegrations(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListTableflowV1CatalogIntegrationsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateTableflowV1CatalogIntegrationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateTableflowV1CatalogIntegrationResponse, error) {
-	rsp, err := c.CreateTableflowV1CatalogIntegrationWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createTableflowV1CatalogIntegrationWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateTableflowV1CatalogIntegrationResponse(rsp)
 }
 func (c *ClientWithResponses) CreateTableflowV1CatalogIntegrationWithResponse(ctx context.Context, body CreateTableflowV1CatalogIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateTableflowV1CatalogIntegrationResponse, error) {
-	rsp, err := c.CreateTableflowV1CatalogIntegration(ctx, body, reqEditors...)
+	rsp, err := c.createTableflowV1CatalogIntegration(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateTableflowV1CatalogIntegrationResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteTableflowV1CatalogIntegrationWithResponse(ctx context.Context, id string, params *DeleteTableflowV1CatalogIntegrationParams, reqEditors ...RequestEditorFn) (*DeleteTableflowV1CatalogIntegrationResponse, error) {
-	rsp, err := c.DeleteTableflowV1CatalogIntegration(ctx, id, params, reqEditors...)
+	rsp, err := c.deleteTableflowV1CatalogIntegration(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteTableflowV1CatalogIntegrationResponse(rsp)
 }
 func (c *ClientWithResponses) GetTableflowV1CatalogIntegrationWithResponse(ctx context.Context, id string, params *GetTableflowV1CatalogIntegrationParams, reqEditors ...RequestEditorFn) (*GetTableflowV1CatalogIntegrationResponse, error) {
-	rsp, err := c.GetTableflowV1CatalogIntegration(ctx, id, params, reqEditors...)
+	rsp, err := c.getTableflowV1CatalogIntegration(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetTableflowV1CatalogIntegrationResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateTableflowV1CatalogIntegrationWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateTableflowV1CatalogIntegrationResponse, error) {
-	rsp, err := c.UpdateTableflowV1CatalogIntegrationWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateTableflowV1CatalogIntegrationWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateTableflowV1CatalogIntegrationResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateTableflowV1CatalogIntegrationWithResponse(ctx context.Context, id string, body UpdateTableflowV1CatalogIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateTableflowV1CatalogIntegrationResponse, error) {
-	rsp, err := c.UpdateTableflowV1CatalogIntegration(ctx, id, body, reqEditors...)
+	rsp, err := c.updateTableflowV1CatalogIntegration(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

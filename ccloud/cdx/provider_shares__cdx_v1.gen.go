@@ -78,7 +78,7 @@ type GetCdxV1ProviderShare200JSONResponseBody_ConsumerRestriction struct {
 type GetCdxV1ProviderShare200JSONResponseBodyKind string
 type CreateCdxV1ProviderShareJSONRequestBody CreateCdxV1ProviderShareJSONBody
 
-func (c *oasClient) ListCdxV1ProviderShares(ctx context.Context, params *ListCdxV1ProviderSharesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listCdxV1ProviderShares(ctx context.Context, params *ListCdxV1ProviderSharesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListCdxV1ProviderSharesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -89,7 +89,7 @@ func (c *oasClient) ListCdxV1ProviderShares(ctx context.Context, params *ListCdx
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateCdxV1ProviderShareWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createCdxV1ProviderShareWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateCdxV1ProviderShareRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -100,7 +100,7 @@ func (c *oasClient) CreateCdxV1ProviderShareWithBody(ctx context.Context, conten
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateCdxV1ProviderShare(ctx context.Context, body CreateCdxV1ProviderShareJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createCdxV1ProviderShare(ctx context.Context, body CreateCdxV1ProviderShareJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateCdxV1ProviderShareRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -111,7 +111,7 @@ func (c *oasClient) CreateCdxV1ProviderShare(ctx context.Context, body CreateCdx
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteCdxV1ProviderShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteCdxV1ProviderShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteCdxV1ProviderShareRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -122,7 +122,7 @@ func (c *oasClient) DeleteCdxV1ProviderShare(ctx context.Context, id string, req
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetCdxV1ProviderShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getCdxV1ProviderShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetCdxV1ProviderShareRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -133,7 +133,7 @@ func (c *oasClient) GetCdxV1ProviderShare(ctx context.Context, id string, reqEdi
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ResendCdxV1ProviderShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) resendCdxV1ProviderShare(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewResendCdxV1ProviderShareRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -733,42 +733,42 @@ type ResendCdxV1ProviderShareResponse struct {
 }
 
 func (c *ClientWithResponses) ListCdxV1ProviderSharesWithResponse(ctx context.Context, params *ListCdxV1ProviderSharesParams, reqEditors ...RequestEditorFn) (*ListCdxV1ProviderSharesResponse, error) {
-	rsp, err := c.ListCdxV1ProviderShares(ctx, params, reqEditors...)
+	rsp, err := c.listCdxV1ProviderShares(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListCdxV1ProviderSharesResponse(rsp)
 }
 func (c *ClientWithResponses) CreateCdxV1ProviderShareWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateCdxV1ProviderShareResponse, error) {
-	rsp, err := c.CreateCdxV1ProviderShareWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createCdxV1ProviderShareWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateCdxV1ProviderShareResponse(rsp)
 }
 func (c *ClientWithResponses) CreateCdxV1ProviderShareWithResponse(ctx context.Context, body CreateCdxV1ProviderShareJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateCdxV1ProviderShareResponse, error) {
-	rsp, err := c.CreateCdxV1ProviderShare(ctx, body, reqEditors...)
+	rsp, err := c.createCdxV1ProviderShare(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateCdxV1ProviderShareResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteCdxV1ProviderShareWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteCdxV1ProviderShareResponse, error) {
-	rsp, err := c.DeleteCdxV1ProviderShare(ctx, id, reqEditors...)
+	rsp, err := c.deleteCdxV1ProviderShare(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteCdxV1ProviderShareResponse(rsp)
 }
 func (c *ClientWithResponses) GetCdxV1ProviderShareWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetCdxV1ProviderShareResponse, error) {
-	rsp, err := c.GetCdxV1ProviderShare(ctx, id, reqEditors...)
+	rsp, err := c.getCdxV1ProviderShare(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetCdxV1ProviderShareResponse(rsp)
 }
 func (c *ClientWithResponses) ResendCdxV1ProviderShareWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*ResendCdxV1ProviderShareResponse, error) {
-	rsp, err := c.ResendCdxV1ProviderShare(ctx, id, reqEditors...)
+	rsp, err := c.resendCdxV1ProviderShare(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

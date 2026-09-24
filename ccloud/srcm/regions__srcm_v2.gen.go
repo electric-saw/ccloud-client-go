@@ -35,7 +35,7 @@ type ListSrcmV2RegionsParams struct {
 type GetSrcmV2Region200JSONResponseBodyApiVersion string
 type GetSrcmV2Region200JSONResponseBodyKind string
 
-func (c *oasClient) ListSrcmV2Regions(ctx context.Context, params *ListSrcmV2RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listSrcmV2Regions(ctx context.Context, params *ListSrcmV2RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSrcmV2RegionsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (c *oasClient) ListSrcmV2Regions(ctx context.Context, params *ListSrcmV2Reg
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetSrcmV2Region(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getSrcmV2Region(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSrcmV2RegionRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -325,14 +325,14 @@ type GetSrcmV2RegionResponse struct {
 }
 
 func (c *ClientWithResponses) ListSrcmV2RegionsWithResponse(ctx context.Context, params *ListSrcmV2RegionsParams, reqEditors ...RequestEditorFn) (*ListSrcmV2RegionsResponse, error) {
-	rsp, err := c.ListSrcmV2Regions(ctx, params, reqEditors...)
+	rsp, err := c.listSrcmV2Regions(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListSrcmV2RegionsResponse(rsp)
 }
 func (c *ClientWithResponses) GetSrcmV2RegionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetSrcmV2RegionResponse, error) {
-	rsp, err := c.GetSrcmV2Region(ctx, id, reqEditors...)
+	rsp, err := c.getSrcmV2Region(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

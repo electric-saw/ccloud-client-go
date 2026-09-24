@@ -1312,7 +1312,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListSrcmV2Clusters List of Clusters
 	//
@@ -1323,7 +1323,7 @@ type ClientInterface interface {
 	// Corresponds with GET /srcm/v2/clusters (the `ListSrcmV2Clusters` operationId).
 	//
 	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	ListSrcmV2Clusters(ctx context.Context, params *ListSrcmV2ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listSrcmV2Clusters(ctx context.Context, params *ListSrcmV2ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateSrcmV2ClusterWithBody Create a Cluster
 	//
@@ -1336,7 +1336,7 @@ type ClientInterface interface {
 	// Corresponds with POST /srcm/v2/clusters (the `CreateSrcmV2Cluster` operationId).
 	//
 	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	CreateSrcmV2ClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createSrcmV2ClusterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateSrcmV2Cluster Create a Cluster
 	//
@@ -1349,7 +1349,7 @@ type ClientInterface interface {
 	// Corresponds with POST /srcm/v2/clusters (the `CreateSrcmV2Cluster` operationId).
 	//
 	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	CreateSrcmV2Cluster(ctx context.Context, body CreateSrcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createSrcmV2Cluster(ctx context.Context, body CreateSrcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteSrcmV2Cluster Delete a Cluster
 	//
@@ -1360,7 +1360,7 @@ type ClientInterface interface {
 	// Corresponds with DELETE /srcm/v2/clusters/{id} (the `DeleteSrcmV2Cluster` operationId).
 	//
 	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	DeleteSrcmV2Cluster(ctx context.Context, id string, params *DeleteSrcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteSrcmV2Cluster(ctx context.Context, id string, params *DeleteSrcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSrcmV2Cluster Read a Cluster
 	//
@@ -1371,7 +1371,7 @@ type ClientInterface interface {
 	// Corresponds with GET /srcm/v2/clusters/{id} (the `GetSrcmV2Cluster` operationId).
 	//
 	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	GetSrcmV2Cluster(ctx context.Context, id string, params *GetSrcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSrcmV2Cluster(ctx context.Context, id string, params *GetSrcmV2ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateSrcmV2ClusterWithBody Update a Cluster
 	//
@@ -1384,7 +1384,7 @@ type ClientInterface interface {
 	// Corresponds with PATCH /srcm/v2/clusters/{id} (the `UpdateSrcmV2Cluster` operationId).
 	//
 	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	UpdateSrcmV2ClusterWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateSrcmV2ClusterWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateSrcmV2Cluster Update a Cluster
 	//
@@ -1397,7 +1397,7 @@ type ClientInterface interface {
 	// Corresponds with PATCH /srcm/v2/clusters/{id} (the `UpdateSrcmV2Cluster` operationId).
 	//
 	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	UpdateSrcmV2Cluster(ctx context.Context, id string, body UpdateSrcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateSrcmV2Cluster(ctx context.Context, id string, body UpdateSrcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListSrcmV2Regions List of Regions
 	//
@@ -1408,7 +1408,7 @@ type ClientInterface interface {
 	// Corresponds with GET /srcm/v2/regions (the `ListSrcmV2Regions` operationId).
 	//
 	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	ListSrcmV2Regions(ctx context.Context, params *ListSrcmV2RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listSrcmV2Regions(ctx context.Context, params *ListSrcmV2RegionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSrcmV2Region Read a Region
 	//
@@ -1419,7 +1419,7 @@ type ClientInterface interface {
 	// Corresponds with GET /srcm/v2/regions/{id} (the `GetSrcmV2Region` operationId).
 	//
 	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	GetSrcmV2Region(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSrcmV2Region(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListSrcmV3Clusters List of Clusters
 	//
@@ -1428,7 +1428,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all clusters.
 	//
 	// Corresponds with GET /srcm/v3/clusters (the `ListSrcmV3Clusters` operationId).
-	ListSrcmV3Clusters(ctx context.Context, params *ListSrcmV3ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listSrcmV3Clusters(ctx context.Context, params *ListSrcmV3ClustersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSrcmV3Cluster Read a Cluster
 	//
@@ -1437,7 +1437,7 @@ type ClientInterface interface {
 	// Make a request to read a cluster.
 	//
 	// Corresponds with GET /srcm/v3/clusters/{id} (the `GetSrcmV3Cluster` operationId).
-	GetSrcmV3Cluster(ctx context.Context, id string, params *GetSrcmV3ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSrcmV3Cluster(ctx context.Context, id string, params *GetSrcmV3ClusterParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -1455,7 +1455,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -1475,149 +1475,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListSrcmV2ClustersWithResponse List of Clusters
-	//
-	// [![Deprecated](https://img.shields.io/badge/Lifecycle%20Stage-Deprecated-%23ff005c)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all clusters.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /srcm/v2/clusters (the `ListSrcmV2Clusters` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	ListSrcmV2ClustersWithResponse(ctx context.Context, params *ListSrcmV2ClustersParams, reqEditors ...RequestEditorFn) (*ListSrcmV2ClustersResponse, error)
-
-	// CreateSrcmV2ClusterWithBodyWithResponse Create a Cluster
-	//
-	// [![Deprecated](https://img.shields.io/badge/Lifecycle%20Stage-Deprecated-%23ff005c)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a cluster.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /srcm/v2/clusters (the `CreateSrcmV2Cluster` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	CreateSrcmV2ClusterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSrcmV2ClusterResponse, error)
-
-	// CreateSrcmV2ClusterWithResponse Create a Cluster
-	//
-	// [![Deprecated](https://img.shields.io/badge/Lifecycle%20Stage-Deprecated-%23ff005c)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a cluster.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /srcm/v2/clusters (the `CreateSrcmV2Cluster` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	CreateSrcmV2ClusterWithResponse(ctx context.Context, body CreateSrcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateSrcmV2ClusterResponse, error)
-
-	// DeleteSrcmV2ClusterWithResponse Delete a Cluster
-	//
-	// [![Deprecated](https://img.shields.io/badge/Lifecycle%20Stage-Deprecated-%23ff005c)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /srcm/v2/clusters/{id} (the `DeleteSrcmV2Cluster` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	DeleteSrcmV2ClusterWithResponse(ctx context.Context, id string, params *DeleteSrcmV2ClusterParams, reqEditors ...RequestEditorFn) (*DeleteSrcmV2ClusterResponse, error)
-
-	// GetSrcmV2ClusterWithResponse Read a Cluster
-	//
-	// [![Deprecated](https://img.shields.io/badge/Lifecycle%20Stage-Deprecated-%23ff005c)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /srcm/v2/clusters/{id} (the `GetSrcmV2Cluster` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	GetSrcmV2ClusterWithResponse(ctx context.Context, id string, params *GetSrcmV2ClusterParams, reqEditors ...RequestEditorFn) (*GetSrcmV2ClusterResponse, error)
-
-	// UpdateSrcmV2ClusterWithBodyWithResponse Update a Cluster
-	//
-	// [![Deprecated](https://img.shields.io/badge/Lifecycle%20Stage-Deprecated-%23ff005c)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a cluster.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /srcm/v2/clusters/{id} (the `UpdateSrcmV2Cluster` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	UpdateSrcmV2ClusterWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSrcmV2ClusterResponse, error)
-
-	// UpdateSrcmV2ClusterWithResponse Update a Cluster
-	//
-	// [![Deprecated](https://img.shields.io/badge/Lifecycle%20Stage-Deprecated-%23ff005c)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a cluster.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /srcm/v2/clusters/{id} (the `UpdateSrcmV2Cluster` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	UpdateSrcmV2ClusterWithResponse(ctx context.Context, id string, body UpdateSrcmV2ClusterJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSrcmV2ClusterResponse, error)
-
-	// ListSrcmV2RegionsWithResponse List of Regions
-	//
-	// [![Deprecated](https://img.shields.io/badge/Lifecycle%20Stage-Deprecated-%23ff005c)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all regions.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /srcm/v2/regions (the `ListSrcmV2Regions` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	ListSrcmV2RegionsWithResponse(ctx context.Context, params *ListSrcmV2RegionsParams, reqEditors ...RequestEditorFn) (*ListSrcmV2RegionsResponse, error)
-
-	// GetSrcmV2RegionWithResponse Read a Region
-	//
-	// [![Deprecated](https://img.shields.io/badge/Lifecycle%20Stage-Deprecated-%23ff005c)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a region.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /srcm/v2/regions/{id} (the `GetSrcmV2Region` operationId).
-	//
-	// Deprecated: this operation has been marked as deprecated upstream, but no `x-deprecated-reason` was set
-	GetSrcmV2RegionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetSrcmV2RegionResponse, error)
-
-	// ListSrcmV3ClustersWithResponse List of Clusters
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all clusters.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /srcm/v3/clusters (the `ListSrcmV3Clusters` operationId).
-	ListSrcmV3ClustersWithResponse(ctx context.Context, params *ListSrcmV3ClustersParams, reqEditors ...RequestEditorFn) (*ListSrcmV3ClustersResponse, error)
-
-	// GetSrcmV3ClusterWithResponse Read a Cluster
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /srcm/v3/clusters/{id} (the `GetSrcmV3Cluster` operationId).
-	GetSrcmV3ClusterWithResponse(ctx context.Context, id string, params *GetSrcmV3ClusterParams, reqEditors ...RequestEditorFn) (*GetSrcmV3ClusterResponse, error)
-}
-
 func (r ListSrcmV2ClustersResponse) GetJSON200() *struct {
 	// ApiVersion APIVersion defines the schema version of this representation of a resource.
 	ApiVersion ListSrcmV2Clusters200JSONResponseBodyApiVersion `json:"api_version"`

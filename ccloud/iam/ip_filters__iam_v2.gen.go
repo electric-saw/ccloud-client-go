@@ -85,7 +85,7 @@ type UpdateIamV2IpFilter200JSONResponseBodyKind string
 type CreateIamV2IpFilterJSONRequestBody CreateIamV2IpFilterJSONBody
 type UpdateIamV2IpFilterJSONRequestBody = IamV2IpFilter
 
-func (c *oasClient) ListIamV2IpFilters(ctx context.Context, params *ListIamV2IpFiltersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listIamV2IpFilters(ctx context.Context, params *ListIamV2IpFiltersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListIamV2IpFiltersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -96,7 +96,7 @@ func (c *oasClient) ListIamV2IpFilters(ctx context.Context, params *ListIamV2IpF
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateIamV2IpFilterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createIamV2IpFilterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2IpFilterRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -107,7 +107,7 @@ func (c *oasClient) CreateIamV2IpFilterWithBody(ctx context.Context, contentType
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateIamV2IpFilter(ctx context.Context, body CreateIamV2IpFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createIamV2IpFilter(ctx context.Context, body CreateIamV2IpFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateIamV2IpFilterRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -118,7 +118,7 @@ func (c *oasClient) CreateIamV2IpFilter(ctx context.Context, body CreateIamV2IpF
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteIamV2IpFilter(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteIamV2IpFilter(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteIamV2IpFilterRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -129,7 +129,7 @@ func (c *oasClient) DeleteIamV2IpFilter(ctx context.Context, id string, reqEdito
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetIamV2IpFilter(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getIamV2IpFilter(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetIamV2IpFilterRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -140,7 +140,7 @@ func (c *oasClient) GetIamV2IpFilter(ctx context.Context, id string, reqEditors 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateIamV2IpFilterWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateIamV2IpFilterWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2IpFilterRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -151,7 +151,7 @@ func (c *oasClient) UpdateIamV2IpFilterWithBody(ctx context.Context, id string, 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateIamV2IpFilter(ctx context.Context, id string, body UpdateIamV2IpFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateIamV2IpFilter(ctx context.Context, id string, body UpdateIamV2IpFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateIamV2IpFilterRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -842,49 +842,49 @@ type UpdateIamV2IpFilterResponse struct {
 }
 
 func (c *ClientWithResponses) ListIamV2IpFiltersWithResponse(ctx context.Context, params *ListIamV2IpFiltersParams, reqEditors ...RequestEditorFn) (*ListIamV2IpFiltersResponse, error) {
-	rsp, err := c.ListIamV2IpFilters(ctx, params, reqEditors...)
+	rsp, err := c.listIamV2IpFilters(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListIamV2IpFiltersResponse(rsp)
 }
 func (c *ClientWithResponses) CreateIamV2IpFilterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateIamV2IpFilterResponse, error) {
-	rsp, err := c.CreateIamV2IpFilterWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createIamV2IpFilterWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIamV2IpFilterResponse(rsp)
 }
 func (c *ClientWithResponses) CreateIamV2IpFilterWithResponse(ctx context.Context, body CreateIamV2IpFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateIamV2IpFilterResponse, error) {
-	rsp, err := c.CreateIamV2IpFilter(ctx, body, reqEditors...)
+	rsp, err := c.createIamV2IpFilter(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateIamV2IpFilterResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteIamV2IpFilterWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteIamV2IpFilterResponse, error) {
-	rsp, err := c.DeleteIamV2IpFilter(ctx, id, reqEditors...)
+	rsp, err := c.deleteIamV2IpFilter(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteIamV2IpFilterResponse(rsp)
 }
 func (c *ClientWithResponses) GetIamV2IpFilterWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetIamV2IpFilterResponse, error) {
-	rsp, err := c.GetIamV2IpFilter(ctx, id, reqEditors...)
+	rsp, err := c.getIamV2IpFilter(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetIamV2IpFilterResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateIamV2IpFilterWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateIamV2IpFilterResponse, error) {
-	rsp, err := c.UpdateIamV2IpFilterWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateIamV2IpFilterWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateIamV2IpFilterResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateIamV2IpFilterWithResponse(ctx context.Context, id string, body UpdateIamV2IpFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateIamV2IpFilterResponse, error) {
-	rsp, err := c.UpdateIamV2IpFilter(ctx, id, body, reqEditors...)
+	rsp, err := c.updateIamV2IpFilter(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -468,14 +468,14 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListContexts List contexts
 	//
 	// Retrieves a list of contexts.
 	//
 	// Corresponds with GET /contexts (the `ListContexts` operationId).
-	ListContexts(ctx context.Context, params *ListContextsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listContexts(ctx context.Context, params *ListContextsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
@@ -493,7 +493,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -513,19 +513,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListContextsWithResponse List contexts
-	//
-	// Retrieves a list of contexts.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /contexts (the `ListContexts` operationId).
-	ListContextsWithResponse(ctx context.Context, params *ListContextsParams, reqEditors ...RequestEditorFn) (*ListContextsResponse, error)
-}
-
 func (r ListContextsResponse) GetApplicationjsonQs05200() *[]string {
 	return r.ApplicationjsonQs05200
 }

@@ -108,7 +108,7 @@ type RegisterJSONRequestBody = RegisterSchemaRequest
 type RegisterApplicationVndSchemaregistryPlusJSONRequestBody = RegisterSchemaRequest
 type RegisterApplicationVndSchemaregistryV1PlusJSONRequestBody = RegisterSchemaRequest
 
-func (c *oasClient) List(ctx context.Context, params *ListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) list(ctx context.Context, params *ListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -119,7 +119,7 @@ func (c *oasClient) List(ctx context.Context, params *ListParams, reqEditors ...
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteSubject(ctx context.Context, subject string, params *DeleteSubjectParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteSubject(ctx context.Context, subject string, params *DeleteSubjectParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteSubjectRequest(c.Server, subject, params)
 	if err != nil {
 		return nil, err
@@ -130,7 +130,7 @@ func (c *oasClient) DeleteSubject(ctx context.Context, subject string, params *D
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) LookUpSchemaUnderSubjectWithBody(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) lookUpSchemaUnderSubjectWithBody(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewLookUpSchemaUnderSubjectRequestWithBody(c.Server, subject, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -141,7 +141,7 @@ func (c *oasClient) LookUpSchemaUnderSubjectWithBody(ctx context.Context, subjec
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) LookUpSchemaUnderSubject(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) lookUpSchemaUnderSubject(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewLookUpSchemaUnderSubjectRequest(c.Server, subject, params, body)
 	if err != nil {
 		return nil, err
@@ -152,7 +152,7 @@ func (c *oasClient) LookUpSchemaUnderSubject(ctx context.Context, subject string
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) lookUpSchemaUnderSubjectWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewLookUpSchemaUnderSubjectRequestWithApplicationVndSchemaregistryPlusJSONBody(c.Server, subject, params, body)
 	if err != nil {
 		return nil, err
@@ -163,7 +163,7 @@ func (c *oasClient) LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryPlus
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) lookUpSchemaUnderSubjectWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewLookUpSchemaUnderSubjectRequestWithApplicationVndSchemaregistryV1PlusJSONBody(c.Server, subject, params, body)
 	if err != nil {
 		return nil, err
@@ -174,7 +174,7 @@ func (c *oasClient) LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryV1Pl
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetLatestWithMetadata(ctx context.Context, subject string, params *GetLatestWithMetadataParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getLatestWithMetadata(ctx context.Context, subject string, params *GetLatestWithMetadataParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetLatestWithMetadataRequest(c.Server, subject, params)
 	if err != nil {
 		return nil, err
@@ -185,7 +185,7 @@ func (c *oasClient) GetLatestWithMetadata(ctx context.Context, subject string, p
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ListVersions(ctx context.Context, subject string, params *ListVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listVersions(ctx context.Context, subject string, params *ListVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListVersionsRequest(c.Server, subject, params)
 	if err != nil {
 		return nil, err
@@ -196,7 +196,7 @@ func (c *oasClient) ListVersions(ctx context.Context, subject string, params *Li
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) RegisterWithBody(ctx context.Context, subject string, params *RegisterParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) registerWithBody(ctx context.Context, subject string, params *RegisterParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRegisterRequestWithBody(c.Server, subject, params, contentType, body)
 	if err != nil {
 		return nil, err
@@ -207,7 +207,7 @@ func (c *oasClient) RegisterWithBody(ctx context.Context, subject string, params
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) Register(ctx context.Context, subject string, params *RegisterParams, body RegisterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) register(ctx context.Context, subject string, params *RegisterParams, body RegisterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRegisterRequest(c.Server, subject, params, body)
 	if err != nil {
 		return nil, err
@@ -218,7 +218,7 @@ func (c *oasClient) Register(ctx context.Context, subject string, params *Regist
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) RegisterWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *RegisterParams, body RegisterApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) registerWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *RegisterParams, body RegisterApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRegisterRequestWithApplicationVndSchemaregistryPlusJSONBody(c.Server, subject, params, body)
 	if err != nil {
 		return nil, err
@@ -229,7 +229,7 @@ func (c *oasClient) RegisterWithApplicationVndSchemaregistryPlusJSONBody(ctx con
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) RegisterWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *RegisterParams, body RegisterApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) registerWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *RegisterParams, body RegisterApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewRegisterRequestWithApplicationVndSchemaregistryV1PlusJSONBody(c.Server, subject, params, body)
 	if err != nil {
 		return nil, err
@@ -240,7 +240,7 @@ func (c *oasClient) RegisterWithApplicationVndSchemaregistryV1PlusJSONBody(ctx c
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteSchemaVersion(ctx context.Context, subject string, version string, params *DeleteSchemaVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteSchemaVersion(ctx context.Context, subject string, version string, params *DeleteSchemaVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteSchemaVersionRequest(c.Server, subject, version, params)
 	if err != nil {
 		return nil, err
@@ -251,7 +251,7 @@ func (c *oasClient) DeleteSchemaVersion(ctx context.Context, subject string, ver
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetSchemaByVersion(ctx context.Context, subject string, version string, params *GetSchemaByVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getSchemaByVersion(ctx context.Context, subject string, version string, params *GetSchemaByVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSchemaByVersionRequest(c.Server, subject, version, params)
 	if err != nil {
 		return nil, err
@@ -262,7 +262,7 @@ func (c *oasClient) GetSchemaByVersion(ctx context.Context, subject string, vers
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetReferencedBy(ctx context.Context, subject string, version string, params *GetReferencedByParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getReferencedBy(ctx context.Context, subject string, version string, params *GetReferencedByParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetReferencedByRequest(c.Server, subject, version, params)
 	if err != nil {
 		return nil, err
@@ -1347,105 +1347,105 @@ type GetReferencedByResponse struct {
 }
 
 func (c *ClientWithResponses) ListWithResponse(ctx context.Context, params *ListParams, reqEditors ...RequestEditorFn) (*ListResponse, error) {
-	rsp, err := c.List(ctx, params, reqEditors...)
+	rsp, err := c.list(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteSubjectWithResponse(ctx context.Context, subject string, params *DeleteSubjectParams, reqEditors ...RequestEditorFn) (*DeleteSubjectResponse, error) {
-	rsp, err := c.DeleteSubject(ctx, subject, params, reqEditors...)
+	rsp, err := c.deleteSubject(ctx, subject, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteSubjectResponse(rsp)
 }
 func (c *ClientWithResponses) LookUpSchemaUnderSubjectWithBodyWithResponse(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*LookUpSchemaUnderSubjectResponse, error) {
-	rsp, err := c.LookUpSchemaUnderSubjectWithBody(ctx, subject, params, contentType, body, reqEditors...)
+	rsp, err := c.lookUpSchemaUnderSubjectWithBody(ctx, subject, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseLookUpSchemaUnderSubjectResponse(rsp)
 }
 func (c *ClientWithResponses) LookUpSchemaUnderSubjectWithResponse(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectJSONRequestBody, reqEditors ...RequestEditorFn) (*LookUpSchemaUnderSubjectResponse, error) {
-	rsp, err := c.LookUpSchemaUnderSubject(ctx, subject, params, body, reqEditors...)
+	rsp, err := c.lookUpSchemaUnderSubject(ctx, subject, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseLookUpSchemaUnderSubjectResponse(rsp)
 }
 func (c *ClientWithResponses) LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*LookUpSchemaUnderSubjectResponse, error) {
-	rsp, err := c.LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryPlusJSONBody(ctx, subject, params, body, reqEditors...)
+	rsp, err := c.lookUpSchemaUnderSubjectWithApplicationVndSchemaregistryPlusJSONBody(ctx, subject, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseLookUpSchemaUnderSubjectResponse(rsp)
 }
 func (c *ClientWithResponses) LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*LookUpSchemaUnderSubjectResponse, error) {
-	rsp, err := c.LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryV1PlusJSONBody(ctx, subject, params, body, reqEditors...)
+	rsp, err := c.lookUpSchemaUnderSubjectWithApplicationVndSchemaregistryV1PlusJSONBody(ctx, subject, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseLookUpSchemaUnderSubjectResponse(rsp)
 }
 func (c *ClientWithResponses) GetLatestWithMetadataWithResponse(ctx context.Context, subject string, params *GetLatestWithMetadataParams, reqEditors ...RequestEditorFn) (*GetLatestWithMetadataResponse, error) {
-	rsp, err := c.GetLatestWithMetadata(ctx, subject, params, reqEditors...)
+	rsp, err := c.getLatestWithMetadata(ctx, subject, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetLatestWithMetadataResponse(rsp)
 }
 func (c *ClientWithResponses) ListVersionsWithResponse(ctx context.Context, subject string, params *ListVersionsParams, reqEditors ...RequestEditorFn) (*ListVersionsResponse, error) {
-	rsp, err := c.ListVersions(ctx, subject, params, reqEditors...)
+	rsp, err := c.listVersions(ctx, subject, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListVersionsResponse(rsp)
 }
 func (c *ClientWithResponses) RegisterWithBodyWithResponse(ctx context.Context, subject string, params *RegisterParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RegisterResponse, error) {
-	rsp, err := c.RegisterWithBody(ctx, subject, params, contentType, body, reqEditors...)
+	rsp, err := c.registerWithBody(ctx, subject, params, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseRegisterResponse(rsp)
 }
 func (c *ClientWithResponses) RegisterWithResponse(ctx context.Context, subject string, params *RegisterParams, body RegisterJSONRequestBody, reqEditors ...RequestEditorFn) (*RegisterResponse, error) {
-	rsp, err := c.Register(ctx, subject, params, body, reqEditors...)
+	rsp, err := c.register(ctx, subject, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseRegisterResponse(rsp)
 }
 func (c *ClientWithResponses) RegisterWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, subject string, params *RegisterParams, body RegisterApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*RegisterResponse, error) {
-	rsp, err := c.RegisterWithApplicationVndSchemaregistryPlusJSONBody(ctx, subject, params, body, reqEditors...)
+	rsp, err := c.registerWithApplicationVndSchemaregistryPlusJSONBody(ctx, subject, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseRegisterResponse(rsp)
 }
 func (c *ClientWithResponses) RegisterWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, subject string, params *RegisterParams, body RegisterApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*RegisterResponse, error) {
-	rsp, err := c.RegisterWithApplicationVndSchemaregistryV1PlusJSONBody(ctx, subject, params, body, reqEditors...)
+	rsp, err := c.registerWithApplicationVndSchemaregistryV1PlusJSONBody(ctx, subject, params, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseRegisterResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteSchemaVersionWithResponse(ctx context.Context, subject string, version string, params *DeleteSchemaVersionParams, reqEditors ...RequestEditorFn) (*DeleteSchemaVersionResponse, error) {
-	rsp, err := c.DeleteSchemaVersion(ctx, subject, version, params, reqEditors...)
+	rsp, err := c.deleteSchemaVersion(ctx, subject, version, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteSchemaVersionResponse(rsp)
 }
 func (c *ClientWithResponses) GetSchemaByVersionWithResponse(ctx context.Context, subject string, version string, params *GetSchemaByVersionParams, reqEditors ...RequestEditorFn) (*GetSchemaByVersionResponse, error) {
-	rsp, err := c.GetSchemaByVersion(ctx, subject, version, params, reqEditors...)
+	rsp, err := c.getSchemaByVersion(ctx, subject, version, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetSchemaByVersionResponse(rsp)
 }
 func (c *ClientWithResponses) GetReferencedByWithResponse(ctx context.Context, subject string, version string, params *GetReferencedByParams, reqEditors ...RequestEditorFn) (*GetReferencedByResponse, error) {
-	rsp, err := c.GetReferencedBy(ctx, subject, version, params, reqEditors...)
+	rsp, err := c.getReferencedBy(ctx, subject, version, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

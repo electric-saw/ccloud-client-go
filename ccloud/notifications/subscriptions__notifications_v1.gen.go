@@ -69,7 +69,7 @@ type UpdateNotificationsV1Subscription200JSONResponseBodyKind string
 type CreateNotificationsV1SubscriptionJSONRequestBody CreateNotificationsV1SubscriptionJSONBody
 type UpdateNotificationsV1SubscriptionJSONRequestBody = NotificationsV1Subscription
 
-func (c *oasClient) ListNotificationsV1Subscriptions(ctx context.Context, params *ListNotificationsV1SubscriptionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listNotificationsV1Subscriptions(ctx context.Context, params *ListNotificationsV1SubscriptionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNotificationsV1SubscriptionsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -80,7 +80,7 @@ func (c *oasClient) ListNotificationsV1Subscriptions(ctx context.Context, params
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateNotificationsV1SubscriptionWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createNotificationsV1SubscriptionWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNotificationsV1SubscriptionRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -91,7 +91,7 @@ func (c *oasClient) CreateNotificationsV1SubscriptionWithBody(ctx context.Contex
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreateNotificationsV1Subscription(ctx context.Context, body CreateNotificationsV1SubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createNotificationsV1Subscription(ctx context.Context, body CreateNotificationsV1SubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateNotificationsV1SubscriptionRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -102,7 +102,7 @@ func (c *oasClient) CreateNotificationsV1Subscription(ctx context.Context, body 
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeleteNotificationsV1Subscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deleteNotificationsV1Subscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeleteNotificationsV1SubscriptionRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -113,7 +113,7 @@ func (c *oasClient) DeleteNotificationsV1Subscription(ctx context.Context, id st
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetNotificationsV1Subscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getNotificationsV1Subscription(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetNotificationsV1SubscriptionRequest(c.Server, id)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (c *oasClient) GetNotificationsV1Subscription(ctx context.Context, id strin
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateNotificationsV1SubscriptionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateNotificationsV1SubscriptionWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNotificationsV1SubscriptionRequestWithBody(c.Server, id, contentType, body)
 	if err != nil {
 		return nil, err
@@ -135,7 +135,7 @@ func (c *oasClient) UpdateNotificationsV1SubscriptionWithBody(ctx context.Contex
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) UpdateNotificationsV1Subscription(ctx context.Context, id string, body UpdateNotificationsV1SubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) updateNotificationsV1Subscription(ctx context.Context, id string, body UpdateNotificationsV1SubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateNotificationsV1SubscriptionRequest(c.Server, id, body)
 	if err != nil {
 		return nil, err
@@ -765,49 +765,49 @@ type UpdateNotificationsV1SubscriptionResponse struct {
 }
 
 func (c *ClientWithResponses) ListNotificationsV1SubscriptionsWithResponse(ctx context.Context, params *ListNotificationsV1SubscriptionsParams, reqEditors ...RequestEditorFn) (*ListNotificationsV1SubscriptionsResponse, error) {
-	rsp, err := c.ListNotificationsV1Subscriptions(ctx, params, reqEditors...)
+	rsp, err := c.listNotificationsV1Subscriptions(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListNotificationsV1SubscriptionsResponse(rsp)
 }
 func (c *ClientWithResponses) CreateNotificationsV1SubscriptionWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateNotificationsV1SubscriptionResponse, error) {
-	rsp, err := c.CreateNotificationsV1SubscriptionWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createNotificationsV1SubscriptionWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateNotificationsV1SubscriptionResponse(rsp)
 }
 func (c *ClientWithResponses) CreateNotificationsV1SubscriptionWithResponse(ctx context.Context, body CreateNotificationsV1SubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateNotificationsV1SubscriptionResponse, error) {
-	rsp, err := c.CreateNotificationsV1Subscription(ctx, body, reqEditors...)
+	rsp, err := c.createNotificationsV1Subscription(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreateNotificationsV1SubscriptionResponse(rsp)
 }
 func (c *ClientWithResponses) DeleteNotificationsV1SubscriptionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteNotificationsV1SubscriptionResponse, error) {
-	rsp, err := c.DeleteNotificationsV1Subscription(ctx, id, reqEditors...)
+	rsp, err := c.deleteNotificationsV1Subscription(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeleteNotificationsV1SubscriptionResponse(rsp)
 }
 func (c *ClientWithResponses) GetNotificationsV1SubscriptionWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetNotificationsV1SubscriptionResponse, error) {
-	rsp, err := c.GetNotificationsV1Subscription(ctx, id, reqEditors...)
+	rsp, err := c.getNotificationsV1Subscription(ctx, id, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetNotificationsV1SubscriptionResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateNotificationsV1SubscriptionWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1SubscriptionResponse, error) {
-	rsp, err := c.UpdateNotificationsV1SubscriptionWithBody(ctx, id, contentType, body, reqEditors...)
+	rsp, err := c.updateNotificationsV1SubscriptionWithBody(ctx, id, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseUpdateNotificationsV1SubscriptionResponse(rsp)
 }
 func (c *ClientWithResponses) UpdateNotificationsV1SubscriptionWithResponse(ctx context.Context, id string, body UpdateNotificationsV1SubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateNotificationsV1SubscriptionResponse, error) {
-	rsp, err := c.UpdateNotificationsV1Subscription(ctx, id, body, reqEditors...)
+	rsp, err := c.updateNotificationsV1Subscription(ctx, id, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -23,7 +23,7 @@ type GetSqlv1StatementResultParams struct {
 type GetSqlv1StatementResult200JSONResponseBodyApiVersion string
 type GetSqlv1StatementResult200JSONResponseBodyKind string
 
-func (c *oasClient) GetSqlv1StatementResult(ctx context.Context, organizationId openapi_types.UUID, environmentId string, name string, params *GetSqlv1StatementResultParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getSqlv1StatementResult(ctx context.Context, organizationId openapi_types.UUID, environmentId string, name string, params *GetSqlv1StatementResultParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSqlv1StatementResultRequest(c.Server, organizationId, environmentId, name, params)
 	if err != nil {
 		return nil, err
@@ -174,7 +174,7 @@ type GetSqlv1StatementResultResponse struct {
 }
 
 func (c *ClientWithResponses) GetSqlv1StatementResultWithResponse(ctx context.Context, organizationId openapi_types.UUID, environmentId string, name string, params *GetSqlv1StatementResultParams, reqEditors ...RequestEditorFn) (*GetSqlv1StatementResultResponse, error) {
-	rsp, err := c.GetSqlv1StatementResult(ctx, organizationId, environmentId, name, params, reqEditors...)
+	rsp, err := c.getSqlv1StatementResult(ctx, organizationId, environmentId, name, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

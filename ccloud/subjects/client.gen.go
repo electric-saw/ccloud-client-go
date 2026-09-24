@@ -652,21 +652,21 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// List List subjects
 	//
 	// Retrieves a list of registered subjects matching specified parameters.
 	//
 	// Corresponds with GET /subjects (the `List` operationId).
-	List(ctx context.Context, params *ListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	list(ctx context.Context, params *ListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteSubject Delete subject
 	//
 	// Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
 	//
 	// Corresponds with DELETE /subjects/{subject} (the `DeleteSubject` operationId).
-	DeleteSubject(ctx context.Context, subject string, params *DeleteSubjectParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteSubject(ctx context.Context, subject string, params *DeleteSubjectParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LookUpSchemaUnderSubjectWithBody Lookup schema under subject
 	//
@@ -675,7 +675,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /subjects/{subject} (the `LookUpSchemaUnderSubject` operationId).
-	LookUpSchemaUnderSubjectWithBody(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	lookUpSchemaUnderSubjectWithBody(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LookUpSchemaUnderSubject Lookup schema under subject
 	//
@@ -684,7 +684,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /subjects/{subject} (the `LookUpSchemaUnderSubject` operationId).
-	LookUpSchemaUnderSubject(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	lookUpSchemaUnderSubject(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryPlusJSONBody Lookup schema under subject
 	//
@@ -693,7 +693,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry+json` content type.
 	//
 	// Corresponds with POST /subjects/{subject} (the `LookUpSchemaUnderSubject` operationId).
-	LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	lookUpSchemaUnderSubjectWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryV1PlusJSONBody Lookup schema under subject
 	//
@@ -702,19 +702,19 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type.
 	//
 	// Corresponds with POST /subjects/{subject} (the `LookUpSchemaUnderSubject` operationId).
-	LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	lookUpSchemaUnderSubjectWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetLatestWithMetadata Retrieve the latest version with the given metadata.
 	//
 	// Corresponds with GET /subjects/{subject}/metadata (the `GetLatestWithMetadata` operationId).
-	GetLatestWithMetadata(ctx context.Context, subject string, params *GetLatestWithMetadataParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getLatestWithMetadata(ctx context.Context, subject string, params *GetLatestWithMetadataParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListVersions List versions under subject
 	//
 	// Retrieves a list of versions registered under the specified subject.
 	//
 	// Corresponds with GET /subjects/{subject}/versions (the `ListVersions` operationId).
-	ListVersions(ctx context.Context, subject string, params *ListVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listVersions(ctx context.Context, subject string, params *ListVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// RegisterWithBody Register schema under a subject
 	//
@@ -725,7 +725,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /subjects/{subject}/versions (the `Register` operationId).
-	RegisterWithBody(ctx context.Context, subject string, params *RegisterParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	registerWithBody(ctx context.Context, subject string, params *RegisterParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// Register Register schema under a subject
 	//
@@ -736,7 +736,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /subjects/{subject}/versions (the `Register` operationId).
-	Register(ctx context.Context, subject string, params *RegisterParams, body RegisterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	register(ctx context.Context, subject string, params *RegisterParams, body RegisterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// RegisterWithApplicationVndSchemaregistryPlusJSONBody Register schema under a subject
 	//
@@ -747,7 +747,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry+json` content type.
 	//
 	// Corresponds with POST /subjects/{subject}/versions (the `Register` operationId).
-	RegisterWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *RegisterParams, body RegisterApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	registerWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *RegisterParams, body RegisterApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// RegisterWithApplicationVndSchemaregistryV1PlusJSONBody Register schema under a subject
 	//
@@ -758,38 +758,38 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type.
 	//
 	// Corresponds with POST /subjects/{subject}/versions (the `Register` operationId).
-	RegisterWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *RegisterParams, body RegisterApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	registerWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *RegisterParams, body RegisterApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteSchemaVersion Delete schema version
 	//
 	// Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
 	//
 	// Corresponds with DELETE /subjects/{subject}/versions/{version} (the `DeleteSchemaVersion` operationId).
-	DeleteSchemaVersion(ctx context.Context, subject string, version string, params *DeleteSchemaVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteSchemaVersion(ctx context.Context, subject string, version string, params *DeleteSchemaVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSchemaByVersion Get schema by version
 	//
 	// Retrieves a specific version of the schema registered under this subject.
 	//
 	// Corresponds with GET /subjects/{subject}/versions/{version} (the `GetSchemaByVersion` operationId).
-	GetSchemaByVersion(ctx context.Context, subject string, version string, params *GetSchemaByVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSchemaByVersion(ctx context.Context, subject string, version string, params *GetSchemaByVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetReferencedBy List schemas referencing a schema
 	//
 	// Retrieves the IDs of schemas that reference the specified schema.
 	//
 	// Corresponds with GET /subjects/{subject}/versions/{version}/referencedby (the `GetReferencedBy` operationId).
-	GetReferencedBy(ctx context.Context, subject string, version string, params *GetReferencedByParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getReferencedBy(ctx context.Context, subject string, version string, params *GetReferencedByParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetSchemaOnly1 Get schema string by version
 	//
 	// Retrieves the schema for the specified version of this subject. Only the unescaped schema string is returned.
 	//
 	// Corresponds with GET /subjects/{subject}/versions/{version}/schema (the `GetSchemaOnly1` operationId).
-	GetSchemaOnly1(ctx context.Context, subject string, version string, params *GetSchemaOnly1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getSchemaOnly1(ctx context.Context, subject string, version string, params *GetSchemaOnly1Params, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *oasClient) GetSchemaOnly1(ctx context.Context, subject string, version string, params *GetSchemaOnly1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getSchemaOnly1(ctx context.Context, subject string, version string, params *GetSchemaOnly1Params, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetSchemaOnly1Request(c.Server, subject, version, params)
 	if err != nil {
 		return nil, err
@@ -917,7 +917,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -937,160 +937,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListWithResponse List subjects
-	//
-	// Retrieves a list of registered subjects matching specified parameters.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /subjects (the `List` operationId).
-	ListWithResponse(ctx context.Context, params *ListParams, reqEditors ...RequestEditorFn) (*ListResponse, error)
-
-	// DeleteSubjectWithResponse Delete subject
-	//
-	// Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /subjects/{subject} (the `DeleteSubject` operationId).
-	DeleteSubjectWithResponse(ctx context.Context, subject string, params *DeleteSubjectParams, reqEditors ...RequestEditorFn) (*DeleteSubjectResponse, error)
-
-	// LookUpSchemaUnderSubjectWithBodyWithResponse Lookup schema under subject
-	//
-	// Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /subjects/{subject} (the `LookUpSchemaUnderSubject` operationId).
-	LookUpSchemaUnderSubjectWithBodyWithResponse(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*LookUpSchemaUnderSubjectResponse, error)
-
-	// LookUpSchemaUnderSubjectWithResponse Lookup schema under subject
-	//
-	// Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /subjects/{subject} (the `LookUpSchemaUnderSubject` operationId).
-	LookUpSchemaUnderSubjectWithResponse(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectJSONRequestBody, reqEditors ...RequestEditorFn) (*LookUpSchemaUnderSubjectResponse, error)
-
-	// LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryPlusJSONBodyWithResponse Lookup schema under subject
-	//
-	// Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
-	//
-	// Takes a body of the `application/vnd.schemaregistry+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /subjects/{subject} (the `LookUpSchemaUnderSubject` operationId).
-	LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*LookUpSchemaUnderSubjectResponse, error)
-
-	// LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse Lookup schema under subject
-	//
-	// Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
-	//
-	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /subjects/{subject} (the `LookUpSchemaUnderSubject` operationId).
-	LookUpSchemaUnderSubjectWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, subject string, params *LookUpSchemaUnderSubjectParams, body LookUpSchemaUnderSubjectApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*LookUpSchemaUnderSubjectResponse, error)
-
-	// GetLatestWithMetadataWithResponse Retrieve the latest version with the given metadata.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /subjects/{subject}/metadata (the `GetLatestWithMetadata` operationId).
-	GetLatestWithMetadataWithResponse(ctx context.Context, subject string, params *GetLatestWithMetadataParams, reqEditors ...RequestEditorFn) (*GetLatestWithMetadataResponse, error)
-
-	// ListVersionsWithResponse List versions under subject
-	//
-	// Retrieves a list of versions registered under the specified subject.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /subjects/{subject}/versions (the `ListVersions` operationId).
-	ListVersionsWithResponse(ctx context.Context, subject string, params *ListVersionsParams, reqEditors ...RequestEditorFn) (*ListVersionsResponse, error)
-
-	// RegisterWithBodyWithResponse Register schema under a subject
-	//
-	// Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects.
-	// A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config
-	// When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /subjects/{subject}/versions (the `Register` operationId).
-	RegisterWithBodyWithResponse(ctx context.Context, subject string, params *RegisterParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*RegisterResponse, error)
-
-	// RegisterWithResponse Register schema under a subject
-	//
-	// Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects.
-	// A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config
-	// When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /subjects/{subject}/versions (the `Register` operationId).
-	RegisterWithResponse(ctx context.Context, subject string, params *RegisterParams, body RegisterJSONRequestBody, reqEditors ...RequestEditorFn) (*RegisterResponse, error)
-
-	// RegisterWithApplicationVndSchemaregistryPlusJSONBodyWithResponse Register schema under a subject
-	//
-	// Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects.
-	// A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config
-	// When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
-	//
-	// Takes a body of the `application/vnd.schemaregistry+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /subjects/{subject}/versions (the `Register` operationId).
-	RegisterWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, subject string, params *RegisterParams, body RegisterApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*RegisterResponse, error)
-
-	// RegisterWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse Register schema under a subject
-	//
-	// Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects.
-	// A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config
-	// When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
-	//
-	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /subjects/{subject}/versions (the `Register` operationId).
-	RegisterWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, subject string, params *RegisterParams, body RegisterApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*RegisterResponse, error)
-
-	// DeleteSchemaVersionWithResponse Delete schema version
-	//
-	// Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /subjects/{subject}/versions/{version} (the `DeleteSchemaVersion` operationId).
-	DeleteSchemaVersionWithResponse(ctx context.Context, subject string, version string, params *DeleteSchemaVersionParams, reqEditors ...RequestEditorFn) (*DeleteSchemaVersionResponse, error)
-
-	// GetSchemaByVersionWithResponse Get schema by version
-	//
-	// Retrieves a specific version of the schema registered under this subject.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /subjects/{subject}/versions/{version} (the `GetSchemaByVersion` operationId).
-	GetSchemaByVersionWithResponse(ctx context.Context, subject string, version string, params *GetSchemaByVersionParams, reqEditors ...RequestEditorFn) (*GetSchemaByVersionResponse, error)
-
-	// GetReferencedByWithResponse List schemas referencing a schema
-	//
-	// Retrieves the IDs of schemas that reference the specified schema.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /subjects/{subject}/versions/{version}/referencedby (the `GetReferencedBy` operationId).
-	GetReferencedByWithResponse(ctx context.Context, subject string, version string, params *GetReferencedByParams, reqEditors ...RequestEditorFn) (*GetReferencedByResponse, error)
-
-	// GetSchemaOnly1WithResponse Get schema string by version
-	//
-	// Retrieves the schema for the specified version of this subject. Only the unescaped schema string is returned.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /subjects/{subject}/versions/{version}/schema (the `GetSchemaOnly1` operationId).
-	GetSchemaOnly1WithResponse(ctx context.Context, subject string, version string, params *GetSchemaOnly1Params, reqEditors ...RequestEditorFn) (*GetSchemaOnly1Response, error)
-}
-
 func (r ListResponse) GetApplicationjsonQs05200() *[]string {
 	return r.ApplicationjsonQs05200
 }
@@ -1716,7 +1562,7 @@ func (r GetSchemaOnly1Response) ContentType() string {
 	return ""
 }
 func (c *ClientWithResponses) GetSchemaOnly1WithResponse(ctx context.Context, subject string, version string, params *GetSchemaOnly1Params, reqEditors ...RequestEditorFn) (*GetSchemaOnly1Response, error) {
-	rsp, err := c.GetSchemaOnly1(ctx, subject, version, params, reqEditors...)
+	rsp, err := c.getSchemaOnly1(ctx, subject, version, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

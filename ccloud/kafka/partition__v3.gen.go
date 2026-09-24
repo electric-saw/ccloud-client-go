@@ -15,7 +15,7 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
-func (c *oasClient) ListKafkaPartitions(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listKafkaPartitions(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListKafkaPartitionsRequest(c.Server, clusterId, topicName)
 	if err != nil {
 		return nil, err
@@ -26,7 +26,7 @@ func (c *oasClient) ListKafkaPartitions(ctx context.Context, clusterId ClusterId
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetKafkaPartition(ctx context.Context, clusterId ClusterId, topicName TopicName, partitionId PartitionId, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getKafkaPartition(ctx context.Context, clusterId ClusterId, topicName TopicName, partitionId PartitionId, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetKafkaPartitionRequest(c.Server, clusterId, topicName, partitionId)
 	if err != nil {
 		return nil, err
@@ -157,14 +157,14 @@ type GetKafkaPartitionResponse struct {
 }
 
 func (c *ClientWithResponses) ListKafkaPartitionsWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, reqEditors ...RequestEditorFn) (*ListKafkaPartitionsResponse, error) {
-	rsp, err := c.ListKafkaPartitions(ctx, clusterId, topicName, reqEditors...)
+	rsp, err := c.listKafkaPartitions(ctx, clusterId, topicName, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListKafkaPartitionsResponse(rsp)
 }
 func (c *ClientWithResponses) GetKafkaPartitionWithResponse(ctx context.Context, clusterId ClusterId, topicName TopicName, partitionId PartitionId, reqEditors ...RequestEditorFn) (*GetKafkaPartitionResponse, error) {
-	rsp, err := c.GetKafkaPartition(ctx, clusterId, topicName, partitionId, reqEditors...)
+	rsp, err := c.getKafkaPartition(ctx, clusterId, topicName, partitionId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

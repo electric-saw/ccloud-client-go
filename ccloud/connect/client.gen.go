@@ -3300,7 +3300,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// ListConnectV1CustomConnectorPlugins List of Custom Connector Plugins
 	//
@@ -3311,7 +3311,7 @@ type ClientInterface interface {
 	// If no `cloud` filter is specified, returns custom connector plugins from all clouds.
 	//
 	// Corresponds with GET /connect/v1/custom-connector-plugins (the `ListConnectV1CustomConnectorPlugins` operationId).
-	ListConnectV1CustomConnectorPlugins(ctx context.Context, params *ListConnectV1CustomConnectorPluginsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listConnectV1CustomConnectorPlugins(ctx context.Context, params *ListConnectV1CustomConnectorPluginsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateConnectV1CustomConnectorPluginWithBody Create a Custom Connector Plugin
 	//
@@ -3322,7 +3322,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /connect/v1/custom-connector-plugins (the `CreateConnectV1CustomConnectorPlugin` operationId).
-	CreateConnectV1CustomConnectorPluginWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createConnectV1CustomConnectorPluginWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateConnectV1CustomConnectorPlugin Create a Custom Connector Plugin
 	//
@@ -3333,7 +3333,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /connect/v1/custom-connector-plugins (the `CreateConnectV1CustomConnectorPlugin` operationId).
-	CreateConnectV1CustomConnectorPlugin(ctx context.Context, body CreateConnectV1CustomConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createConnectV1CustomConnectorPlugin(ctx context.Context, body CreateConnectV1CustomConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteConnectV1CustomConnectorPlugin Delete a Custom Connector Plugin
 	//
@@ -3342,7 +3342,7 @@ type ClientInterface interface {
 	// Make a request to delete a custom connector plugin.
 	//
 	// Corresponds with DELETE /connect/v1/custom-connector-plugins/{id} (the `DeleteConnectV1CustomConnectorPlugin` operationId).
-	DeleteConnectV1CustomConnectorPlugin(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteConnectV1CustomConnectorPlugin(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetConnectV1CustomConnectorPlugin Read a Custom Connector Plugin
 	//
@@ -3351,7 +3351,7 @@ type ClientInterface interface {
 	// Make a request to read a custom connector plugin.
 	//
 	// Corresponds with GET /connect/v1/custom-connector-plugins/{id} (the `GetConnectV1CustomConnectorPlugin` operationId).
-	GetConnectV1CustomConnectorPlugin(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getConnectV1CustomConnectorPlugin(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateConnectV1CustomConnectorPluginWithBody Update a Custom Connector Plugin
 	//
@@ -3362,7 +3362,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PATCH /connect/v1/custom-connector-plugins/{id} (the `UpdateConnectV1CustomConnectorPlugin` operationId).
-	UpdateConnectV1CustomConnectorPluginWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateConnectV1CustomConnectorPluginWithBody(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// UpdateConnectV1CustomConnectorPlugin Update a Custom Connector Plugin
 	//
@@ -3373,7 +3373,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PATCH /connect/v1/custom-connector-plugins/{id} (the `UpdateConnectV1CustomConnectorPlugin` operationId).
-	UpdateConnectV1CustomConnectorPlugin(ctx context.Context, id string, body UpdateConnectV1CustomConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	updateConnectV1CustomConnectorPlugin(ctx context.Context, id string, body UpdateConnectV1CustomConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListConnectV1CustomConnectorRuntimes List of Custom Connector Runtimes
 	//
@@ -3382,7 +3382,7 @@ type ClientInterface interface {
 	// Retrieve a sorted, filtered, paginated list of all custom connector runtimes.
 	//
 	// Corresponds with GET /connect/v1/custom-connector-runtimes (the `ListConnectV1CustomConnectorRuntimes` operationId).
-	ListConnectV1CustomConnectorRuntimes(ctx context.Context, params *ListConnectV1CustomConnectorRuntimesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listConnectV1CustomConnectorRuntimes(ctx context.Context, params *ListConnectV1CustomConnectorRuntimesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListConnectv1ConnectorPlugins List of Managed Connector plugins
 	//
@@ -3391,7 +3391,7 @@ type ClientInterface interface {
 	// Return a list of Managed Connector plugins installed in the Kafka Connect cluster.
 	//
 	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins (the `ListConnectv1ConnectorPlugins` operationId).
-	ListConnectv1ConnectorPlugins(ctx context.Context, environmentId string, kafkaClusterId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listConnectv1ConnectorPlugins(ctx context.Context, environmentId string, kafkaClusterId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// TranslateConnectv1ConnectorPluginWithBody Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configurations
 	//
@@ -3404,7 +3404,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/translate?mask_sensitive=true (the `TranslateConnectv1ConnectorPlugin` operationId).
-	TranslateConnectv1ConnectorPluginWithBody(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	translateConnectv1ConnectorPluginWithBody(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// TranslateConnectv1ConnectorPlugin Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configurations
 	//
@@ -3417,7 +3417,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/translate?mask_sensitive=true (the `TranslateConnectv1ConnectorPlugin` operationId).
-	TranslateConnectv1ConnectorPlugin(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, body TranslateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	translateConnectv1ConnectorPlugin(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, body TranslateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ValidateConnectv1ConnectorPluginWithBody Validate a Managed Connector Plugin
 	//
@@ -3428,7 +3428,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate (the `ValidateConnectv1ConnectorPlugin` operationId).
-	ValidateConnectv1ConnectorPluginWithBody(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	validateConnectv1ConnectorPluginWithBody(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ValidateConnectv1ConnectorPlugin Validate a Managed Connector Plugin
 	//
@@ -3439,7 +3439,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate (the `ValidateConnectv1ConnectorPlugin` operationId).
-	ValidateConnectv1ConnectorPlugin(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, body ValidateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	validateConnectv1ConnectorPlugin(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, body ValidateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListConnectv1Connectors List of Connectors
 	//
@@ -3448,7 +3448,7 @@ type ClientInterface interface {
 	// Retrieve a list of "names" of the active connectors. You can then make a [read request](#operation/readConnectv1Connector) for a specific connector by name.
 	//
 	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors (the `ListConnectv1Connectors` operationId).
-	ListConnectv1Connectors(ctx context.Context, environmentId string, kafkaClusterId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listConnectv1Connectors(ctx context.Context, environmentId string, kafkaClusterId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateConnectv1ConnectorWithBody Create a Connector
 	//
@@ -3459,7 +3459,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors (the `CreateConnectv1Connector` operationId).
-	CreateConnectv1ConnectorWithBody(ctx context.Context, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createConnectv1ConnectorWithBody(ctx context.Context, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateConnectv1Connector Create a Connector
 	//
@@ -3470,7 +3470,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors (the `CreateConnectv1Connector` operationId).
-	CreateConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, body CreateConnectv1ConnectorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, body CreateConnectv1ConnectorJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// DeleteConnectv1Connector Delete a Connector
 	//
@@ -3479,7 +3479,7 @@ type ClientInterface interface {
 	// Delete a connector. Halts all tasks and deletes the connector configuration.
 	//
 	// Corresponds with DELETE /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name} (the `DeleteConnectv1Connector` operationId).
-	DeleteConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	deleteConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReadConnectv1Connector Read a Connector
 	//
@@ -3488,7 +3488,7 @@ type ClientInterface interface {
 	// Get information about the connector.
 	//
 	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name} (the `ReadConnectv1Connector` operationId).
-	ReadConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	readConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetConnectv1ConnectorConfig Read a Connector Configuration
 	//
@@ -3497,7 +3497,7 @@ type ClientInterface interface {
 	// Get the configuration for the connector.
 	//
 	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config (the `GetConnectv1ConnectorConfig` operationId).
-	GetConnectv1ConnectorConfig(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getConnectv1ConnectorConfig(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateOrUpdateConnectv1ConnectorConfigWithBody Create or Update a Connector Configuration
 	//
@@ -3506,7 +3506,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config (the `CreateOrUpdateConnectv1ConnectorConfig` operationId).
-	CreateOrUpdateConnectv1ConnectorConfigWithBody(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createOrUpdateConnectv1ConnectorConfigWithBody(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateOrUpdateConnectv1ConnectorConfig Create or Update a Connector Configuration
 	//
@@ -3515,7 +3515,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config (the `CreateOrUpdateConnectv1ConnectorConfig` operationId).
-	CreateOrUpdateConnectv1ConnectorConfig(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, body CreateOrUpdateConnectv1ConnectorConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	createOrUpdateConnectv1ConnectorConfig(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, body CreateOrUpdateConnectv1ConnectorConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetConnectv1ConnectorOffsets Get a Connector Offsets
 	//
@@ -3525,7 +3525,7 @@ type ClientInterface interface {
 	// from which the connector is pulling in data. The offsets of a connector are continuously observed periodically and are queryable via this API.
 	//
 	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets (the `GetConnectv1ConnectorOffsets` operationId).
-	GetConnectv1ConnectorOffsets(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getConnectv1ConnectorOffsets(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// AlterConnectv1ConnectorOffsetsRequestWithBody Request to Alter the Connector Offsets
 	//
@@ -3538,7 +3538,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request (the `AlterConnectv1ConnectorOffsetsRequest` operationId).
-	AlterConnectv1ConnectorOffsetsRequestWithBody(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	alterConnectv1ConnectorOffsetsRequestWithBody(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// AlterConnectv1ConnectorOffsetsRequest Request to Alter the Connector Offsets
 	//
@@ -3551,7 +3551,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request (the `AlterConnectv1ConnectorOffsetsRequest` operationId).
-	AlterConnectv1ConnectorOffsetsRequest(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, body AlterConnectv1ConnectorOffsetsRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	alterConnectv1ConnectorOffsetsRequest(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, body AlterConnectv1ConnectorOffsetsRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetConnectv1ConnectorOffsetsRequestStatus Get the Status of Alter Offset Request
 	//
@@ -3560,7 +3560,7 @@ type ClientInterface interface {
 	// Get the status of the previous alter offset request.
 	//
 	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status (the `GetConnectv1ConnectorOffsetsRequestStatus` operationId).
-	GetConnectv1ConnectorOffsetsRequestStatus(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	getConnectv1ConnectorOffsetsRequestStatus(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PauseConnectv1Connector Pause a Connector
 	//
@@ -3569,7 +3569,7 @@ type ClientInterface interface {
 	// Pause the connector and its tasks. Stops message processing until the connector is resumed. This call is asynchronous and the tasks will not transition to PAUSED state at the same time.
 	//
 	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause (the `PauseConnectv1Connector` operationId).
-	PauseConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	pauseConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// RestartConnectv1Connector Restart a Connector
 	//
@@ -3577,7 +3577,7 @@ type ClientInterface interface {
 	// Restart the connector and its tasks. Stops message processing until the connector and tasks are restart. This call is asynchronous and the connector will not transition to another state at the same time.
 	//
 	// Corresponds with POST /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/restart (the `RestartConnectv1Connector` operationId).
-	RestartConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	restartConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ResumeConnectv1Connector Resume a Connector
 	//
@@ -3586,14 +3586,14 @@ type ClientInterface interface {
 	// Resume a paused connector or do nothing if the connector is not paused. This call is asynchronous and the tasks will not transition to RUNNING state at the same time.
 	//
 	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume (the `ResumeConnectv1Connector` operationId).
-	ResumeConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	resumeConnectv1Connector(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ReadConnectv1ConnectorStatus Read a Connector Status
 	//
 	// Get current status of the connector. This includes whether it is running, failed, or paused. Also includes which worker it is assigned to, error information if it has failed, and the state of all its tasks.
 	//
 	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status (the `ReadConnectv1ConnectorStatus` operationId).
-	ReadConnectv1ConnectorStatus(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	readConnectv1ConnectorStatus(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListConnectv1ConnectorTasks List of Connector Tasks
 	//
@@ -3602,7 +3602,7 @@ type ClientInterface interface {
 	// Get a list of tasks currently running for the connector.
 	//
 	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks (the `ListConnectv1ConnectorTasks` operationId).
-	ListConnectv1ConnectorTasks(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listConnectv1ConnectorTasks(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListConnectv1ConnectorsWithExpansions List of Connectors with Expansions
 	//
@@ -3611,7 +3611,7 @@ type ClientInterface interface {
 	// Retrieve an object with the queried expansions of all connectors. Without `expand` query parameter, this list connector’s endpoint will return a [list of only the connector names](#operation/listConnectv1Connectors).
 	//
 	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id (the `ListConnectv1ConnectorsWithExpansions` operationId).
-	ListConnectv1ConnectorsWithExpansions(ctx context.Context, environmentId string, kafkaClusterId string, params *ListConnectv1ConnectorsWithExpansionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	listConnectv1ConnectorsWithExpansions(ctx context.Context, environmentId string, kafkaClusterId string, params *ListConnectv1ConnectorsWithExpansionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PresignedUploadUrlConnectV1PresignedUrlWithBody Request a presigned upload URL for a new Custom Connector Plugin.
 	//
@@ -3622,7 +3622,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /connect/v1/presigned-upload-url (the `PresignedUploadUrlConnectV1PresignedUrl` operationId).
-	PresignedUploadUrlConnectV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	presignedUploadUrlConnectV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PresignedUploadUrlConnectV1PresignedUrl Request a presigned upload URL for a new Custom Connector Plugin.
 	//
@@ -3633,10 +3633,10 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /connect/v1/presigned-upload-url (the `PresignedUploadUrlConnectV1PresignedUrl` operationId).
-	PresignedUploadUrlConnectV1PresignedUrl(ctx context.Context, body PresignedUploadUrlConnectV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	presignedUploadUrlConnectV1PresignedUrl(ctx context.Context, body PresignedUploadUrlConnectV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *oasClient) PresignedUploadUrlConnectV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) presignedUploadUrlConnectV1PresignedUrlWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPresignedUploadUrlConnectV1PresignedUrlRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -3647,7 +3647,7 @@ func (c *oasClient) PresignedUploadUrlConnectV1PresignedUrlWithBody(ctx context.
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) PresignedUploadUrlConnectV1PresignedUrl(ctx context.Context, body PresignedUploadUrlConnectV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) presignedUploadUrlConnectV1PresignedUrl(ctx context.Context, body PresignedUploadUrlConnectV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPresignedUploadUrlConnectV1PresignedUrlRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -3709,7 +3709,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -3729,377 +3729,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// ListConnectV1CustomConnectorPluginsWithResponse List of Custom Connector Plugins
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all custom connector plugins.
-	//
-	// If no `cloud` filter is specified, returns custom connector plugins from all clouds.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /connect/v1/custom-connector-plugins (the `ListConnectV1CustomConnectorPlugins` operationId).
-	ListConnectV1CustomConnectorPluginsWithResponse(ctx context.Context, params *ListConnectV1CustomConnectorPluginsParams, reqEditors ...RequestEditorFn) (*ListConnectV1CustomConnectorPluginsResponse, error)
-
-	// CreateConnectV1CustomConnectorPluginWithBodyWithResponse Create a Custom Connector Plugin
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a custom connector plugin.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /connect/v1/custom-connector-plugins (the `CreateConnectV1CustomConnectorPlugin` operationId).
-	CreateConnectV1CustomConnectorPluginWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateConnectV1CustomConnectorPluginResponse, error)
-
-	// CreateConnectV1CustomConnectorPluginWithResponse Create a Custom Connector Plugin
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to create a custom connector plugin.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /connect/v1/custom-connector-plugins (the `CreateConnectV1CustomConnectorPlugin` operationId).
-	CreateConnectV1CustomConnectorPluginWithResponse(ctx context.Context, body CreateConnectV1CustomConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateConnectV1CustomConnectorPluginResponse, error)
-
-	// DeleteConnectV1CustomConnectorPluginWithResponse Delete a Custom Connector Plugin
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to delete a custom connector plugin.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /connect/v1/custom-connector-plugins/{id} (the `DeleteConnectV1CustomConnectorPlugin` operationId).
-	DeleteConnectV1CustomConnectorPluginWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*DeleteConnectV1CustomConnectorPluginResponse, error)
-
-	// GetConnectV1CustomConnectorPluginWithResponse Read a Custom Connector Plugin
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to read a custom connector plugin.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /connect/v1/custom-connector-plugins/{id} (the `GetConnectV1CustomConnectorPlugin` operationId).
-	GetConnectV1CustomConnectorPluginWithResponse(ctx context.Context, id string, reqEditors ...RequestEditorFn) (*GetConnectV1CustomConnectorPluginResponse, error)
-
-	// UpdateConnectV1CustomConnectorPluginWithBodyWithResponse Update a Custom Connector Plugin
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a custom connector plugin.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /connect/v1/custom-connector-plugins/{id} (the `UpdateConnectV1CustomConnectorPlugin` operationId).
-	UpdateConnectV1CustomConnectorPluginWithBodyWithResponse(ctx context.Context, id string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateConnectV1CustomConnectorPluginResponse, error)
-
-	// UpdateConnectV1CustomConnectorPluginWithResponse Update a Custom Connector Plugin
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Make a request to update a custom connector plugin.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /connect/v1/custom-connector-plugins/{id} (the `UpdateConnectV1CustomConnectorPlugin` operationId).
-	UpdateConnectV1CustomConnectorPluginWithResponse(ctx context.Context, id string, body UpdateConnectV1CustomConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateConnectV1CustomConnectorPluginResponse, error)
-
-	// ListConnectV1CustomConnectorRuntimesWithResponse List of Custom Connector Runtimes
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a sorted, filtered, paginated list of all custom connector runtimes.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /connect/v1/custom-connector-runtimes (the `ListConnectV1CustomConnectorRuntimes` operationId).
-	ListConnectV1CustomConnectorRuntimesWithResponse(ctx context.Context, params *ListConnectV1CustomConnectorRuntimesParams, reqEditors ...RequestEditorFn) (*ListConnectV1CustomConnectorRuntimesResponse, error)
-
-	// ListConnectv1ConnectorPluginsWithResponse List of Managed Connector plugins
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Return a list of Managed Connector plugins installed in the Kafka Connect cluster.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins (the `ListConnectv1ConnectorPlugins` operationId).
-	ListConnectv1ConnectorPluginsWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, reqEditors ...RequestEditorFn) (*ListConnectv1ConnectorPluginsResponse, error)
-
-	// TranslateConnectv1ConnectorPluginWithBodyWithResponse Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configurations
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Translate the provided Self Managed configuration values. This API performs configuration translation
-	// and returns the translated fully managed configuration along with any errors or warnings.
-	// Query Parameter `mask_sensitive=true` redacts sensitive config values in response.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/translate?mask_sensitive=true (the `TranslateConnectv1ConnectorPlugin` operationId).
-	TranslateConnectv1ConnectorPluginWithBodyWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TranslateConnectv1ConnectorPluginResponse, error)
-
-	// TranslateConnectv1ConnectorPluginWithResponse Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configurations
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Translate the provided Self Managed configuration values. This API performs configuration translation
-	// and returns the translated fully managed configuration along with any errors or warnings.
-	// Query Parameter `mask_sensitive=true` redacts sensitive config values in response.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/translate?mask_sensitive=true (the `TranslateConnectv1ConnectorPlugin` operationId).
-	TranslateConnectv1ConnectorPluginWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, params *TranslateConnectv1ConnectorPluginParams, body TranslateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*TranslateConnectv1ConnectorPluginResponse, error)
-
-	// ValidateConnectv1ConnectorPluginWithBodyWithResponse Validate a Managed Connector Plugin
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Validate the provided configuration values against the configuration definition. This API performs per config validation and returns suggested values and validation error messages.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate (the `ValidateConnectv1ConnectorPlugin` operationId).
-	ValidateConnectv1ConnectorPluginWithBodyWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ValidateConnectv1ConnectorPluginResponse, error)
-
-	// ValidateConnectv1ConnectorPluginWithResponse Validate a Managed Connector Plugin
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Validate the provided configuration values against the configuration definition. This API performs per config validation and returns suggested values and validation error messages.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate (the `ValidateConnectv1ConnectorPlugin` operationId).
-	ValidateConnectv1ConnectorPluginWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, pluginName string, body ValidateConnectv1ConnectorPluginJSONRequestBody, reqEditors ...RequestEditorFn) (*ValidateConnectv1ConnectorPluginResponse, error)
-
-	// ListConnectv1ConnectorsWithResponse List of Connectors
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve a list of "names" of the active connectors. You can then make a [read request](#operation/readConnectv1Connector) for a specific connector by name.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors (the `ListConnectv1Connectors` operationId).
-	ListConnectv1ConnectorsWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, reqEditors ...RequestEditorFn) (*ListConnectv1ConnectorsResponse, error)
-
-	// CreateConnectv1ConnectorWithBodyWithResponse Create a Connector
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Create a new connector. Returns the new connector information if successful.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors (the `CreateConnectv1Connector` operationId).
-	CreateConnectv1ConnectorWithBodyWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateConnectv1ConnectorResponse, error)
-
-	// CreateConnectv1ConnectorWithResponse Create a Connector
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Create a new connector. Returns the new connector information if successful.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors (the `CreateConnectv1Connector` operationId).
-	CreateConnectv1ConnectorWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, body CreateConnectv1ConnectorJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateConnectv1ConnectorResponse, error)
-
-	// DeleteConnectv1ConnectorWithResponse Delete a Connector
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Delete a connector. Halts all tasks and deletes the connector configuration.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name} (the `DeleteConnectv1Connector` operationId).
-	DeleteConnectv1ConnectorWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*DeleteConnectv1ConnectorResponse, error)
-
-	// ReadConnectv1ConnectorWithResponse Read a Connector
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Get information about the connector.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name} (the `ReadConnectv1Connector` operationId).
-	ReadConnectv1ConnectorWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*ReadConnectv1ConnectorResponse, error)
-
-	// GetConnectv1ConnectorConfigWithResponse Read a Connector Configuration
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Get the configuration for the connector.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config (the `GetConnectv1ConnectorConfig` operationId).
-	GetConnectv1ConnectorConfigWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*GetConnectv1ConnectorConfigResponse, error)
-
-	// CreateOrUpdateConnectv1ConnectorConfigWithBodyWithResponse Create or Update a Connector Configuration
-	//
-	// Create a new connector using the given configuration, or update the configuration for an existing connector. Returns information about the connector after the change has been made.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config (the `CreateOrUpdateConnectv1ConnectorConfig` operationId).
-	CreateOrUpdateConnectv1ConnectorConfigWithBodyWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateOrUpdateConnectv1ConnectorConfigResponse, error)
-
-	// CreateOrUpdateConnectv1ConnectorConfigWithResponse Create or Update a Connector Configuration
-	//
-	// Create a new connector using the given configuration, or update the configuration for an existing connector. Returns information about the connector after the change has been made.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/config (the `CreateOrUpdateConnectv1ConnectorConfig` operationId).
-	CreateOrUpdateConnectv1ConnectorConfigWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, body CreateOrUpdateConnectv1ConnectorConfigJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateOrUpdateConnectv1ConnectorConfigResponse, error)
-
-	// GetConnectv1ConnectorOffsetsWithResponse Get a Connector Offsets
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Get the current offsets for the connector. The offsets provide information on the point in the source system,
-	// from which the connector is pulling in data. The offsets of a connector are continuously observed periodically and are queryable via this API.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets (the `GetConnectv1ConnectorOffsets` operationId).
-	GetConnectv1ConnectorOffsetsWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*GetConnectv1ConnectorOffsetsResponse, error)
-
-	// AlterConnectv1ConnectorOffsetsRequestWithBodyWithResponse Request to Alter the Connector Offsets
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Request to alter the offsets of a connector. This supports the ability to PATCH/DELETE the offsets of a connector.
-	// Note, you will see momentary downtime as this will internally stop the connector, while the offsets are being altered.
-	// You can only make one alter offsets request at a time for a connector.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request (the `AlterConnectv1ConnectorOffsetsRequest` operationId).
-	AlterConnectv1ConnectorOffsetsRequestWithBodyWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AlterConnectv1ConnectorOffsetsRequestResponse, error)
-
-	// AlterConnectv1ConnectorOffsetsRequestWithResponse Request to Alter the Connector Offsets
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Request to alter the offsets of a connector. This supports the ability to PATCH/DELETE the offsets of a connector.
-	// Note, you will see momentary downtime as this will internally stop the connector, while the offsets are being altered.
-	// You can only make one alter offsets request at a time for a connector.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request (the `AlterConnectv1ConnectorOffsetsRequest` operationId).
-	AlterConnectv1ConnectorOffsetsRequestWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, body AlterConnectv1ConnectorOffsetsRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*AlterConnectv1ConnectorOffsetsRequestResponse, error)
-
-	// GetConnectv1ConnectorOffsetsRequestStatusWithResponse Get the Status of Alter Offset Request
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Get the status of the previous alter offset request.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/offsets/request/status (the `GetConnectv1ConnectorOffsetsRequestStatus` operationId).
-	GetConnectv1ConnectorOffsetsRequestStatusWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*GetConnectv1ConnectorOffsetsRequestStatusResponse, error)
-
-	// PauseConnectv1ConnectorWithResponse Pause a Connector
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Pause the connector and its tasks. Stops message processing until the connector is resumed. This call is asynchronous and the tasks will not transition to PAUSED state at the same time.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/pause (the `PauseConnectv1Connector` operationId).
-	PauseConnectv1ConnectorWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*PauseConnectv1ConnectorResponse, error)
-
-	// RestartConnectv1ConnectorWithResponse Restart a Connector
-	//
-	// [![Preview](https://img.shields.io/badge/Lifecycle%20Stage-Preview-%2300afba)](#section/Versioning/API-Lifecycle-Policy)
-	// Restart the connector and its tasks. Stops message processing until the connector and tasks are restart. This call is asynchronous and the connector will not transition to another state at the same time.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/restart (the `RestartConnectv1Connector` operationId).
-	RestartConnectv1ConnectorWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*RestartConnectv1ConnectorResponse, error)
-
-	// ResumeConnectv1ConnectorWithResponse Resume a Connector
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Resume a paused connector or do nothing if the connector is not paused. This call is asynchronous and the tasks will not transition to RUNNING state at the same time.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PUT /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/resume (the `ResumeConnectv1Connector` operationId).
-	ResumeConnectv1ConnectorWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*ResumeConnectv1ConnectorResponse, error)
-
-	// ReadConnectv1ConnectorStatusWithResponse Read a Connector Status
-	//
-	// Get current status of the connector. This includes whether it is running, failed, or paused. Also includes which worker it is assigned to, error information if it has failed, and the state of all its tasks.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/status (the `ReadConnectv1ConnectorStatus` operationId).
-	ReadConnectv1ConnectorStatusWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*ReadConnectv1ConnectorStatusResponse, error)
-
-	// ListConnectv1ConnectorTasksWithResponse List of Connector Tasks
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Get a list of tasks currently running for the connector.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors/{connector_name}/tasks (the `ListConnectv1ConnectorTasks` operationId).
-	ListConnectv1ConnectorTasksWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, connectorName string, reqEditors ...RequestEditorFn) (*ListConnectv1ConnectorTasksResponse, error)
-
-	// ListConnectv1ConnectorsWithExpansionsWithResponse List of Connectors with Expansions
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Retrieve an object with the queried expansions of all connectors. Without `expand` query parameter, this list connector’s endpoint will return a [list of only the connector names](#operation/listConnectv1Connectors).
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connectors?expand=info,status,id (the `ListConnectv1ConnectorsWithExpansions` operationId).
-	ListConnectv1ConnectorsWithExpansionsWithResponse(ctx context.Context, environmentId string, kafkaClusterId string, params *ListConnectv1ConnectorsWithExpansionsParams, reqEditors ...RequestEditorFn) (*ListConnectv1ConnectorsWithExpansionsResponse, error)
-
-	// PresignedUploadUrlConnectV1PresignedUrlWithBodyWithResponse Request a presigned upload URL for a new Custom Connector Plugin.
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Request a presigned upload URL to upload a Custom Connector Plugin archive.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /connect/v1/presigned-upload-url (the `PresignedUploadUrlConnectV1PresignedUrl` operationId).
-	PresignedUploadUrlConnectV1PresignedUrlWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PresignedUploadUrlConnectV1PresignedUrlResponse, error)
-
-	// PresignedUploadUrlConnectV1PresignedUrlWithResponse Request a presigned upload URL for a new Custom Connector Plugin.
-	//
-	// [![General Availability](https://img.shields.io/badge/Lifecycle%20Stage-General%20Availability-%2345c6e8)](#section/Versioning/API-Lifecycle-Policy)
-	//
-	// Request a presigned upload URL to upload a Custom Connector Plugin archive.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /connect/v1/presigned-upload-url (the `PresignedUploadUrlConnectV1PresignedUrl` operationId).
-	PresignedUploadUrlConnectV1PresignedUrlWithResponse(ctx context.Context, body PresignedUploadUrlConnectV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*PresignedUploadUrlConnectV1PresignedUrlResponse, error)
-}
-
 func (r ListConnectV1CustomConnectorPluginsResponse) GetJSON200() *ConnectV1CustomConnectorPluginList {
 	return r.JSON200
 }
@@ -5389,14 +5018,14 @@ func (r PresignedUploadUrlConnectV1PresignedUrlResponse) ContentType() string {
 	return ""
 }
 func (c *ClientWithResponses) PresignedUploadUrlConnectV1PresignedUrlWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PresignedUploadUrlConnectV1PresignedUrlResponse, error) {
-	rsp, err := c.PresignedUploadUrlConnectV1PresignedUrlWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.presignedUploadUrlConnectV1PresignedUrlWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParsePresignedUploadUrlConnectV1PresignedUrlResponse(rsp)
 }
 func (c *ClientWithResponses) PresignedUploadUrlConnectV1PresignedUrlWithResponse(ctx context.Context, body PresignedUploadUrlConnectV1PresignedUrlJSONRequestBody, reqEditors ...RequestEditorFn) (*PresignedUploadUrlConnectV1PresignedUrlResponse, error) {
-	rsp, err := c.PresignedUploadUrlConnectV1PresignedUrl(ctx, body, reqEditors...)
+	rsp, err := c.presignedUploadUrlConnectV1PresignedUrl(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -18,7 +18,7 @@ import (
 
 type ExecuteQueryV1alpha1StatementJSONRequestBody = QueryV1alpha1QueryRequest
 
-func (c *oasClient) ExecuteQueryV1alpha1StatementWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) executeQueryV1alpha1StatementWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewExecuteQueryV1alpha1StatementRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -29,7 +29,7 @@ func (c *oasClient) ExecuteQueryV1alpha1StatementWithBody(ctx context.Context, c
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) ExecuteQueryV1alpha1Statement(ctx context.Context, body ExecuteQueryV1alpha1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) executeQueryV1alpha1Statement(ctx context.Context, body ExecuteQueryV1alpha1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewExecuteQueryV1alpha1StatementRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -40,7 +40,7 @@ func (c *oasClient) ExecuteQueryV1alpha1Statement(ctx context.Context, body Exec
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetQueryV1alpha1JobStatus(ctx context.Context, statementId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getQueryV1alpha1JobStatus(ctx context.Context, statementId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetQueryV1alpha1JobStatusRequest(c.Server, statementId)
 	if err != nil {
 		return nil, err
@@ -235,21 +235,21 @@ type GetQueryV1alpha1JobStatusResponse struct {
 }
 
 func (c *ClientWithResponses) ExecuteQueryV1alpha1StatementWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ExecuteQueryV1alpha1StatementResponse, error) {
-	rsp, err := c.ExecuteQueryV1alpha1StatementWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.executeQueryV1alpha1StatementWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseExecuteQueryV1alpha1StatementResponse(rsp)
 }
 func (c *ClientWithResponses) ExecuteQueryV1alpha1StatementWithResponse(ctx context.Context, body ExecuteQueryV1alpha1StatementJSONRequestBody, reqEditors ...RequestEditorFn) (*ExecuteQueryV1alpha1StatementResponse, error) {
-	rsp, err := c.ExecuteQueryV1alpha1Statement(ctx, body, reqEditors...)
+	rsp, err := c.executeQueryV1alpha1Statement(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseExecuteQueryV1alpha1StatementResponse(rsp)
 }
 func (c *ClientWithResponses) GetQueryV1alpha1JobStatusWithResponse(ctx context.Context, statementId string, reqEditors ...RequestEditorFn) (*GetQueryV1alpha1JobStatusResponse, error) {
-	rsp, err := c.GetQueryV1alpha1JobStatus(ctx, statementId, reqEditors...)
+	rsp, err := c.getQueryV1alpha1JobStatus(ctx, statementId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

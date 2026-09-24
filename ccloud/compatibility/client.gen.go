@@ -626,7 +626,7 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 	}
 }
 
-type ClientInterface interface {
+type clientInterface interface {
 
 	// TestCompatibilityForSubjectWithBody Test schema compatibility against all schemas under a subject
 	//
@@ -635,7 +635,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /compatibility/subjects/{subject}/versions (the `TestCompatibilityForSubject` operationId).
-	TestCompatibilityForSubjectWithBody(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	testCompatibilityForSubjectWithBody(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// TestCompatibilityForSubject Test schema compatibility against all schemas under a subject
 	//
@@ -644,7 +644,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /compatibility/subjects/{subject}/versions (the `TestCompatibilityForSubject` operationId).
-	TestCompatibilityForSubject(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	testCompatibilityForSubject(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// TestCompatibilityForSubjectWithApplicationVndSchemaregistryPlusJSONBody Test schema compatibility against all schemas under a subject
 	//
@@ -653,7 +653,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry+json` content type.
 	//
 	// Corresponds with POST /compatibility/subjects/{subject}/versions (the `TestCompatibilityForSubject` operationId).
-	TestCompatibilityForSubjectWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	testCompatibilityForSubjectWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// TestCompatibilityForSubjectWithApplicationVndSchemaregistryV1PlusJSONBody Test schema compatibility against all schemas under a subject
 	//
@@ -662,7 +662,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type.
 	//
 	// Corresponds with POST /compatibility/subjects/{subject}/versions (the `TestCompatibilityForSubject` operationId).
-	TestCompatibilityForSubjectWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	testCompatibilityForSubjectWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// TestCompatibilityBySubjectNameWithBody Test schema compatibility against a particular schema subject-version
 	//
@@ -671,7 +671,7 @@ type ClientInterface interface {
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /compatibility/subjects/{subject}/versions/{version} (the `TestCompatibilityBySubjectName` operationId).
-	TestCompatibilityBySubjectNameWithBody(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	testCompatibilityBySubjectNameWithBody(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// TestCompatibilityBySubjectName Test schema compatibility against a particular schema subject-version
 	//
@@ -680,7 +680,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	//
 	// Corresponds with POST /compatibility/subjects/{subject}/versions/{version} (the `TestCompatibilityBySubjectName` operationId).
-	TestCompatibilityBySubjectName(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	testCompatibilityBySubjectName(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// TestCompatibilityBySubjectNameWithApplicationVndSchemaregistryPlusJSONBody Test schema compatibility against a particular schema subject-version
 	//
@@ -689,7 +689,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry+json` content type.
 	//
 	// Corresponds with POST /compatibility/subjects/{subject}/versions/{version} (the `TestCompatibilityBySubjectName` operationId).
-	TestCompatibilityBySubjectNameWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	testCompatibilityBySubjectNameWithApplicationVndSchemaregistryPlusJSONBody(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// TestCompatibilityBySubjectNameWithApplicationVndSchemaregistryV1PlusJSONBody Test schema compatibility against a particular schema subject-version
 	//
@@ -698,7 +698,7 @@ type ClientInterface interface {
 	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type.
 	//
 	// Corresponds with POST /compatibility/subjects/{subject}/versions/{version} (the `TestCompatibilityBySubjectName` operationId).
-	TestCompatibilityBySubjectNameWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	testCompatibilityBySubjectNameWithApplicationVndSchemaregistryV1PlusJSONBody(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func NewTestCompatibilityForSubjectRequestWithApplicationVndSchemaregistryPlusJSONBody(server string, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectApplicationVndSchemaregistryPlusJSONRequestBody) (*http.Request, error) {
@@ -752,7 +752,7 @@ func (c *oasClient) applyEditors(ctx context.Context, req *http.Request, additio
 }
 
 type ClientWithResponses struct {
-	ClientInterface
+	clientInterface
 }
 
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
@@ -772,82 +772,6 @@ func WithBaseURL(baseURL string) ClientOption {
 		return nil
 	}
 }
-
-type ClientWithResponsesInterface interface {
-
-	// TestCompatibilityForSubjectWithBodyWithResponse Test schema compatibility against all schemas under a subject
-	//
-	// Test input schema against a subject's schemas for compatibility, based on the configured compatibility level of the subject. In other words, it will perform the same compatibility check as register for that subject. The compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /compatibility/subjects/{subject}/versions (the `TestCompatibilityForSubject` operationId).
-	TestCompatibilityForSubjectWithBodyWithResponse(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TestCompatibilityForSubjectResponse, error)
-
-	// TestCompatibilityForSubjectWithResponse Test schema compatibility against all schemas under a subject
-	//
-	// Test input schema against a subject's schemas for compatibility, based on the configured compatibility level of the subject. In other words, it will perform the same compatibility check as register for that subject. The compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /compatibility/subjects/{subject}/versions (the `TestCompatibilityForSubject` operationId).
-	TestCompatibilityForSubjectWithResponse(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectJSONRequestBody, reqEditors ...RequestEditorFn) (*TestCompatibilityForSubjectResponse, error)
-
-	// TestCompatibilityForSubjectWithApplicationVndSchemaregistryPlusJSONBodyWithResponse Test schema compatibility against all schemas under a subject
-	//
-	// Test input schema against a subject's schemas for compatibility, based on the configured compatibility level of the subject. In other words, it will perform the same compatibility check as register for that subject. The compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
-	//
-	// Takes a body of the `application/vnd.schemaregistry+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /compatibility/subjects/{subject}/versions (the `TestCompatibilityForSubject` operationId).
-	TestCompatibilityForSubjectWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*TestCompatibilityForSubjectResponse, error)
-
-	// TestCompatibilityForSubjectWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse Test schema compatibility against all schemas under a subject
-	//
-	// Test input schema against a subject's schemas for compatibility, based on the configured compatibility level of the subject. In other words, it will perform the same compatibility check as register for that subject. The compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
-	//
-	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /compatibility/subjects/{subject}/versions (the `TestCompatibilityForSubject` operationId).
-	TestCompatibilityForSubjectWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, subject string, params *TestCompatibilityForSubjectParams, body TestCompatibilityForSubjectApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*TestCompatibilityForSubjectResponse, error)
-
-	// TestCompatibilityBySubjectNameWithBodyWithResponse Test schema compatibility against a particular schema subject-version
-	//
-	// Test input schema against a particular version of a subject's schema for compatibility. The compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /compatibility/subjects/{subject}/versions/{version} (the `TestCompatibilityBySubjectName` operationId).
-	TestCompatibilityBySubjectNameWithBodyWithResponse(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TestCompatibilityBySubjectNameResponse, error)
-
-	// TestCompatibilityBySubjectNameWithResponse Test schema compatibility against a particular schema subject-version
-	//
-	// Test input schema against a particular version of a subject's schema for compatibility. The compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /compatibility/subjects/{subject}/versions/{version} (the `TestCompatibilityBySubjectName` operationId).
-	TestCompatibilityBySubjectNameWithResponse(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameJSONRequestBody, reqEditors ...RequestEditorFn) (*TestCompatibilityBySubjectNameResponse, error)
-
-	// TestCompatibilityBySubjectNameWithApplicationVndSchemaregistryPlusJSONBodyWithResponse Test schema compatibility against a particular schema subject-version
-	//
-	// Test input schema against a particular version of a subject's schema for compatibility. The compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
-	//
-	// Takes a body of the `application/vnd.schemaregistry+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /compatibility/subjects/{subject}/versions/{version} (the `TestCompatibilityBySubjectName` operationId).
-	TestCompatibilityBySubjectNameWithApplicationVndSchemaregistryPlusJSONBodyWithResponse(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameApplicationVndSchemaregistryPlusJSONRequestBody, reqEditors ...RequestEditorFn) (*TestCompatibilityBySubjectNameResponse, error)
-
-	// TestCompatibilityBySubjectNameWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse Test schema compatibility against a particular schema subject-version
-	//
-	// Test input schema against a particular version of a subject's schema for compatibility. The compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
-	//
-	// Takes a body of the `application/vnd.schemaregistry.v1+json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /compatibility/subjects/{subject}/versions/{version} (the `TestCompatibilityBySubjectName` operationId).
-	TestCompatibilityBySubjectNameWithApplicationVndSchemaregistryV1PlusJSONBodyWithResponse(ctx context.Context, subject string, version string, params *TestCompatibilityBySubjectNameParams, body TestCompatibilityBySubjectNameApplicationVndSchemaregistryV1PlusJSONRequestBody, reqEditors ...RequestEditorFn) (*TestCompatibilityBySubjectNameResponse, error)
-}
-
 func (r TestCompatibilityForSubjectResponse) GetApplicationjsonQs05200() *CompatibilityCheckResponse {
 	return r.ApplicationjsonQs05200
 }

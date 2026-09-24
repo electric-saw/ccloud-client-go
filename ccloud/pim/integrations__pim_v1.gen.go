@@ -79,7 +79,7 @@ type GetPimV1Integration200JSONResponseBody_Config struct {
 type GetPimV1Integration200JSONResponseBodyKind string
 type CreatePimV1IntegrationJSONRequestBody CreatePimV1IntegrationJSONBody
 
-func (c *oasClient) ListPimV1Integrations(ctx context.Context, params *ListPimV1IntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) listPimV1Integrations(ctx context.Context, params *ListPimV1IntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListPimV1IntegrationsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
@@ -90,7 +90,7 @@ func (c *oasClient) ListPimV1Integrations(ctx context.Context, params *ListPimV1
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreatePimV1IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createPimV1IntegrationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreatePimV1IntegrationRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
@@ -101,7 +101,7 @@ func (c *oasClient) CreatePimV1IntegrationWithBody(ctx context.Context, contentT
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) CreatePimV1Integration(ctx context.Context, body CreatePimV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) createPimV1Integration(ctx context.Context, body CreatePimV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreatePimV1IntegrationRequest(c.Server, body)
 	if err != nil {
 		return nil, err
@@ -112,7 +112,7 @@ func (c *oasClient) CreatePimV1Integration(ctx context.Context, body CreatePimV1
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) DeletePimV1Integration(ctx context.Context, id string, params *DeletePimV1IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) deletePimV1Integration(ctx context.Context, id string, params *DeletePimV1IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewDeletePimV1IntegrationRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -123,7 +123,7 @@ func (c *oasClient) DeletePimV1Integration(ctx context.Context, id string, param
 	}
 	return c.Client.Do(req)
 }
-func (c *oasClient) GetPimV1Integration(ctx context.Context, id string, params *GetPimV1IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *oasClient) getPimV1Integration(ctx context.Context, id string, params *GetPimV1IntegrationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetPimV1IntegrationRequest(c.Server, id, params)
 	if err != nil {
 		return nil, err
@@ -665,35 +665,35 @@ type GetPimV1IntegrationResponse struct {
 }
 
 func (c *ClientWithResponses) ListPimV1IntegrationsWithResponse(ctx context.Context, params *ListPimV1IntegrationsParams, reqEditors ...RequestEditorFn) (*ListPimV1IntegrationsResponse, error) {
-	rsp, err := c.ListPimV1Integrations(ctx, params, reqEditors...)
+	rsp, err := c.listPimV1Integrations(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseListPimV1IntegrationsResponse(rsp)
 }
 func (c *ClientWithResponses) CreatePimV1IntegrationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatePimV1IntegrationResponse, error) {
-	rsp, err := c.CreatePimV1IntegrationWithBody(ctx, contentType, body, reqEditors...)
+	rsp, err := c.createPimV1IntegrationWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreatePimV1IntegrationResponse(rsp)
 }
 func (c *ClientWithResponses) CreatePimV1IntegrationWithResponse(ctx context.Context, body CreatePimV1IntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreatePimV1IntegrationResponse, error) {
-	rsp, err := c.CreatePimV1Integration(ctx, body, reqEditors...)
+	rsp, err := c.createPimV1Integration(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseCreatePimV1IntegrationResponse(rsp)
 }
 func (c *ClientWithResponses) DeletePimV1IntegrationWithResponse(ctx context.Context, id string, params *DeletePimV1IntegrationParams, reqEditors ...RequestEditorFn) (*DeletePimV1IntegrationResponse, error) {
-	rsp, err := c.DeletePimV1Integration(ctx, id, params, reqEditors...)
+	rsp, err := c.deletePimV1Integration(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseDeletePimV1IntegrationResponse(rsp)
 }
 func (c *ClientWithResponses) GetPimV1IntegrationWithResponse(ctx context.Context, id string, params *GetPimV1IntegrationParams, reqEditors ...RequestEditorFn) (*GetPimV1IntegrationResponse, error) {
-	rsp, err := c.GetPimV1Integration(ctx, id, params, reqEditors...)
+	rsp, err := c.getPimV1Integration(ctx, id, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}

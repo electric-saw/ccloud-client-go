@@ -1,0 +1,28 @@
+[tools]
+go = "1.26"
+golangci-lint = "2.14.0"
+pre-commit = "4.6.2"
+"go:github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen" = "v2.8.0"
+
+[tasks.gen]
+description = "Regenerate the full client: spec -> packages -> per-tag files"
+run = ["go run ./scripts/ccloud-gen gen"]
+
+[tasks.build]
+description = "go build ./..."
+run = ["go build ./..."]
+
+[tasks.vet]
+description = "go vet ./..."
+run = ["go vet ./..."]
+
+[tasks.test]
+description = "go test ./..."
+run = ["go test ./..."]
+
+[tasks.clean]
+description = "Remove generated .gen.go files and the normalized spec"
+run = [
+    "find ccloud -name '*.gen.go' -delete",
+    "rm -f spec/openapi.norm.yaml",
+]

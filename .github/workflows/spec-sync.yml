@@ -1,0 +1,122 @@
+name: spec-sync
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # daily, UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: spec-sync
+  cancel-in-progress: true
+
+jobs:
+  spec-sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install spec tools
+        run: pip install "pyyaml==6.0.3"
+
+      - name: Fetch upstream spec
+        run: curl -fsSL -o spec/openapi.new.yaml https://docs.confluent.io/cloud/current/openapi.yaml
+
+      - name: Detect spec changes
+        id: specdiff
+        run: |
+          if git diff --no-index --quiet spec/openapi.yaml spec/openapi.new.yaml; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Skip (spec unchanged)
+        if: steps.specdiff.outputs.changed == 'false'
+        run: echo "::notice::Upstream spec unchanged; nothing to do."
+
+      - name: Vend spec + regenerate
+        if: steps.specdiff.outputs.changed == 'true'
+        run: |
+          mv spec/openapi.new.yaml spec/openapi.yaml
+          make gen
+
+      - name: Build, vet & test (failures still open a PR, labeled generator-fail)
+        id: build
+        if: steps.specdiff.outputs.changed == 'true'
+        continue-on-error: true
+        run: |
+          go build ./...
+          go vet ./...
+          go test ./...
+
+      - name: Open PR
+        if: steps.specdiff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          DATE=$(date -u +%F)
+          BRANCH="chore/spec-sync-${DATE}"
+
+          git config user.name "spec-sync-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add spec/openapi.yaml ccloud/
+          git commit -m "chore(gen): spec sync ${DATE}"
+
+          SPEC_STAT=$(git show --stat HEAD -- spec/ | tail -1)
+          GEN_STAT=$(git show --stat HEAD -- ccloud/gen/ | tail -1)
+
+          BUILD_STATUS="OK"
+          if [ "${{ steps.build.outcome }}" != "success" ]; then
+            BUILD_STATUS="FAILED"
+          fi
+          BUILD_NOTE=""
+          if [ "$BUILD_STATUS" != "OK" ]; then
+            BUILD_NOTE=" — review generated code before merging"
+          fi
+
+          # bot branches are disposable: force-push makes same-day reruns idempotent
+          git push --force origin "$BRANCH"
+
+          gh pr create \
+            --title "chore(gen): spec sync ${DATE}" \
+            --base main \
+            --head "$BRANCH" \
+            --body "$(cat <<EOF
+          ## Daily upstream spec sync
+
+          | Scope | Diff |
+          |---|---|
+          | spec/ | ${SPEC_STAT:-no changes} |
+          | ccloud/ | ${GEN_STAT:-no changes} |
+
+          Build/vet/test: **${BUILD_STATUS}**${BUILD_NOTE}
+          EOF
+          )" || echo "::notice::PR for ${BRANCH} likely already exists."
+
+          PR_NUMBER=$(gh pr list --head "$BRANCH" --json number --jq '.[0].number')
+          if [ -z "$PR_NUMBER" ]; then
+            echo "::error::No PR found for branch $BRANCH; skipping label steps."
+            exit 1
+          fi
+          gh pr edit "$PR_NUMBER" --add-label spec-sync 2>/dev/null \
+            || { gh label create spec-sync --color 0e8a16 && gh pr edit "$PR_NUMBER" --add-label spec-sync; }
+
+          if [ "$BUILD_STATUS" != "OK" ]; then
+            gh pr edit "$PR_NUMBER" --add-label generator-fail 2>/dev/null \
+              || { gh label create generator-fail --color d93f0b && gh pr edit "$PR_NUMBER" --add-label generator-fail; }
+          fi

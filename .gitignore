@@ -15,3 +15,7 @@
 # vendor/
 .env
 .DS_Store
+
+# Regenerated from spec/openapi.yaml by scripts/build_groups.py
+build/
+/ccloud-gen

@@ -1,4 +1,4 @@
-// Example: minimal usage of the generated Confluent Cloud client.
+// Example: minimal usage of the ogen-generated Confluent Cloud client.
 //
 // Run with:
 //
@@ -11,7 +11,6 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -24,7 +23,6 @@ type basicAuth struct{ key, secret string }
 
 func (b basicAuth) SetAuth(r *http.Request) error {
 	r.SetBasicAuth(b.key, b.secret)
-
 	return nil
 }
 
@@ -32,7 +30,6 @@ type bearerAuth struct{ token string }
 
 func (b bearerAuth) SetAuth(r *http.Request) error {
 	r.Header.Set("Authorization", "Bearer "+b.token)
-
 	return nil
 }
 
@@ -48,32 +45,25 @@ func main() {
 	}
 	httpClient := ccloud.NewHTTPClient(auth)
 
-	// ClientWithResponses: typed, decoded responses.
-	iamClient, err := iam.NewClientWithResponses("https://api.confluent.cloud", iam.WithHTTPClient(httpClient))
+	// Facade: one client per domain package, all sharing the http.Client.
+	// SecuritySource is nil — auth is injected by NewHTTPClient's transport.
+	cl, err := ccloud.New(ccloud.WithHTTPClient(httpClient))
 	if err != nil {
-		fatal("iam.NewClientWithResponses: %v", err)
+		fatal("ccloud.New: %v", err)
 	}
 
-	resp, err := iamClient.ListIamV2ApiKeysWithResponse(ctx, &iam.ListIamV2ApiKeysParams{})
+	// Typed response: ListIamV2ApiKeysRes is an interface; assert the OK case.
+	res, err := cl.Iam.ListIamV2ApiKeys(ctx, iam.ListIamV2ApiKeysParams{})
 	if err != nil {
 		fatal("list api keys: %v", err)
 	}
-	if resp.HTTPResponse.StatusCode != http.StatusOK {
-		fatal("list api keys: unexpected status %d: %s", resp.HTTPResponse.StatusCode, resp.Body)
+	ok, okOk := res.(*iam.ListIamV2ApiKeysOKHeaders)
+	if !okOk {
+		fatal("list api keys: unexpected response %T", res)
 	}
-
-	// The list response schema is a oneOf, so the generated JSON200 data items
-	// carry only Spec.Owner/Resource. Decode the full typed list for access to
-	// Id and Spec.DisplayName.
-	var list iam.IamV2ApiKeyList
-	if err := json.Unmarshal(resp.Body, &list); err != nil {
-		fatal("decode list: %v", err)
-	}
-	fmt.Printf("api keys: %d\n", len(list.Data))
-	for _, k := range list.Data {
-		// Spec is a oneOf in the spec, so it decodes as map[string]any.
-		name, _ := k.Spec["display_name"].(string)
-		fmt.Printf("  - %s (%s)\n", k.Id, name)
+	fmt.Printf("api keys: %d\n", len(ok.Response.Data))
+	for _, k := range ok.Response.Data {
+		fmt.Printf("  - %s\n", k.GetID())
 	}
 }
 

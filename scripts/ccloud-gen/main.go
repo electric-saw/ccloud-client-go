@@ -29,6 +29,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"regexp"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -59,6 +60,8 @@ func main() {
 		err = cmdFacade(args)
 	case "gen":
 		err = cmdGen(args)
+	case "ogen":
+		err = cmdOgen(args)
 	case "help", "-h", "--help":
 		usage()
 		return
@@ -78,6 +81,7 @@ func usage() {
 
 subcommands:
   gen [spec.yaml]                      run the full pipeline (default: spec/openapi.yaml)
+  ogen [spec.yaml]                     generate via ogen (migration: sanitized spec)
   preprocess <spec.yaml> <out.yaml>   strip readOnly/example/examples keys
   buildgroups <spec.yaml>             write build/groups.json + build/opmap.json
   genlines <groups.json>              print `+"`pkg|tag1,tag2`"+` lines
@@ -216,6 +220,582 @@ func removeInterfaceBlock(text, name string) string {
 	return strings.Join(out, "\n")
 }
 
+// ---------------------------------------------------------------------------
+// ogen (migration)
+// ---------------------------------------------------------------------------
+
+// cmdOgen generates per-group packages via ogen. It sanitizes the spec with
+// the ogen-specific fixes (allOf flatten, path queries, ColumnDetails
+// recursion, query.v1alpha1 removal), then runs ogen once per group with a
+// sub-spec containing only that group's paths + the shared components.
+//
+// Usage: ccloud-gen ogen [spec.yaml]
+func cmdOgen(args []string) error {
+	spec := "spec/openapi.yaml"
+	if len(args) == 1 {
+		spec = args[0]
+	}
+	if len(args) > 1 {
+		return fmt.Errorf("usage: ccloud-gen ogen [spec.yaml]")
+	}
+
+	// 1) sanitize the spec for ogen
+	sanitized := "spec/openapi.ogen.yaml"
+	if err := cmdPreprocess([]string{spec, sanitized}); err != nil {
+		return err
+	}
+	if err := ogenSanitize(sanitized); err != nil {
+		return err
+	}
+
+	// remove oapi-codegen artifacts (.gen.go files) + stale security.go —
+	// ogen writes oas_*.go and we regenerate security.go per package
+	if err := run("sh", "-c", `rm -f ccloud/*/*.gen.go ccloud/client.go ccloud/*/security.go`); err != nil {
+		return err
+	}
+
+	// 2) buildgroups (from the sanitized spec, so query is excluded)
+	if err := cmdBuildgroups([]string{sanitized}); err != nil {
+		return err
+	}
+
+	var groups map[string][]string
+	if err := readJSON("build/groups.json", &groups); err != nil {
+		return err
+	}
+
+	// 3) per-group sub-spec + ogen
+	for pkg, tags := range groups {
+		dir := filepath.Join("ccloud", pkg)
+		if err := os.MkdirAll(dir, 0o755); err != nil {
+			return err
+		}
+		sub := filepath.Join(dir, "subspec.yaml")
+		if err := writeSubspec(sanitized, sub, tags); err != nil {
+			return err
+		}
+		fmt.Printf("[ogen] %s (%d tags)\n", pkg, len(tags))
+		cfg := filepath.Join(dir, ".ogen.yaml")
+		cfgContent := "generator:\n  ignore_not_implemented: [\"all\"]\n  features:\n    disable:\n      - paths/server\n      - webhooks/server\n      - webhooks/client\n"
+		if err := os.WriteFile(cfg, []byte(cfgContent), 0o644); err != nil {
+			return err
+		}
+		if err := run("ogen", "-config", cfg, "-package", pkg, "-target", dir, "-clean", sub); err != nil {
+			return err
+		}
+		if err := os.Remove(cfg); err != nil {
+			return err
+		}
+		if err := os.Remove(sub); err != nil {
+			return err
+		}
+		// write a SecuritySource helper bridging ccloud.ClientAuth credentials
+		if err := writeSecuritySource(pkg, dir); err != nil {
+			return err
+		}
+	}
+
+	// 4) post-process: fix ogen's invalid != comparisons in _equal_gen.go
+	if err := fixEqualComparisons(); err != nil {
+		return err
+	}
+	// format the generated security.go helpers
+	if err := run("sh", "-c", `gofmt -w $(find ccloud -name 'security.go') 2>/dev/null || true`); err != nil {
+		return err
+	}
+	// 5) facade with the ogen template
+	if err := os.Setenv("CCLOUD_GEN_OGEN", "1"); err != nil {
+		return err
+	}
+	if err := cmdFacade([]string{"build/groups.json"}); err != nil {
+		return err
+	}
+	return cmdGofmt()
+}
+
+// ogenSanitize applies ogen-specific fixes on top of the base preprocess:
+//   - flatten allOf ($ref + inline object) into a plain object schema
+//   - strip query strings from paths (dedupe collisions)
+//   - make ColumnDetails.type optional (breaks ogen's required-cycle check)
+//   - drop query.v1alpha1 paths+schemas (recursive anyOf array ResultValue)
+func ogenSanitize(path string) error {
+	in, err := os.ReadFile(path)
+	if err != nil {
+		return err
+	}
+	var doc yaml.Node
+	if err := yaml.Unmarshal(in, &doc); err != nil {
+		return err
+	}
+	flattenAllOf(&doc)
+	stripPathQueries(&doc)
+	makeColumnTypeOptional(&doc)
+	dropQueryAlpha1(&doc)
+	out, err := yaml.Marshal(&doc)
+	if err != nil {
+		return err
+	}
+	return os.WriteFile(path, out, 0o644)
+}
+
+// flattenAllOf merges every `allOf: [{$ref}, {object}]` into a plain object
+// schema (properties merged, inline overrides win). ogen rejects mixed
+// allOf with "can't merge object with".
+//
+//nolint:gocyclo // schema walker with many small branches
+func flattenAllOf(doc *yaml.Node) {
+	root := doc.Content[0]
+	schemas := mapNode(root, "components")
+	if schemas == nil || schemas.Kind != yaml.MappingNode {
+		return
+	}
+	comp := schemas
+	var schemasNode *yaml.Node
+	for i := 0; i+1 < len(comp.Content); i += 2 {
+		if comp.Content[i].Value == "schemas" {
+			schemasNode = comp.Content[i+1]
+			break
+		}
+	}
+	if schemasNode == nil || schemasNode.Kind != yaml.MappingNode {
+		return
+	}
+	// name -> map of props (string->*yaml.Node)
+	propMap := map[string]map[string]*yaml.Node{}
+	requiredMap := map[string][]string{}
+	for i := 0; i+1 < len(schemasNode.Content); i += 2 {
+		name := schemasNode.Content[i].Value
+		schema := schemasNode.Content[i+1]
+		if schema.Kind != yaml.MappingNode {
+			continue
+		}
+		// find "allOf"
+		var allOf *yaml.Node
+		for j := 0; j+1 < len(schema.Content); j += 2 {
+			if schema.Content[j].Value == "allOf" {
+				allOf = schema.Content[j+1]
+				break
+			}
+		}
+		if allOf == nil || allOf.Kind != yaml.SequenceNode {
+			continue
+		}
+		props := map[string]*yaml.Node{}
+		var required []string
+		hasInline := false
+		for _, part := range allOf.Content {
+			if part.Kind != yaml.MappingNode {
+				continue
+			}
+			// $ref?
+			refName := ""
+			for j := 0; j+1 < len(part.Content); j += 2 {
+				if part.Content[j].Value == "$ref" {
+					refName = part.Content[j+1].Value
+				}
+			}
+			if refName != "" {
+				baseName := refName[strings.LastIndex(refName, "/")+1:]
+				if base := propMap[baseName]; base != nil {
+					for k, v := range base {
+						if _, ok := props[k]; !ok {
+							props[k] = v
+						}
+					}
+				}
+				continue
+			}
+			// inline object: props + required
+			hasInline = true
+			for j := 0; j+1 < len(part.Content); j += 2 {
+				switch part.Content[j].Value {
+				case "properties":
+					pn := part.Content[j+1]
+					if pn.Kind == yaml.MappingNode {
+						for k := 0; k+1 < len(pn.Content); k += 2 {
+							if _, ok := props[pn.Content[k].Value]; !ok {
+								props[pn.Content[k].Value] = pn.Content[k+1]
+							}
+						}
+					}
+				case "required":
+					rn := part.Content[j+1]
+					if rn.Kind == yaml.SequenceNode {
+						for _, r := range rn.Content {
+							required = append(required, r.Value)
+						}
+					}
+				case "type":
+					// keep for merged output
+				}
+			}
+		}
+		propMap[name] = props
+		requiredMap[name] = required
+		if hasInline {
+			// rebuild schema: remove allOf, set type: object + properties + required
+			// keep description
+			newSchema := map[string]*yaml.Node{
+				"type":       node("object"),
+				"properties": mapNodeOf(props),
+			}
+			var desc *yaml.Node
+			for j := 0; j+1 < len(schema.Content); j += 2 {
+				if schema.Content[j].Value == "description" {
+					desc = schema.Content[j+1]
+				}
+			}
+			if desc != nil {
+				newSchema["description"] = desc
+			}
+			if len(required) > 0 {
+				rn := &yaml.Node{Kind: yaml.SequenceNode}
+				for _, r := range required {
+					rn.Content = append(rn.Content, node(r))
+				}
+				newSchema["required"] = rn
+			}
+			schema.Content = schema.Content[:0]
+			for k, v := range newSchema {
+				schema.Content = append(schema.Content, node(k), v)
+			}
+		}
+	}
+}
+
+func node(v string) *yaml.Node {
+	return &yaml.Node{Kind: yaml.ScalarNode, Tag: "!!str", Value: v}
+}
+
+func mapNodeOf(m map[string]*yaml.Node) *yaml.Node {
+	n := &yaml.Node{Kind: yaml.MappingNode}
+	for k, v := range m {
+		n.Content = append(n.Content, node(k), v)
+	}
+	return n
+}
+
+// stripPathQueries removes query strings from path keys (ogen rejects them).
+// If stripping causes a duplicate path key, the duplicate entry is removed.
+func stripPathQueries(doc *yaml.Node) {
+	root := doc.Content[0]
+	if root == nil || root.Kind != yaml.MappingNode {
+		return
+	}
+	for i := 0; i+1 < len(root.Content); i += 2 {
+		if root.Content[i].Value != "paths" {
+			continue
+		}
+		paths := root.Content[i+1]
+		if paths.Kind != yaml.MappingNode {
+			return
+		}
+		seen := map[string]bool{}
+		out := make([]*yaml.Node, 0, len(paths.Content))
+		for j := 0; j+1 < len(paths.Content); j += 2 {
+			key := paths.Content[j].Value
+			if q := strings.IndexByte(key, '?'); q >= 0 {
+				key = key[:q]
+			}
+			if seen[key] {
+				continue
+			}
+			seen[key] = true
+			paths.Content[j].Value = key
+			out = append(out, paths.Content[j], paths.Content[j+1])
+		}
+		paths.Content = out
+		return
+	}
+}
+
+// makeColumnTypeOptional removes "type" from required of *ColumnDetails
+// schemas, breaking ogen's required-cycle rejection for recursive DataType.
+func makeColumnTypeOptional(doc *yaml.Node) {
+	root := doc.Content[0]
+	comp := mapNode(root, "components")
+	if comp == nil || comp.Kind != yaml.MappingNode {
+		return
+	}
+	var schemasNode *yaml.Node
+	for i := 0; i+1 < len(comp.Content); i += 2 {
+		if comp.Content[i].Value == "schemas" {
+			schemasNode = comp.Content[i+1]
+		}
+	}
+	if schemasNode == nil {
+		return
+	}
+	for i := 0; i+1 < len(schemasNode.Content); i += 2 {
+		name := schemasNode.Content[i].Value
+		if !strings.Contains(name, "ColumnDetails") {
+			continue
+		}
+		schema := schemasNode.Content[i+1]
+		if schema.Kind != yaml.MappingNode {
+			continue
+		}
+		for j := 0; j+1 < len(schema.Content); j += 2 {
+			if schema.Content[j].Value != "required" {
+				continue
+			}
+			req := schema.Content[j+1]
+			if req.Kind != yaml.SequenceNode {
+				continue
+			}
+			out := req.Content[:0]
+			for _, r := range req.Content {
+				if r.Value != "type" {
+					out = append(out, r)
+				}
+			}
+			req.Content = out
+		}
+	}
+}
+
+// dropQueryAlpha1 removes query/v1alpha1 paths and schemas (recursive
+// anyOf-array ResultValue breaks ogen's goimports).
+func dropQueryAlpha1(doc *yaml.Node) {
+	root := doc.Content[0]
+	// paths
+	paths := mapNode(root, "paths")
+	if paths != nil && paths.Kind == yaml.MappingNode {
+		out := paths.Content[:0]
+		for i := 0; i+1 < len(paths.Content); i += 2 {
+			if strings.Contains(paths.Content[i].Value, "query/v1alpha1") {
+				continue
+			}
+			out = append(out, paths.Content[i], paths.Content[i+1])
+		}
+		paths.Content = out
+	}
+	// schemas
+	comp := mapNode(root, "components")
+	if comp == nil {
+		return
+	}
+	var schemasNode *yaml.Node
+	for i := 0; i+1 < len(comp.Content); i += 2 {
+		if comp.Content[i].Value == "schemas" {
+			schemasNode = comp.Content[i+1]
+		}
+	}
+	if schemasNode == nil {
+		return
+	}
+	out := schemasNode.Content[:0]
+	for i := 0; i+1 < len(schemasNode.Content); i += 2 {
+		if strings.Contains(schemasNode.Content[i].Value, "query.v1alpha1") {
+			continue
+		}
+		out = append(out, schemasNode.Content[i], schemasNode.Content[i+1])
+	}
+	schemasNode.Content = out
+}
+
+// writeSubspec writes a spec containing only the given tags' paths + the
+// full components (so $refs resolve).
+func writeSubspec(sanitized, out string, tags []string) error {
+	in, err := os.ReadFile(sanitized)
+	if err != nil {
+		return err
+	}
+	var doc yaml.Node
+	if err := yaml.Unmarshal(in, &doc); err != nil {
+		return err
+	}
+	root := doc.Content[0]
+
+	want := map[string]bool{}
+	for _, t := range tags {
+		want[t] = true
+	}
+	paths := mapNode(root, "paths")
+	if paths != nil && paths.Kind == yaml.MappingNode {
+		outContent := paths.Content[:0]
+		for i := 0; i+1 < len(paths.Content); i += 2 {
+			keep := false
+			methods := paths.Content[i+1]
+			if methods.Kind == yaml.MappingNode {
+				for j := 0; j+1 < len(methods.Content); j += 2 {
+					op := methods.Content[j+1]
+					if op.Kind != yaml.MappingNode {
+						continue
+					}
+					for k := 0; k+1 < len(op.Content); k += 2 {
+						if op.Content[k].Value == "tags" && op.Content[k+1].Kind == yaml.SequenceNode {
+							for _, t := range op.Content[k+1].Content {
+								if want[t.Value] {
+									keep = true
+								}
+							}
+						}
+					}
+				}
+			}
+			if keep {
+				outContent = append(outContent, paths.Content[i], paths.Content[i+1])
+			}
+		}
+		paths.Content = outContent
+	}
+	outBytes, err := yaml.Marshal(&doc)
+	if err != nil {
+		return err
+	}
+	return os.WriteFile(out, outBytes, 0o644)
+}
+
+// fixEqualComparisons rewrites `a.X != b.X` -> `!reflect.DeepEqual(a.X, b.X)`
+// in ogen's _equal_gen.go (it emits invalid comparisons for oneOf of
+// non-comparable structs) and repairs the imports (reflect + bytes +
+// validate).
+func fixEqualComparisons() error {
+	files, _ := filepath.Glob(filepath.Join("ccloud", "*", "oas_*_equal_gen.go"))
+	re := regexp.MustCompile(`\ba\.(\w+) != b\.(\w+)\b`)
+	for _, f := range files {
+		src, err := os.ReadFile(f)
+		if err != nil {
+			continue
+		}
+		text := string(src)
+		orig := text
+		text = re.ReplaceAllString(text, `!reflect.DeepEqual(a.$1, b.$2)`)
+		if text != orig {
+			// fix import block: needs reflect (always), bytes (if used), validate
+			if strings.Contains(text, "import (") {
+				if !strings.Contains(text, `"reflect"`) {
+					text = strings.Replace(text, "import (", "import (\n\t\"reflect\"", 1)
+				}
+				if strings.Contains(text, "bytes.Equal") && !strings.Contains(text, `"bytes"`) {
+					text = strings.Replace(text, "import (\n\t\"reflect\"", "import (\n\t\"bytes\"\n\t\"reflect\"", 1)
+				}
+			} else {
+				// single-line import: `import "github.com/ogen-go/ogen/validate"` -> block
+				reImport := regexp.MustCompile(`import "([^"]+)"`)
+				imps := []string{`"reflect"`}
+				if strings.Contains(text, "bytes.Equal") {
+					imps = append([]string{`"bytes"`}, imps...)
+				}
+				for _, extra := range imps {
+					if !strings.Contains(text, extra) {
+						text = reImport.ReplaceAllString(text, "import (\n\t"+extra+"\n\t\"$1\"\n)")
+					}
+				}
+			}
+			if err := os.WriteFile(f, []byte(text), 0o644); err != nil {
+				return err
+			}
+		}
+	}
+	// gofmt the fixed files (import ordering)
+	return run("sh", "-c", `gofmt -w $(find ccloud -name 'oas_*_equal_gen.go') 2>/dev/null || true`)
+}
+
+// writeSecuritySource writes security.go for a generated package: a helper
+// that adapts API key/secret/token credentials to the package's
+// SecuritySource interface. Only methods whose credential types exist in the
+// package are emitted (ogen generates only the schemes operations use).
+func writeSecuritySource(pkg, dir string) error {
+	secFile := filepath.Join(dir, "oas_security_gen.go")
+	if _, err := os.Stat(secFile); err != nil {
+		return nil // no security in this package
+	}
+	// detect which credential types exist (grep the schemas/security files)
+	hasType := func(name string) bool {
+		matches, _ := filepath.Glob(filepath.Join(dir, "oas_*.go"))
+		for _, f := range matches {
+			src, err := os.ReadFile(f)
+			if err != nil {
+				continue
+			}
+			if regexp.MustCompile(`(?m)^type ` + regexp.QuoteMeta(name) + ` `).Match(src) {
+				return true
+			}
+		}
+		return false
+	}
+
+	var b strings.Builder
+	fmt.Fprintf(&b, `// Code generated by ccloud-gen. DO NOT EDIT.
+package %s
+
+`, pkg)
+	methods := []string{}
+	if hasType("CloudAPIKey") {
+		methods = append(methods, "CloudAPIKey")
+	}
+	if hasType("GlobalAPIKey") {
+		methods = append(methods, "GlobalAPIKey")
+	}
+	if hasType("ConfluentStsAccessToken") {
+		methods = append(methods, "ConfluentStsAccessToken")
+	}
+	if hasType("ResourceAPIKey") {
+		methods = append(methods, "ResourceAPIKey")
+	}
+	if hasType("ExternalAccessToken") {
+		methods = append(methods, "ExternalAccessToken")
+	}
+	if len(methods) == 0 {
+		// no security schemes used; nothing to generate
+		return nil
+	}
+	b.WriteString(`import "context"
+
+// AuthSource implements the generated SecuritySource interface using
+// static credentials. Pass it to NewClient alongside ccloud.NewHTTPClient.
+type AuthSource struct {
+	Key    string
+	Secret string
+	Token  string
+}
+
+`)
+	if slices.Contains(methods, "CloudAPIKey") {
+		b.WriteString(`// CloudAPIKey returns basic-auth credentials.
+func (s AuthSource) CloudAPIKey(ctx context.Context, operationName OperationName) (CloudAPIKey, error) {
+	return CloudAPIKey{Username: s.Key, Password: s.Secret}, nil
+}
+
+`)
+	}
+	if slices.Contains(methods, "GlobalAPIKey") {
+		b.WriteString(`// GlobalAPIKey returns basic-auth credentials.
+func (s AuthSource) GlobalAPIKey(ctx context.Context, operationName OperationName) (GlobalAPIKey, error) {
+	return GlobalAPIKey{Username: s.Key, Password: s.Secret}, nil
+}
+
+`)
+	}
+	if slices.Contains(methods, "ConfluentStsAccessToken") {
+		b.WriteString(`// ConfluentStsAccessToken returns a bearer token.
+func (s AuthSource) ConfluentStsAccessToken(ctx context.Context, operationName OperationName) (ConfluentStsAccessToken, error) {
+	return ConfluentStsAccessToken{Token: s.Token}, nil
+}
+
+`)
+	}
+	if slices.Contains(methods, "ResourceAPIKey") {
+		b.WriteString(`// ResourceAPIKey returns basic-auth credentials.
+func (s AuthSource) ResourceAPIKey(ctx context.Context, operationName OperationName) (ResourceAPIKey, error) {
+	return ResourceAPIKey{Username: s.Key, Password: s.Secret}, nil
+}
+
+`)
+	}
+	if slices.Contains(methods, "ExternalAccessToken") {
+		b.WriteString(`// ExternalAccessToken returns a bearer token.
+func (s AuthSource) ExternalAccessToken(ctx context.Context, operationName OperationName) (ExternalAccessToken, error) {
+	return ExternalAccessToken{Token: s.Token}, nil
+}
+
+`)
+	}
+	return os.WriteFile(filepath.Join(dir, "security.go"), []byte(b.String()), 0o644)
+}
+
 // cmdGoimports runs goimports -w over every generated .gen.go file.
 func cmdGoimports() error {
 	return run("sh", "-c", `find ccloud -name '*.gen.go' -exec goimports -w {} +`)
@@ -341,8 +921,11 @@ func unexportInterfaceMethods(text string) string {
 // cmdGofmt formats ccloud/client.go and fails if any generated file is
 // left unformatted.
 func cmdGofmt() error {
-	if err := run("gofmt", "-w", "ccloud/client.go"); err != nil {
-		return err
+	// client.go may be absent (ogen flow); format it only if present
+	if _, err := os.Stat("ccloud/client.go"); err == nil {
+		if err := run("gofmt", "-w", "ccloud/client.go"); err != nil {
+			return err
+		}
 	}
 	out, err := runOutput("gofmt", "-l", "ccloud")
 	if err != nil {
@@ -770,6 +1353,7 @@ type facadePackage struct {
 	Pkg        string // go package name, e.g. iam
 	Field      string // exported field name, e.g. Iam
 	ImportPath string // full import path
+	HasAuth    bool   // package has a generated AuthSource (security.go)
 }
 
 func cmdFacade(args []string) error {
@@ -781,6 +1365,11 @@ func cmdFacade(args []string) error {
 		return err
 	}
 
+	tmplFile := "client.go.tmpl"
+	if env := os.Getenv("CCLOUD_GEN_OGEN"); env == "1" {
+		tmplFile = "client-ogen.go.tmpl"
+	}
+
 	pkgs := make([]string, 0, len(groups))
 	for pkg := range groups {
 		pkgs = append(pkgs, sanitizePkg(pkg))
@@ -789,14 +1378,16 @@ func cmdFacade(args []string) error {
 
 	packages := make([]facadePackage, 0, len(pkgs))
 	for _, pkg := range pkgs {
+		_, authErr := os.Stat(filepath.Join("ccloud", pkg, "security.go"))
 		packages = append(packages, facadePackage{
 			Pkg:        pkg,
 			Field:      exportName(pkg),
 			ImportPath: modulePath + "/ccloud/" + pkg,
+			HasAuth:    authErr == nil,
 		})
 	}
 
-	tmpl, err := template.ParseFiles(filepath.Join("scripts", "ccloud-gen", "client.go.tmpl"))
+	tmpl, err := template.ParseFiles(filepath.Join("scripts", "ccloud-gen", tmplFile))
 	if err != nil {
 		return err
 	}

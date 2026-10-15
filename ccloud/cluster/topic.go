@@ -14,7 +14,7 @@ type Topic struct {
 	TopicName              string   `json:"topic_name"`
 	IsInternal             bool     `json:"is_internal"`
 	ReplicationFactor      int      `json:"replication_factor"`
-	PartitionCount         int      `json:"partition_count"`
+	PartitionCount         int      `json:"partitions_count"`
 	Partitions             Resource `json:"partitions"`
 	Configs                Resource `json:"configs"`
 	PartitionReassignments Resource `json:"partition_reassignments"`
